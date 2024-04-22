@@ -6,14 +6,26 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate:supabase:types": "npx supabase gen types typescript --local > types/database-generated.types.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.42.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "global": "^4.4.0",
+    "lucide-react": "^0.364.0",
     "next": "14.1.4",
     "ra-data-json-server": "^4.16.12",
+    "ra-input-rich-text": "^4.16.14",
+    "ra-supabase": "^2.2.0",
     "react": "^18",
     "react-admin": "^4.16.14",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "snaplet": "^0.90.0",
+    "tailwind-merge": "^2.2.2",
+    "tailwindcss-animate": "^1.0.7",
+    "tsx": "^4.7.2"
   },
   "devDependencies": {
     "@types/node": "^20",

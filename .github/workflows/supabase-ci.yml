@@ -1,0 +1,40 @@
+name: roll out supabase migration
+on:
+  push:
+    branches:
+      - develop
+
+env:
+  SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+  SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+  # Retrieve <project-id> from dashboard url: https://app.supabase.com/project/<project-id>
+  PROJECT_ID: ${{ secrets.SUPABASE_PROJECT_ID }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Start Supabase local development setup
+        run: supabase start
+
+      - name: Verify generated types are checked in
+        run: |
+          supabase gen types typescript --local > types.gen.ts
+          if ! git diff --ignore-space-at-eol --exit-code --quiet types.gen.ts; then
+            echo "Detected uncommitted changes after build. See status below:"
+            git diff
+            exit 1
+          fi
+
+  deploy-migrations:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: supabase/setup-cli@v1
+      - run: supabase link --project-ref $PROJECT_ID
+      - run: supabase db push
