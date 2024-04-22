@@ -38,7 +38,6 @@ export const EditImpactMetric = () => {
 
                         <RichTextInput name="Rationale" source={"rationale"} fullWidth/>
 
-                        // TODO Input for relationships
                         <ReferenceArrayInput name="Categories" source="name" reference="categories">
                             <AutocompleteArrayInput label="Categories" optionValue="id" optionText="name"/>
                         </ReferenceArrayInput>
