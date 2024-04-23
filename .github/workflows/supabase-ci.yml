@@ -35,6 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: staging
     steps:
+      - uses: actions/checkout@v4
       - uses: supabase/setup-cli@v1
       - run: supabase link --project-ref $PROJECT_ID
       - run: supabase db push
