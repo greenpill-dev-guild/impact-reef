@@ -1,0 +1,10 @@
+{
+  "name": "impact-framework",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "cd packages/client && pnpm run dev",
+    "test": "cd packages/client && pnpm run test",
+    "build": "cd packages/client && pnpm run build"
+  }
+}
