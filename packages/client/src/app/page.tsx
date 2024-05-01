@@ -5,6 +5,6 @@ const AdminApp = dynamic(() => import("@/components/AdminApp"), {
   ssr: false,
 });
 
-const Home: NextPage = () => <AdminApp />;
+const Home: NextPage = () => <div />;
 
 export default Home;
