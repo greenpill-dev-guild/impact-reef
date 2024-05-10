@@ -1,17 +1,15 @@
 import "./globals.css";
 
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 
+import { inter, sora } from "@/utils/fonts";
 import { Navbar } from "@/components/Layout/Navbar";
 
-const APP_NAME = "Impact Voice";
-const APP_DEFAULT_TITLE = "Impact Voice App";
-const APP_TITLE_TEMPLATE = "%s - Impact Voice";
+const APP_NAME = "Impact Coral Reef";
+const APP_DEFAULT_TITLE = "Impact Coral Reef";
+const APP_TITLE_TEMPLATE = "%s - Impact Coral Reef";
 const APP_DESCRIPTION =
   "Let your voice be heard, submit proposals for your community";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -52,8 +50,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${sora.variable} antialiased`}
+    >
+      <body>
         <Navbar />
         {children}
       </body>

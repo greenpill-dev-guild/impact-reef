@@ -5,8 +5,20 @@
 @media (prefers-color-scheme: dark) {
 }
 
-/* body {
-} */
+body {
+  font-family: var(--font-inter);
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+h1,
+h2 {
+  font-family: var(--font-sora);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
 
 @layer utilities {
   .text-balance {
