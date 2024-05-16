@@ -39,3 +39,22 @@ declare interface Metric extends CreateMetric {
   id: string;
   createdAt: string;
 }
+
+type Category = "";
+
+declare interface ProjectItem {
+  title: string;
+  avatar_image: string;
+  banner_image: string;
+  category: Category;
+  transactions_count: number;
+  attestation_counts: number;
+  updated_at: Date;
+}
+
+declare interface Project extends ProjectItem {
+  description: string;
+  metrics: any[];
+  endorsments: any[];
+  socials: string[];
+}
