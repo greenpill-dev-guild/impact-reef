@@ -1,6 +1,8 @@
 import { NextPage } from "next";
-// import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 
-const MetricPage: NextPage = () => <div />;
+const ProjectDetailsView = dynamic(() => import("@/views/Projects/Details"));
 
-export default MetricPage;
+const ProjectPage: NextPage = () => <ProjectDetailsView />;
+
+export default ProjectPage;
