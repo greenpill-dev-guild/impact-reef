@@ -1,9 +1,13 @@
 import "./globals.css";
+import "@farcaster/auth-kit/styles.css";
 
+import { Toaster } from "react-hot-toast";
 import type { Metadata, Viewport } from "next";
 
 import { inter, sora } from "@/utils/fonts";
+
 import { Navbar } from "@/components/Layout/Navbar";
+import { Footer } from "@/components/Layout/Footer";
 
 const APP_NAME = "Impact Coral Reef";
 const APP_DEFAULT_TITLE = "Impact Coral Reef";
@@ -55,8 +59,10 @@ export default function RootLayout({
       className={`${inter.variable} ${sora.variable} antialiased`}
     >
       <body>
+        <Toaster />
         <Navbar />
-        {children}
+        <main className="min-h-screen w-screen">{children}</main>
+        <Footer />
       </body>
     </html>
   );
