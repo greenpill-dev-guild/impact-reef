@@ -47,6 +47,7 @@ export const Navbar: React.FC<NavBarProps> = (props) => {
         <nav className="inline-flex gap-1">
           {links.map(({ icon, title }) => (
             <Link
+                key={title}
               href={title}
               className={`capitalize inline-flex gap-2 w-32 p-4 justify-center items-center rounded-full text-zinc-800 font-semibold leading-snug ${pathname.includes(title) && "bg-neutral-100"}`}
             >
