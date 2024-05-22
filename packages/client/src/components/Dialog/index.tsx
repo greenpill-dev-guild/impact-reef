@@ -1,22 +1,25 @@
-import React from "react";
+"use-client";
+
+import React, { forwardRef } from "react";
 
 export interface DialogProps {
   id: string;
-  children: React.ReactNode;
-  onClose: () => void;
+  className?: string;
+  children?: React.ReactNode;
+  style: React.CSSProperties;
 }
 
-export const Dialog: React.FC<DialogProps> = ({ id, children, onClose }) => {
-  const dialog = document.getElementById(id) as HTMLDialogElement;
-
-  dialog.onclose = onClose;
-
-  return (
-    <dialog id={id} className="modal">
-      <div className="modal-box">{children}</div>
-      <form method="dialog" className="modal-backdrop">
-        <button>close</button>
-      </form>
-    </dialog>
-  );
-};
+export const Dialog = forwardRef<HTMLDialogElement, DialogProps>(
+  ({ id, className, style, children }, ref) => {
+    return (
+      <dialog id={id} className="modal" ref={ref}>
+        <div style={style} className={`modal-box ${className}`}>
+          {children}
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+    );
+  }
+);

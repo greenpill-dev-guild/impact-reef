@@ -6,11 +6,11 @@ settings:
 
 dependencies:
   '@farcaster/auth-kit':
-    specifier: 0.2.2
-    version: 0.2.2(@types/react@18.2.74)(react-dom@18.2.0)(react@18.2.0)(viem@2.9.28)
+    specifier: 0.3.0
+    version: 0.3.0(@types/react@18.2.74)(react-dom@18.2.0)(react@18.2.0)(viem@2.9.28)
   '@xstate/react':
     specifier: 4.1.1
-    version: 4.1.1(@types/react@18.2.74)(react@18.2.0)(xstate@5.12.0)
+    version: 4.1.1(@types/react@18.2.74)(react@18.2.0)(xstate@5.13.0)
   lucide-react:
     specifier: 0.376.0
     version: 0.376.0(react@18.2.0)
@@ -39,8 +39,8 @@ dependencies:
     specifier: 2.9.28
     version: 2.9.28(typescript@5.4.3)(zod@3.23.4)
   xstate:
-    specifier: 5.12.0
-    version: 5.12.0
+    specifier: 5.13.0
+    version: 5.13.0
   zod:
     specifier: 3.23.4
     version: 3.23.4
@@ -1854,8 +1854,8 @@ packages:
       viem: 2.9.28(typescript@5.4.3)(zod@3.23.4)
     dev: false
 
-  /@farcaster/auth-kit@0.2.2(@types/react@18.2.74)(react-dom@18.2.0)(react@18.2.0)(viem@2.9.28):
-    resolution: {integrity: sha512-ryhSgj5AZPs3g0jok+4bheYxWLa3z5BXt3g0DMpHBlhQ0qL6iDwcKArb/m2JT2M7PH/C6rMR4R/aVjVCzBb+Zg==}
+  /@farcaster/auth-kit@0.3.0(@types/react@18.2.74)(react-dom@18.2.0)(react@18.2.0)(viem@2.9.28):
+    resolution: {integrity: sha512-M1RBWUoT+9y0GZFXDzFXfI2iqTqboPU66ABHMGZHx77ZXZf2uFwSU81m63tQk3y5ZFyYn+Dfnn+czHNiNRq07Q==}
     peerDependencies:
       react: '>= 17'
       react-dom: '>= 17'
@@ -4094,7 +4094,7 @@ packages:
       '@xtuc/long': 4.2.2
     dev: true
 
-  /@xstate/react@4.1.1(@types/react@18.2.74)(react@18.2.0)(xstate@5.12.0):
+  /@xstate/react@4.1.1(@types/react@18.2.74)(react@18.2.0)(xstate@5.13.0):
     resolution: {integrity: sha512-pFp/Y+bnczfaZ0V8B4LOhx3d6Gd71YKAPbzerGqydC2nsYN/mp7RZu3q/w6/kvI2hwR/jeDeetM7xc3JFZH2NA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -4106,7 +4106,7 @@ packages:
       react: 18.2.0
       use-isomorphic-layout-effect: 1.1.2(@types/react@18.2.74)(react@18.2.0)
       use-sync-external-store: 1.2.2(react@18.2.0)
-      xstate: 5.12.0
+      xstate: 5.13.0
     transitivePeerDependencies:
       - '@types/react'
     dev: false
@@ -11377,8 +11377,8 @@ packages:
     resolution: {integrity: sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==}
     dev: true
 
-  /xstate@5.12.0:
-    resolution: {integrity: sha512-4W/Hj553mwVnTLQ1itc3rni/cGtM5OkjyavTjaxCelc0ZZKE/ks6tYllc98KbekIoUrEPm4CJH/wTB5p5pPGEw==}
+  /xstate@5.13.0:
+    resolution: {integrity: sha512-Z0om784N5u8sAzUvQJBa32jiTCIGGF/2ZsmKkerQEqeeUktAeOMK20FIHFUMywC4GcAkNksSvaeX7lwoRNXPEQ==}
     dev: false
 
   /xtend@4.0.2:

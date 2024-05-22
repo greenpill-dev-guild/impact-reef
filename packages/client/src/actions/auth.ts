@@ -2,7 +2,8 @@
 
 import { getCsrfToken } from "next-auth/react";
 
-import { signIn, signOut } from "@/modules/auth";
+import { signIn, signOut, auth } from "@/modules/auth";
+import { cookies } from "next/headers";
 
 export interface Credentials {
   message: string;
@@ -22,6 +23,12 @@ export async function getNonce() {
   } catch (error) {
     return { error, message: "Effor getting nonce" };
   }
+}
+
+export async function getUser() {
+  const session = await auth();
+
+  return session?.user;
 }
 
 export async function login(credentials: Credentials) {

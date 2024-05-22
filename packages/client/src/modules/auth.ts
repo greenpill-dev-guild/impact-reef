@@ -20,8 +20,8 @@ declare module "next-auth" {
 export const authConfig = {
   relay: "https://relay.farcaster.xyz",
   rpcUrl: "https://mainnet.optimism.io",
-  siweUri: "http://example.com/login",
-  domain: "example.com",
+  // siweUri: "http://example.com/login",
+  // domain: "example.com",
 };
 
 export const { handlers, signIn, signOut, auth } = NextAuth({

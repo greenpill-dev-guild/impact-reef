@@ -1,13 +1,9 @@
-"use client";
-
 import {
   useProfile,
   AuthClientError,
   StatusAPIResponse,
 } from "@farcaster/auth-kit";
-// import { Session } from "next-auth";
 import React, { useCallback } from "react";
-// import { useSession } from "next-auth/react";
 import { toast, ErrorIcon } from "react-hot-toast";
 
 import { getNonce, login, logout } from "@/actions/auth";
@@ -23,31 +19,31 @@ interface AuthHookProps {
     custody?: `0x${string}`;
     verifications?: `0x${string}`[];
   };
-  // session: Session | null;
   handleNonce: () => Promise<string>;
-  handleLogin: (res: StatusAPIResponse) => Promise<void>;
+  handleLogin: (res: StatusAPIResponse) => void;
   handleLogout: () => Promise<void>;
   handleError: (error?: AuthClientError) => void;
 }
 
 export function useAuth(): AuthHookProps {
-  // const { data: session } = useSession();
   const { isAuthenticated, profile } = useProfile();
 
   const handleNonce = useCallback(async () => {
-    const nonce = (await getNonce()).nonce;
+    const { nonce } = await getNonce();
 
     return nonce!;
   }, []);
 
-  const handleLogin = useCallback(async (res: StatusAPIResponse) => {
-    await login({
-      message: res.message!,
-      signature: res.signature!,
-      name: res.username!,
-      pfp: res.pfpUrl!,
-      redirect: false,
-    });
+  const handleLogin = useCallback((res: StatusAPIResponse) => {
+    console.log("Success Farcaster", res);
+
+    // await login({
+    //   message: res.message!,
+    //   signature: res.signature!,
+    //   name: res.username!,
+    //   pfp: res.pfpUrl!,
+    //   redirect: false,
+    // });
   }, []);
 
   const handleLogout = useCallback(async () => {
@@ -65,7 +61,6 @@ export function useAuth(): AuthHookProps {
   return {
     isAuthenticated,
     profile,
-    // session,
     handleNonce,
     handleLogin,
     handleLogout,

@@ -4,48 +4,16 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
 
+import { determineSocialMedia } from "@/utils/text";
 import { endorsments, metrics } from "@/utils/mockData";
-import { Collaspe } from "@/components/Collaspe";
+
 import { Stat } from "@/components/Stat";
+import { Collaspe } from "@/components/Collaspe";
 import { Progress } from "@/components/Progress";
+import { ProjectCompare } from "@/components/Project/Compare";
 
-export interface ProjectDetailsProps {}
-
-function determineSocialMedia(link: string) {
-  if (link.includes("twitter.com") || link.includes("x.com"))
-    return {
-      icon: "/icons/x.svg",
-      label: "X",
-    };
-
-  if (link.includes("warpcast.com"))
-    return {
-      icon: "/icons/farcaster.svg",
-      label: "farcaster",
-    };
-
-  if (link.includes("mirror.xyz"))
-    return {
-      icon: "/icons/mirror.svg",
-      label: "mirror",
-    };
-
-  if (link.includes("discord.com"))
-    return {
-      icon: "/icons/discord.svg",
-      label: "discord",
-    };
-
-  if (link.includes("t.me"))
-    return {
-      icon: "/icons/telegram.svg",
-      label: "telegram",
-    };
-
-  return {
-    icon: "/icons/globe-alt.svg",
-    label: "link",
-  };
+export interface ProjectViewProps {
+  project: Project;
 }
 
 const projectSocialLinks = [
@@ -55,7 +23,7 @@ const projectSocialLinks = [
   "https://why.wefa.app",
 ];
 
-const ProjectDetails: React.FC<ProjectDetailsProps> = ({}) => {
+const ProjectView: React.FC<ProjectViewProps> = ({ project }) => {
   const [showAllMetrics, setShowAllMetrics] = useState(false);
 
   const metricList = showAllMetrics ? metrics : metrics.slice(0, 6);
@@ -65,19 +33,22 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({}) => {
   }
 
   return (
-    <main id="project-details" className="flex flex-col gap-4 w-full mx-auto">
-      <header className="flex flex-col max-w-screen-xl mx-auto gap-4 py-8">
+    <main id="project-summary" className="flex flex-col gap-4 w-full mx-auto">
+      <header
+        id="project-header"
+        className="flex flex-col max-w-screen-xl mx-auto gap-4 py-8"
+      >
         <div className="w-full flex justify-between">
           <Link
             href="/projects"
-            className="bg-zinc-300 p-1 grid aspect-square place-items-center rounded-md"
+            className="bg-zinc-200 p-3 grid aspect-square place-items-center rounded-lg"
           >
             <Image
               alt="back button icon"
               src="/icons/back.svg"
               unoptimized
-              width={32}
-              height={32}
+              width={28}
+              height={28}
             />
           </Link>
           <button className="grid place-items-center w-36 p-4 rounded-full bg-blue-950 text-neutral-50 font-semibold leading-snug">
@@ -138,7 +109,10 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({}) => {
           </div>
         </div>
       </header>
-      <div className="flex w-full max-w-screen-xl mx-auto gap-3 py-6">
+      <div
+        id="project-metrics"
+        className="flex w-full max-w-screen-xl mx-auto gap-3 py-6"
+      >
         <aside className="basis-72 flex flex-col gap-2">
           <Collaspe title="Repository">
             <ul>
@@ -291,25 +265,176 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({}) => {
           />
         </aside>
       </div>
-      <section className="min-h-screen w-full flex flex-col items-center bg-gray-50 py-6">
-        <div className="flex gap-2">
-          <Image
-            src="/icons/puzzle.svg"
-            alt="flag icon to represent comparison"
-            unoptimized
-            width={32}
-            height={32}
-          />
-          <h2 className="font-semibold text-3xl">Compare With Others</h2>
-        </div>
-        <div>
-          <div>
-            <span></span>
-            <ul></ul>
+      <section
+        id="project-comparison"
+        className="min-h-screen w-full flex flex-col items-center bg-gray-50 py-12"
+      >
+        <div className="w-full max-w-screen-xl mx-auto">
+          <div className="flex gap-2">
+            <Image
+              src="/icons/puzzle.svg"
+              alt="flag icon to represent comparison"
+              unoptimized
+              width={32}
+              height={32}
+            />
+            <h2 className="font-semibold text-3xl">Compare With Others</h2>
           </div>
+          <ProjectCompare
+            category="utility"
+            grantTrack="onchain-builders"
+            colorMap={
+              new Map([
+                ["1", "red"],
+                ["2", "blue"],
+                ["3", "yellow"],
+                ["4", "purple"],
+                ["5", "green"],
+              ])
+            }
+            metrics={[
+              {
+                title:
+                  "Number of OP Stack modules dependent on this contribution",
+                projects: [
+                  {
+                    id: "2",
+                    amount: 4,
+                  },
+                  {
+                    id: "3",
+                    amount: 8,
+                  },
+                  {
+                    id: "4",
+                    amount: 2,
+                  },
+                  {
+                    id: "5",
+                    amount: 0,
+                  },
+                ],
+              },
+              {
+                title: "Number of OP Stack modules dependent",
+                projects: [
+                  {
+                    id: "2",
+                    amount: 4,
+                  },
+                  {
+                    id: "3",
+                    amount: 8,
+                  },
+                  {
+                    id: "4",
+                    amount: 2,
+                  },
+                  {
+                    id: "5",
+                    amount: 0,
+                  },
+                ],
+              },
+              {
+                title: "Bytecode size reduction",
+                projects: [
+                  {
+                    id: "2",
+                    amount: 4,
+                  },
+                  {
+                    id: "3",
+                    amount: 8,
+                  },
+                  {
+                    id: "4",
+                    amount: 2,
+                  },
+                  {
+                    id: "5",
+                    amount: 0,
+                  },
+                ],
+              },
+              {
+                title: "Gas costs reduction in contract creation",
+                projects: [
+                  {
+                    id: "2",
+                    amount: 4,
+                  },
+                  {
+                    id: "3",
+                    amount: 8,
+                  },
+                  {
+                    id: "4",
+                    amount: 2,
+                  },
+                  {
+                    id: "5",
+                    amount: 0,
+                  },
+                ],
+              },
+              {
+                title:
+                  "Number of modules that were developed simultaneously without causing issues",
+                projects: [
+                  {
+                    id: "2",
+                    amount: 4,
+                  },
+                  {
+                    id: "3",
+                    amount: 8,
+                  },
+                  {
+                    id: "4",
+                    amount: 2,
+                  },
+                  {
+                    id: "5",
+                    amount: 0,
+                  },
+                ],
+              },
+            ]}
+            project={{
+              id: "1",
+              logo: "/images/project-icon.png",
+              name: "Project Guild",
+            }}
+            similarProjects={[
+              {
+                id: "2",
+                logo: "",
+                name: "other teams",
+              },
+              {
+                id: "3",
+                logo: "",
+                name: "other team- a very long name",
+              },
+              {
+                id: "4",
+                logo: "",
+                name: "other teams",
+              },
+              {
+                id: "5",
+                logo: "",
+                name: "other teams",
+              },
+            ]}
+          />
         </div>
       </section>
-      <section className="w-full min-h-screen max-w-screen-xl mx-auto flex flex-col items-center gap-12 py-6">
+      <section
+        id="project-endorsements"
+        className="w-full min-h-screen max-w-screen-xl mx-auto flex flex-col items-center gap-12 py-12"
+      >
         <Image
           src="/images/project-banner.jpg"
           alt="project banner"
@@ -329,7 +454,10 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({}) => {
         </div>
         <ul className="grid grid-cols-4 grid-rows-auto gap-4 w-full">
           {endorsments.map((endorsement) => (
-            <li className="p-3 bg-neutral-100 rounded-md shadow-sm flex flex-col justify-between gap-6">
+            <li
+              key={endorsement.id}
+              className="p-3 bg-neutral-100 rounded-md shadow-sm flex flex-col justify-between gap-6"
+            >
               <p className="">{endorsement.message}</p>
               <div>
                 <p className="line-clamp-1 font-semibold">
@@ -369,4 +497,4 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({}) => {
   );
 };
 
-export default ProjectDetails;
+export default ProjectView;

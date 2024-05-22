@@ -21,17 +21,27 @@ export default function ProfileLayout({
 }>) {
   return (
     <>
-      <aside>
-        <nav>
+      <aside className="">
+        <nav className="px-2 flex flex-col gap-2 w-full">
           {links.map((link) => (
-            <Link key={link.title} href={`/profile/${link.title}`}>
-              <Image alt="profile navigation icon" src={link.icon} />
+            <Link
+              className="flex gap-1 px-3 py-2 rounded-lg hover:bg-zinc-300 bg-zinc-100 text-lg font-semibold"
+              key={link.title}
+              href={`/profile/${link.title}`}
+            >
+              <Image
+                alt="profile navigation icon"
+                src={link.icon}
+                unoptimized
+                width={24}
+                height={24}
+              />
               {link.title}
             </Link>
           ))}
         </nav>
       </aside>
-      <main>{children}</main>
+      <section>{children}</section>
     </>
   );
 }
