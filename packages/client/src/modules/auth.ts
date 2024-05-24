@@ -18,8 +18,8 @@ declare module "next-auth" {
 }
 
 export const authConfig = {
-  relay: "https://relay.farcaster.xyz",
-  rpcUrl: "https://mainnet.optimism.io",
+  // relay: "https://relay.farcaster.xyz",
+  // rpcUrl: "https://mainnet.optimism.io",
   // siweUri: "http://example.com/login",
   // domain: "example.com",
 };
@@ -57,7 +57,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       authorize: async (credentials) => {
         try {
-          const csrfToken = await getCsrfToken();
+          // const csrfToken = await getCsrfToken();
 
           const appClient = createAppClient({
             ethereum: viemConnector(),
@@ -66,8 +66,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const verifyResponse = await appClient.verifySignInMessage({
             message: credentials?.message as string,
             signature: credentials?.signature as `0x${string}`,
-            domain: "example.com",
-            nonce: csrfToken,
+            domain: "localhost",
+            nonce: "csrfToken",
           });
 
           const { success, fid } = verifyResponse;

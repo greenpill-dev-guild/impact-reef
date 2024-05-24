@@ -10,6 +10,7 @@ import { authConfig } from "@/modules/auth";
 import { useAuth } from "@/hooks/auth/useAuth";
 
 import { Dialog } from "@/components/Dialog";
+import { SessionProvider } from "next-auth/react";
 
 interface Link {
   title: string;
@@ -21,9 +22,11 @@ export interface LoginProps {}
 
 export const Login: React.FC<LoginProps> = () => {
   return (
-    <AuthKitProvider config={authConfig}>
-      <LoginContent />
-    </AuthKitProvider>
+    <SessionProvider>
+      <AuthKitProvider config={authConfig}>
+        <LoginContent />
+      </AuthKitProvider>
+    </SessionProvider>
   );
 };
 
@@ -32,6 +35,7 @@ export const LoginContent: React.FC<LoginProps> = () => {
     isAuthenticated,
     // profile,
     // handleNonce,
+    dialogRef,
     handleLogin,
     handleLogout,
     handleError,
@@ -44,12 +48,10 @@ export const LoginContent: React.FC<LoginProps> = () => {
   // }, []);
 
   const { url, signIn, connect } = useSignIn({
-    // nonce: getNonce,
+    nonce: "csrfToken",
     onSuccess: handleLogin,
     onError: handleError,
   });
-
-  const dialogRef = useRef<HTMLDialogElement>(null);
 
   const profileLinks: Link[] = [
     { title: "endorsements", icon: "/icons/fire.svg" },
@@ -116,7 +118,7 @@ export const LoginContent: React.FC<LoginProps> = () => {
         style={{
           padding: 0,
         }}
-        className="flex gap-4 max-w-none "
+        className="flex gap-4 max-w-2xl h-[480px]"
       >
         <Image
           alt="login image for impact reef"
@@ -124,13 +126,15 @@ export const LoginContent: React.FC<LoginProps> = () => {
           width={520}
           height={723}
         />
-        <div>
-          <h2>
+        <div className="flex flex-col w-full py-8 pr-4 text-zinc-800">
+          <h2 className="text-2xl font-bold leading-7 mb-4">
             Build your Impact Profile by evaluating others and helping the
             ecosystem grow.
           </h2>
-          <p>Please continue with Farcaster</p>
-          {url && <QRCode uri={url} size={420} />}
+          <p className="text-base font-light leading-7">
+            Please continue with Farcaster
+          </p>
+          {url && <QRCode uri={url} size={240} />}
         </div>
       </Dialog>
     </div>
