@@ -18,7 +18,10 @@ interface Column {
   title: string;
 }
 
-const categories: Record<ProjectCategory, { label: string; color: string }> = {
+export const categories: Record<
+  ProjectCategory,
+  { label: string; color: string }
+> = {
   cefi: {
     label: "CeFi",
     color: "#e0f2fe",

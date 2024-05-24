@@ -267,9 +267,9 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project }) => {
       </div>
       <section
         id="project-comparison"
-        className="min-h-screen w-full flex flex-col items-center bg-gray-50 py-12"
+        className="min-h-screen w-full bg-gray-50 py-12"
       >
-        <div className="w-full max-w-screen-xl mx-auto">
+        <div className="w-full max-w-screen-xl flex flex-col gap-4 items-center mx-auto">
           <div className="flex gap-2">
             <Image
               src="/icons/puzzle.svg"
