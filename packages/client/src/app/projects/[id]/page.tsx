@@ -11,7 +11,7 @@ const ProjectPage: NextPage = () => {
     transactions_count: 0,
     avatar_image: "",
     banner_image: "",
-    category: "",
+    category: "cefi",
     description: "",
     endorsments: [],
     metrics: [],

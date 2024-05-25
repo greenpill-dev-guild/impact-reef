@@ -40,6 +40,7 @@ export const Filters: React.FC<FiltersProps> = ({
     <div className="w-full flex gap-2 flex-wrap text-lg text-zinc-800 font-light leading-6">
       {filters.map(({ count, active, title, onFilterChange, disabled }) => (
         <button
+          key={title}
           onClick={onFilterChange}
           disabled={disabled}
           className={`${active ? "bg-blue-900 text-white" : disabled ? "backdrop-blur-sm" : "bg-slate-100 hover:bg-blue-100"} shadow-sm flex gap-2 px-3 py-2 items-center rounded-lg transition-colors ease-in-out duration-200`}

@@ -23,3 +23,5 @@ export const Dialog = forwardRef<HTMLDialogElement, DialogProps>(
     );
   }
 );
+
+Dialog.displayName = "Dialog Component";

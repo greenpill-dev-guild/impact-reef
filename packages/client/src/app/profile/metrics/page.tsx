@@ -1,5 +1,7 @@
+"use server";
+
 import { NextPage } from "next";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 
 // TODO: Import Action For Fetching User Metrics
 
