@@ -1,5 +1,5 @@
 {
-  "name": "impact-garden",
+  "name": "impact-reef",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -16,6 +16,7 @@
     "@graphql-typed-document-node/core": "^3.2.0",
     "@tanstack/react-query": "^5.37.1",
     "@urql/core": "^5.0.3",
+    "@farcaster/auth-kit": "0.3.0",
     "@xstate/react": "4.1.1",
     "axios": "^1.7.1",
     "class-variance-authority": "^0.7.0",
@@ -24,15 +25,16 @@
     "graphql": "^16.8.1",
     "lucide-react": "0.376.0",
     "next": "14.2.3",
-    "react": "^18",
-    "react-dom": "^18",
+    "next-auth": "5.0.0-beta.18",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-hot-toast": "2.4.1",
     "react-spinners": "0.13.8",
     "snaplet": "^0.90.0",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
     "viem": "2.9.28",
-    "xstate": "5.12.0",
+    "xstate": "5.13.0",
     "zod": "3.23.4"
   },
   "devDependencies": {
