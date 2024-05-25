@@ -60,31 +60,31 @@ export function formatLastUpdated(updatedAt: string) {
 }
 
 export function determineSocialMedia(link: string) {
-  if (link.includes("twitter.com") || link.includes("x.com"))
+  if (link.includes("https://twitter.com") || link.includes(" https://x.com"))
     return {
       icon: "/icons/x.svg",
       label: "X",
     };
 
-  if (link.includes("warpcast.com"))
+  if (link.includes("https://warpcast.com"))
     return {
       icon: "/icons/farcaster.svg",
       label: "farcaster",
     };
 
-  if (link.includes("mirror.xyz"))
+  if (link.includes("https://mirror.xyz"))
     return {
       icon: "/icons/mirror.svg",
       label: "mirror",
     };
 
-  if (link.includes("discord.com"))
+  if (link.includes("https://discord.com"))
     return {
       icon: "/icons/discord.svg",
       label: "discord",
     };
 
-  if (link.includes("t.me"))
+  if (link.includes("https://t.me"))
     return {
       icon: "/icons/telegram.svg",
       label: "telegram",
