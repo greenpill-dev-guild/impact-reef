@@ -128,7 +128,7 @@ export const ProjectCompare: React.FC<ProjectCompareProps> = ({
           </p>
         </aside>
         <section className="flex-1">
-          <ul className="w-full flex flex-col gap-8 h-screen overflow-scroll">
+          <ul className="w-full flex flex-col gap-8">
             {metrics.map((metric) => {
               const amounts = metric.projects.map((metric) => metric.amount);
               const max = Math.max(...amounts);

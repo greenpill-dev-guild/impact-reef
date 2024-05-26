@@ -4,6 +4,22 @@ import dynamic from "next/dynamic";
 const ProjectDetailsView = dynamic(() => import("@/views/Projects/Details"));
 
 const ProjectPage: NextPage = () => {
+  // const searchParams = useSearchParams();
+
+  // const uid = searchParams.get("uid");
+
+  // const {
+  //   isLoading,
+  //   isError,
+  //   data: metadata,
+  //   error,
+  // } = useQuery({
+  //   queryKey: ["project-metadata", uid],
+  //   queryFn: () => getProjectMetadata(uid),
+  //   enabled: !!uid,
+  // });
+
+  // console.log(metadata);
   const project: Project = {
     id: "",
     title: "",
@@ -11,7 +27,7 @@ const ProjectPage: NextPage = () => {
     transactions_count: 0,
     avatar_image: "",
     banner_image: "",
-    category: "",
+    category: "cefi",
     description: "",
     endorsments: [],
     metrics: [],
