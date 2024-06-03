@@ -2,6 +2,7 @@ import fs from "node:fs";
 import { z } from "zod";
 import { schemaRegistry } from "../services/eas";
 import * as path from "node:path";
+import {ZERO_ADDRESS} from "@ethereum-attestation-service/eas-sdk";
 
 // EAS schema is an array of [type, name] tuples. E.g. "uint256 eventId, uint8 voteIndex"
 const EasSchemaSchema = z.object({
@@ -48,7 +49,6 @@ export const schemasToEas = async (filePath: string, force?: boolean) => {
 
 			const tx = await _schemaRegistry.register({
 				schema: schemaToStore,
-				resolverAddress: "0x0a7E2Ff54e76B8E6659aedc9103FB21c038050D0",
 				revocable: false,
 			});
 

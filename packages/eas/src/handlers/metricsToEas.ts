@@ -1,8 +1,11 @@
 import fs from "node:fs";
-import {easSigner} from "../services/eas";
-import {z} from "zod";
-import {SchemaEncoder,} from "@ethereum-attestation-service/eas-sdk";
-import type {EasSchema} from "./schemasToEas";
+import { easSigner } from "../services/eas";
+import { z } from "zod";
+import {
+	SchemaEncoder,
+	ZERO_ADDRESS,
+} from "@ethereum-attestation-service/eas-sdk";
+import type { EasSchema } from "./schemasToEas";
 import schemaJson from "../resources/schemas.json";
 
 const MetricSchema = z.object({
@@ -16,6 +19,40 @@ const MetricSchema = z.object({
 });
 
 type Metric = z.infer<typeof MetricSchema> & { UID?: string };
+
+function composeData(
+	schema: {
+		UID: string;
+		description: string;
+		name: string;
+		parsed: string;
+		values: Array<{ name: string; type: string }>;
+	},
+	metric: Metric,
+) {
+	// Initialize SchemaEncoder with the schema string
+	const schemaEncoder = new SchemaEncoder(schema.parsed);
+
+	const composedData = schema.values.map(({ type, name }) => {
+		const value = Object.entries(metric).find(
+			([key]) => key.toLowerCase() === name.toLowerCase(),
+		);
+
+		if (!value) {
+			throw new Error(`Value for ${name} not found in metric`);
+		}
+
+		const parsedValue = value[1] ?? "";
+		return {
+			type,
+			name,
+			value: parsedValue,
+		};
+	});
+
+	const encodedData = schemaEncoder.encodeData(composedData);
+	return { composedData, encodedData };
+}
 
 export const metricsToEas = async (
 	file: string,
@@ -42,54 +79,45 @@ export const metricsToEas = async (
 
 	let updated = false;
 
-	// Iterate over the array and store each metric using the EAS service
-	const updatedMetrics = await Promise.all(
-		metrics.map(async (metric) => {
+	// Calculate the number of batches
+	const batchSize = 5;
+	const numBatches = Math.ceil(metrics.length / batchSize);
+
+	const _newFile: Metric[] = [];
+
+	for (let i = 0; i < numBatches; i++) {
+		// Get the next batch of metrics
+		const batch = metrics.slice(i * batchSize, (i + 1) * batchSize);
+
+		const atts = [];
+
+		// TODO: implement logic to skip metrics that already have a UID and write the updated metrics back to the JSON file
+		// Iterate over the array and store each metric using the EAS service
+		for (const metric of batch) {
 			// Skip if the metric already has a UID
 			if (!force && schema?.UID) {
 				return;
 			}
-			// Initialize SchemaEncoder with the schema string
-			const schemaEncoder = new SchemaEncoder(schema.parsed);
+			const { composedData, encodedData } = composeData(schema, metric);
 
-			const composedData = schema.values.map(({ type, name }) => {
-				const value = Object.entries(metric).find(
-					([key]) => key.toLowerCase() === name.toLowerCase(),
-				);
-
-				if (!value) {
-					throw new Error(`Value for ${name} not found in metric`);
-				}
-
-				const parsedValue = value[1] ?? "";
-				return {
-					type,
-					name,
-					value: parsedValue,
-				};
+			atts.push({
+				recipient: ZERO_ADDRESS,
+				expirationTime: 0n,
+				revocable: false, // Be aware that if your schema is not revocable, this MUST be false
+				data: encodedData,
 			});
+		}
 
-			const encodedData = schemaEncoder.encodeData(composedData);
-
-			const tx = await _easSigner.attest({
+		const res = await _easSigner.multiAttest([
+			{
 				schema: easSchemaId,
-				data: {
-					recipient: "0x475db4e7c8976fd243d3d6fa444fda524cefbaf9",
-					expirationTime: 0n,
-					revocable: false, // Be aware that if your schema is not revocable, this MUST be false
-					data: encodedData,
-				},
-			});
+				data: atts,
+			},
+		]);
 
-			metric.UID = await tx.wait(); // Attach the UID to the metric object
-
-			console.log(`Stored metric with UID ${metric.UID}`);
-
-			updated = true;
-			return metric;
-		}),
-	);
+		console.log(res);
+	}
 
 	// Write the updated metrics back to the JSON file
-	if (updated) fs.writeFileSync(file, JSON.stringify(updatedMetrics, null, 2));
+	if (updated) fs.writeFileSync(file, JSON.stringify(_newFile, null, 2));
 };

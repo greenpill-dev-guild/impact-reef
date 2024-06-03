@@ -20,7 +20,7 @@ program
 	.argument(
 		"[schemaId]",
 		"ID of the schema to which the metrics belong",
-		"0xf7ed57ed82ddb99ec1ae1be584209b79ae246500b6d4c52e0fc0fc919904f3c6",
+		"0xdd56b1a5da612085133234cdd66bb28056e2eab9aa951c7fb0d90709f78f9436",
 	)
 	.option('-f, --force [force]', "Force upload", false)
 	.action(async (file, schemaId, force) => {
