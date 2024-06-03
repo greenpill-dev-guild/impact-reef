@@ -1,0 +1,3 @@
+schema:
+  - https://optimism.easscan.org/graphql
+documents: '**/*.graphql'
