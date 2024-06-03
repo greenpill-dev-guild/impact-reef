@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Impact metrics season 4",
+    "description": "Impact metrics season 4",
+    "values": [
+      {
+        "type": "string",
+        "name": "name"
+      },
+      {
+        "type": "string",
+        "name": "description"
+      },
+      {
+        "type": "string",
+        "name": "importance"
+      },
+      {
+        "type": "string",
+        "name": "rationale"
+      },
+      {
+        "type": "string",
+        "name": "keyword"
+      },
+      {
+        "type": "string",
+        "name": "term"
+      },
+      {
+        "type": "string",
+        "name": "category"
+      }
+    ],
+    "UID": "0xf7ed57ed82ddb99ec1ae1be584209b79ae246500b6d4c52e0fc0fc919904f3c6",
+    "parsed": "string name, string description, string importance, string rationale, string keyword, string term, string category"
+  }
+]
