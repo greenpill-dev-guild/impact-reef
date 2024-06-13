@@ -1,41 +1,34 @@
-import {
-  useProfile,
-  AuthClientError,
-  StatusAPIResponse,
-} from "@farcaster/auth-kit";
 import React, { useCallback } from "react";
 import { toast, ErrorIcon } from "react-hot-toast";
 
 import { getNonce, login, logout } from "@/actions/auth";
 
 interface AuthHookProps {
-  isAuthenticated: boolean;
-  profile: {
-    fid?: number;
-    pfpUrl?: string;
-    username?: string;
-    displayName?: string;
-    bio?: string;
-    custody?: `0x${string}`;
-    verifications?: `0x${string}`[];
-  };
+  // isAuthenticated: boolean;
+  // profile: {
+  //   fid?: number;
+  //   pfpUrl?: string;
+  //   username?: string;
+  //   displayName?: string;
+  //   bio?: string;
+  //   custody?: `0x${string}`;
+  //   verifications?: `0x${string}`[];
+  // };
   handleNonce: () => Promise<string>;
-  handleLogin: (res: StatusAPIResponse) => void;
+  handleLogin: () => void;
   handleLogout: () => Promise<void>;
-  handleError: (error?: AuthClientError) => void;
+  handleError: () => void;
 }
 
 export function useAuth(): AuthHookProps {
-  const { isAuthenticated, profile } = useProfile();
-
   const handleNonce = useCallback(async () => {
     const { nonce } = await getNonce();
 
     return nonce!;
   }, []);
 
-  const handleLogin = useCallback((res: StatusAPIResponse) => {
-    console.log("Success Farcaster", res);
+  const handleLogin = useCallback(() => {
+    console.log("Success Farcaster");
 
     // await login({
     //   message: res.message!,
@@ -50,17 +43,17 @@ export function useAuth(): AuthHookProps {
     await logout();
   }, []);
 
-  const handleError = useCallback((error?: AuthClientError) => {
-    error &&
-      toast(error?.message, {
-        icon: <ErrorIcon />,
-        className: "",
-      });
+  const handleError = useCallback(() => {
+    // error &&
+    //   toast(error?.message, {
+    //     icon: <ErrorIcon />,
+    //     className: "",
+    //   });
   }, []);
 
   return {
-    isAuthenticated,
-    profile,
+    // isAuthenticated,
+    // profile,
     handleNonce,
     handleLogin,
     handleLogout,

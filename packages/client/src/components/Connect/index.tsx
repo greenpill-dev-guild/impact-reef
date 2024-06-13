@@ -1,15 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import toast from "react-hot-toast";
 import React, { useRef } from "react";
-import { useSignIn, QRCode, AuthKitProvider } from "@farcaster/auth-kit";
+import { ConnectKitButton } from "connectkit";
 
-import { authConfig } from "@/modules/auth";
-import { useAuth } from "@/hooks/auth/useAuth";
-
-import { Dialog } from "@/components/Dialog";
+import { Web3Provider } from "@/hooks/auth/Provider";
 
 interface Link {
   title: string;
@@ -17,37 +13,31 @@ interface Link {
   action?: () => void;
 }
 
-export interface LoginProps {}
+export interface ConnectProps {}
 
-export const Login: React.FC<LoginProps> = () => {
+export const Connect: React.FC<ConnectProps> = () => {
   return (
-    <AuthKitProvider config={authConfig}>
-      <LoginContent />
-    </AuthKitProvider>
+    <Web3Provider>
+      <ConnectContent />
+    </Web3Provider>
   );
 };
 
-export const LoginContent: React.FC<LoginProps> = () => {
-  const {
-    isAuthenticated,
-    // profile,
-    // handleNonce,
-    handleLogin,
-    handleLogout,
-    handleError,
-  } = useAuth();
+export const ConnectContent: React.FC<ConnectProps> = () => {
+  // const {
+  //   isAuthenticated,
+  //   // profile,
+  //   // handleNonce,
+  //   handleConnect,
+  //   handleLogout,
+  //   handleError,
+  // } = useAuth();
 
   // const getNonce = useCallback(async () => {
   //   const nonce = await getCsrfToken();
   //   if (!nonce) throw new Error("Unable to generate nonce");
   //   return nonce;
   // }, []);
-
-  const { url, signIn, connect } = useSignIn({
-    // nonce: getNonce,
-    onSuccess: handleLogin,
-    onError: handleError,
-  });
 
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -56,13 +46,13 @@ export const LoginContent: React.FC<LoginProps> = () => {
     { title: "metrics", icon: "/icons/flag.svg" },
     { title: "criteria", icon: "/icons/newspaper.svg" },
     { title: "settings", icon: "/icons/flag.svg" },
-    { title: "logout", icon: "/icons/fire.svg", action: handleLogout },
+    // { title: "logout", icon: "/icons/fire.svg", action: handleLogout },
   ];
 
-  async function handleLoginClick() {
+  async function handleConnectClick() {
     try {
-      await connect();
-      signIn();
+      // await connect();
+      // signIn();
 
       dialogRef.current?.showModal();
     } catch (error) {
@@ -72,7 +62,7 @@ export const LoginContent: React.FC<LoginProps> = () => {
 
   return (
     <div className="">
-      {isAuthenticated ? (
+      {true ? (
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
@@ -102,37 +92,8 @@ export const LoginContent: React.FC<LoginProps> = () => {
           </ul>
         </div>
       ) : (
-        <button
-          type="button"
-          onClick={handleLoginClick}
-          className="button grid place-items-center w-36 p-4 rounded-full bg-blue-950 text-neutral-50 font-semibold leading-snug"
-        >
-          Sign In
-        </button>
+        <ConnectKitButton />
       )}
-      <Dialog
-        id="login-dialog"
-        ref={dialogRef}
-        style={{
-          padding: 0,
-        }}
-        className="flex gap-4 max-w-none "
-      >
-        <Image
-          alt="login image for impact reef"
-          src="/images/img-signin.jpg"
-          width={520}
-          height={723}
-        />
-        <div>
-          <h2>
-            Build your Impact Profile by evaluating others and helping the
-            ecosystem grow.
-          </h2>
-          <p>Please continue with Farcaster</p>
-          {url && <QRCode uri={url} size={420} />}
-        </div>
-      </Dialog>
     </div>
   );
 };
