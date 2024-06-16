@@ -1,5 +1,29 @@
 [
   {
+    "name": "Project evaluation",
+    "description": "Rate a project based on a set of metrics",
+    "values": [
+      {
+        "type": "bytes32",
+        "name": "projectUID"
+      },
+      {
+        "type": "bytes32[]",
+        "name": "metricUIDs"
+      },
+      {
+        "type": "string",
+        "name": "description"
+      },
+      {
+        "type": "uint8",
+        "name": "stars"
+      }
+    ],
+    "parsed": "bytes32 projectUID, bytes32[] metricUIDs, string description, uint8 stars",
+    "UID": "0xe623eafcf84d0a4d721f9531be103e5123cc61b60179b8577cca08316785d2c1"
+  },
+  {
     "name": "Endorsement",
     "description": "Endorsements for a project or it's matrics",
     "values": [
@@ -16,8 +40,8 @@
         "name": "description"
       }
     ],
-    "parsed": "bytes32 projectUID, bytes32 metricUID, string description",
-    "UID": "0xe0c66a037aaf73ed3df067aa1a0950b722e5d95a6a231b014f84969217b70add"
+    "UID": "0xe0c66a037aaf73ed3df067aa1a0950b722e5d95a6a231b014f84969217b70add",
+    "parsed": "bytes32 projectUID, bytes32 metricUID, string description"
   },
   {
     "name": "Project metric attestations",
