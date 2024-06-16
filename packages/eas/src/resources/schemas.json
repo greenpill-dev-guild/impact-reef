@@ -1,60 +1,62 @@
 [
-	{
-		"name": "Project metric attestations",
-		"description": "A projects value for the provided metric",
-		"values": [
-			{
-				"type": "bytes32",
-				"name": "projectUID"
-			},
-			{
-				"type": "bytes32",
-				"name": "metricUID"
-			},
-			{
-				"type": "string",
-				"name": "value"
-			},
-			{
-				"type": "string",
-				"name": "source"
-			},
-		]
-	},
-	{
-		"name": "Impact metrics season 4",
-		"description": "Impact metrics season 4",
-		"values": [
-			{
-				"type": "string",
-				"name": "name"
-			},
-			{
-				"type": "string",
-				"name": "description"
-			},
-			{
-				"type": "string",
-				"name": "importance"
-			},
-			{
-				"type": "string",
-				"name": "rationale"
-			},
-			{
-				"type": "string",
-				"name": "keyword"
-			},
-			{
-				"type": "string",
-				"name": "term"
-			},
-			{
-				"type": "string",
-				"name": "category"
-			}
-		],
-		"UID": "0xdd56b1a5da612085133234cdd66bb28056e2eab9aa951c7fb0d90709f78f9436",
-		"parsed": "string name, string description, string importance, string rationale, string keyword, string term, string category"
-	}
+  {
+    "name": "Project metric attestations",
+    "description": "A projects value for the provided metric",
+    "values": [
+      {
+        "type": "bytes32",
+        "name": "projectUID"
+      },
+      {
+        "type": "bytes32",
+        "name": "metricUID"
+      },
+      {
+        "type": "string",
+        "name": "value"
+      },
+      {
+        "type": "string",
+        "name": "source"
+      }
+    ],
+    "parsed": "bytes32 projectUID, bytes32 metricUID, string value, string source",
+    "UID": "0x7bd6430d6ddf8ef8d70f3ca0175d3383af97fd93cac56c2db621f2054f23e0ae"
+  },
+  {
+    "name": "Impact metrics season 4",
+    "description": "Impact metrics season 4",
+    "values": [
+      {
+        "type": "string",
+        "name": "name"
+      },
+      {
+        "type": "string",
+        "name": "description"
+      },
+      {
+        "type": "string",
+        "name": "importance"
+      },
+      {
+        "type": "string",
+        "name": "rationale"
+      },
+      {
+        "type": "string",
+        "name": "keyword"
+      },
+      {
+        "type": "string",
+        "name": "term"
+      },
+      {
+        "type": "string",
+        "name": "category"
+      }
+    ],
+    "UID": "0xdd56b1a5da612085133234cdd66bb28056e2eab9aa951c7fb0d90709f78f9436",
+    "parsed": "string name, string description, string importance, string rationale, string keyword, string term, string category"
+  }
 ]

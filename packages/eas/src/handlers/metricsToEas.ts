@@ -96,8 +96,6 @@ export const metricsToEas = async (
 
 		// Iterate over the array and store each metric using the EAS service if it doesn't have a UID
 		for (const metric of batch) {
-			console.log("Metric", metric);
-			console.log(force);
 			// Skip if the metric already has a UID
 			if (metric.UID !== undefined && !force) {
 				console.log("Skipping metric with UID", metric.UID);

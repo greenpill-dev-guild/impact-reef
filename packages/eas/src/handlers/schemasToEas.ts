@@ -2,7 +2,7 @@ import fs from "node:fs";
 import { z } from "zod";
 import { schemaRegistry } from "../services/eas";
 import * as path from "node:path";
-import {ZERO_ADDRESS} from "@ethereum-attestation-service/eas-sdk";
+import { ZERO_ADDRESS } from "@ethereum-attestation-service/eas-sdk";
 
 // EAS schema is an array of [type, name] tuples. E.g. "uint256 eventId, uint8 voteIndex"
 const EasSchemaSchema = z.object({
@@ -20,7 +20,12 @@ const EasSchemaSchema = z.object({
 
 export type EasSchema = z.infer<typeof EasSchemaSchema>;
 
-export const schemasToEas = async (filePath: string, force?: boolean) => {
+export const schemasToEas = async (
+	filePath: string,
+	options: { force?: boolean },
+) => {
+	const { force } = options;
+
 	const _schemaRegistry = schemaRegistry();
 	// Read the JSON file
 	const _path = path.join(process.cwd(), "src", filePath);
@@ -33,12 +38,12 @@ export const schemasToEas = async (filePath: string, force?: boolean) => {
 
 	let updated = false;
 
-	// Iterate over the array and store each metric using the EAS service
+	// Iterate over the array and store each schema  using the EAS service
 	const updatedMetrics = await Promise.all(
 		schemas.map(async (schema) => {
 			// Skip if the metric already has a UID
 			if (!force && schema?.UID) {
-				return;
+				return schema;
 			}
 
 			const schemaToStore = schema.values
