@@ -1,5 +1,25 @@
 [
   {
+    "name": "Endorsement",
+    "description": "Endorsements for a project or it's matrics",
+    "values": [
+      {
+        "type": "bytes32",
+        "name": "projectUID"
+      },
+      {
+        "type": "bytes32",
+        "name": "metricUID"
+      },
+      {
+        "type": "string",
+        "name": "description"
+      }
+    ],
+    "parsed": "bytes32 projectUID, bytes32 metricUID, string description",
+    "UID": "0xe0c66a037aaf73ed3df067aa1a0950b722e5d95a6a231b014f84969217b70add"
+  },
+  {
     "name": "Project metric attestations",
     "description": "A projects value for the provided metric",
     "values": [
@@ -20,8 +40,8 @@
         "name": "source"
       }
     ],
-    "parsed": "bytes32 projectUID, bytes32 metricUID, string value, string source",
-    "UID": "0x7bd6430d6ddf8ef8d70f3ca0175d3383af97fd93cac56c2db621f2054f23e0ae"
+    "UID": "0x7bd6430d6ddf8ef8d70f3ca0175d3383af97fd93cac56c2db621f2054f23e0ae",
+    "parsed": "bytes32 projectUID, bytes32 metricUID, string value, string source"
   },
   {
     "name": "Impact metrics season 4",
