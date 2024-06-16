@@ -49,7 +49,7 @@ export const schemasToEas = async (filePath: string, force?: boolean) => {
 
 			const tx = await _schemaRegistry.register({
 				schema: schemaToStore,
-				revocable: false,
+				revocable: true,
 			});
 
 			const uid = await tx.wait();

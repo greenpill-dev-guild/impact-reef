@@ -27,4 +27,4 @@ const schemaRegistry = () => {
 	return schemaRegistry.connect(signer);
 };
 
-export { easService, schemaRegistry, easSigner };
+export { schemaRegistry, easSigner };

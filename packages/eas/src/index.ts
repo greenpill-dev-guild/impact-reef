@@ -22,7 +22,7 @@ program
 		"ID of the schema to which the metrics belong",
 		"0xdd56b1a5da612085133234cdd66bb28056e2eab9aa951c7fb0d90709f78f9436",
 	)
-	.option('-f, --force [force]', "Force upload", false)
+	.option('-f, --force <boolean>', "Force upload", false)
 	.action(async (file, schemaId, force) => {
 		await metricsToEas(file, schemaId, force);
 	});
@@ -37,7 +37,7 @@ program
 		"Path to the file containing the metrics",
 		"/resources/schemas.json",
 	)
-	.option('-f, --force [force]', "Force upload", false)
+	.option('-f, --force <boolean>', "Force upload", false)
 	.action(async (file, force) => {
 		await schemasToEas(file, force);
 	});
