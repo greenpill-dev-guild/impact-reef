@@ -1,0 +1,28 @@
+{
+  "name": "eas schema creator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node ./src/index.ts",
+    "biome:check": "biome check ./src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@biomejs/biome": "1.7.3",
+    "@swc/core": "^1.5.24",
+    "@swc/helpers": "^0.5.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@ethereum-attestation-service/eas-sdk": "^2.1.4",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.5",
+    "ethers": "^6.12.2",
+    "zod": "^3.23.8"
+  }
+}
