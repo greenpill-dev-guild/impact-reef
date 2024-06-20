@@ -4,7 +4,12 @@ import { formatLastUpdated } from "@/utils/text";
 import Image from "next/image";
 import React from "react";
 
-export interface ProjectListItemProps extends ProjectItem {}
+export interface ListItemProps {
+  id: string;
+  title: string;
+  avatar_image: string;
+  updated_at: string;
+}
 
 type ColumnValue =
   | "project"
@@ -52,13 +57,13 @@ export const categories: Record<
   },
 };
 
-export const ProjectListItem: React.FC<ProjectListItemProps> = ({
+export const ListItem: React.FC<ListItemProps> = ({
   id,
   title,
   avatar_image,
-  category,
-  transactions_count,
-  attestation_counts,
+  // category,
+  // transactions_count,
+  // attestation_counts,
   updated_at,
   ...props
 }) => {
@@ -82,20 +87,20 @@ export const ProjectListItem: React.FC<ProjectListItemProps> = ({
         <h4 className="line-clamp-2">{title}</h4>
       </div>
       <div className={`flex-[2]`}>
-        <span
+        {/* <span
           style={{
             background: categories[category].color,
           }}
           className="rounded-md text-sm text-zinc-800 p-2 leading-snug"
         >
           {categories[category].label}
-        </span>
+        </span> */}
       </div>
       <div className="flex-[3] leading-snug">
-        {transactions_count.toLocaleString()}
+        {/* {transactions_count.toLocaleString()} */}
       </div>
       <div className="flex-[3] leading-snug">
-        {attestation_counts.toLocaleString()}
+        {/* {attestation_counts.toLocaleString()} */}
       </div>
       <div className="flex-[2] leading-snug capitalize">
         {formatLastUpdated(updated_at)}

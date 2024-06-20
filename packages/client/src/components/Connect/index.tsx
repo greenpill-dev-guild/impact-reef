@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import toast from "react-hot-toast";
 import React, { useRef } from "react";
 import { ConnectKitButton } from "connectkit";
 
@@ -39,8 +38,6 @@ export const ConnectContent: React.FC<ConnectProps> = () => {
   //   return nonce;
   // }, []);
 
-  const dialogRef = useRef<HTMLDialogElement>(null);
-
   const profileLinks: Link[] = [
     { title: "endorsements", icon: "/icons/fire.svg" },
     { title: "metrics", icon: "/icons/flag.svg" },
@@ -49,17 +46,6 @@ export const ConnectContent: React.FC<ConnectProps> = () => {
     // { title: "logout", icon: "/icons/fire.svg", action: handleLogout },
   ];
 
-  async function handleConnectClick() {
-    try {
-      // await connect();
-      // signIn();
-
-      dialogRef.current?.showModal();
-    } catch (error) {
-      toast("Error starting sign in");
-    }
-  }
-
   return (
     <div className="">
       {true ? (
@@ -67,14 +53,21 @@ export const ConnectContent: React.FC<ConnectProps> = () => {
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost btn-circle avatar"
+            className="btn inline-flex btn-outline border-bl justify-center items-center gap-2 w-32 p-4  text-zinc-800 font-semibold hover:fill-white hover:text-white"
           >
-            <div className="w-10 rounded-full">
-              {/* <img
-                alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-              /> */}
-            </div>
+            My Reef{" "}
+            <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M1.79289 1.29289C2.18342 0.902369 2.81658 0.902369 3.20711 1.29289L6.5 4.58579L9.79289 1.29289C10.1834 0.902369 10.8166 0.902369 11.2071 1.29289C11.5976 1.68342 11.5976 2.31658 11.2071 2.70711L7.20711 6.70711C6.81658 7.09763 6.18342 7.09763 5.79289 6.70711L1.79289 2.70711C1.40237 2.31658 1.40237 1.68342 1.79289 1.29289Z"
+                fill="#0E255D"
+                stroke="#0E255D"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </div>
           <ul
             tabIndex={0}

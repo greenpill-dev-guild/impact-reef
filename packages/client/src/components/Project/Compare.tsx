@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
-import { categories } from "./ListItem";
+import { categories } from "../List/Item";
 
 interface Metric {
   title: string;

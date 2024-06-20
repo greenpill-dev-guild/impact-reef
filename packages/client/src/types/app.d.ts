@@ -72,6 +72,7 @@ declare interface ProjectItem {
   transactions_count: number;
   attestation_counts: number;
   updated_at: string;
+  creator: string;
 }
 
 declare interface Project extends ProjectItem {

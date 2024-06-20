@@ -2,15 +2,15 @@
 
 import React from "react";
 
-import { ProjectListItem } from "./ListItem";
+import { ListItem } from "./Item";
 
-export interface ProjectListProps {
-  projects: ProjectItem[];
+export interface ListProps {
+  items: any[];
   columns: { size: number; title: string }[];
 }
 
 type ColumnValue =
-  | "project"
+  | "item"
   | "category"
   | "largest-transaction-counts"
   | "attestation-counts"
@@ -21,10 +21,7 @@ interface Column {
   title: string;
 }
 
-export const ProjectList: React.FC<ProjectListProps> = ({
-  projects,
-  columns,
-}) => {
+export const List: React.FC<ListProps> = ({ items, columns }) => {
   return (
     <div role="table" className="w-full h-full flex flex-col gap-2">
       <ul
@@ -47,9 +44,7 @@ export const ProjectList: React.FC<ProjectListProps> = ({
         role="rowgroup"
         className="w-full max-h-[60vh] flex flex-col gap-1 flex-1 overflow-scroll"
       >
-        {projects.map((project) => (
-          <ProjectListItem key={project.id} {...project} />
-        ))}
+        {items?.map((item) => <ListItem key={item.id} {...item} />)}
       </ul>
     </div>
   );

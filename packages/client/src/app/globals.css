@@ -11,6 +11,10 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
 }
 
+main {
+  @apply min-h-screen w-screen;
+}
+
 h1,
 h2 {
   font-family: var(--font-sora);
