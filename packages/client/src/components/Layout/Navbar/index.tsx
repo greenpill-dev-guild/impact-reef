@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import { Login } from "@/components/Login";
+import { Connect } from "@/components/Connect";
 
 import { NavbarLinks } from "./Links";
 
@@ -14,7 +14,7 @@ export const Navbar: React.FC<NavBarProps> = () => {
       <div className="flex gap-4 w-full max-w-screen-xl flex-nowrap">
         <Link href="/" className="flex gap-2 shrink-0">
           <Image
-            alt="impact coral reef sun logo"
+            alt="impact reef sun logo"
             src={"/images/sun-logo.png"}
             className="aspect-square rounded-full"
             width={48}
@@ -22,7 +22,7 @@ export const Navbar: React.FC<NavBarProps> = () => {
             priority
           />
           <Image
-            alt="impact coral reef text logo"
+            alt="impact reef text logo"
             src={"/images/logo-text.png"}
             className=""
             width={164}
@@ -49,7 +49,7 @@ export const Navbar: React.FC<NavBarProps> = () => {
           />
         </label>
         <NavbarLinks />
-        <Login />
+        <Connect />
       </div>
     </header>
   );

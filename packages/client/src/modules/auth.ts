@@ -1,7 +1,6 @@
 import { getCsrfToken } from "next-auth/react";
 import NextAuth, { DefaultSession } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { createAppClient, viemConnector } from "@farcaster/auth-kit";
 
 declare module "next-auth" {
   /**
@@ -13,6 +12,10 @@ declare module "next-auth" {
       id: string;
       name: string;
       image: string;
+      badgeholder: boolean;
+      metrics_admin: boolean;
+      council_member: boolean;
+      addresses: string[];
     } & DefaultSession["user"];
   }
 }
@@ -59,27 +62,27 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         try {
           const csrfToken = await getCsrfToken();
 
-          const appClient = createAppClient({
-            ethereum: viemConnector(),
-          });
+          // const verifyResponse = await appClient.verifySignInMessage({
+          //   message: credentials?.message as string,
+          //   signature: credentials?.signature as `0x${string}`,
+          //   domain: "example.com",
+          //   nonce: csrfToken,
+          // });
 
-          const verifyResponse = await appClient.verifySignInMessage({
-            message: credentials?.message as string,
-            signature: credentials?.signature as `0x${string}`,
-            domain: "example.com",
-            nonce: csrfToken,
-          });
+          // const { success, fid } = verifyResponse;
 
-          const { success, fid } = verifyResponse;
-
-          if (!success) {
-            return null;
-          }
+          // if (!success) {
+          //   return null;
+          // }
 
           return {
-            id: fid.toString(),
+            // id: fid.toString(),
             name: credentials?.name as string,
             image: credentials?.pfp as string,
+            badgeholder: true,
+            metrics_admin: true,
+            council_member: true,
+            addresses: [],
           };
         } catch (error) {
           throw error;

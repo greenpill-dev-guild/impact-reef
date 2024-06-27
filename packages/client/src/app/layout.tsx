@@ -1,5 +1,4 @@
 import "./globals.css";
-import "@farcaster/auth-kit/styles.css";
 
 import { Toaster } from "react-hot-toast";
 import type { Metadata, Viewport } from "next";
@@ -9,9 +8,9 @@ import { inter, sora } from "@/utils/fonts";
 import { Navbar } from "@/components/Layout/Navbar";
 import { Footer } from "@/components/Layout/Footer";
 
-const APP_NAME = "Impact Coral Reef";
-const APP_DEFAULT_TITLE = "Impact Coral Reef";
-const APP_TITLE_TEMPLATE = "%s - Impact Coral Reef";
+const APP_NAME = "Impact Reef";
+const APP_DEFAULT_TITLE = "Impact Reef";
+const APP_TITLE_TEMPLATE = "%s - Impact Reef";
 const APP_DESCRIPTION = "";
 
 export const metadata: Metadata = {
@@ -60,7 +59,7 @@ export default function RootLayout({
     >
       <body suppressHydrationWarning>
         <Navbar />
-        <main className="min-h-screen w-screen">{children}</main>
+        {children}
         <Footer />
         <Toaster />
       </body>

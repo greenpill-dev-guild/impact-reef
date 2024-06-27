@@ -43,7 +43,7 @@ export const Footer: React.FC<FooterProps> = async () => {
             height={24}
           />
           <p>
-            Impact Coral Reef is built by <b>Greenpill Dev Guild</b>
+            Impact Reef is built by <b>Greenpill Dev Guild</b>
           </p>
         </aside>
         <nav className="flex gap-3">

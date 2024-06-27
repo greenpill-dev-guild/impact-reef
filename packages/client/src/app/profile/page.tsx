@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 
 import { auth } from "@/modules/auth";
 
-const ProfileView = dynamic(() => import("@/views/Profile"));
+const ProfileView = dynamic(() => import("@/views/Profile/Evaluations"));
 
 const ProfilePage: NextPage = async () => {
   // const session = await auth();

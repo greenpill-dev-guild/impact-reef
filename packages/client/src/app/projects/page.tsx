@@ -9,11 +9,11 @@ import { projects as mockProjects } from "@/utils/mockData";
 const ProjectsView = dynamic(() => import("@/views/Projects"));
 
 const ProjectsPage: NextPage = async () => {
-  const owners = await getProjectsOwners();
+  // const owners = await getProjectsOwners();
 
-  if (!owners) {
-    return <div />;
-  }
+  // if (!owners) {
+  //   return <div />;
+  // }
 
   // Example projectOwnerWithData
   //   {
@@ -25,18 +25,18 @@ const ProjectsPage: NextPage = async () => {
   //       bio: 'Co-Founder @Gitcoin | Working on @GitcoinPassport'
   //     }
   //   },
-  const projectOwnerWithFarcasterData = await Promise.all(
-    owners.map(async (owner) => {
-      const farcasterData = await getFarcasterUserDataById(owner);
+  // const projectOwnerWithFarcasterData = await Promise.all(
+  // owners.map(async (owner) => {
+  //   const farcasterData = await getFarcasterUserDataById(owner);
 
-      return {
-        farcasterID: owner,
-        userData: farcasterData,
-      };
-    })
-  );
+  //   return {
+  //     farcasterID: owner,
+  //     userData: farcasterData,
+  //   };
+  // })
+  // );
 
-  console.log(projectOwnerWithFarcasterData);
+  // console.log(projectOwnerWithFarcasterData);
 
   return <ProjectsView projects={mockProjects} />;
 };
