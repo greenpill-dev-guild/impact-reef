@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { forwardRef } from "react";
 
-interface ProjectAttestEvaluationsProps {
+interface ProjectAttestEvaluationProps {
   register: any;
 }
 
-export const ProjectAttestEvaluations = forwardRef<
+export const ProjectAttestEvaluation = forwardRef<
   HTMLTextAreaElement,
-  ProjectAttestEvaluationsProps
+  ProjectAttestEvaluationProps
 >(({ register }, ref) => {
   return (
     <div
@@ -17,7 +17,7 @@ export const ProjectAttestEvaluations = forwardRef<
       <div className="collapse-title text-xl font-medium">
         <h3 className="mb-3 text-xl font-semibold">
           <Image src="/icons/chat.svg" alt="Endorsment Chat SVG" unoptimized />{" "}
-          Evaluations
+          Evaluation
         </h3>
         <p className="">
           This type of attestation is intended as a soft evaluation, ranging
@@ -37,3 +37,5 @@ export const ProjectAttestEvaluations = forwardRef<
     </div>
   );
 });
+
+ProjectAttestEvaluation.displayName = "Project Attest Evaluation";

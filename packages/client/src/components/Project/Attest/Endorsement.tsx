@@ -37,3 +37,5 @@ export const ProjectAttestEndorsement = forwardRef<
     </div>
   );
 });
+
+ProjectAttestEndorsement.displayName = "Project Attest Endorsement";

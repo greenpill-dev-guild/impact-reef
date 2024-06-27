@@ -93,6 +93,7 @@ export const metrics: { title: string; value: number }[] = [
 export const projects: ProjectItem[] = [
   {
     id: "1",
+    creator: "",
     title: "Project name",
     avatar_image: "/images/project-icon.png",
     category: "cefi",
@@ -102,6 +103,7 @@ export const projects: ProjectItem[] = [
   },
   {
     id: "2",
+    creator: "",
     title: "Project name long name warp",
     avatar_image: "/images/project-icon.png",
     category: "cross-chain",
@@ -111,6 +113,7 @@ export const projects: ProjectItem[] = [
   },
   {
     id: "3",
+    creator: "",
     title: "Project name",
     avatar_image: "",
     category: "defi",
@@ -120,6 +123,7 @@ export const projects: ProjectItem[] = [
   },
   {
     id: "4",
+    creator: "",
     title: "Project name",
     avatar_image: "/images/project-icon.png",
     category: "governance",
@@ -129,6 +133,7 @@ export const projects: ProjectItem[] = [
   },
   {
     id: "5",
+    creator: "",
     title: "Project name",
     avatar_image: "",
     category: "nft",
@@ -138,6 +143,7 @@ export const projects: ProjectItem[] = [
   },
   {
     id: "6",
+    creator: "",
     title: "Project name",
     avatar_image: "/images/project-icon.png",
     category: "social",
@@ -147,6 +153,7 @@ export const projects: ProjectItem[] = [
   },
   {
     id: "7",
+    creator: "",
     title: "Project name",
     avatar_image: "",
     category: "utility",
@@ -156,6 +163,7 @@ export const projects: ProjectItem[] = [
   },
   {
     id: "8",
+    creator: "",
     title: "Project name",
     avatar_image: "",
     category: "utility",
@@ -165,6 +173,7 @@ export const projects: ProjectItem[] = [
   },
   {
     id: "9",
+    creator: "",
     title: "Project name",
     avatar_image: "",
     category: "utility",
@@ -174,6 +183,7 @@ export const projects: ProjectItem[] = [
   },
   {
     id: "10",
+    creator: "",
     title: "Project name",
     avatar_image: "",
     category: "utility",
@@ -183,6 +193,7 @@ export const projects: ProjectItem[] = [
   },
   {
     id: "11",
+    creator: "",
     title: "Project name",
     avatar_image: "",
     category: "utility",
@@ -192,6 +203,7 @@ export const projects: ProjectItem[] = [
   },
   {
     id: "12",
+    creator: "",
     title: "Project name",
     avatar_image: "",
     category: "utility",
@@ -201,6 +213,7 @@ export const projects: ProjectItem[] = [
   },
   {
     id: "13",
+    creator: "",
     title: "Project name",
     avatar_image: "",
     category: "utility",
@@ -210,6 +223,7 @@ export const projects: ProjectItem[] = [
   },
   {
     id: "14",
+    creator: "",
     title: "Project name",
     avatar_image: "",
     category: "utility",
@@ -219,6 +233,7 @@ export const projects: ProjectItem[] = [
   },
   {
     id: "15",
+    creator: "",
     title: "Project name",
     avatar_image: "",
     category: "utility",
@@ -228,6 +243,7 @@ export const projects: ProjectItem[] = [
   },
   {
     id: "16",
+    creator: "",
     title: "Project name",
     avatar_image: "",
     category: "utility",

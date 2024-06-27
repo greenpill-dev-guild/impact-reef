@@ -23,6 +23,7 @@ const ProjectPage: NextPage = () => {
   const project: Project = {
     id: "",
     title: "",
+    creator: "",
     attestation_counts: 0,
     transactions_count: 0,
     avatar_image: "",

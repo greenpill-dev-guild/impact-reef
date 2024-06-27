@@ -28,6 +28,7 @@ const ProjectAttestMetric = forwardRef<
         <ul className="flex flex-col gap-2">
           {metrics.map((metric) => (
             <li
+              key={metric.id}
               tabIndex={0}
               className="collapse collapse-arrow border border-base-300 bg-base-200 px-2 py-3"
             >
@@ -74,3 +75,5 @@ const ProjectAttestMetric = forwardRef<
     </div>
   );
 });
+
+ProjectAttestMetric.displayName = "Project Attest Metric";
