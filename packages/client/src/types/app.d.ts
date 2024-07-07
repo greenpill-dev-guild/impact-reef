@@ -40,15 +40,6 @@ declare interface Metric extends CreateMetric {
   createdAt: string;
 }
 
-declare interface CriteriaItem {
-  id: string;
-  updated_at: string;
-}
-
-declare interface Criteria extends EndorsementItem {
-  description: string;
-}
-
 declare type GrantTrack =
   | "onchain-builders"
   | "op-stack"
@@ -64,6 +55,14 @@ declare type ProjectCategory =
   | "social"
   | "utility";
 
+declare interface ProjectGrant {
+  title: string;
+  date: string;
+  funds_received: number;
+  description: string;
+  link?: string;
+}
+
 declare interface ProjectItem {
   id: string;
   title: string;
@@ -76,21 +75,25 @@ declare interface ProjectItem {
 }
 
 declare interface Project extends ProjectItem {
+  grant_track: ProjectGrant;
   description: string;
   banner_image: string;
-  metrics: any[];
-  endorsments: any[];
+  metrics: ProjectMetric[];
+  endorsements: Endorsement[];
+  repositories: string[];
+  contracts: string[];
+  funding: ProjectGrant[];
   socials: string[];
 }
 
-declare interface EvaluationItem {
+declare interface ProjectMetricItem {
   id: string;
+  title: string;
+  value: number;
   updated_at: string;
 }
 
-declare interface Evaluation extends EndorsementItem {
-  description: string;
-}
+declare interface ProjectMetric extends ProjectMetricItem {}
 
 declare interface EndorsementItem {
   id: string;

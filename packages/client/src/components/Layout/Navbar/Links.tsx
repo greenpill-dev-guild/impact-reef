@@ -15,8 +15,8 @@ interface Link {
 
 const links: Link[] = [
   { title: "projects", icon: "/icons/fire.svg" },
-  { title: "metrics", icon: "/icons/flag.svg" },
-  { title: "about", icon: "/icons/newspaper.svg" },
+  // { title: "metrics", icon: "/icons/flag.svg" },
+  // { title: "about", icon: "/icons/newspaper.svg" },
 ];
 
 export const NavbarLinks: React.FC<NavBarLinksProps> = () => {
@@ -27,7 +27,7 @@ export const NavbarLinks: React.FC<NavBarLinksProps> = () => {
       {links.map(({ icon, title }) => (
         <Link
           key={title}
-          href={title}
+          href={`/${title}`}
           className={`capitalize inline-flex gap-2 w-32 p-4 justify-center items-center rounded-full text-zinc-800 font-semibold leading-snug ${pathname.includes(title) && !pathname.includes("profile") && "bg-neutral-100"}`}
         >
           {title}

@@ -11,7 +11,7 @@ interface NavBarProps {}
 export const Navbar: React.FC<NavBarProps> = () => {
   return (
     <header className="navbar justify-center py-6 border-b border-zinc-200">
-      <div className="flex gap-4 w-full max-w-screen-xl flex-nowrap">
+      <div className="flex gap-4 w-full justify-between max-w-screen-xl flex-nowrap">
         <Link href="/" className="flex gap-2 shrink-0">
           <Image
             alt="impact reef sun logo"
@@ -30,7 +30,7 @@ export const Navbar: React.FC<NavBarProps> = () => {
             priority
           />
         </Link>
-        <label
+        {/* <label
           htmlFor="search"
           className="input input-bordered flex flex-1 items-center rounded-full border border-zinc-200 gap-2"
         >
@@ -47,9 +47,11 @@ export const Navbar: React.FC<NavBarProps> = () => {
             className="grow"
             placeholder="Search projects, metrics, criteria..."
           />
-        </label>
-        <NavbarLinks />
-        <Connect />
+        </label> */}
+        <div className="flex gap-2 items-center">
+          <NavbarLinks />
+          <Connect />
+        </div>
       </div>
     </header>
   );

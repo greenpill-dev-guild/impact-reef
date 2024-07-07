@@ -5,6 +5,7 @@ import React, { useRef } from "react";
 import { ConnectKitButton } from "connectkit";
 
 import { Web3Provider } from "@/hooks/auth/Provider";
+import { useAuth } from "@/hooks/auth/useAuth";
 
 interface Link {
   title: string;
@@ -23,14 +24,14 @@ export const Connect: React.FC<ConnectProps> = () => {
 };
 
 export const ConnectContent: React.FC<ConnectProps> = () => {
-  // const {
-  //   isAuthenticated,
-  //   // profile,
-  //   // handleNonce,
-  //   handleConnect,
-  //   handleLogout,
-  //   handleError,
-  // } = useAuth();
+  const {
+    address,
+    // profile,
+    // handleNonce,
+    // handleConnect,
+    // handleLogout,
+    // handleError,
+  } = useAuth();
 
   // const getNonce = useCallback(async () => {
   //   const nonce = await getCsrfToken();
@@ -40,15 +41,15 @@ export const ConnectContent: React.FC<ConnectProps> = () => {
 
   const profileLinks: Link[] = [
     { title: "endorsements", icon: "/icons/fire.svg" },
-    { title: "metrics", icon: "/icons/flag.svg" },
-    { title: "criteria", icon: "/icons/newspaper.svg" },
+    // { title: "metrics", icon: "/icons/flag.svg" },
+    // { title: "criteria", icon: "/icons/newspaper.svg" },
     { title: "settings", icon: "/icons/flag.svg" },
     // { title: "logout", icon: "/icons/fire.svg", action: handleLogout },
   ];
 
   return (
-    <div className="">
-      {true ? (
+    <div className="basis-12 w-full">
+      {address ? (
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
@@ -56,13 +57,12 @@ export const ConnectContent: React.FC<ConnectProps> = () => {
             className="btn inline-flex btn-outline border-bl justify-center items-center gap-2 w-32 p-4  text-zinc-800 font-semibold hover:fill-white hover:text-white"
           >
             My Reef{" "}
-            <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
+            <svg width="13" height="8" viewBox="0 0 13 8">
               <path
+                className="text-[#0E255D] hover:text-white"
                 fillRule="evenodd"
                 clipRule="evenodd"
                 d="M1.79289 1.29289C2.18342 0.902369 2.81658 0.902369 3.20711 1.29289L6.5 4.58579L9.79289 1.29289C10.1834 0.902369 10.8166 0.902369 11.2071 1.29289C11.5976 1.68342 11.5976 2.31658 11.2071 2.70711L7.20711 6.70711C6.81658 7.09763 6.18342 7.09763 5.79289 6.70711L1.79289 2.70711C1.40237 2.31658 1.40237 1.68342 1.79289 1.29289Z"
-                fill="#0E255D"
-                stroke="#0E255D"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -78,14 +78,18 @@ export const ConnectContent: React.FC<ConnectProps> = () => {
                 {link?.action ? (
                   <button onClick={link.action}>{link.title}</button>
                 ) : (
-                  <Link href={`/profile/${link.title}`}>{link.title}</Link>
+                  <Link
+                    href={`/profile/${link.title === "settings" ? "" : link.title}`}
+                  >
+                    {link.title}
+                  </Link>
                 )}
               </li>
             ))}
           </ul>
         </div>
       ) : (
-        <ConnectKitButton />
+        <ConnectKitButton customTheme={""} />
       )}
     </div>
   );

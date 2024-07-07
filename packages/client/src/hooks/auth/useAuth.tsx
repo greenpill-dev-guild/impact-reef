@@ -1,10 +1,11 @@
 import React, { useCallback } from "react";
-import { toast, ErrorIcon } from "react-hot-toast";
+// import { toast, ErrorIcon } from "react-hot-toast";
 
 import { getNonce, login, logout } from "@/actions/auth";
+import { useAccount } from "wagmi";
 
 interface AuthHookProps {
-  // isAuthenticated: boolean;
+  address: `0x${string}` | undefined;
   // profile: {
   //   fid?: number;
   //   pfpUrl?: string;
@@ -21,6 +22,8 @@ interface AuthHookProps {
 }
 
 export function useAuth(): AuthHookProps {
+  const { address } = useAccount();
+
   const handleNonce = useCallback(async () => {
     const { nonce } = await getNonce();
 
@@ -52,7 +55,7 @@ export function useAuth(): AuthHookProps {
   }, []);
 
   return {
-    // isAuthenticated,
+    address,
     // profile,
     handleNonce,
     handleLogin,

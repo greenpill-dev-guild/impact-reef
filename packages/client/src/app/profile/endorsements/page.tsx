@@ -10,7 +10,7 @@ import { NextPage } from "next";
 const ProfileEvaluationsPage: NextPage = () => {
   // TODO: Fetch user evaluations data
 
-  return <div> </div>;
+  return <div>Endorsements</div>;
 };
 
 export default ProfileEvaluationsPage;

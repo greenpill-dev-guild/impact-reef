@@ -3,6 +3,9 @@ import type { Config } from "tailwindcss";
 const config: Config = {
   darkMode: ["class"],
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  variants: {
+    fill: ["hover", "focus"], // this line does the trick
+  },
   plugins: [require("daisyui"), require("tailwindcss-animate")],
   daisyui: {
     themes: ["light"], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]

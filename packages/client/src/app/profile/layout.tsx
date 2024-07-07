@@ -9,8 +9,8 @@ interface Link {
 
 const links: Link[] = [
   { title: "endorsements", icon: "/icons/fire.svg" },
-  { title: "metrics", icon: "/icons/flag.svg" },
-  { title: "criteria", icon: "/icons/newspaper.svg" },
+  // { title: "metrics", icon: "/icons/flag.svg" },
+  // { title: "criteria", icon: "/icons/newspaper.svg" },
   { title: "settings", icon: "/icons/flag.svg" },
 ];
 
@@ -35,7 +35,7 @@ export default function ProfileLayout({
               <Link
                 className="flex gap-1 px-3 py-2 rounded-lg hover:bg-zinc-300 bg-zinc-100 text-lg font-semibold"
                 key={link.title}
-                href={`/profile/${link.title}`}
+                href={`/profile/${link.title === "settings" ? "" : link.title}`}
               >
                 <Image
                   alt="profile navigation icon"

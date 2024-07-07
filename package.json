@@ -7,5 +7,9 @@
     "test": "cd packages/client && pnpm run test",
     "build": "cd packages/client && pnpm run build",
     "generate:supabase:types": "npx supabase gen types typescript --local > types/database-generated.types.ts"
+  },
+  "engines": {
+    "node": "20.x",
+    "pnpm": "^9.x"
   }
 }
