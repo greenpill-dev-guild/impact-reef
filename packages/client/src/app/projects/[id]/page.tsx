@@ -15,7 +15,7 @@ const ProjectPage: NextPage = () => {
   //   error,
   // } = useQuery({
   //   queryKey: ["project-metadata", uid],
-  //   queryFn: () => getProjectMetadata(uid),
+  //   queryFn: () => getProject(uid),
   //   enabled: !!uid,
   // });
 

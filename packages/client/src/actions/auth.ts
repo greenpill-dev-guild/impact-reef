@@ -8,9 +8,9 @@ import { signIn, signOut, auth } from "@/modules/auth";
 export interface Credentials {
   message: string;
   signature: string;
-  name: string;
-  pfp: string;
-  redirect: boolean;
+  // name: string;
+  // pfp: string;
+  // redirect: boolean;
 }
 
 export async function getNonce() {

@@ -3,8 +3,6 @@ import { useMachine } from "@xstate/react";
 import { endorsementMachine } from "./machines/endorsement";
 import { claimMetricsMachine } from "./machines/claimMetrics";
 
-// interface ProjectHookProps {}
-
 export const useProject = (id: string) => {
   const [endorsementState, endorsementSend] = useMachine(endorsementMachine, {
     input: {

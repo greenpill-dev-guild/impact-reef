@@ -1,13 +1,27 @@
 import Image from "next/image";
 import { forwardRef } from "react";
+import { FieldArrayWithId, UseFormRegister } from "react-hook-form";
+
+export interface AttestFormValues {
+  endorsement: string;
+  metrics: {
+    metricUID: string;
+    metricName: string;
+    metricDescription: string;
+    value: number;
+    source: string;
+  }[];
+}
 
 interface ProjectAttestMetricProps {
-  metrics: any[];
+  register: UseFormRegister<AttestFormValues>;
+  metrics: FieldArrayWithId<AttestFormValues, "metrics", "metricUID">[];
 }
-const ProjectAttestMetric = forwardRef<
+
+export const ProjectAttestMetric = forwardRef<
   HTMLTextAreaElement,
   ProjectAttestMetricProps
->(({ metrics }, ref) => {
+>(({ register, metrics }) => {
   return (
     <div
       tabIndex={0}
@@ -26,17 +40,17 @@ const ProjectAttestMetric = forwardRef<
       </div>
       <div className="collapse-content">
         <ul className="flex flex-col gap-2">
-          {metrics.map((metric) => (
+          {metrics.map((metric, index) => (
             <li
-              key={metric.id}
+              key={metric.metricUID}
               tabIndex={0}
               className="collapse collapse-arrow border border-base-300 bg-base-200 px-2 py-3"
             >
               <div className="collapse-title text-xl font-medium">
-                {metric.title}
+                {metric.metricName}
               </div>
               <div className="collapse-content">
-                <p className="text-gray-300">{metric.description}</p>
+                <p className="text-gray-300">{metric.metricDescription}</p>
                 <label className="form-control w-full max-w-xs">
                   <div className="label">
                     <span className="label-text">Date</span>
@@ -45,6 +59,7 @@ const ProjectAttestMetric = forwardRef<
                     type="text"
                     placeholder="Type here"
                     className="input input-bordered w-full max-w-xs"
+                    {...register(`metrics.${index}.value`)}
                   />
                   <div className="label">
                     <span className="label-text-alt">
@@ -60,6 +75,7 @@ const ProjectAttestMetric = forwardRef<
                     type="text"
                     placeholder="Type here"
                     className="input input-bordered w-full max-w-xs"
+                    {...register(`metrics.${index}.source`)}
                   />
                   <div className="label">
                     <span className="label-text-alt">

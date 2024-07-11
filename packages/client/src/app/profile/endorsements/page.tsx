@@ -3,14 +3,14 @@
 import { NextPage } from "next";
 // import dynamic from "next/dynamic";
 
-// TODO: Import Action For Fetching User Evaluations
+// TODO: Import Action For Fetching User Endorsements
 
-// TODO: Dynamically Import Profile Evaluations View
+// TODO: Dynamically Import Profile Endorsements View
 
-const ProfileEvaluationsPage: NextPage = () => {
-  // TODO: Fetch user evaluations data
+const ProfileEndorsementsPage: NextPage = () => {
+  // TODO: Fetch user Endorsements data
 
   return <div>Endorsements</div>;
 };
 
-export default ProfileEvaluationsPage;
+export default ProfileEndorsementsPage;

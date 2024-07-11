@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 
-import { getProjectsOwners } from "@/actions/projects";
+import { getProjectBuilders } from "@/actions/projects";
 import { getFarcasterUserDataById } from "@/actions/farcaster";
 
 import { projects as mockProjects } from "@/utils/mockData";
@@ -9,7 +9,9 @@ import { projects as mockProjects } from "@/utils/mockData";
 const ProjectsView = dynamic(() => import("@/views/Projects"));
 
 const ProjectsPage: NextPage = async () => {
-  // const owners = await getProjectsOwners();
+  const owners = (await getProjectBuilders()) ?? [];
+
+  console.log("Owners", owners);
 
   // if (!owners) {
   //   return <div />;
@@ -25,18 +27,18 @@ const ProjectsPage: NextPage = async () => {
   //       bio: 'Co-Founder @Gitcoin | Working on @GitcoinPassport'
   //     }
   //   },
-  // const projectOwnerWithFarcasterData = await Promise.all(
-  // owners.map(async (owner) => {
-  //   const farcasterData = await getFarcasterUserDataById(owner);
+  const projectOwnerWithFarcasterData = await Promise.all(
+    owners.map(async (owner) => {
+      const farcasterData = await getFarcasterUserDataById(owner);
 
-  //   return {
-  //     farcasterID: owner,
-  //     userData: farcasterData,
-  //   };
-  // })
-  // );
+      return {
+        farcasterID: owner,
+        userData: farcasterData,
+      };
+    })
+  );
 
-  // console.log(projectOwnerWithFarcasterData);
+  console.log("Projects", projectOwnerWithFarcasterData);
 
   return <ProjectsView projects={mockProjects} />;
 };

@@ -11,7 +11,6 @@ import { endorsments, metrics } from "@/utils/mockData";
 import { Stat } from "@/components/Stat";
 import { Collaspe } from "@/components/Collaspe";
 import { Progress } from "@/components/Progress";
-import { ProjectCompare } from "@/components/Project/Compare";
 // import { useAuth } from "@/hooks/auth/useAuth";
 
 export interface ProjectViewProps {
@@ -37,16 +36,9 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project }) => {
   }
 
   return (
-    <main
-      id="project-summary"
-      className="w-full mx-auto drawer drawer-end drawer-content"
-    >
-      <input
-        id="project-attest-drawer"
-        type="checkbox"
-        className="drawer-toggle"
-      />
-      <div className="flex flex-col gap-4 w-full drawer-content">
+    <main className="drawer drawer-end">
+      <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content w-full mx-auto flex flex-col gap-4">
         <header
           id="project-header"
           className="flex flex-col max-w-screen-xl mx-auto gap-4 py-8"
@@ -65,9 +57,12 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project }) => {
               />
             </Link>
             <div className="flex gap-3">
-              <button className="grid place-items-center w-36 p-4 rounded-full bg-blue-950 text-neutral-50 font-semibold leading-snug">
+              <label
+                htmlFor="my-drawer-4"
+                className="grid place-items-center drawer-button w-36 p-4 rounded-full bg-blue-950 text-neutral-50 font-semibold leading-snug"
+              >
                 Attest Impact
-              </button>
+              </label>
               <button className="grid place-items-center w-36 p-4 rounded-full bg-blue-950 text-neutral-50 font-semibold leading-snug">
                 Attest Impact
               </button>
@@ -286,172 +281,6 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project }) => {
           </aside>
         </div>
         <section
-          id="project-comparison"
-          className="min-h-screen w-full bg-gray-50 py-12"
-        >
-          <div className="w-full max-w-screen-xl flex flex-col gap-4 items-center mx-auto">
-            <div className="flex gap-2">
-              <Image
-                src="/icons/puzzle.svg"
-                alt="flag icon to represent comparison"
-                unoptimized
-                width={32}
-                height={32}
-              />
-              <h2 className="font-semibold text-3xl">Compare With Others</h2>
-            </div>
-            <ProjectCompare
-              category="utility"
-              grantTrack="onchain-builders"
-              colorMap={
-                new Map([
-                  ["1", "red"],
-                  ["2", "blue"],
-                  ["3", "yellow"],
-                  ["4", "purple"],
-                  ["5", "green"],
-                ])
-              }
-              metrics={[
-                {
-                  title:
-                    "Number of OP Stack modules dependent on this contribution",
-                  projects: [
-                    {
-                      id: "2",
-                      amount: 4,
-                    },
-                    {
-                      id: "3",
-                      amount: 8,
-                    },
-                    {
-                      id: "4",
-                      amount: 2,
-                    },
-                    {
-                      id: "5",
-                      amount: 0,
-                    },
-                  ],
-                },
-                {
-                  title: "Number of OP Stack modules dependent",
-                  projects: [
-                    {
-                      id: "2",
-                      amount: 4,
-                    },
-                    {
-                      id: "3",
-                      amount: 8,
-                    },
-                    {
-                      id: "4",
-                      amount: 2,
-                    },
-                    {
-                      id: "5",
-                      amount: 0,
-                    },
-                  ],
-                },
-                {
-                  title: "Bytecode size reduction",
-                  projects: [
-                    {
-                      id: "2",
-                      amount: 4,
-                    },
-                    {
-                      id: "3",
-                      amount: 8,
-                    },
-                    {
-                      id: "4",
-                      amount: 2,
-                    },
-                    {
-                      id: "5",
-                      amount: 0,
-                    },
-                  ],
-                },
-                {
-                  title: "Gas costs reduction in contract creation",
-                  projects: [
-                    {
-                      id: "2",
-                      amount: 4,
-                    },
-                    {
-                      id: "3",
-                      amount: 8,
-                    },
-                    {
-                      id: "4",
-                      amount: 2,
-                    },
-                    {
-                      id: "5",
-                      amount: 0,
-                    },
-                  ],
-                },
-                {
-                  title:
-                    "Number of modules that were developed simultaneously without causing issues",
-                  projects: [
-                    {
-                      id: "2",
-                      amount: 4,
-                    },
-                    {
-                      id: "3",
-                      amount: 8,
-                    },
-                    {
-                      id: "4",
-                      amount: 2,
-                    },
-                    {
-                      id: "5",
-                      amount: 0,
-                    },
-                  ],
-                },
-              ]}
-              project={{
-                id: "1",
-                logo: "/images/project-icon.png",
-                name: "Project Guild",
-              }}
-              similarProjects={[
-                {
-                  id: "2",
-                  logo: "",
-                  name: "other teams",
-                },
-                {
-                  id: "3",
-                  logo: "",
-                  name: "other team- a very long name",
-                },
-                {
-                  id: "4",
-                  logo: "",
-                  name: "other teams",
-                },
-                {
-                  id: "5",
-                  logo: "",
-                  name: "other teams",
-                },
-              ]}
-            />
-          </div>
-        </section>
-        <section
           id="project-endorsements"
           className="w-full min-h-screen max-w-screen-xl mx-auto flex flex-col items-center gap-12 py-12"
         >
@@ -523,6 +352,16 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project }) => {
             />
           </button>
         </footer>
+      </div>
+      <div className="drawer-side">
+        <label
+          htmlFor="my-drawer-4"
+          aria-label="close sidebar"
+          className="drawer-overlay"
+        ></label>
+        <aside className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+          {/* Sidebar content here */}
+        </aside>
       </div>
     </main>
   );

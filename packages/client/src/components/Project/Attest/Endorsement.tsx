@@ -1,14 +1,15 @@
 import Image from "next/image";
-import { forwardRef } from "react";
+import { forwardRef, InputHTMLAttributes } from "react";
 
-interface ProjectAttestEndorsementProps {
-  register: any;
+interface ProjectAttestEndorsementProps
+  extends InputHTMLAttributes<HTMLTextAreaElement> {
+  // register: any;
 }
 
 export const ProjectAttestEndorsement = forwardRef<
   HTMLTextAreaElement,
   ProjectAttestEndorsementProps
->(({ register }, ref) => {
+>(({ ...props }, ref) => {
   return (
     <div
       tabIndex={0}
@@ -30,7 +31,7 @@ export const ProjectAttestEndorsement = forwardRef<
           className="mb-2"
           placeholder="when someone enter text, use this color"
           ref={ref}
-          {...register}
+          {...props}
         />
         <p className="text-sm">500 Characters Max</p>
       </div>

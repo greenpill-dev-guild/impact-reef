@@ -4,6 +4,21 @@ declare enum Impact {
   HIGH,
 }
 
+declare type GrantTrack =
+  | "onchain-builders"
+  | "op-stack"
+  | "dev-tooling"
+  | "governance";
+
+declare type ProjectCategory =
+  | "cefi"
+  | "cross-chain"
+  | "defi"
+  | "governance"
+  | "nft"
+  | "social"
+  | "utility";
+
 declare interface CreateMetric {
   name: string;
   description: string;
@@ -40,21 +55,6 @@ declare interface Metric extends CreateMetric {
   createdAt: string;
 }
 
-declare type GrantTrack =
-  | "onchain-builders"
-  | "op-stack"
-  | "dev-tooling"
-  | "governance";
-
-declare type ProjectCategory =
-  | "cefi"
-  | "cross-chain"
-  | "defi"
-  | "governance"
-  | "nft"
-  | "social"
-  | "utility";
-
 declare interface ProjectGrant {
   title: string;
   date: string;
@@ -68,8 +68,8 @@ declare interface ProjectItem {
   title: string;
   avatar_image: string;
   category: ProjectCategory;
-  transactions_count: number;
-  attestation_counts: number;
+  transactions_count?: number;
+  attestation_counts?: number;
   updated_at: string;
   creator: string;
 }
@@ -86,6 +86,14 @@ declare interface Project extends ProjectItem {
   socials: string[];
 }
 
+declare interface CreateProjectMetric {
+  projectUID: string;
+  metricUID: number;
+  value: string;
+  source: string;
+  recipient?: string;
+}
+
 declare interface ProjectMetricItem {
   id: string;
   title: string;
@@ -95,11 +103,17 @@ declare interface ProjectMetricItem {
 
 declare interface ProjectMetric extends ProjectMetricItem {}
 
+interface CreateEndorsement {
+  recipient?: string; // Contract for Project
+  projectUID: string;
+  metricUID: string;
+  description: string;
+}
+
 declare interface EndorsementItem {
   id: string;
   updated_at: string;
+  attester: string; // Endorser
 }
 
-declare interface Endorsement extends EndorsementItem {
-  description: string;
-}
+declare interface Endorsement extends EndorsementItem, CreateEndorsement {}

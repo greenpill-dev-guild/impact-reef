@@ -2,6 +2,7 @@
 
 import React from "react";
 import { User } from "next-auth";
+
 import { List } from "@/components/List";
 
 export interface ProfileEndorsementsProps {

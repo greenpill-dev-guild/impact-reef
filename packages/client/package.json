@@ -13,6 +13,7 @@
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
+    "@ethereum-attestation-service/eas-sdk": "^2.3.0",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@tanstack/react-query": "^5.37.1",
     "@urql/core": "^5.0.3",
@@ -27,12 +28,13 @@
     "next-auth": "5.0.0-beta.18",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-hook-form": "7.52.1",
     "react-hot-toast": "2.4.1",
     "react-spinners": "0.13.8",
     "snaplet": "^0.90.0",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
-    "viem": "2.9.28",
+    "viem": "2.17.2",
     "wagmi": "^2.9.10",
     "xstate": "5.13.0",
     "zod": "3.23.4"
