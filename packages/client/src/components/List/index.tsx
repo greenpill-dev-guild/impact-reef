@@ -7,6 +7,7 @@ import { ListItem } from "./Item";
 export interface ListProps {
   items: any[];
   columns: { size: number; title: string }[];
+  onItemClick: (id: string) => void;
 }
 
 type ColumnValue =
@@ -21,7 +22,7 @@ interface Column {
   title: string;
 }
 
-export const List: React.FC<ListProps> = ({ items, columns }) => {
+export const List: React.FC<ListProps> = ({ items, columns, onItemClick }) => {
   return (
     <div role="table" className="w-full h-full flex flex-col gap-2">
       <ul
@@ -42,9 +43,19 @@ export const List: React.FC<ListProps> = ({ items, columns }) => {
       </ul>
       <ul
         role="rowgroup"
-        className="w-full max-h-[60vh] flex flex-col gap-1 flex-1 overflow-scroll"
+        className="w-full max-h-[100vh] flex flex-col gap-1 flex-1 overflow-scroll"
       >
-        {items?.map((item) => <ListItem key={item.id} {...item} />)}
+        {items?.map((item) => (
+          <ListItem
+            {...item}
+            key={item.id}
+            onClick={() => {
+              console.log("jknjnkjkn");
+
+              onItemClick(item.id);
+            }}
+          />
+        ))}
       </ul>
     </div>
   );

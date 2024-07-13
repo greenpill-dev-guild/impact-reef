@@ -8,9 +8,14 @@ import { useRouter } from "next/navigation";
 import { determineSocialMedia } from "@/utils/text";
 import { endorsments, metrics } from "@/utils/mockData";
 
+import { useProject } from "@/hooks/projects/useProject";
+
 import { Stat } from "@/components/Stat";
 import { Collaspe } from "@/components/Collaspe";
 import { Progress } from "@/components/Progress";
+import { ProjectAttest } from "@/components/Project/Attest";
+import { useAuth } from "@/hooks/auth/useAuth";
+import { AttestFormValues } from "@/components/Project/Attest/Metric";
 // import { useAuth } from "@/hooks/auth/useAuth";
 
 export interface ProjectViewProps {
@@ -25,7 +30,18 @@ const projectSocialLinks = [
 ];
 
 const ProjectView: React.FC<ProjectViewProps> = ({ project }) => {
+  const { address } = useAuth();
   const { push } = useRouter();
+  const {
+    claimMetricsState,
+    startClaiming,
+    claim,
+    cancelClaim,
+    endorsementState,
+    startEndorsing,
+    endorse,
+    cancelEndorse,
+  } = useProject(project.id);
   // const { isAuthenticated, profile } = useAuth();
   const [showAllMetrics, setShowAllMetrics] = useState(false);
 
@@ -34,6 +50,14 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project }) => {
   function handleShowAllMetrics() {
     setShowAllMetrics(!showAllMetrics);
   }
+
+  const badgeholdr = true;
+  const projectCreator = !!address && address === project.creator;
+
+  async function onSubmit(
+    data: AttestFormValues,
+    event?: React.BaseSyntheticEvent
+  ) {}
 
   return (
     <main className="drawer drawer-end">
@@ -359,8 +383,13 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project }) => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <aside className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-          {/* Sidebar content here */}
+        <aside className="bg-base-200 text-base-content min-h-full w-80 p-4">
+          <ProjectAttest
+            onSubmit={onSubmit}
+            metrics={project.metrics}
+            badgeholder={badgeholdr}
+            projectCreator={projectCreator}
+          />
         </aside>
       </div>
     </main>

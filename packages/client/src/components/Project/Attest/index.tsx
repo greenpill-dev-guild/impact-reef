@@ -4,7 +4,7 @@ import { ProjectAttestEndorsement } from "./Endorsement";
 import { AttestFormValues, ProjectAttestMetric } from "./Metric";
 
 interface ProjectAttestProps {
-  metrics: Metric[];
+  metrics: ProjectMetricItem[];
   projectCreator: boolean;
   badgeholder: boolean;
   onSubmit: SubmitHandler<AttestFormValues>;

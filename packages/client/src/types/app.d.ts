@@ -96,9 +96,10 @@ declare interface CreateProjectMetric {
 
 declare interface ProjectMetricItem {
   id: string;
-  title: string;
-  value: number;
-  updated_at: string;
+  value: string;
+  source: string;
+  name: string;
+  description: string;
 }
 
 declare interface ProjectMetric extends ProjectMetricItem {}

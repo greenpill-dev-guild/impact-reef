@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 
 import { Filters } from "@/components/Filter";
 import { List } from "@/components/List";
@@ -10,6 +11,8 @@ export interface ProjectsViewProps {
 }
 
 const ProjectsView: React.FC<ProjectsViewProps> = ({ projects }) => {
+  const { push } = useRouter();
+
   return (
     <main className="flex flex-col gap-4 min-h-screen">
       <header className="w-full mx-auto max-w-screen-xl">
@@ -80,6 +83,10 @@ const ProjectsView: React.FC<ProjectsViewProps> = ({ projects }) => {
               { title: "last updated", size: 2 },
             ]}
             items={projects}
+            onItemClick={(id) => {
+              console.log("Projects", id);
+              push(`/projects/${id}`);
+            }}
           />
         </section>
         <aside className="basis-72">

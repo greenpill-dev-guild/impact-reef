@@ -1,5 +1,10 @@
 export const EAS = {
   "10": {
+    METRICS: {
+      uid: "0x7bd6430d6ddf8ef8d70f3ca0175d3383af97fd93cac56c2db621f2054f23e0ae",
+      schema:
+        "string name, string description, string importance, string rationale, string keyword, string term, string category",
+    },
     PROJECT_OWNERS: {
       uid: "0x7ae9f4adabd9214049df72f58eceffc48c4a69e920882f5b06a6c69a3157e5bd",
       schema: "uint256 farcasterID,string issuer",

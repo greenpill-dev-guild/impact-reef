@@ -1,14 +1,15 @@
 "use-client";
+import React from "react";
+import Image from "next/image";
 
 import { formatLastUpdated } from "@/utils/text";
-import Image from "next/image";
-import React from "react";
 
 export interface ListItemProps {
   id: string;
   title: string;
   avatar_image: string;
   updated_at: string;
+  onClick?: () => void;
 }
 
 type ColumnValue =
@@ -65,11 +66,13 @@ export const ListItem: React.FC<ListItemProps> = ({
   // transactions_count,
   // attestation_counts,
   updated_at,
+  onClick,
   ...props
 }) => {
   return (
     <li
       {...props}
+      onClick={onClick}
       className="cursor-pointer hover:bg-slate-50 hover:shadow-sm flex gap-2 items-center w-full font-light border border-zinc-300 rounded-lg px-4 py-3 transition-all ease-in-out duration-300"
     >
       <div className="flex gap-2 items-center flex-[4] text-lg font-semibold leading-7">
