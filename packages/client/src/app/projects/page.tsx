@@ -5,11 +5,13 @@ import { getProjectBuilders, getProjects } from "@/actions/projects";
 
 const ProjectsView = dynamic(() => import("@/views/Projects"));
 
-interface Params {
-  page?: string;
+interface Props {
+  params: {
+    page?: string;
+  };
 }
 
-const ProjectsPage: NextPage<Params> = async (params) => {
+const ProjectsPage: NextPage<Props> = async ({ params }) => {
   // const pathname = usePathname();
   // const currentPage = Number(params?.page) || 1;
 

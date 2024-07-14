@@ -6,11 +6,11 @@ import { Web3Provider } from "@/hooks/auth/Provider";
 
 const ProjectDetailsView = dynamic(() => import("@/views/Projects/Details"));
 
-interface Params {
-  uid: string;
+interface Props {
+  params: { uid: string };
 }
 
-const ProjectPage: NextPage<Params> = async ({ uid }) => {
+const ProjectPage: NextPage<Props> = async ({ params: { uid } }) => {
   const project = await getProject(uid);
 
   return (
