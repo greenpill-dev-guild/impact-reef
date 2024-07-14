@@ -6,7 +6,7 @@ import { List } from "@/components/List";
 
 export interface ProfileEndorsementsProps {
   user?: User;
-  endorsements: Endorsement[];
+  endorsements: EndorsementItem[];
 }
 
 const ProfileEndorsements: React.FC<ProfileEndorsementsProps> = ({

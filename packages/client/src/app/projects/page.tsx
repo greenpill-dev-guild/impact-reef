@@ -2,7 +2,6 @@ import { NextPage } from "next";
 import dynamic from "next/dynamic";
 
 import { getProjectBuilders, getProjects } from "@/actions/projects";
-import { usePathname } from "next/navigation";
 
 const ProjectsView = dynamic(() => import("@/views/Projects"));
 
