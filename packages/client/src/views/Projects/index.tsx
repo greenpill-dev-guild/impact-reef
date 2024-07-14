@@ -3,6 +3,8 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
+import { useProjects } from "@/hooks/projects/useProjects";
+
 import { List } from "@/components/List";
 import { Filters } from "@/components/Filter";
 
@@ -12,6 +14,7 @@ export interface ProjectsViewProps {
 
 const ProjectsView: React.FC<ProjectsViewProps> = ({ projects }) => {
   const { push } = useRouter();
+  const {} = useProjects(20);
 
   return (
     <main className="flex flex-col gap-4 min-h-screen">

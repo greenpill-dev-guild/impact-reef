@@ -1,62 +1,93 @@
-import { createMachine, fromPromise } from "xstate";
+import toast from "react-hot-toast";
+import { JsonRpcSigner } from "ethers";
+import { setup, fromPromise } from "xstate";
 
-export const endorsementMachine = createMachine(
-  {
-    id: "project-endorsement",
-    initial: "idle",
-    states: {
-      idle: {
-        on: {
-          ENDORSE: "endorse",
-        },
-      },
-      endorse: {
-        on: {
-          START_ENDORSING: "endorsing",
-          CANCEL: "idle",
-        },
-      },
-      endorsing: {
-        invoke: {
-          src: "makeEndorsement",
-          onDone: {
-            target: "endorsed",
-            actions: "handleSuccess",
-          },
-          onError: {
-            target: "endorse",
-            actions: "handleError",
-          },
-        },
-      },
-      endorsed: {
-        type: "final",
-        entry: "notifyEndorsementSuccess",
-      },
+import { makeEndorsement } from "@/actions/endorsements";
+
+interface Context {
+  projectUID: string;
+  signer: JsonRpcSigner;
+}
+
+export const endorsementMachine = setup({
+  types: {} as {
+    input: Context;
+    context: Context;
+    events:
+      | { type: "ENDORSE"; endorsement: CreateEndorsement }
+      | { type: "START_ENDORSING" }
+      | { type: "CANCEL" };
+  },
+  actions: {
+    handleSuccess: () => {
+      toast.success("Endorsement successful!");
+    },
+    handleError: () => {
+      toast.error("Endorsement failed:");
     },
   },
-  {
-    actors: {
-      makeEndorsement: fromPromise(() => {
-        // Function to make the endorsement attestation
-        return new Promise<void>((resolve, reject) => {
-          // Simulate async operation
-          setTimeout(() => {
-            resolve(); // or reject(new Error('Endorsement failed'));
-          }, 2000);
-        });
-      }),
+  actors: {
+    makeEndorsement: fromPromise<
+      string,
+      { endorsement: CreateEndorsement; signer?: JsonRpcSigner }
+    >(async ({ input: { endorsement, signer } }) => {
+      // Function to make the endorsement attestation
+      const uid = await makeEndorsement(endorsement, signer);
+
+      return uid;
+    }),
+  },
+}).createMachine({
+  id: "project-endorsement",
+  initial: "idle",
+  context: ({
+    input: { signer, projectUID },
+  }: {
+    input: { signer: JsonRpcSigner; projectUID: string };
+  }) =>
+    ({
+      signer,
+      projectUID,
+    }) as Context,
+  states: {
+    idle: {
+      on: {
+        ENDORSE: "endorse",
+      },
     },
-    actions: {
-      handleSuccess: (context, event) => {
-        console.log("Endorsement successful!");
-      },
-      handleError: (context, event) => {
-        console.error("Endorsement failed:", event);
-      },
-      notifyEndorsementSuccess: (context, event) => {
-        console.log("User has been successfully endorsed!");
+    endorse: {
+      on: {
+        START_ENDORSING: "endorsing",
+        CANCEL: "idle",
       },
     },
-  }
-);
+    endorsing: {
+      invoke: {
+        src: "makeEndorsement",
+        input: ({ context, event }) => ({
+          endorsement:
+            event.type === "ENDORSE"
+              ? event.endorsement
+              : {
+                  metricUID: "",
+                  projectUID: "",
+                  description: "",
+                  recipient: "",
+                },
+          signer: context.signer,
+        }),
+        onDone: {
+          target: "endorsed",
+          actions: "handleSuccess",
+        },
+        onError: {
+          target: "endorse",
+          actions: "handleError",
+        },
+      },
+    },
+    endorsed: {
+      type: "final",
+    },
+  },
+});

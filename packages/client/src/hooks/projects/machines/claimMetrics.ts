@@ -1,62 +1,81 @@
-import { createMachine, fromPromise } from "xstate";
+import toast from "react-hot-toast";
+import { JsonRpcSigner } from "ethers";
+import { setup, fromPromise } from "xstate";
 
-export const claimMetricsMachine = createMachine(
-  {
-    id: "project-metrics-claim",
-    initial: "idle",
-    states: {
-      idle: {
-        on: {
-          CLAIM: "claim",
-        },
-      },
-      claim: {
-        on: {
-          START_CLAIMING: "claiming",
-          CANCEL: "idle",
-        },
-      },
-      claiming: {
-        invoke: {
-          src: "claimMetrics",
-          onDone: {
-            target: "claimed",
-            actions: "handleClaimSuccess",
-          },
-          onError: {
-            target: "claim",
-            actions: "handleClaimError",
-          },
-        },
-      },
-      claimed: {
-        type: "final",
-        entry: "notifyClaimSuccess",
-      },
+import { claimProjectMetrics } from "@/actions/metrics";
+
+interface Context {
+  projectUID: string;
+  signer?: JsonRpcSigner;
+}
+
+export const claimMetricsMachine = setup({
+  types: {} as {
+    input: Context;
+    context: Context;
+    events:
+      | { type: "CLAIM"; metrics: CreateProjectMetric[] }
+      | { type: "START_CLAIMING" }
+      | { type: "CANCEL" };
+  },
+  actions: {
+    handleClaimSuccess: (_) => {
+      toast.success("Metrics claimed successfully!", {});
+    },
+    handleClaimError: (_) => {
+      toast.error("Claiming metrics failed:");
     },
   },
-  {
-    actors: {
-      claimMetrics: fromPromise(() => {
-        // Function to claim metrics
-        return new Promise<void>((resolve, reject) => {
-          // Simulate async operation
-          setTimeout(() => {
-            resolve(); // or reject(new Error('Claiming metrics failed'));
-          }, 2000);
-        });
-      }),
+  actors: {
+    claimMetrics: fromPromise<
+      string[],
+      { metrics: CreateProjectMetric[]; signer?: JsonRpcSigner }
+    >(async ({ input: { metrics, signer } }) => {
+      toast.loading("Creating Metric...");
+      // Function to claim metrics
+      const uids = await claimProjectMetrics(metrics, signer);
+
+      return uids;
+    }),
+  },
+}).createMachine({
+  id: "project-metrics-claim",
+  initial: "idle",
+  context: ({ input: { signer, projectUID } }) => ({
+    signer,
+    projectUID,
+  }),
+  states: {
+    idle: {
+      on: {
+        CLAIM: "claim",
+      },
     },
-    actions: {
-      handleClaimSuccess: (context, event) => {
-        console.log("Metrics claimed successfully!");
-      },
-      handleClaimError: (context, event) => {
-        console.error("Claiming metrics failed:", event);
-      },
-      notifyClaimSuccess: (context, event) => {
-        console.log("User has successfully claimed metrics!");
+    claim: {
+      on: {
+        START_CLAIMING: "claiming",
+        CANCEL: "idle",
       },
     },
-  }
-);
+    claiming: {
+      invoke: {
+        src: "claimMetrics",
+        input: ({ context, event }) => ({
+          metrics: event.type === "CLAIM" ? event.metrics : [],
+          signer: context.signer,
+        }),
+        onDone: {
+          target: "claimed",
+          actions: "handleClaimSuccess",
+        },
+        onError: {
+          target: "claim",
+          actions: "handleClaimError",
+        },
+      },
+    },
+    claimed: {
+      type: "final",
+    },
+  },
+});

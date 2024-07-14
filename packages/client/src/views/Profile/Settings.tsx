@@ -10,7 +10,7 @@ export interface ProfileSettingsProps {
 const ProfileSettings: React.FC<ProfileSettingsProps> = ({ user }) => {
   const { address } = useAccount();
 
-  console.log("User Address", address);
+  console.log("User Address", address, user);
 
   return (
     <div className="flex gap-4">

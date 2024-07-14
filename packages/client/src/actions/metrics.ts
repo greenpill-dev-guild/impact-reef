@@ -2,6 +2,7 @@
 
 import { graphql } from "gql.tada";
 import {
+  AttestationRequestData,
   SchemaEncoder,
   TransactionSigner,
 } from "@ethereum-attestation-service/eas-sdk";
@@ -47,8 +48,10 @@ export async function createMetric(
   console.log("Transaction receipt:", transaction.receipt);
 }
 
-export async function deprecateMetric(uid: string, signer: TransactionSigner) {
+export async function deprecateMetric(uid: string, signer?: TransactionSigner) {
   "use client";
+
+  if (!signer) throw new Error("No signer found");
 
   eas.connect(signer);
 
@@ -65,38 +68,47 @@ export async function deprecateMetric(uid: string, signer: TransactionSigner) {
   console.log("Transaction receipt:", transaction.receipt);
 }
 
-export const claimProjectMetric = async (
-  metric: CreateProjectMetric,
-  signer: TransactionSigner
+export const claimProjectMetrics = async (
+  metrics: CreateProjectMetric[],
+  signer?: TransactionSigner
 ) => {
   "use client";
 
+  if (!signer) throw new Error("No signer found");
+
   eas.connect(signer);
 
-  // Initialize SchemaEncoder with the schema string
   const schemaEncoder = new SchemaEncoder(EAS[11155420].PROJECT_METRICS.schema);
 
-  const encodedData = schemaEncoder.encodeData([
-    { name: "projectUID", value: metric.projectUID, type: "bytes32" },
-    { name: "metricUID", value: metric.metricUID ?? "", type: "bytes32" },
-    { name: "value", value: metric.value, type: "string" },
-    { name: "source", value: metric.source, type: "string" },
-  ]);
+  const data = metrics.map<AttestationRequestData>((metric) => {
+    const encodedData = schemaEncoder.encodeData([
+      { name: "projectUID", value: metric.projectUID, type: "bytes32" },
+      { name: "metricUID", value: metric.metricUID ?? "", type: "bytes32" },
+      { name: "value", value: metric.value, type: "string" },
+      { name: "source", value: metric.source, type: "string" },
+    ]);
 
-  const transaction = await eas.attest({
-    schema: EAS[11155420].ENDORSEMENTS.uid,
-    data: {
+    return {
       recipient: metric.recipient ?? "",
       // expirationTime: 0,
       revocable: true, // Be aware that if your schema is not revocable, this MUST be false
       data: encodedData,
-    },
+    };
   });
 
-  const newAttestationUID = await transaction.wait();
+  const transaction = await eas.multiAttest([
+    {
+      schema: EAS[11155420].PROJECT_METRICS.uid,
+      data,
+    },
+  ]);
 
-  console.log("New attestation UID:", newAttestationUID);
+  const uids = await transaction.wait();
+
+  console.log("New attestation UIDs:", uids);
   console.log("Transaction receipt:", transaction.receipt);
+
+  return uids;
 };
 
 export const getProjectMetrics = async (projectId?: string | null) => {

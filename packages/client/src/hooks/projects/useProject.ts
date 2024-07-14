@@ -1,19 +1,25 @@
 import { useMachine } from "@xstate/react";
 
+import { useEthersSigner } from "../auth/useEthersSigner";
+
 import { endorsementMachine } from "./machines/endorsement";
 import { claimMetricsMachine } from "./machines/claimMetrics";
 
-export const useProject = (id: string) => {
+export const useProject = (projectUID: string) => {
+  const signer = useEthersSigner()!;
+
   const [endorsementState, endorsementSend] = useMachine(endorsementMachine, {
     input: {
-      id,
+      projectUID,
+      signer,
     },
   });
   const [claimMetricsState, claimMetricsSend] = useMachine(
     claimMetricsMachine,
     {
       input: {
-        id,
+        projectUID,
+        signer,
       },
     }
   );
@@ -23,8 +29,8 @@ export const useProject = (id: string) => {
   const startEndorsing = () => endorsementSend({ type: "START_ENDORSING" });
   const cancelEndorse = () => endorsementSend({ type: "CANCEL" });
 
-  const claim = (metric: CreateProjectMetric) =>
-    claimMetricsSend({ type: "CLAIM", metric });
+  const claim = (metrics: CreateProjectMetric[]) =>
+    claimMetricsSend({ type: "CLAIM", metrics });
   const startClaiming = () => claimMetricsSend({ type: "START_CLAIMING" });
   const cancelClaim = () => claimMetricsSend({ type: "CANCEL" });
 

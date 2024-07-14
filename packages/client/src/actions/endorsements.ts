@@ -14,11 +14,13 @@ import { easOptimismSepoliaClient } from "@/modules/urql";
 
 import { endorsements } from "@/utils/mockData";
 
-export const createEndorsements = async (
+export const makeEndorsement = async (
   endorsement: CreateEndorsement,
-  signer: TransactionSigner
+  signer?: TransactionSigner
 ) => {
   "use client";
+
+  if (!signer) throw new Error("No signer found");
 
   eas.connect(signer);
 
@@ -45,6 +47,8 @@ export const createEndorsements = async (
 
   console.log("New attestation UID:", newAttestationUID);
   console.log("Transaction receipt:", transaction.receipt);
+
+  return newAttestationUID;
 };
 
 export const getProjectEndorsements = async (projectUID?: string | null) => {

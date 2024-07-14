@@ -8,10 +8,12 @@ import { inter, sora } from "@/utils/fonts";
 import { Navbar } from "@/components/Layout/Navbar";
 import { Footer } from "@/components/Layout/Footer";
 
-const APP_NAME = "Impact Reef";
-const APP_DEFAULT_TITLE = "Impact Reef";
-const APP_TITLE_TEMPLATE = "%s - Impact Reef";
-const APP_DESCRIPTION = "";
+import {
+  APP_DEFAULT_TITLE,
+  APP_DESCRIPTION,
+  APP_NAME,
+  APP_TITLE_TEMPLATE,
+} from "@/constants";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,

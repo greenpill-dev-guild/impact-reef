@@ -3,7 +3,6 @@
 import { getCsrfToken } from "next-auth/react";
 
 import { signIn, signOut, auth } from "@/modules/auth";
-// import { cookies } from "next/headers";
 
 export interface Credentials {
   message: string;
