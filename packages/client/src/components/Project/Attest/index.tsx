@@ -1,3 +1,5 @@
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import { ProjectAttestEndorsement } from "./Endorsement";
@@ -8,6 +10,38 @@ interface ProjectAttestProps {
   projectCreator: boolean;
   badgeholder: boolean;
   onSubmit: SubmitHandler<AttestFormValues>;
+}
+
+function generateSchema(projectCreator: boolean) {
+  return projectCreator
+    ? z.object({
+        endorsement: z.string().min(100).max(1000).nullish(),
+        metrics: z
+          .array(
+            z.object({
+              metricUID: z.string(),
+              metricName: z.string(),
+              metricDescription: z.string(),
+              value: z.number(),
+              source: z.string(),
+            })
+          )
+          .nonempty(),
+      })
+    : z.object({
+        endorsement: z.string().min(100).max(1000),
+        metrics: z
+          .array(
+            z.object({
+              metricUID: z.string(),
+              metricName: z.string(),
+              metricDescription: z.string(),
+              value: z.number(),
+              source: z.string(),
+            })
+          )
+          .nullish(),
+      });
 }
 
 export const ProjectAttest: React.FC<ProjectAttestProps> = ({
@@ -28,6 +62,7 @@ export const ProjectAttest: React.FC<ProjectAttestProps> = ({
         source: "",
       })),
     },
+    resolver: zodResolver(generateSchema(projectCreator)),
   });
 
   const { fields } = useFieldArray({

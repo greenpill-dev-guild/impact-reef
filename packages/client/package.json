@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@ethereum-attestation-service/eas-sdk": "^2.3.0",
+    "@hookform/resolvers": "3.9.0",
     "@neynar/nodejs-sdk": "1.37.2",
     "@tanstack/react-query": "^5.37.1",
     "@urql/core": "^5.0.3",
@@ -42,7 +43,6 @@
     "@storybook/addon-essentials": "^8.0.9",
     "@storybook/addon-interactions": "^8.0.9",
     "@storybook/addon-links": "^8.0.9",
-    "@storybook/addon-onboarding": "^8.0.9",
     "@storybook/blocks": "^8.0.9",
     "@storybook/nextjs": "^8.0.9",
     "@storybook/react": "^8.0.9",

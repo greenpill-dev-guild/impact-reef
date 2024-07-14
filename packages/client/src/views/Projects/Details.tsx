@@ -49,10 +49,18 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
 
   console.log("Project", project);
 
-  async function onSubmit(
-    data: AttestFormValues,
-    event?: React.BaseSyntheticEvent
-  ) {}
+  async function onSubmit(data: AttestFormValues) {
+    if (projectCreator) {
+      claim(
+        data.metrics.map((metric) => ({ projectUID: project.id, ...metric }))
+      );
+    } else {
+      endorse({
+        projectUID: project.id,
+        description: data.endorsement,
+      });
+    }
+  }
 
   return (
     <main className="drawer drawer-end">
@@ -77,8 +85,14 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
             </Link>
             <div className="flex gap-3">
               <label
-                htmlFor="attest-drawer"
-                className="grid place-items-center drawer-button w-36 p-4 rounded-full bg-blue-950 text-neutral-50 font-semibold leading-snug"
+                htmlFor={
+                  endorsementState.matches("endorsing") ||
+                  claimMetricsState.matches("claiming")
+                    ? undefined
+                    : "attest-drawer"
+                }
+                onClick={projectCreator ? cancelClaim : cancelEndorse}
+                className="grid place-items-center drawer-button w-36 p-4 rounded-full bg-blue-950 text-neutral-50 font-semibold leading-snug btn"
               >
                 {projectCreator ? "Claim Metric" : "Endorse"}
               </label>
@@ -340,7 +354,13 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
       </div>
       <div className="drawer-side">
         <label
-          htmlFor="attest-drawer"
+          htmlFor={
+            endorsementState.matches("endorsing") ||
+            claimMetricsState.matches("claiming")
+              ? undefined
+              : "attest-drawer"
+          }
+          onClick={projectCreator ? startClaiming : startEndorsing}
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>

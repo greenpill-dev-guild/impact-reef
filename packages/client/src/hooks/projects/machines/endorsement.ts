@@ -16,11 +16,18 @@ export const endorsementMachine = setup({
     events:
       | { type: "ENDORSE"; endorsement: CreateEndorsement }
       | { type: "START_ENDORSING" }
-      | { type: "CANCEL" };
+      | { type: "CANCEL" }
+      | { type: `xstate.done.actor.endorser`; output: string }
+      | { type: `xstate.error.actor.endorser`; error: unknown };
   },
   actions: {
-    handleSuccess: () => {
-      toast.success("Endorsement successful!");
+    handleSuccess: ({ event }) => {
+      const id =
+        event.type === "xstate.done.actor.endorser" ? event.output : "";
+
+      toast.success(
+        `Endorsement succesful, view it here https://optimism-sepolia.easscan.org/onchain/attestation/view/${id}`
+      );
     },
     handleError: () => {
       toast.error("Endorsement failed:");
@@ -63,6 +70,7 @@ export const endorsementMachine = setup({
     },
     endorsing: {
       invoke: {
+        id: "endorser",
         src: "makeEndorsement",
         input: ({ context, event }) => ({
           endorsement:
