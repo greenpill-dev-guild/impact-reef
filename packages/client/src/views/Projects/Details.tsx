@@ -344,7 +344,7 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <aside className="bg-base-200 text-base-content min-h-full w-80 p-4">
+        <aside className="bg-base-200 text-base-content min-h-full w-[420px] p-4">
           <ProjectAttest
             onSubmit={onSubmit}
             metrics={project.metrics}

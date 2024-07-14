@@ -29,3 +29,19 @@ h2 {
     text-wrap: balance;
   }
 }
+
+.toaster {
+  @apply p-2 rounded-lg;
+}
+
+.toaster-loading {
+  @apply p-2 rounded-lg;
+}
+
+.toaster-error {
+  @apply p-2 rounded-lg;
+}
+
+.toaste-success {
+  @apply p-2 rounded-lg;
+}

@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { SiweMessage } from "siwe";
-import { getCsrfToken } from "next-auth/react";
+// import { getCsrfToken } from "next-auth/react";
 import { useAccount, useDisconnect, useSignMessage } from "wagmi";
 import { ConnectKitButton, ConnectKitProvider } from "connectkit";
 
@@ -46,7 +46,7 @@ export const ConnectContent: React.FC<ConnectProps> = () => {
     const message = new SiweMessage({
       domain: window.location.host,
       address,
-      statement: "Sign in with Ethereum to the app.",
+      statement: "Sign in to Impact Reef",
       uri: window.location.origin,
       version: "1",
       chainId,
@@ -61,12 +61,6 @@ export const ConnectContent: React.FC<ConnectProps> = () => {
   async function handleDisconnect() {
     signOut({});
   }
-
-  // const getNonce = useCallback(async () => {
-  //   const nonce = await getCsrfToken();
-  //   if (!nonce) throw new Error("Unable to generate nonce");
-  //   return nonce;
-  // }, []);
 
   const profileLinks: Link[] = [
     { title: "endorsements", icon: "/icons/fire.svg" },

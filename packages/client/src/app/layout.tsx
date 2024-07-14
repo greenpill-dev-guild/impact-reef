@@ -55,13 +55,28 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${sora.variable} antialiased`}
-      suppressHydrationWarning
     >
-      <body suppressHydrationWarning>
+      <body>
         <Navbar />
         {children}
         <Footer />
-        <Toaster />
+        <Toaster
+          toastOptions={{
+            className: "toaster",
+            loading: {
+              // icon: "",
+              className: "toaster-loading",
+            },
+            error: {
+              // icon: ""
+              className: "toaster-error",
+            },
+            success: {
+              // icon: ""
+              className: "toaster-success",
+            },
+          }}
+        />
       </body>
     </html>
   );

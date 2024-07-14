@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import { User } from "next-auth";
-import { useAccount } from "wagmi";
 
 export interface ProfileSettingsProps {
   user?: User;

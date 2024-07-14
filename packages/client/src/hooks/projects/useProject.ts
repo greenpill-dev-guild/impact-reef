@@ -18,11 +18,13 @@ export const useProject = (id: string) => {
     }
   );
 
-  const endorse = () => endorsementSend({ type: "ENDORSE" });
+  const endorse = (endorsement: CreateEndorsement) =>
+    endorsementSend({ type: "ENDORSE", endorsement });
   const startEndorsing = () => endorsementSend({ type: "START_ENDORSING" });
   const cancelEndorse = () => endorsementSend({ type: "CANCEL" });
 
-  const claim = () => claimMetricsSend({ type: "CLAIM" });
+  const claim = (metric: CreateProjectMetric) =>
+    claimMetricsSend({ type: "CLAIM", metric });
   const startClaiming = () => claimMetricsSend({ type: "START_CLAIMING" });
   const cancelClaim = () => claimMetricsSend({ type: "CANCEL" });
 
