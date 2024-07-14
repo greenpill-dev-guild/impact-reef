@@ -1,18 +1,15 @@
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 
-import { auth } from "@/modules/auth";
+import { getUser } from "@/actions/auth";
+// import { Web3Provider } from "@/hooks/auth/Provider";
 
-const ProfileView = dynamic(() => import("@/views/Profile/Endorsements"));
+const ProfileView = dynamic(() => import("@/views/Profile/Settings"));
 
 const ProfilePage: NextPage = async () => {
-  // const session = await auth();
+  const user = await getUser();
 
-  // if (!session) return null;
-
-  return <div />;
-
-  // return <ProfileView user={session?.user!} />;
+  return <ProfileView user={user} />;
 };
 
 export default ProfilePage;

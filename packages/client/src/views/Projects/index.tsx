@@ -3,8 +3,8 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
-import { Filters } from "@/components/Filter";
 import { List } from "@/components/List";
+import { Filters } from "@/components/Filter";
 
 export interface ProjectsViewProps {
   projects: ProjectItem[];

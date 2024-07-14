@@ -1,16 +1,18 @@
-"use server";
-
 import { NextPage } from "next";
-// import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 
-// TODO: Import Action For Fetching User Endorsements
+import { getUser } from "@/actions/auth";
+import { getUserEndorsements } from "@/actions/endorsements";
+// import { Web3Provider } from "@/hooks/auth/Provider";
 
-// TODO: Dynamically Import Profile Endorsements View
+const ProfileView = dynamic(() => import("@/views/Profile/Endorsements"));
 
-const ProfileEndorsementsPage: NextPage = () => {
-  // TODO: Fetch user Endorsements data
+const ProfilePage: NextPage = async () => {
+  const user = await getUser();
 
-  return <div>Endorsements</div>;
+  const endorsements = await getUserEndorsements(user?.address);
+
+  return <ProfileView user={user} endorsements={endorsements} />;
 };
 
-export default ProfileEndorsementsPage;
+export default ProfilePage;

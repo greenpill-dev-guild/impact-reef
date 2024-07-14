@@ -1,88 +1,59 @@
+import { SiweMessage } from "siwe";
+// import { getCsrfToken } from "next-auth/react";
+// import { cookies } from "next/headers";
 import { getCsrfToken } from "next-auth/react";
-import NextAuth, { DefaultSession } from "next-auth";
+import NextAuth, { DefaultSession, AuthError } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
-declare module "next-auth" {
-  /**
-   * Returned by `auth`, `useSession`, and `getSession`
-   */
-  interface Session {
-    user: {
-      /** The user's postal address. */
-      id: string;
-      name: string;
-      image: string;
-      badgeholder: boolean;
-      metrics_admin: boolean;
-      council_member: boolean;
-      addresses: string[];
-    } & DefaultSession["user"];
-  }
-}
-
-export const authConfig = {
-  relay: "https://relay.farcaster.xyz",
-  rpcUrl: "https://mainnet.optimism.io",
-  // siweUri: "http://example.com/login",
-  // domain: "example.com",
-};
+import { councilMembers, metricAdmins } from "@/constants";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
-      name: "Sign in with Farcaster",
+      name: "Sign in with Ethereum",
       // You can specify which fields should be submitted, by adding keys to the `credentials` object.
       // e.g. domain, username, password, 2FA token, etc.
       credentials: {
         message: {
           label: "Message",
           type: "text",
-          placeholder: "0x0",
         },
         signature: {
           label: "Signature",
           type: "text",
-          placeholder: "0x0",
-        },
-        // In a production app with a server, these should be fetched from
-        // your Farcaster data indexer rather than have them accepted as part
-        // of credentials.
-        name: {
-          label: "Name",
-          type: "text",
-          placeholder: "0x0",
-        },
-        pfp: {
-          label: "Pfp",
-          type: "text",
-          placeholder: "0x0",
         },
       },
-      authorize: async (credentials) => {
+      authorize: async (credentials, req) => {
         try {
-          const csrfToken = await getCsrfToken();
+          if (
+            typeof credentials.message !== "string" ||
+            typeof credentials.signature !== "string"
+          ) {
+            throw new AuthError("Invalid Credentials");
+          }
 
-          // const verifyResponse = await appClient.verifySignInMessage({
-          //   message: credentials?.message as string,
-          //   signature: credentials?.signature as `0x${string}`,
-          //   domain: "example.com",
-          //   nonce: csrfToken,
-          // });
+          const siwe = new SiweMessage(credentials.message);
 
-          // const { success, fid } = verifyResponse;
+          // const nonce = await getCsrfToken();
+          // cookies()
+          //   .get("next-auth.csrf-token")
+          //   ?.value.split("|")[0];
 
-          // if (!success) {
-          //   return null;
-          // }
+          // console.log("Server Nonce", nonce);
+
+          const { data: fields } = await siwe.verify({
+            signature: credentials.signature,
+            // nonce,
+          });
 
           return {
             // id: fid.toString(),
-            name: credentials?.name as string,
-            image: credentials?.pfp as string,
-            badgeholder: true,
-            metrics_admin: true,
-            council_member: true,
-            addresses: [],
+            name: "",
+            image: "",
+            badgeholder: false,
+            metrics_admin: metricAdmins.has(fields.address),
+            council_member: councilMembers.get(fields.address),
+            address: fields.address,
           };
         } catch (error) {
           throw error;

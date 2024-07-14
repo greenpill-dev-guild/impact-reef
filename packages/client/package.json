@@ -31,6 +31,7 @@
     "react-hook-form": "7.52.1",
     "react-hot-toast": "2.4.1",
     "react-spinners": "0.13.8",
+    "siwe": "2.3.2",
     "snaplet": "^0.90.0",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",

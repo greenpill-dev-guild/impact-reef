@@ -1,9 +1,14 @@
+"use server";
+
+import { graphql } from "gql.tada";
 import {
   SchemaEncoder,
   TransactionSigner,
 } from "@ethereum-attestation-service/eas-sdk";
 
 import { eas } from "@/modules/eas";
+import { easOptimismSepoliaClient } from "@/modules/urql";
+
 import { EAS } from "@/constants";
 
 export async function createMetric(
@@ -15,7 +20,7 @@ export async function createMetric(
   eas.connect(signer);
 
   // Initialize SchemaEncoder with the schema string
-  const schemaEncoder = new SchemaEncoder(EAS[10].METRICS.schema);
+  const schemaEncoder = new SchemaEncoder(EAS[11155420].METRICS.schema);
 
   const encodedData = schemaEncoder.encodeData([
     { name: "name", value: metric.name, type: "string" },
@@ -28,7 +33,7 @@ export async function createMetric(
   ]);
 
   const transaction = await eas.attest({
-    schema: EAS[10].METRICS.uid,
+    schema: EAS[11155420].METRICS.uid,
     data: {
       recipient: "",
       revocable: true, // Be aware that if your schema is not revocable, this MUST be false
@@ -48,7 +53,7 @@ export async function deprecateMetric(uid: string, signer: TransactionSigner) {
   eas.connect(signer);
 
   const transaction = await eas.revoke({
-    schema: EAS[10].METRICS.uid,
+    schema: EAS[11155420].METRICS.uid,
     data: {
       uid,
     },
@@ -59,3 +64,62 @@ export async function deprecateMetric(uid: string, signer: TransactionSigner) {
   console.log("Revoked UID:", newAttestationUID);
   console.log("Transaction receipt:", transaction.receipt);
 }
+
+export const claimProjectMetric = async (
+  metric: CreateProjectMetric,
+  signer: TransactionSigner
+) => {
+  "use client";
+
+  eas.connect(signer);
+
+  // Initialize SchemaEncoder with the schema string
+  const schemaEncoder = new SchemaEncoder(EAS[11155420].PROJECT_METRICS.schema);
+
+  const encodedData = schemaEncoder.encodeData([
+    { name: "projectUID", value: metric.projectUID, type: "bytes32" },
+    { name: "metricUID", value: metric.metricUID ?? "", type: "bytes32" },
+    { name: "value", value: metric.value, type: "string" },
+    { name: "source", value: metric.source, type: "string" },
+  ]);
+
+  const transaction = await eas.attest({
+    schema: EAS[11155420].ENDORSEMENTS.uid,
+    data: {
+      recipient: metric.recipient ?? "",
+      // expirationTime: 0,
+      revocable: true, // Be aware that if your schema is not revocable, this MUST be false
+      data: encodedData,
+    },
+  });
+
+  const newAttestationUID = await transaction.wait();
+
+  console.log("New attestation UID:", newAttestationUID);
+  console.log("Transaction receipt:", transaction.receipt);
+};
+
+export const getProjectMetrics = async (projectId?: string | null) => {
+  if (!projectId) {
+    console.error("No project ID provided");
+    return;
+  }
+
+  const QUERY = graphql(/* GraphQL */ `
+    query Attestations($where: AttestationWhereInput) {
+      attestations(where: $where) {
+        data
+        decodedDataJson
+      }
+    }
+  `);
+
+  return await easOptimismSepoliaClient
+    .query(QUERY, {
+      where: {
+        schemaId: { equals: EAS["11155420"].PROJECT_METRICS.uid },
+        decodedDataJson: { contains: projectId },
+      },
+    })
+    .toPromise();
+};

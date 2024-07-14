@@ -1,3 +1,13 @@
+declare interface User {
+  id: string;
+  name: string;
+  image: string;
+  badgeholder: boolean;
+  metrics_admin: boolean;
+  council_member: boolean;
+  address: string;
+}
+
 declare enum Impact {
   LOW,
   MEDIUM,
@@ -58,7 +68,7 @@ declare interface Metric extends CreateMetric {
 declare interface ProjectGrant {
   title: string;
   date: string;
-  funds_received: number;
+  funds_received: string;
   description: string;
   link?: string;
 }

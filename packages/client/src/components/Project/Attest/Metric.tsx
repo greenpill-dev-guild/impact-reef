@@ -29,7 +29,13 @@ export const ProjectAttestMetric = forwardRef<
     >
       <div className="collapse-title text-xl font-medium">
         <h3 className="mb-3 text-xl font-semibold">
-          <Image src="/icons/chat.svg" alt="Endorsment Chat SVG" unoptimized />{" "}
+          <Image
+            src="/icons/chat.svg"
+            alt="Endorsment Chat SVG"
+            width={48}
+            height={48}
+            unoptimized
+          />{" "}
           Endorsement
         </h3>
         <p className="">

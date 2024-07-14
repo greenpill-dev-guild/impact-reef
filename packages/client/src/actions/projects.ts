@@ -1,51 +1,16 @@
 "use server";
-import { graphql } from "gql.tada";
-import {
-  SchemaEncoder,
-  TransactionSigner,
-} from "@ethereum-attestation-service/eas-sdk";
-import { Hex, decodeAbiParameters, parseAbiParameters } from "viem";
 
-import { eas } from "@/modules/eas";
-import { easOptimismClient, easOptimismSepoliaClient } from "@/modules/urql";
+import { graphql } from "gql.tada";
+// import { getFarcasterUserDataById } from "@/actions/farcaster";
+// import { Hex, decodeAbiParameters, parseAbiParameters } from "viem";
+
+import { easOptimismClient } from "@/modules/urql";
 
 import { EAS } from "@/constants";
 
-export const claimProjectMetric = async (
-  metric: CreateProjectMetric,
-  signer: TransactionSigner
-) => {
-  "use client";
+import { metrics, endorsements, projects } from "@/utils/mockData";
 
-  eas.connect(signer);
-
-  // Initialize SchemaEncoder with the schema string
-  const schemaEncoder = new SchemaEncoder(EAS[10].PROJECT_METRICS.schema);
-
-  const encodedData = schemaEncoder.encodeData([
-    { name: "projectUID", value: metric.projectUID, type: "bytes32" },
-    { name: "metricUID", value: metric.metricUID ?? "", type: "bytes32" },
-    { name: "value", value: metric.value, type: "string" },
-    { name: "source", value: metric.source, type: "string" },
-  ]);
-
-  const transaction = await eas.attest({
-    schema: EAS[10].ENDORSEMENTS.uid,
-    data: {
-      recipient: metric.recipient ?? "",
-      // expirationTime: 0,
-      revocable: true, // Be aware that if your schema is not revocable, this MUST be false
-      data: encodedData,
-    },
-  });
-
-  const newAttestationUID = await transaction.wait();
-
-  console.log("New attestation UID:", newAttestationUID);
-  console.log("Transaction receipt:", transaction.receipt);
-};
-
-export const getProjectBuilders = async () => {
+export const getProjectBuilders = async (): Promise<any[]> => {
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
@@ -63,28 +28,23 @@ export const getProjectBuilders = async () => {
     })
     .toPromise();
 
-  if (error) {
-    console.error(error);
-    return;
-  }
+  if (error) console.error(error);
+  if (!data) console.error("No data found");
 
-  if (!data) {
-    console.error("No data found");
-    return;
-  }
+  return data?.attestations ?? [];
 
   // TODO - bit of a hack to cast as bigint, should be enforced by the schema tho
-  return data.attestations
-    .map((ownerAttestation) =>
-      decodeAbiParameters(
-        parseAbiParameters(EAS["10"].PROJECT_OWNERS.schema),
-        ownerAttestation.data as Hex
-      )
-    )
-    .flatMap((decodedData) => decodedData) as bigint[];
+  // return data.attestations
+  //   .map((ownerAttestation) =>
+  //     decodeAbiParameters(
+  //       parseAbiParameters(EAS["10"].PROJECT_OWNERS.schema),
+  //       ownerAttestation.data as Hex
+  //     )
+  //   )
+  //   .flatMap((decodedData) => decodedData) as bigint[];
 };
 
-export const getProjects = async () => {
+export const getProjects = async (): Promise<ProjectItem[]> => {
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
@@ -102,32 +62,62 @@ export const getProjects = async () => {
     })
     .toPromise();
 
-  if (error) {
-    console.error(error);
-    return;
-  }
+  if (error) console.error(error);
+  if (!data) console.error("No data found");
 
-  if (!data) {
-    console.error("No data found");
-    return;
-  }
+  console.log("Projects API", data);
 
-  // TODO - bit of a hack to cast as bigint, should be enforced by the schema tho
-  return data.attestations
-    .map((ownerAttestation) =>
-      decodeAbiParameters(
-        parseAbiParameters(EAS["10"].PROJECT_OWNERS.schema),
-        ownerAttestation.data as Hex
-      )
-    )
-    .flatMap((decodedData) => decodedData) as bigint[];
+  return projects;
 };
 
-export const getProject = async (projectId?: string | null) => {
-  if (!projectId) {
-    console.error("No project ID provided");
-    return;
-  }
+export const getProject = async (
+  projectId?: string | null
+): Promise<Project> => {
+  const project: Project = {
+    id: "1",
+    title: "Protocol Guild",
+    creator: "0x00",
+    attestation_counts: 0,
+    transactions_count: 0,
+    avatar_image: "/images/project-icon.png",
+    banner_image: "/images/project-banner.jpg",
+    category: "utility",
+    description: `As a rollup, Optimism leverages Ethereum for settlement &
+                security assurances. It also uses several core infrastructure
+                components (client implementations, specifications, test suites,
+                etc) developed and maintained by Protocol Guild contributors
+                over the years. Optimism.`,
+    endorsements,
+    contracts: ["link1", "link2"],
+    funding: [
+      {
+        date: new Date().toLocaleDateString(),
+        description: "description goes here, i think its about 280 characters",
+        funds_received: "50k OP",
+        title: "Optimism Grants",
+        link: "link",
+      },
+      {
+        date: new Date().toLocaleDateString(),
+        description: "description goes here, i think its about 280 characters",
+        funds_received: "40k USD",
+        title: "Venture Funding",
+        link: "link",
+      },
+    ],
+    grant_track: "onchain-builders",
+    repositories: ["https://gtihub.com/wefa-labs/wefa", "link"],
+    metrics,
+    socials: [
+      "https://twitter.com/wefaworld",
+      "https://t.me/afo_wefa",
+      "https://warpcast.com/wefa",
+      "https://why.wefa.app",
+    ],
+    updated_at: "",
+  };
+
+  if (!projectId) console.error("No project ID provided");
 
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
@@ -138,7 +128,7 @@ export const getProject = async (projectId?: string | null) => {
     }
   `);
 
-  return await easOptimismClient
+  const { data, error } = await easOptimismClient
     .query(QUERY, {
       where: {
         schemaId: { equals: EAS["10"].PROJECT_METADATA.uid },
@@ -146,29 +136,11 @@ export const getProject = async (projectId?: string | null) => {
       },
     })
     .toPromise();
-};
 
-export const getProjectMetrics = async (projectId?: string | null) => {
-  if (!projectId) {
-    console.error("No project ID provided");
-    return;
-  }
+  if (error) console.error(error);
+  if (!data) console.error("No data found");
 
-  const QUERY = graphql(/* GraphQL */ `
-    query Attestations($where: AttestationWhereInput) {
-      attestations(where: $where) {
-        data
-        decodedDataJson
-      }
-    }
-  `);
+  console.log("Project API", data);
 
-  return await easOptimismSepoliaClient
-    .query(QUERY, {
-      where: {
-        schemaId: { equals: EAS["10"].PROJECT_METRICS.uid },
-        decodedDataJson: { contains: projectId },
-      },
-    })
-    .toPromise();
+  return project;
 };

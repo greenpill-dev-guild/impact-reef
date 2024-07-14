@@ -17,7 +17,13 @@ export const ProjectAttestEndorsement = forwardRef<
     >
       <div className="collapse-title text-xl font-medium">
         <h3 className="mb-3 text-xl font-semibold">
-          <Image src="/icons/chat.svg" alt="Endorsment Chat SVG" unoptimized />{" "}
+          <Image
+            src="/icons/chat.svg"
+            alt="Endorsment Chat SVG"
+            unoptimized
+            width={48}
+            height={48}
+          />{" "}
           Endorsement
         </h3>
         <p className="">

@@ -1,9 +1,8 @@
 export const EAS = {
   "10": {
-    METRICS: {
-      uid: "0x7bd6430d6ddf8ef8d70f3ca0175d3383af97fd93cac56c2db621f2054f23e0ae",
-      schema:
-        "string name, string description, string importance, string rationale, string keyword, string term, string category",
+    BADGEHOLDERS: {
+      uid: "0xfdcfdad2dbe7489e0ce56b260348b7f14e8365a8a325aef9834818c00d46b31b",
+      schema: "string rpgfRound,address referredBy,string referredMethod",
     },
     PROJECT_OWNERS: {
       uid: "0x7ae9f4adabd9214049df72f58eceffc48c4a69e920882f5b06a6c69a3157e5bd",
@@ -19,6 +18,19 @@ export const EAS = {
       schema:
         "bytes32 projectRefUID,uint256 farcasterID,string name,string category,bytes32 parentProjectRefUID,uint8 metadataType,string metadataUrl",
     },
+    EAS: {
+      address: "0x4200000000000000000000000000000000000021",
+    },
+    OPTIMISM: {
+      address: "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    },
+  },
+  "11155420": {
+    METRICS: {
+      uid: "0x7bd6430d6ddf8ef8d70f3ca0175d3383af97fd93cac56c2db621f2054f23e0ae",
+      schema:
+        "string name, string description, string importance, string rationale, string keyword, string term, string category",
+    },
     PROJECT_METRICS: {
       uid: "0x7bd6430d6ddf8ef8d70f3ca0175d3383af97fd93cac56c2db621f2054f23e0ae",
       schema:
@@ -30,8 +42,9 @@ export const EAS = {
     },
     EAS: {
       address: "0x4200000000000000000000000000000000000021",
-      uid: "",
-      schema: "",
     },
   },
 };
+
+export const metricAdmins = new Map([["", true]]);
+export const councilMembers = new Map([["", true]]);

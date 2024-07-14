@@ -1,4 +1,5 @@
 "use server";
+
 import { graphql } from "gql.tada";
 import {
   SchemaEncoder,
@@ -11,6 +12,8 @@ import { EAS } from "@/constants";
 import { eas } from "@/modules/eas";
 import { easOptimismSepoliaClient } from "@/modules/urql";
 
+import { endorsements } from "@/utils/mockData";
+
 export const createEndorsements = async (
   endorsement: CreateEndorsement,
   signer: TransactionSigner
@@ -20,7 +23,7 @@ export const createEndorsements = async (
   eas.connect(signer);
 
   // Initialize SchemaEncoder with the schema string
-  const schemaEncoder = new SchemaEncoder(EAS[10].ENDORSEMENTS.schema);
+  const schemaEncoder = new SchemaEncoder(EAS[11155420].ENDORSEMENTS.schema);
 
   const encodedData = schemaEncoder.encodeData([
     { name: "projectUID", value: endorsement.projectUID, type: "bytes32" },
@@ -29,7 +32,7 @@ export const createEndorsements = async (
   ]);
 
   const transaction = await eas.attest({
-    schema: EAS[10].ENDORSEMENTS.uid,
+    schema: EAS[11155420].ENDORSEMENTS.uid,
     data: {
       recipient: endorsement.recipient ?? "",
       // expirationTime: 0,
@@ -57,7 +60,7 @@ export const getProjectEndorsements = async (projectUID?: string | null) => {
   const { data, error } = await easOptimismSepoliaClient
     .query(QUERY, {
       where: {
-        schemaId: { equals: EAS["10"].ENDORSEMENTS.uid },
+        schemaId: { equals: EAS["11155420"].ENDORSEMENTS.uid },
         decodedDataJson: { contains: projectUID },
       },
     })
@@ -77,18 +80,17 @@ export const getProjectEndorsements = async (projectUID?: string | null) => {
   return data.attestations
     .map((ownerAttestation) =>
       decodeAbiParameters(
-        parseAbiParameters(EAS["10"].PROJECT_OWNERS.schema),
+        parseAbiParameters(EAS["11155420"].ENDORSEMENTS.schema),
         ownerAttestation.data as Hex
       )
     )
     .flatMap((decodedData) => decodedData) as bigint[];
 };
 
-export const getAddressEndorsements = async (address?: string | null) => {
-  if (!address) {
-    console.error("No address provided");
-    return;
-  }
+export const getUserEndorsements = async (
+  address?: string | null
+): Promise<EndorsementItem[]> => {
+  if (!address) console.error("No address provided");
 
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
@@ -99,12 +101,19 @@ export const getAddressEndorsements = async (address?: string | null) => {
     }
   `);
 
-  return await easOptimismSepoliaClient
+  const { data, error } = await easOptimismSepoliaClient
     .query(QUERY, {
       where: {
-        schemaId: { equals: EAS["10"].PROJECT_METADATA.uid },
+        schemaId: { equals: EAS["11155420"].ENDORSEMENTS.uid },
         attester: { equals: address },
       },
     })
     .toPromise();
+
+  if (error) console.error(error);
+  if (!data) console.error("No data found");
+
+  console.log("User endorsements", data);
+
+  return endorsements;
 };

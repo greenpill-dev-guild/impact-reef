@@ -1,8 +1,8 @@
 "use-client";
 
+import { getDefaultConfig } from "connectkit";
 import { optimismSepolia } from "wagmi/chains";
 import { WagmiProvider, createConfig, http } from "wagmi";
-import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const config = createConfig(
@@ -34,9 +34,7 @@ const queryClient = new QueryClient();
 export const Web3Provider: React.FC<{ children: any }> = ({ children }) => {
   return (
     <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <ConnectKitProvider>{children}</ConnectKitProvider>
-      </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
   );
 };

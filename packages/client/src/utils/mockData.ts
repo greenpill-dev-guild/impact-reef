@@ -1,92 +1,120 @@
-export const endorsments: {
-  id: string;
-  message: string;
-  author: string;
-  date: string;
-}[] = [
+export const endorsements: Endorsement[] = [
   {
     id: "1",
-    message:
+    metricUID: "",
+    projectUID: "23",
+    description:
       "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
-    author: "afo-wefa.eth",
-    date: new Date().toISOString(),
+    attester: "afo-wefa.eth",
+    updated_at: new Date().toISOString(),
   },
   {
     id: "2",
-    message:
+    metricUID: "",
+    projectUID: "23",
+    description:
       "This section here should be fix height, and we should have max. character limit in the form.",
-    author: "chiali.eth",
-    date: new Date().toISOString(),
+    attester: "chiali.eth",
+    updated_at: new Date().toISOString(),
   },
   {
     id: "30",
-    message:
+    metricUID: "",
+    projectUID: "23",
+    description:
       "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
-    author: "afo-wefa.eth",
-    date: new Date().toISOString(),
+    attester: "afo-wefa.eth",
+    updated_at: new Date().toISOString(),
   },
   {
     id: "3",
-    message:
+    metricUID: "",
+    projectUID: "23",
+    description:
       "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
-    author: "0x2aa64E6d80390F5C017F0313cB908051BE2FD35e",
-    date: new Date().toISOString(),
+    attester: "0x2aa64E6d80390F5C017F0313cB908051BE2FD35e",
+    updated_at: new Date().toISOString(),
   },
   {
     id: "4",
-    message:
+    metricUID: "",
+    projectUID: "23",
+    description:
       "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
-    author: "afo-wefa.eth",
-    date: new Date().toISOString(),
+    attester: "afo-wefa.eth",
+    updated_at: new Date().toISOString(),
   },
   {
     id: "5",
-    message:
+    metricUID: "",
+    projectUID: "23",
+    description:
       "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
-    author: "0x5d638a6E9089ea3140F97E85Cd1FC54bd6f0023e",
-    date: new Date().toISOString(),
+    attester: "0x5d638a6E9089ea3140F97E85Cd1FC54bd6f0023e",
+    updated_at: new Date().toISOString(),
   },
   {
     id: "11",
-    message:
+    metricUID: "",
+    projectUID: "23",
+    description:
       "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
-    author: "afo-wefa.eth",
-    date: new Date().toISOString(),
+    attester: "afo-wefa.eth",
+    updated_at: new Date().toISOString(),
   },
   {
     id: "6",
-    message:
+    metricUID: "",
+    projectUID: "23",
+    description:
       "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
-    author: "0x5d638a6E9089ea3140F97E85Cd1FC54bd6f0023e",
-    date: new Date().toISOString(),
+    attester: "0x5d638a6E9089ea3140F97E85Cd1FC54bd6f0023e",
+    updated_at: new Date().toISOString(),
   },
 ];
 
-export const metrics: { title: string; value: number }[] = [
+export const metrics: ProjectMetric[] = [
   {
-    title: "Number of OP Stack modules dependent on this contribution",
-    value: 0,
+    id: "1",
+    name: "Number of OP Stack modules dependent on this contribution",
+    description: "",
+    source: "",
+    value: "0",
   },
   {
-    title: "Number of merged contributions to the OP Stack",
-    value: 3083091,
+    id: "2",
+    name: "Number of merged contributions to the OP Stack",
+    description: "",
+    source: "",
+    value: "3083091",
   },
   {
-    title: "Bytecode size reduction",
-    value: 0,
+    id: "3",
+    name: "Bytecode size reduction",
+    description: "",
+    source: "",
+    value: "0",
   },
   {
-    title: "Response time for RPC calls",
-    value: 482401,
+    id: "4",
+    name: "Response time for RPC calls",
+    description: "",
+    source: "",
+    value: "482401",
   },
   {
-    title: "Gas costs reduction in contract creation",
-    value: 32,
+    id: "5",
+    name: "Gas costs reduction in contract creation",
+    description: "",
+    source: "",
+    value: "32",
   },
   {
-    title:
-      "Number of modules that were developed simultaneously without causing issues",
-    value: 0,
+    id: "6",
+    name: "Number of modules that were developed simultaneously without causing issues",
+    description: "",
+    source: "",
+    value: "0",
   },
 ];
 
