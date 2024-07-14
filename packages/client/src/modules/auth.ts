@@ -1,11 +1,11 @@
 import { SiweMessage } from "siwe";
-// import { getCsrfToken } from "next-auth/react";
-// import { cookies } from "next/headers";
-import { getCsrfToken } from "next-auth/react";
-import NextAuth, { DefaultSession, AuthError } from "next-auth";
+import NextAuth, { AuthError } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+// import { getCsrfToken } from "next-auth/react";
 
 import { councilMembers, metricAdmins } from "@/constants";
+import { neynarClient } from "./neynar";
+import { getBadgeholder } from "@/actions/badgeholder";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -23,7 +23,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           type: "text",
         },
       },
-      authorize: async (credentials, req) => {
+      authorize: async (credentials) => {
         try {
           if (
             typeof credentials.message !== "string" ||
@@ -46,11 +46,22 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             // nonce,
           });
 
+          const userMap = await neynarClient.fetchBulkUsersByEthereumAddress([
+            fields.address,
+          ]);
+
+          const farcasterUser =
+            userMap[fields.address] !== undefined
+              ? userMap[fields.address][0]
+              : undefined;
+
+          const badgeholder = await getBadgeholder(fields.address);
+
           return {
-            // id: fid.toString(),
-            name: "",
-            image: "",
-            badgeholder: false,
+            fid: farcasterUser?.fid,
+            name: farcasterUser?.username,
+            image: farcasterUser?.pfp_url,
+            badgeholder,
             metrics_admin: metricAdmins.has(fields.address),
             council_member: councilMembers.get(fields.address),
             address: fields.address,

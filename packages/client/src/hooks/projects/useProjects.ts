@@ -18,12 +18,10 @@ export const useProjects = (
   const [totalProjects, setTotalProjects] = useState(0);
 
   useEffect(() => {
-    // Fetch the projects when the component mounts or when currentPage or pageSize changes
     fetchProjects(currentPage, initialPageSize);
   }, [currentPage]);
 
   const fetchProjects = async (page: number, size: number) => {
-    // Replace this with your actual fetch logic
     const response = await fetch(`/api/projects?page=${page}&size=${size}`);
     const data = await response.json();
     setProjects(data.projects);

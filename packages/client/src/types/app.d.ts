@@ -1,5 +1,5 @@
 declare interface User {
-  id: string;
+  fid: number;
   name: string;
   image: string;
   badgeholder: boolean;
