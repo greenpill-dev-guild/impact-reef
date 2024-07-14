@@ -1,1 +1,1 @@
-export { auth as middleware } from "@/modules/auth";
+export { auth as middleware } from "@/modules/nextAuth";

@@ -2,7 +2,7 @@
 
 import { getCsrfToken } from "next-auth/react";
 
-import { signIn, signOut, auth } from "@/modules/auth";
+import { signIn, signOut, auth } from "@/modules/nextAuth";
 
 export interface Credentials {
   message: string;
@@ -47,7 +47,7 @@ export async function login(credentials: Credentials) {
 
 export async function logout() {
   try {
-    await signOut();
+    await signOut({ redirect: true, redirectTo: "/" });
 
     return {
       message: "User succesfully logged out",

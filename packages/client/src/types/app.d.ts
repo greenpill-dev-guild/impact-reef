@@ -1,7 +1,7 @@
 declare interface User {
-  fid: number;
-  name: string;
-  image: string;
+  // fid?: number;
+  // name?: string;
+  // image?: string;
   badgeholder: boolean;
   metrics_admin: boolean;
   council_member: boolean;

@@ -6,7 +6,7 @@ import { SiweMessage } from "siwe";
 import { ConnectKitButton, useModal } from "connectkit";
 import { useAccount, useDisconnect, useSignMessage } from "wagmi";
 
-import { signIn, signOut } from "@/modules/auth";
+import { login, logout } from "@/actions/auth";
 
 import { Web3Provider } from "@/hooks/auth/Provider";
 
@@ -39,7 +39,6 @@ export const ConnectContent: React.FC<ConnectProps> = () => {
     connectorId?: string;
   }) {
     // const nonce = await getCsrfToken();
-
     // console.log("Client Nonce", nonce);
 
     const message = new SiweMessage({
@@ -54,11 +53,11 @@ export const ConnectContent: React.FC<ConnectProps> = () => {
 
     const signature = await signMessageAsync({ message });
 
-    signIn("credentials", { message, signature });
+    login({ message, signature });
   }
 
   async function handleDisconnect() {
-    signOut({ redirect: true, redirectTo: "/" });
+    logout();
   }
 
   const profileLinks: Link[] = [

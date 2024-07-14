@@ -87,7 +87,7 @@ const ProjectsView: React.FC<ProjectsViewProps> = ({ projects }) => {
             ]}
             items={projects}
             onItemClick={(id) => {
-              console.log("Projects", id);
+              console.log("Project", id);
               push(`/projects/${id}`);
             }}
           />

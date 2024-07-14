@@ -3,9 +3,11 @@ import NextAuth, { AuthError } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 // import { getCsrfToken } from "next-auth/react";
 
+import { getBadgeholder } from "@/actions/badgeholders";
+
 import { councilMembers, metricAdmins } from "@/constants";
-import { neynarClient } from "./neynar";
-import { getBadgeholder } from "@/actions/badgeholder";
+
+// import { neynarClient } from "./neynar";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -46,21 +48,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             // nonce,
           });
 
-          const userMap = await neynarClient.fetchBulkUsersByEthereumAddress([
-            fields.address,
-          ]);
+          // const userMap = await neynarClient.fetchBulkUsersByEthereumAddress([
+          //   fields.address,
+          // ]);
 
-          const farcasterUser =
-            userMap[fields.address] !== undefined
-              ? userMap[fields.address][0]
-              : undefined;
+          // const farcasterUser =
+          //   userMap[fields.address] !== undefined
+          //     ? userMap[fields.address][0]
+          //     : undefined;
 
           const badgeholder = await getBadgeholder(fields.address);
 
           return {
-            fid: farcasterUser?.fid,
-            name: farcasterUser?.username,
-            image: farcasterUser?.pfp_url,
+            // fid: farcasterUser?.fid,
+            name: "",
+            // image: farcasterUser?.pfp_url,
             badgeholder,
             metrics_admin: metricAdmins.has(fields.address),
             council_member: councilMembers.get(fields.address),
