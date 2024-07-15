@@ -18,15 +18,15 @@ export const useProjects = (
   const [totalProjects, setTotalProjects] = useState(0);
 
   useEffect(() => {
-    fetchProjects(currentPage, initialPageSize);
+    // fetchProjects(currentPage, initialPageSize);
   }, [currentPage]);
 
-  const fetchProjects = async (page: number, size: number) => {
-    const response = await fetch(`/api/projects?page=${page}&size=${size}`);
-    const data = await response.json();
-    setProjects(data.projects);
-    setTotalProjects(data.total);
-  };
+  // const fetchProjects = async (page: number, size: number) => {
+  //   const response = await fetch(`/api/projects?page=${page}&size=${size}`);
+  //   const data = await response.json();
+  //   setProjects(data.projects);
+  //   setTotalProjects(data.total);
+  // };
 
   const nextPage = () => {
     if (currentPage < totalPages) {

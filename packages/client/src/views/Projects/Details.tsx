@@ -44,7 +44,6 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
     setShowAllMetrics(!showAllMetrics);
   }
 
-  const badgeholdr = true;
   const projectCreator = !!user?.address && user?.address === project.creator;
 
   console.log("Project", project);
@@ -368,7 +367,7 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
           <ProjectAttest
             onSubmit={onSubmit}
             metrics={project.metrics}
-            badgeholder={badgeholdr}
+            badgeholder={!!user?.badgeholder}
             projectCreator={projectCreator}
           />
         </aside>

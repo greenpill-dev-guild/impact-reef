@@ -14,7 +14,6 @@ export const getBadgeholder = async (
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
-        data
         decodedDataJson
       }
     }
@@ -43,7 +42,6 @@ export const getBadgeholders = async (): Promise<string[]> => {
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
         recipient
-        data
         decodedDataJson
       }
     }

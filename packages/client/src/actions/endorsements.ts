@@ -55,7 +55,6 @@ export const getProjectEndorsements = async (projectUID?: string | null) => {
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
-        data
         decodedDataJson
       }
     }
@@ -79,16 +78,6 @@ export const getProjectEndorsements = async (projectUID?: string | null) => {
     console.error("No data found");
     return;
   }
-
-  // TODO - bit of a hack to cast as bigint, should be enforced by the schema tho
-  return data.attestations
-    .map((ownerAttestation) =>
-      decodeAbiParameters(
-        parseAbiParameters(EAS["11155420"].ENDORSEMENTS.schema),
-        ownerAttestation.data as Hex
-      )
-    )
-    .flatMap((decodedData) => decodedData) as bigint[];
 };
 
 export const getUserEndorsements = async (
@@ -99,7 +88,6 @@ export const getUserEndorsements = async (
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
-        data
         decodedDataJson
       }
     }

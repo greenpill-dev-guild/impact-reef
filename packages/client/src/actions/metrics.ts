@@ -120,7 +120,6 @@ export const getProjectMetrics = async (projectId?: string | null) => {
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
-        data
         decodedDataJson
       }
     }

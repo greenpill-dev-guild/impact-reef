@@ -31,7 +31,12 @@ export const getProjectBuilders = async (): Promise<any[]> => {
   if (error) console.error(error);
   if (!data) console.error("No data found");
 
-  return data?.attestations ?? [];
+  return (
+    data?.attestations.map((data) => {
+      const json = JSON.parse(data.decodedDataJson);
+      return json;
+    })[23][1] ?? []
+  );
 
   // TODO - bit of a hack to cast as bigint, should be enforced by the schema tho
   // return data.attestations
@@ -48,7 +53,6 @@ export const getProjects = async (): Promise<ProjectItem[]> => {
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
-        data
         decodedDataJson
       }
     }
@@ -65,7 +69,10 @@ export const getProjects = async (): Promise<ProjectItem[]> => {
   if (error) console.error(error);
   if (!data) console.error("No data found");
 
-  console.log("Projects API", data);
+  console.log(
+    "Projects API",
+    JSON.parse(data?.attestations[0].decodedDataJson!)
+  );
 
   return projects;
 };
@@ -122,7 +129,6 @@ export const getProject = async (
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
-        data
         decodedDataJson
       }
     }
