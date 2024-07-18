@@ -20,8 +20,8 @@ function generateSchema(projectCreator: boolean) {
           .array(
             z.object({
               metricUID: z.string(),
-              metricName: z.string(),
-              metricDescription: z.string(),
+              metricName: z.string().optional(),
+              metricDescription: z.string().optional(),
               value: z.number(),
               source: z.string(),
             })
@@ -50,7 +50,12 @@ export const ProjectAttest: React.FC<ProjectAttestProps> = ({
   badgeholder,
   onSubmit,
 }) => {
-  const { register, handleSubmit, control } = useForm<AttestFormValues>({
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { isValid, isSubmitting },
+  } = useForm<AttestFormValues>({
     shouldUseNativeValidation: true,
     values: {
       endorsement: "",
@@ -62,7 +67,7 @@ export const ProjectAttest: React.FC<ProjectAttestProps> = ({
         source: "",
       })),
     },
-    resolver: zodResolver(generateSchema(projectCreator)),
+    resolver: zodResolver(generateSchema(!projectCreator)),
   });
 
   const { fields } = useFieldArray({
@@ -73,10 +78,10 @@ export const ProjectAttest: React.FC<ProjectAttestProps> = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="pt-3 pb-6 overflow-scroll"
+      className="w-[680px] relative h-full mb-16 flex flex-col"
     >
-      <header>
-        <h2>
+      <header className="py-8 px-12">
+        <h2 className="mb-2">
           {projectCreator
             ? "Claim Metrics"
             : badgeholder
@@ -91,18 +96,21 @@ export const ProjectAttest: React.FC<ProjectAttestProps> = ({
               : "Support this project by submitting an onchain attestation as proof of your endorsement."}
         </p>
       </header>
-      <section>
+      <section className="bg-slate-200 w-full overflow-scroll flex-1">
         {projectCreator ? (
           <ProjectAttestMetric metrics={fields} register={register} />
         ) : (
           <ProjectAttestEndorsement {...register("endorsement")} />
         )}
       </section>
-      <div className="w-full px-4 fixed bottom-0 left-0">
-        <button className="w-full" disabled={true}>
+      <footer className="w-full fixed bottom-6 left-0 px-8">
+        <button
+          className="w-full btn rounded-3xl"
+          disabled={isSubmitting || !isValid}
+        >
           Submit
         </button>
-      </div>
+      </footer>
     </form>
   );
 };

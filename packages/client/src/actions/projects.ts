@@ -70,8 +70,8 @@ export const getProjects = async (): Promise<ProjectItem[]> => {
   if (!data) console.error("No data found");
 
   console.log(
-    "Projects API",
-    JSON.parse(data?.attestations[0].decodedDataJson!)
+    "Projects API"
+    // JSON.parse(data?.attestations[0].decodedDataJson!)
   );
 
   return projects;

@@ -5,7 +5,6 @@ import {
   SchemaEncoder,
   TransactionSigner,
 } from "@ethereum-attestation-service/eas-sdk";
-import { Hex, decodeAbiParameters, parseAbiParameters } from "viem";
 
 import { EAS } from "@/constants";
 

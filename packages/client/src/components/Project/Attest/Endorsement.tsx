@@ -11,27 +11,25 @@ export const ProjectAttestEndorsement = forwardRef<
   ProjectAttestEndorsementProps
 >(({ ...props }, ref) => {
   return (
-    <div
-      tabIndex={0}
-      className="collapse collapse-arrow w-full px-8 bg-gray-300"
-    >
-      <h3 className="mb-3 text-xl font-semibold">
+    <div className="collapse collapse-arrow w-full py-8 px-12">
+      <h3 className="flex items-center gap-1 mb-2">
         <Image
-          src="/icons/chat.svg"
+          src="/icons/chat-alt.svg"
           alt="Endorsment Chat SVG"
           unoptimized
-          width={48}
-          height={48}
+          width={32}
+          height={32}
         />{" "}
         Endorsement
       </h3>
-      <p className="">
+      <p className="mb-4">
         This type of attestation is intended as a soft evaluation, ranging from
         any beneficial actions for the community to efforts spread over the
         years.
       </p>
       <textarea
-        className="mb-2"
+        rows={10}
+        className="mb-2 p-4 rounded-lg border border-gray-400"
         placeholder="when someone enter text, use this color"
         ref={ref}
         {...props}

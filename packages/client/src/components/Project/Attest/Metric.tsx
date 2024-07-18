@@ -23,77 +23,75 @@ export const ProjectAttestMetric = forwardRef<
   ProjectAttestMetricProps
 >(({ register, metrics }) => {
   return (
-    <div
-      tabIndex={0}
-      className="collapse collapse-arrow w-full px-8 bg-gray-4s00"
-    >
-      <div className="collapse-title text-xl font-medium">
-        <h3 className="mb-3 text-xl font-semibold">
+    <div className="collapse collapse-arrow w-full h-full px-8 bg-gray-4s00">
+      <input type="checkbox" />
+      <div className="collapse-title">
+        <h3 className="flex items-center gap-1 mb-2">
           <Image
-            src="/icons/chat.svg"
-            alt="Endorsment Chat SVG"
-            width={48}
-            height={48}
+            src="/icons/flag.svg"
+            alt="Metric Claim SVG"
+            width={32}
+            height={32}
             unoptimized
           />{" "}
-          Endorsement
+          Metric
         </h3>
-        <p className="">
-          This type of attestation is intended as a soft evaluation, ranging
-          from any beneficial actions for the community to efforts spread over
-          the years.
+        <p className="mb-4">
+          There are <b>{metrics.length}</b> metrics available for onchain
+          builders to attest to their projects. Each metric-based attestation
+          must include a link for verification purposes.
         </p>
       </div>
-      <div className="collapse-content">
-        <ul className="flex flex-col gap-2">
-          {metrics.map((metric, index) => (
-            <li
-              key={metric.metricUID}
-              tabIndex={0}
-              className="collapse collapse-arrow border border-base-300 bg-base-200 px-2 py-3"
-            >
-              <div className="collapse-title text-xl font-medium">
-                {metric.metricName}
-              </div>
-              <div className="collapse-content">
-                <p className="text-gray-300">{metric.metricDescription}</p>
-                <label className="form-control w-full max-w-xs">
-                  <div className="label">
-                    <span className="label-text">Date</span>
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Type here"
-                    className="input input-bordered w-full max-w-xs"
-                    {...register(`metrics.${index}.value`)}
-                  />
-                  <div className="label">
-                    <span className="label-text-alt">
-                      This field must be a number format.
-                    </span>
-                  </div>
-                </label>
-                <label className="form-control w-full max-w-xs">
-                  <div className="label">
-                    <span className="label-text">Support Link</span>
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Type here"
-                    className="input input-bordered w-full max-w-xs"
-                    {...register(`metrics.${index}.source`)}
-                  />
-                  <div className="label">
-                    <span className="label-text-alt">
-                      Please include a support link for your attest.
-                    </span>
-                  </div>
-                </label>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul className="collapse-content flex flex-col gap-2">
+        {metrics.map((metric, index) => (
+          <li
+            key={metric.metricUID}
+            className="collapse collapse-arrow border border-slate-500 px-2 py-3"
+          >
+            <input type="checkbox" />
+            <div className="collapse-title text-lg font-medium">
+              {metric.metricName}
+            </div>
+            <div className="collapse-content">
+              <p className="text-gray-300">{metric.metricDescription}</p>
+              <label className="form-control w-full">
+                <div className="label">
+                  <span className="label-text text-lg font-semibold">Data</span>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Type here"
+                  className="input input-bordered w-full"
+                  {...register(`metrics.${index}.value`)}
+                />
+                <div className="label">
+                  <span className="label-text-alt text-light text-base">
+                    This field must be a number format.
+                  </span>
+                </div>
+              </label>
+              <label className="form-control w-full">
+                <div className="label">
+                  <span className="label-text text-lg font-semibold">
+                    Support Link
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Type here"
+                  className="input input-bordered w-full"
+                  {...register(`metrics.${index}.source`)}
+                />
+                <div className="label">
+                  <span className="label-text-alt text-light text-base">
+                    Please include a support link for your attest.
+                  </span>
+                </div>
+              </label>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 });

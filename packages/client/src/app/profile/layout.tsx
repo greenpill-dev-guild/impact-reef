@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+
 import { Web3Provider } from "@/hooks/auth/Provider";
 
 interface Link {

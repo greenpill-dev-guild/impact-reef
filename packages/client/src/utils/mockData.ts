@@ -77,14 +77,14 @@ export const metrics: ProjectMetric[] = [
   {
     id: "1",
     name: "Number of OP Stack modules dependent on this contribution",
-    description: "",
+    description: "jkjkj",
     source: "",
     value: "0",
   },
   {
     id: "2",
     name: "Number of merged contributions to the OP Stack",
-    description: "",
+    description: "klklk",
     source: "",
     value: "3083091",
   },
