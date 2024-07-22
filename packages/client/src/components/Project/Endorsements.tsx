@@ -8,6 +8,27 @@ export interface ProjectEndorsementsProps {
   endorsements: Endorsement[];
 }
 
+export interface ProjectEndorsementCardProps {
+  endorsement: Endorsement;
+}
+
+const ProjectEndorsementCard: React.FC<ProjectEndorsementCardProps> = ({
+  endorsement,
+}) => {
+  return (
+    <li
+      key={endorsement.id}
+      className="p-3 bg-neutral-100 rounded-md shadow-sm flex flex-col justify-between gap-6"
+    >
+      <p className="">{endorsement.description}</p>
+      <div>
+        <p className="line-clamp-1 font-semibold">by {endorsement.attester}</p>
+        <span>{new Date(Date.parse(endorsement.updated_at)).getUTCDate()}</span>
+      </div>
+    </li>
+  );
+};
+
 const ProjectEndorsements: React.FC<ProjectEndorsementsProps> = ({
   banner,
   endorsements,
@@ -35,22 +56,13 @@ const ProjectEndorsements: React.FC<ProjectEndorsementsProps> = ({
         <h2 className="font-semibold text-3xl">Endorsements</h2>
       </div>
       <ul className="grid grid-cols-4 grid-rows-auto gap-4 w-full">
-        {endorsements.map((endorsement) => (
-          <li
-            key={endorsement.id}
-            className="p-3 bg-neutral-100 rounded-md shadow-sm flex flex-col justify-between gap-6"
-          >
-            <p className="">{endorsement.description}</p>
-            <div>
-              <p className="line-clamp-1 font-semibold">
-                by {endorsement.attester}
-              </p>
-              <span>
-                {new Date(Date.parse(endorsement.updated_at)).getUTCDate()}
-              </span>
-            </div>
-          </li>
-        ))}
+        {endorsements.length ? (
+          endorsements.map((endorsement) => (
+            <ProjectEndorsementCard endorsement={endorsement} />
+          ))
+        ) : (
+          <div></div>
+        )}
       </ul>
     </section>
   );
