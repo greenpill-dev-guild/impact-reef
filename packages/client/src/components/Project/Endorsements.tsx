@@ -58,7 +58,10 @@ export const ProjectEndorsements: React.FC<ProjectEndorsementsProps> = ({
       <ul className="grid grid-cols-4 grid-rows-auto gap-4 w-full">
         {endorsements.length ? (
           endorsements.map((endorsement) => (
-            <ProjectEndorsementCard endorsement={endorsement} />
+            <ProjectEndorsementCard
+              key={endorsement.id}
+              endorsement={endorsement}
+            />
           ))
         ) : (
           <div></div>
