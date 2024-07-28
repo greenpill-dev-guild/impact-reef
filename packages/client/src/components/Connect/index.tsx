@@ -8,8 +8,6 @@ import { useAccount, useDisconnect, useSignMessage } from "wagmi";
 
 import { login, logout } from "@/actions/auth";
 
-import { Web3Provider } from "@/hooks/auth/Provider";
-
 interface Link {
   title: string;
   icon: string;
@@ -19,11 +17,7 @@ interface Link {
 export interface ConnectProps {}
 
 export const Connect: React.FC<ConnectProps> = () => {
-  return (
-    <Web3Provider>
-      <ConnectContent />
-    </Web3Provider>
-  );
+  return <ConnectContent />;
 };
 
 export const ConnectContent: React.FC<ConnectProps> = () => {

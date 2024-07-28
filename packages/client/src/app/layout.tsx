@@ -14,6 +14,7 @@ import {
   APP_NAME,
   APP_TITLE_TEMPLATE,
 } from "@/constants";
+import { Web3Provider } from "@/hooks/auth/Provider";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -57,10 +58,13 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${sora.variable} antialiased`}
+      suppressHydrationWarning
     >
       <body>
-        <Navbar />
-        {children}
+        <Web3Provider>
+          <Navbar />
+          {children}
+        </Web3Provider>
         <Footer />
         <Toaster
           toastOptions={{
