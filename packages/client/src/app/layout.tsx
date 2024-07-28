@@ -57,8 +57,9 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${sora.variable} antialiased`}
+      suppressHydrationWarning
     >
-      <body>
+      <body suppressHydrationWarning>
         <Navbar />
         {children}
         <Footer />

@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 
-import { getProject } from "@/actions/projects";
+import { getProjectDetails } from "@/actions/projects";
 import { Web3Provider } from "@/hooks/auth/Provider";
 
 const ProjectDetailsView = dynamic(() => import("@/views/Projects/Details"));
@@ -11,7 +11,13 @@ interface Props {
 }
 
 const ProjectPage: NextPage<Props> = async ({ params: { uid } }) => {
-  const project = await getProject(uid);
+  const project = await getProjectDetails(uid);
+
+  if(!project) {
+    return <div>Project not found</div>;
+  }
+
+  console.log("Project", project);
 
   return (
     <Web3Provider>

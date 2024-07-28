@@ -126,7 +126,7 @@ export const getProjectMetrics = async (projectId?: string | null) => {
     }
   `);
 
-  return await easOptimismSepoliaClient
+  const data = await easOptimismSepoliaClient
     .query(QUERY, {
       where: {
         schemaId: { equals: EAS["11155420"].PROJECT_METRICS.uid },
@@ -134,4 +134,7 @@ export const getProjectMetrics = async (projectId?: string | null) => {
       },
     })
     .toPromise();
+
+
+  
 };

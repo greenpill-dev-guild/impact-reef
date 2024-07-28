@@ -24,7 +24,7 @@ const ProjectsPage: NextPage<Props> = async ({ params }) => {
   const projects = await getProjects();
   const projectBuilders = await getProjectBuilders();
 
-  console.log("Project Builders", projectBuilders);
+  // console.log("Project Builders", projectBuilders);
 
   return <ProjectsView projects={projects} />;
 };

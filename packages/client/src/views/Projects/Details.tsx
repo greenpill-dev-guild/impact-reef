@@ -106,6 +106,7 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
           <ProjectMetrics metrics={project.metrics} />
           <ProjectAttestations />
         </div>
+       
         <ProjectEndorsements
           banner={project.banner_image}
           endorsements={project.endorsements}
@@ -143,7 +144,7 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
           </button>
         </footer>
       </div>
-      <div className="drawer-side h-screen">
+      {/* <div className="drawer-side h-screen">
         <label
           htmlFor={
             endorsementState.matches("endorsing") ||
@@ -163,7 +164,7 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
             projectCreator={projectCreator}
           />
         </aside>
-      </div>
+      </div> */}
     </main>
   );
 };
