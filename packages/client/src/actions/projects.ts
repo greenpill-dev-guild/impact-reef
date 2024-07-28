@@ -35,7 +35,7 @@ export const getProjectBuilders = async (): Promise<any[]> => {
     data?.attestations.map((data) => {
       const json = JSON.parse(data.decodedDataJson);
       return json;
-    })[23][1] ?? []
+    }) ?? []
   );
 
   // TODO - bit of a hack to cast as bigint, should be enforced by the schema tho
@@ -49,6 +49,7 @@ export const getProjectBuilders = async (): Promise<any[]> => {
   //   .flatMap((decodedData) => decodedData) as bigint[];
 };
 
+// TODO filter on 'where: valid: true'
 export const getProjects = async (): Promise<ProjectItem[]> => {
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {

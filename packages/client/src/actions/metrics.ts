@@ -26,7 +26,7 @@ export async function createMetric(
   const encodedData = schemaEncoder.encodeData([
     { name: "name", value: metric.name, type: "string" },
     { name: "description", value: metric.description, type: "string" },
-    { name: "importnce", value: metric.impact, type: "string" },
+    { name: "importance", value: metric.impact, type: "string" },
     { name: "rationale", value: metric.rationale, type: "string" },
     { name: "keyword", value: metric.keyword, type: "string" },
     { name: "term", value: metric.term, type: "string" },
@@ -117,6 +117,7 @@ export const getProjectMetrics = async (projectId?: string | null) => {
     return;
   }
 
+  // TODO add 'where: valid: true' filter
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {

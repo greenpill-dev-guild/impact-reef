@@ -7,7 +7,7 @@ import { Progress } from "@/components/Progress";
 
 export interface ProjectAttestationsProps {}
 
-const ProjectAttestations: React.FC<ProjectAttestationsProps> = ({}) => {
+export const ProjectAttestations: React.FC<ProjectAttestationsProps> = ({}) => {
   return (
     <aside className="basis-72 flex flex-col gap-2">
       <Stat
@@ -64,5 +64,3 @@ const ProjectAttestations: React.FC<ProjectAttestationsProps> = ({}) => {
     </aside>
   );
 };
-
-export default ProjectAttestations;

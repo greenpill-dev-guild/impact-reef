@@ -65,7 +65,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             // image: farcasterUser?.pfp_url,
             badgeholder,
             metrics_admin: metricAdmins.has(fields.address),
-            council_member: councilMembers.get(fields.address),
+            council_member: councilMembers.has(fields.address),
             address: fields.address,
           };
         } catch (error) {

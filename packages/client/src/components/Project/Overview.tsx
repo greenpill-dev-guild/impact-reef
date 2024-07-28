@@ -15,7 +15,7 @@ export interface ProjectOverviewProps {
   socials: string[];
 }
 
-const ProjectOverview: React.FC<ProjectOverviewProps> = ({
+export const ProjectOverview: React.FC<ProjectOverviewProps> = ({
   avatar_image,
   title,
   description,
@@ -73,5 +73,3 @@ const ProjectOverview: React.FC<ProjectOverviewProps> = ({
     </div>
   );
 };
-
-export default ProjectOverview;

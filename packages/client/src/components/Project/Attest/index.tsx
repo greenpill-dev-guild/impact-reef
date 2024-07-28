@@ -15,18 +15,20 @@ interface ProjectAttestProps {
 function generateSchema(projectCreator: boolean) {
   return projectCreator
     ? z.object({
-        endorsement: z.string().min(100).max(1000).nullish(),
+        endorsement: z.string().nullish(),
         metrics: z
           .array(
-            z.object({
-              metricUID: z.string(),
-              metricName: z.string().optional(),
-              metricDescription: z.string().optional(),
-              value: z.number(),
-              source: z.string(),
-            })
+            z
+              .object({
+                metricUID: z.string(),
+                metricName: z.string().optional(),
+                metricDescription: z.string().optional(),
+                value: z.string(),
+                source: z.string().url(),
+              })
+              .nullish()
           )
-          .nonempty(),
+          .nullish(),
       })
     : z.object({
         endorsement: z.string().min(100).max(1000),
@@ -59,15 +61,16 @@ export const ProjectAttest: React.FC<ProjectAttestProps> = ({
     shouldUseNativeValidation: true,
     values: {
       endorsement: "",
-      metrics: metrics.map((metric) => ({
-        metricUID: metric.id,
-        metricName: metric.name,
-        metricDescription: metric.description,
-        value: 0,
-        source: "",
-      })),
+      metrics: [],
+      // metrics.map((metric) => ({
+      //   metricUID: metric.id,
+      //   metricName: metric.name,
+      //   metricDescription: metric.description,
+      //   value: 0,
+      //   source: "",
+      // }))
     },
-    resolver: zodResolver(generateSchema(!projectCreator)),
+    resolver: zodResolver(generateSchema(projectCreator)),
   });
 
   const { fields } = useFieldArray({

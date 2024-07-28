@@ -1,27 +1,22 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-
-import { determineSocialMedia } from "@/utils/text";
 
 import { useProject } from "@/hooks/projects/useProject";
 
-import { Stat } from "@/components/Stat";
-import { Collaspe } from "@/components/Collaspe";
-import { Progress } from "@/components/Progress";
-import { ProjectAttest } from "@/components/Project/Attest";
-import { AttestFormValues } from "@/components/Project/Attest/Metric";
-import ProjectEndorsements from "@/components/Project/Endorsements";
 import { ProjectInfo } from "@/components/Project/Info";
+import { ProjectAttest } from "@/components/Project/Attest";
 import { ProjectMetrics } from "@/components/Project/Metrics";
-import ProjectAttestations from "@/components/Project/Attestations";
-import ProjectOverview from "@/components/Project/Overview";
+import { ProjectOverview } from "@/components/Project/Overview";
+import { ProjectAttestations } from "@/components/Project/Attestations";
+import { ProjectEndorsements } from "@/components/Project/Endorsements";
+import { AttestFormValues } from "@/components/Project/Attest/Metric";
 
 export interface ProjectViewProps {
-  user?: User;
+  user: User;
   project: Project;
 }
 
@@ -39,19 +34,7 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
     cancelEndorse,
   } = useProject(project.id);
 
-  const [showAllMetrics, setShowAllMetrics] = useState(false);
-
-  const metricList = showAllMetrics
-    ? project.metrics
-    : project.metrics.slice(0, 6);
-
-  function handleShowAllMetrics() {
-    setShowAllMetrics(!showAllMetrics);
-  }
-
-  const projectCreator = !!user?.address && user?.address === project.creator;
-
-  console.log("Project", project);
+  const projectCreator = !!user.address || user.address === project.creator;
 
   async function onSubmit(data: AttestFormValues) {
     if (projectCreator) {
@@ -177,7 +160,7 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
             onSubmit={onSubmit}
             metrics={project.metrics}
             badgeholder={!!user?.badgeholder}
-            projectCreator={!projectCreator}
+            projectCreator={projectCreator}
           />
         </aside>
       </div>

@@ -12,7 +12,7 @@ export interface ProjectEndorsementCardProps {
   endorsement: Endorsement;
 }
 
-const ProjectEndorsementCard: React.FC<ProjectEndorsementCardProps> = ({
+export const ProjectEndorsementCard: React.FC<ProjectEndorsementCardProps> = ({
   endorsement,
 }) => {
   return (
@@ -29,7 +29,7 @@ const ProjectEndorsementCard: React.FC<ProjectEndorsementCardProps> = ({
   );
 };
 
-const ProjectEndorsements: React.FC<ProjectEndorsementsProps> = ({
+export const ProjectEndorsements: React.FC<ProjectEndorsementsProps> = ({
   banner,
   endorsements,
 }) => {
@@ -67,5 +67,3 @@ const ProjectEndorsements: React.FC<ProjectEndorsementsProps> = ({
     </section>
   );
 };
-
-export default ProjectEndorsements;

@@ -11,10 +11,11 @@ export const getBadgeholder = async (
 ): Promise<boolean> => {
   if (!address) console.error("No address provided");
 
+  // TODO add filter on 'where: {valid: true}'
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
-        decodedDataJson
+        id
       }
     }
   `);
@@ -38,11 +39,11 @@ export const getBadgeholder = async (
 };
 
 export const getBadgeholders = async (): Promise<string[]> => {
+  // TODO add filter on 'where: {valid: true}'
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
         recipient
-        decodedDataJson
       }
     }
   `);

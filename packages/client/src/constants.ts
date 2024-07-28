@@ -29,7 +29,7 @@ export const EAS = {
       address: "0x4200000000000000000000000000000000000021",
     },
     OPTIMISM: {
-      address: "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+      address: "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9", // Filter for attestations by OP
     },
   },
   "11155420": {

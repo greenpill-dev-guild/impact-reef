@@ -43,7 +43,7 @@ export const List: React.FC<ListProps> = ({ items, columns, onItemClick }) => {
       </ul>
       <ul
         role="rowgroup"
-        className="w-full max-h-[100vh] flex flex-col gap-1 flex-1 overflow-scroll"
+        className="w-full flex flex-col gap-1 flex-1 overflow-scroll"
       >
         {items?.map((item) => (
           <ListItem

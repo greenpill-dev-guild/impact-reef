@@ -17,7 +17,7 @@ const ProjectsView: React.FC<ProjectsViewProps> = ({ projects }) => {
   const {} = useProjects(20);
 
   return (
-    <main className="flex flex-col gap-4 min-h-screen">
+    <main className="flex flex-col gap-4 min-h-screen p-12">
       <header className="w-full mx-auto max-w-screen-xl">
         <h1 className="text-4xl font-semibold">Projects</h1>
         <p className="mb-6">

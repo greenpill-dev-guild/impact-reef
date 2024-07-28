@@ -40,7 +40,7 @@ export const claimMetricsMachine = setup({
   },
 }).createMachine({
   id: "project-metrics-claim",
-  initial: "idle",
+  initial: "claim",
   context: ({ input: { signer, projectUID } }) => ({
     signer,
     projectUID,

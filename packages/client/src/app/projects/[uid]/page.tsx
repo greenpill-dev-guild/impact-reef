@@ -15,7 +15,16 @@ const ProjectPage: NextPage<Props> = async ({ params: { uid } }) => {
 
   return (
     <Web3Provider>
-      <ProjectDetailsView project={project} />;
+      <ProjectDetailsView
+        project={project}
+        user={{
+          address: "0x1234567890abcdef1234567890abcdef1234567890", // Placeholder
+          badgeholder: true, // Placeholder
+          council_member: true, // Placeholder
+          metrics_admin: true, // Placeholder
+        }}
+      />
+      ;
     </Web3Provider>
   );
 };

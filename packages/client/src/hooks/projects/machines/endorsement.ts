@@ -46,7 +46,7 @@ export const endorsementMachine = setup({
   },
 }).createMachine({
   id: "project-endorsement",
-  initial: "idle",
+  initial: "endorse",
   context: ({
     input: { signer, projectUID },
   }: {
