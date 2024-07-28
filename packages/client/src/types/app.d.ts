@@ -78,8 +78,6 @@ declare interface ProjectItem {
   title: string;
   avatar_image: string;
   category: ProjectCategory;
-  transactions_count?: number;
-  attestation_counts?: number;
   updated_at: string;
   creator: string;
 }

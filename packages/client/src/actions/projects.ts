@@ -71,11 +71,6 @@ export const getProjects = async (): Promise<ProjectItem[]> => {
   if (error) console.error(error);
   if (!data) console.error("No data found");
 
-  // console.log(
-  //   "Projects API"
-  //   // JSON.parse(data?.attestations[0].decodedDataJson!)
-  // );
-
   // {
   //   id: "1",
   //   creator: "",
@@ -176,9 +171,9 @@ export const getProjectDetails = async (
         revoked: { equals: false },
       },
       orderBy: {
-        timeCreated: "desc"
+        timeCreated: "desc",
       },
-      take: 1
+      take: 1,
     })
     .toPromise();
 
@@ -203,8 +198,6 @@ export const getProjectDetails = async (
         .value,
       title: _data.filter((d: any) => d.name === "name")[0].value.value!,
       creator: "vitalik.eth",
-      attestation_counts: 420,
-      transactions_count: 69,
       avatar_image: metadata.projectAvatarUrl,
       banner_image: metadata.projectCoverImageUrl,
       category: _data.filter((d: any) => d.name === "category")[0].value.value!,
@@ -226,7 +219,7 @@ export const getProjectDetails = async (
 
   console.log("Project data: ", data);
 
-  if(data.attestations.length === 0) {
+  if (!data || data?.attestations.length === 0) {
     console.error("No data found");
     return;
   }
