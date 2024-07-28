@@ -38,7 +38,7 @@ export const ProjectOverview: React.FC<ProjectOverviewProps> = ({
       </div>
       <div className="basis-72 flex flex-col h-full justify-between items-end gap-6">
         <ul className="flex gap-2">
-          {socials.map((link) => {
+          {socials && socials.map((link) => {
             const social = determineSocialMedia(link);
 
             return (

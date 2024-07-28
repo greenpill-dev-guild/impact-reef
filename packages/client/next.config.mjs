@@ -11,6 +11,13 @@ const nextConfig = {
       },
     ];
   },
+  webpack: config => {
+    config.externals.push('pino-pretty', 'lokijs', 'encoding')
+    return config
+  },
+  images: {
+    domains: ["picsum.photos"],
+  },
 };
 
 export default process.env.ANALYZE === "true"

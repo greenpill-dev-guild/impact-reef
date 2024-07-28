@@ -10,7 +10,7 @@ export interface ProjectMetricsProps {
 export const ProjectMetrics: React.FC<ProjectMetricsProps> = ({ metrics }) => {
   const [showAllMetrics, setShowAllMetrics] = useState(false);
 
-  const metricList = showAllMetrics ? metrics : metrics.slice(0, 6);
+  const metricList = showAllMetrics ? metrics : metrics?.slice(0, 6) || [];
 
   function handleShowAllMetrics() {
     setShowAllMetrics(!showAllMetrics);
@@ -44,7 +44,7 @@ export const ProjectMetrics: React.FC<ProjectMetricsProps> = ({ metrics }) => {
         ))}
       </ul>
       <button
-        disabled={metrics.length <= 6}
+        disabled={!metrics || metrics?.length <= 6}
         onClick={handleShowAllMetrics}
         className="w-32 rounded-full bg-slate-400 text-center px-4 py-2 text-neutral-50 font-semibold leading-snug"
       >

@@ -60,7 +60,7 @@ export default function RootLayout({
       className={`${inter.variable} ${sora.variable} antialiased`}
       suppressHydrationWarning
     >
-      <body>
+      <body suppressHydrationWarning>
         <Web3Provider>
           <Navbar />
           {children}

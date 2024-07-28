@@ -56,7 +56,7 @@ export const ProjectEndorsements: React.FC<ProjectEndorsementsProps> = ({
         <h2 className="font-semibold text-3xl">Endorsements</h2>
       </div>
       <ul className="grid grid-cols-4 grid-rows-auto gap-4 w-full">
-        {endorsements.length ? (
+        {endorsements && endorsements.length ? (
           endorsements.map((endorsement) => (
             <ProjectEndorsementCard
               key={endorsement.id}
