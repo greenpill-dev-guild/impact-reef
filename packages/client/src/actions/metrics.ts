@@ -8,7 +8,7 @@ import {
 } from "@ethereum-attestation-service/eas-sdk";
 
 import { eas } from "@/modules/eas";
-import { easOptimismSepoliaClient } from "@/modules/urql";
+import { easSepoliaClient } from "@/modules/urql";
 
 import { EAS } from "@/constants";
 
@@ -21,7 +21,7 @@ export async function createMetric(
   eas.connect(signer);
 
   // Initialize SchemaEncoder with the schema string
-  const schemaEncoder = new SchemaEncoder(EAS[11155420].METRICS.schema);
+  const schemaEncoder = new SchemaEncoder(EAS[11155111].METRICS.schema);
 
   const encodedData = schemaEncoder.encodeData([
     { name: "name", value: metric.name, type: "string" },
@@ -34,7 +34,7 @@ export async function createMetric(
   ]);
 
   const transaction = await eas.attest({
-    schema: EAS[11155420].METRICS.uid,
+    schema: EAS[11155111].METRICS.uid,
     data: {
       recipient: "",
       revocable: true, // Be aware that if your schema is not revocable, this MUST be false
@@ -56,7 +56,7 @@ export async function deprecateMetric(uid: string, signer?: TransactionSigner) {
   eas.connect(signer);
 
   const transaction = await eas.revoke({
-    schema: EAS[11155420].METRICS.uid,
+    schema: EAS[11155111].METRICS.uid,
     data: {
       uid,
     },
@@ -78,7 +78,7 @@ export const claimProjectMetrics = async (
 
   eas.connect(signer);
 
-  const schemaEncoder = new SchemaEncoder(EAS[11155420].PROJECT_METRICS.schema);
+  const schemaEncoder = new SchemaEncoder(EAS[11155111].PROJECT_METRICS.schema);
 
   const data = metrics.map<AttestationRequestData>((metric) => {
     const encodedData = schemaEncoder.encodeData([
@@ -98,7 +98,7 @@ export const claimProjectMetrics = async (
 
   const transaction = await eas.multiAttest([
     {
-      schema: EAS[11155420].PROJECT_METRICS.uid,
+      schema: EAS[11155111].PROJECT_METRICS.uid,
       data,
     },
   ]);
@@ -126,15 +126,12 @@ export const getProjectMetrics = async (projectId?: string | null) => {
     }
   `);
 
-  const data = await easOptimismSepoliaClient
+  const data = await easSepoliaClient
     .query(QUERY, {
       where: {
-        schemaId: { equals: EAS["11155420"].PROJECT_METRICS.uid },
+        schemaId: { equals: EAS["11155111"].PROJECT_METRICS.uid },
         decodedDataJson: { contains: projectId },
       },
     })
     .toPromise();
-
-
-  
 };

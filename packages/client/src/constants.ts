@@ -32,9 +32,9 @@ export const EAS = {
       address: "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9", // Filter for attestations by OP
     },
   },
-  "11155420": {
+  "11155111": {
     METRICS: {
-      uid: "0x7bd6430d6ddf8ef8d70f3ca0175d3383af97fd93cac56c2db621f2054f23e0ae",
+      uid: "0xdd56b1a5da612085133234cdd66bb28056e2eab9aa951c7fb0d90709f78f9436",
       schema:
         "string name, string description, string importance, string rationale, string keyword, string term, string category",
     },
@@ -48,7 +48,7 @@ export const EAS = {
       schema: "bytes32 projectUID, bytes32 metricUID, string description",
     },
     EAS: {
-      address: "0x4200000000000000000000000000000000000021",
+      address: "0xC2679fBD37d54388Ce493F1DB75320D236e1815e",
     },
   },
 };

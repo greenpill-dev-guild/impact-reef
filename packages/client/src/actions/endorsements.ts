@@ -9,7 +9,7 @@ import {
 import { EAS } from "@/constants";
 
 import { eas } from "@/modules/eas";
-import { easOptimismSepoliaClient } from "@/modules/urql";
+import { easSepoliaClient } from "@/modules/urql";
 
 import { endorsements } from "@/utils/mockData";
 
@@ -24,7 +24,7 @@ export const makeEndorsement = async (
   eas.connect(signer);
 
   // Initialize SchemaEncoder with the schema string
-  const schemaEncoder = new SchemaEncoder(EAS[11155420].ENDORSEMENTS.schema);
+  const schemaEncoder = new SchemaEncoder(EAS[11155111].ENDORSEMENTS.schema);
 
   const encodedData = schemaEncoder.encodeData([
     { name: "projectUID", value: endorsement.projectUID, type: "bytes32" },
@@ -33,7 +33,7 @@ export const makeEndorsement = async (
   ]);
 
   const transaction = await eas.attest({
-    schema: EAS[11155420].ENDORSEMENTS.uid,
+    schema: EAS[11155111].ENDORSEMENTS.uid,
     data: {
       recipient: endorsement.recipient ?? "",
       // expirationTime: 0,
@@ -59,10 +59,10 @@ export const getProjectEndorsements = async (projectUID?: string | null) => {
     }
   `);
 
-  const { data, error } = await easOptimismSepoliaClient
+  const { data, error } = await easSepoliaClient
     .query(QUERY, {
       where: {
-        schemaId: { equals: EAS["11155420"].ENDORSEMENTS.uid },
+        schemaId: { equals: EAS["11155111"].ENDORSEMENTS.uid },
         decodedDataJson: { contains: projectUID },
       },
     })
@@ -92,10 +92,10 @@ export const getUserEndorsements = async (
     }
   `);
 
-  const { data, error } = await easOptimismSepoliaClient
+  const { data, error } = await easSepoliaClient
     .query(QUERY, {
       where: {
-        schemaId: { equals: EAS["11155420"].ENDORSEMENTS.uid },
+        schemaId: { equals: EAS["11155111"].ENDORSEMENTS.uid },
         attester: { equals: address },
       },
     })
