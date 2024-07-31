@@ -65,7 +65,7 @@ declare interface Metric extends CreateMetric {
   createdAt: string;
 }
 
-type Contract = {
+declare type Contract = {
   id: string;
   contractAddress: string;
   deployerAddress: string;
