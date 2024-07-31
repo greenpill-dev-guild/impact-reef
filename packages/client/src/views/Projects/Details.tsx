@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import { useProject } from "@/hooks/projects/useProject";
 
 import { ProjectInfo } from "@/components/Project/Info";
-import { ProjectAttest } from "@/components/Project/Attest";
 import { ProjectMetrics } from "@/components/Project/Metrics";
 import { ProjectOverview } from "@/components/Project/Overview";
 import { ProjectAttestations } from "@/components/Project/Attestations";

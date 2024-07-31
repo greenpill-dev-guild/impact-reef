@@ -19,6 +19,7 @@ export const parseDataToProjectItem = async (
     avatar_image: metadata.projectAvatarUrl,
     creator: "", // Todo get creator
     updated_at: new Date().toISOString(),
+    creator: "vitalik.eth",
   };
 };
 
