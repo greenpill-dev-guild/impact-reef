@@ -97,20 +97,20 @@ declare interface Project extends ProjectItem {
 declare interface CreateProjectMetric {
   projectUID: string;
   metricUID: string;
-  value: number;
+  value: string;
   source: string;
   recipient?: string;
 }
 
-declare interface ProjectMetricItem {
+declare interface ProjectMetricItem extends CreateProjectMetric {
   id: string;
-  value: string;
-  source: string;
-  name: string;
-  description: string;
+  created_at: string;
 }
 
-declare interface ProjectMetric extends ProjectMetricItem {}
+declare interface ProjectMetric extends ProjectMetricItem {
+  description: string;
+  name: string;
+}
 
 interface CreateEndorsement {
   recipient?: string; // Contract for Project
@@ -121,7 +121,7 @@ interface CreateEndorsement {
 
 declare interface EndorsementItem {
   id: string;
-  updated_at: string;
+  created_at: string;
   attester: string; // Endorser
 }
 
