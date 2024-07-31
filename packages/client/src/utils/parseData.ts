@@ -17,6 +17,7 @@ export const parseDataToProjectItem = async (data: any) => {
     category: _data.filter((d: any) => d.name === "category")[0].value.value!,
     avatar_image: metadata.projectAvatarUrl,
     updated_at: new Date().toISOString(),
+    creator: "vitalik.eth",
   };
 };
 

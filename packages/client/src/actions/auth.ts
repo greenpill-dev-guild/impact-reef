@@ -1,61 +1,48 @@
 "use server";
 
-import { getCsrfToken } from "next-auth/react";
-
-import { signIn, signOut, auth } from "@/modules/nextAuth";
+import {siweConfig} from "@/config/siwe";
 
 export interface Credentials {
-  message: string;
-  signature: string;
-  // name: string;
-  // pfp: string;
-  // redirect: boolean;
+    message: string;
+    signature: string;
+    // name: string;
+    // pfp: string;
+    // redirect: boolean;
 }
 
 export async function getNonce() {
-  try {
-    const nonce = await getCsrfToken();
-
-    if (!nonce) throw new Error("Unable to generate nonce");
-
-    return { nonce, message: "Nonce fetched" };
-  } catch (error) {
-    return { error, message: "Effor getting nonce" };
-  }
+    try {
+        const nonce = await siweConfig.getNonce();
+        return {nonce, message: "Nonce fetched"};
+    } catch (error) {
+        return {error, message: "Error getting nonce"};
+    }
 }
 
 export async function getUser() {
-  const session = await auth();
+    const signedInUser = await siweConfig.getSession();
 
-  return session?.user;
-}
-
-export async function login(credentials: Credentials) {
-  try {
-    await signIn("credentials", credentials);
+    // TODO get user auth roles
 
     return {
-      message: "User succesfully logged in",
-    };
-  } catch (error) {
-    return {
-      message: "Error lpgging out user",
-      error,
-    };
-  }
+        ...signedInUser,
+        badgeholder: true,
+        metrics_admin: true,
+        council_member: true
+    }
 }
 
 export async function logout() {
-  try {
-    await signOut({ redirect: true, redirectTo: "/" });
+    try {
+        await siweConfig.signOut();
 
-    return {
-      message: "User succesfully logged out",
-    };
-  } catch (error) {
-    return {
-      message: "Error lpgging out user",
-      error,
-    };
-  }
+        return {
+            message: "User succesfully logged out",
+        };
+    } catch (error) {
+        return {
+            message: "Error lpgging out user",
+            error,
+        };
+    }
 }

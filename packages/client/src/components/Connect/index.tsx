@@ -2,10 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import {SiweMessage} from "siwe";
-import {useAccount, useDisconnect, useSignMessage} from "wagmi";
-
-import {login, logout} from "@/actions/auth";
+import {useAccount, useDisconnect } from "wagmi";
 
 interface Link {
     title: string;
@@ -22,37 +19,7 @@ export const Connect: React.FC<ConnectProps> = () => {
 
 export const ConnectContent: React.FC<ConnectProps> = () => {
     const {disconnect} = useDisconnect();
-    const {chainId, address} = useAccount();
-    // const {signMessageAsync} = useSignMessage();
-
-    // async function handleConnect({
-    //                                  address,
-    //                                  connectorId,
-    //                              }: {
-    //     address?: string;
-    //     connectorId?: string;
-    // }) {
-    //     // const nonce = await getCsrfToken();
-    //     // console.log("Client Nonce", nonce);
-    //
-    //     const message = new SiweMessage({
-    //         domain: window.location.host,
-    //         address,
-    //         statement: "Sign in to Impact Reef",
-    //         uri: window.location.origin,
-    //         version: "1",
-    //         chainId,
-    //         // nonce,
-    //     }).prepareMessage();
-    //
-    //     const signature = await signMessageAsync({message});
-    //
-    //     login({message, signature});
-    // }
-
-    async function handleDisconnect() {
-        disconnect();
-    }
+    const { address} = useAccount();
 
     const profileLinks: Link[] = [
         {title: "endorsements", icon: "/icons/fire.svg"},

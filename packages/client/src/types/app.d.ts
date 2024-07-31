@@ -73,6 +73,7 @@ declare interface ProjectGrant {
   link?: string;
 }
 
+// TODO hacked with key:string until we have data fields narrowed down
 declare interface ProjectItem {
   id: string;
   title: string;
@@ -80,6 +81,7 @@ declare interface ProjectItem {
   category: ProjectCategory;
   updated_at: string;
   creator: string;
+  [key: string]: any;
 }
 
 declare interface Project extends ProjectItem {
