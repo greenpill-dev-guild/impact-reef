@@ -65,6 +65,14 @@ declare interface Metric extends CreateMetric {
   createdAt: string;
 }
 
+type Contract = {
+  id: string;
+  contractAddress: string;
+  deployerAddress: string;
+  deploymentHash: string;
+  chainId: number;
+};
+
 declare interface ProjectGrant {
   title: string;
   date: string;
@@ -91,7 +99,7 @@ declare interface Project extends ProjectItem {
   metrics: ProjectMetric[];
   endorsements: Endorsement[];
   repositories: string[];
-  contracts: string[];
+  contracts: Contract[];
   funding: ProjectGrant[];
   socials: string[];
 }
