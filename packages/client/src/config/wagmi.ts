@@ -2,6 +2,7 @@ import {defaultWagmiConfig} from '@web3modal/wagmi/react/config'
 
 import {cookieStorage, createStorage} from 'wagmi'
 import {mainnet, sepolia} from 'wagmi/chains'
+import {APP_DESCRIPTION, APP_ICON, APP_NAME, APP_URL} from "@/constants";
 
 // Get projectId from https://cloud.walletconnect.com
 export const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID
@@ -9,10 +10,10 @@ export const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID
 if (!projectId) throw new Error('Project ID is not defined')
 
 export const metadata = {
-    name: 'Impact Reef',
-    description: 'Find your way through the coral',
-    url: 'https://impactreef.wtf', // origin must match your domain & subdomain
-    icons: ['https://avatars.githubusercontent.com/u/37784886']
+    name:APP_NAME,
+    description: APP_DESCRIPTION,
+    url: APP_URL, // origin must match your domain & subdomain
+    icons: [APP_ICON]
 }
 
 // Create wagmiConfig
