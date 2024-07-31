@@ -5,14 +5,6 @@ import React from "react";
 
 import { Collaspe } from "@/components/Collaspe";
 
-type Contract = {
-  id: string;
-  contractAddress: string;
-  deployerAddress: string;
-  deploymentHash: string;
-  chainId: number;
-};
-
 export interface ProjectInfoProps {
   repositories: string[];
   contracts: Contract[];
@@ -62,24 +54,24 @@ export const ProjectInfo: React.FC<ProjectInfoProps> = ({
       <Collaspe title="Contracts">
         <ul>
           {contracts?.map((contract) => {
-              if (!contract) {
-                return null;
-              }
+            if (!contract) {
+              return null;
+            }
 
-              const blockExplorerUrl = getBlockExplorerLink({
-                contractAddress: contract.contractAddress,
-                chainId: contract.chainId,
-              });
+            const blockExplorerUrl = getBlockExplorerLink({
+              contractAddress: contract.contractAddress,
+              chainId: contract.chainId,
+            });
 
-              return (
-                <li key={blockExplorerUrl}>
-                  <Link
-                    target="_blank"
-                    href={blockExplorerUrl}
-                  >{`${contract.chainId} - ${contract.contractAddress}`}</Link>
-                </li>
-              );
-            })}
+            return (
+              <li key={blockExplorerUrl}>
+                <Link
+                  target="_blank"
+                  href={blockExplorerUrl}
+                >{`${contract.chainId} - ${contract.contractAddress}`}</Link>
+              </li>
+            );
+          })}
         </ul>
       </Collaspe>
       <Collaspe title="Funding">
