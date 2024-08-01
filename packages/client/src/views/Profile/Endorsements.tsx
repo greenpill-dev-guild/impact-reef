@@ -7,7 +7,7 @@ import {List} from "@/components/List";
 export interface ProfileEndorsementsProps {
 }
 
-const ProfileEndorsements: React.FC<ProfileEndorsementsProps> = () => {
+const ProfileEndorsementsView: React.FC<ProfileEndorsementsProps> = () => {
     const account = useAccount();
 
     const [endorsements, setEndorsements] = useState<Endorsement[]>([])
@@ -38,4 +38,4 @@ const ProfileEndorsements: React.FC<ProfileEndorsementsProps> = () => {
     );
 };
 
-export default ProfileEndorsements;
+export default ProfileEndorsementsView;

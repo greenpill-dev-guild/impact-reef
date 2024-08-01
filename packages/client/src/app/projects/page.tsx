@@ -1,21 +1,9 @@
-import { NextPage } from "next";
-import dynamic from "next/dynamic";
+import {NextPage} from "next";
+import ProjectsView from "@/views/Projects";
 
-import { getProjectBuilders, getProjects } from "@/actions/projects";
+const ProjectsPage: NextPage = () => {
 
-const ProjectsView = dynamic(() => import("@/views/Projects"));
-
-interface Props {
-  params: {
-    page?: string;
-  };
-}
-
-const ProjectsPage: NextPage<Props> = async ({ params }) => {
-  const projects = await getProjects();
-  const projectBuilders = await getProjectBuilders();
-
-  return <ProjectsView projects={projects} />;
+    return <ProjectsView/>;
 };
 
 export default ProjectsPage;

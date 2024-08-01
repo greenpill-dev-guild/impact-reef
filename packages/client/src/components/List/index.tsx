@@ -43,15 +43,13 @@ export const List: React.FC<ListProps> = ({ items, columns, onItemClick }) => {
       </ul>
       <ul
         role="rowgroup"
-        className="w-full flex flex-col gap-1 flex-1 overflow-scroll"
+        className="flex w-full flex-col gap-2 flex-1"
       >
         {items?.map((item) => (
           <ListItem
             {...item}
             key={item.id}
             onClick={() => {
-              console.log("jknjnkjkn");
-
               onItemClick(item.id);
             }}
           />

@@ -1,22 +1,29 @@
 "use client";
 
-import React from "react";
+import React, {useEffect} from "react";
 import {useRouter} from "next/navigation";
 
 import {useProjects} from "@/hooks/projects/useProjects";
 
 import {List} from "@/components/List";
 import {Filters} from "@/components/Filter";
+import {getProjects} from "@/actions/projects";
 
-export interface ProjectsViewProps {
-    projects?: ProjectItem[];
-}
-
-const ProjectsView: React.FC<ProjectsViewProps> = ({projects}) => {
+const ProjectsView: React.FC = () => {
     const {push} = useRouter();
     const {} = useProjects(20);
+    const [projects, setProjects] = React.useState<ProjectItem[]>([]);
 
-    const content = projects && projects.length > 0 ? (<section className="flex-1">
+    useEffect(() => {
+        const fetchProjects = async () => {
+            const projects = await getProjects();
+            setProjects(projects);
+        };
+        fetchProjects();
+    }, []);
+
+
+    const content = <section className="flex-1">
         <List
             columns={[
                 {title: "project", size: 4},
@@ -31,8 +38,6 @@ const ProjectsView: React.FC<ProjectsViewProps> = ({projects}) => {
                 push(`/projects/${id}`);
             }}
         />
-    </section>) : <section className="flex-1">
-        <div>No projects found...</div>
     </section>
 
     return (
