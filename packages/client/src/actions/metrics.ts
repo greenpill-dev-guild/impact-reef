@@ -126,6 +126,7 @@ export const getProjectMetrics = async (
       attestations(where: $where) {
         id
         recipient
+        timeCreated
         decodedDataJson
       }
     }
@@ -144,8 +145,8 @@ export const getProjectMetrics = async (
   if (!data) console.error("No data found");
 
   return (
-    data?.attestations.map(({ id, recipient, decodedDataJson }) =>
-      parseDataToProjectMetric(id, recipient, decodedDataJson)
+    data?.attestations.map(({ id, recipient, timeCreated, decodedDataJson }) =>
+      parseDataToProjectMetric(id, recipient, timeCreated, decodedDataJson)
     ) ?? []
   );
 };

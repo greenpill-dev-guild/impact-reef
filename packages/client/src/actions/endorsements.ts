@@ -1,14 +1,9 @@
 "use server";
 
 import { graphql } from "gql.tada";
-import {
-  SchemaEncoder,
-  TransactionSigner,
-} from "@ethereum-attestation-service/eas-sdk";
 
 import { EAS } from "@/constants";
 
-import { EAS as EAS_REGISTRY } from "@ethereum-attestation-service/eas-sdk";
 import { easSepoliaClient } from "@/modules/urql";
 
 import { parseDataToEndorsementItem } from "@/utils/parseData";
@@ -21,6 +16,7 @@ export const getProjectEndorsements = async (
       attestations(where: $where) {
         id
         attester
+        timeCreated
         decodedDataJson
       }
     }
@@ -39,8 +35,8 @@ export const getProjectEndorsements = async (
   if (!data) console.error("No data found");
 
   return (
-    data?.attestations.map(({ id, attester, decodedDataJson }) =>
-      parseDataToEndorsementItem(id, attester, decodedDataJson)
+    data?.attestations.map(({ id, attester, timeCreated, decodedDataJson }) =>
+      parseDataToEndorsementItem(id, attester, timeCreated, decodedDataJson)
     ) ?? []
   );
 };
@@ -55,6 +51,7 @@ export const getUserEndorsements = async (
       attestations(where: $where) {
         id
         attester
+        timeCreated
         decodedDataJson
       }
     }
@@ -73,8 +70,8 @@ export const getUserEndorsements = async (
   if (!data) console.error("No data found");
 
   return (
-    data?.attestations.map(({ id, attester, decodedDataJson }) =>
-      parseDataToEndorsementItem(id, attester, decodedDataJson)
+    data?.attestations.map(({ id, attester, timeCreated, decodedDataJson }) =>
+      parseDataToEndorsementItem(id, attester, timeCreated, decodedDataJson)
     ) ?? []
   );
 };

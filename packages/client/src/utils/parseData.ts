@@ -25,6 +25,7 @@ export const parseDataToProjectItem = async (
 export const parseDataToProjectMetric = (
   id: string,
   recipient: string,
+  timeCreated: number,
   data: any
 ): ProjectMetricItem => {
   const _data = JSON.parse(data);
@@ -37,13 +38,14 @@ export const parseDataToProjectMetric = (
     source: _data.filter((d: any) => d.name === "source")[0].value.value!,
     value: _data.filter((d: any) => d.name === "value")[0].value.value!,
     recipient,
-    created_at: new Date().toISOString(),
+    created_at: new Date(timeCreated * 1000).toUTCString(),
   };
 };
 
 export const parseDataToEndorsementItem = (
   id: string,
   attester: string,
+  timeCreated: number,
   data: any
 ): Endorsement => {
   const _data = JSON.parse(data);
@@ -56,6 +58,6 @@ export const parseDataToEndorsementItem = (
     attester,
     description: _data.filter((d: any) => d.name === "description")[0].value
       .value!,
-    created_at: new Date().toISOString(),
+    created_at: new Date(timeCreated * 1000).toLocaleString(),
   };
 };

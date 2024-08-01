@@ -1,31 +1,38 @@
+import {
+  FaTelegramPlane,
+  FaDiscord,
+  FaTwitter,
+  FaGithub,
+} from "react-icons/fa";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { IconType } from "react-icons/lib";
 
 interface FooterProps {}
 
 interface Link {
   title: string;
-  icon: string;
+  Icon: IconType;
   link: string;
   action?: () => void;
 }
 
 const links: Link[] = [
-  { title: "x", icon: "/icons/x.svg", link: "https://x.com/gp_dev_guild" },
+  { title: "x", Icon: FaTwitter, link: "https://x.com/gp_dev_guild" },
   {
     title: "discord",
-    icon: "/icons/discord.svg",
+    Icon: FaDiscord,
     link: "https://discord.com/gp_dev_guild",
   },
   {
     title: "telegram",
-    icon: "/icons/telegram.svg",
+    Icon: FaTelegramPlane,
     link: "https://t.me/gp_dev_guild",
   },
   {
     title: "github",
-    icon: "/icons/github.svg",
+    Icon: FaGithub,
     link: "https://github.com/greenpill-dev-guild",
   },
 ];
@@ -47,20 +54,14 @@ export const Footer: React.FC<FooterProps> = async () => {
           </p>
         </aside>
         <nav className="flex gap-3">
-          {links.map(({ icon, title }) => (
+          {links.map(({ Icon, title, link }) => (
             <Link
               key={title}
-              href={title}
+              href={link}
+              target="_blank"
               className={`p-1.5 grid place-items-center rounded-full bg-black text-white`}
             >
-              <Image
-                alt="Footer link"
-                src={icon}
-                unoptimized
-                className="fill-white text-white"
-                width={16}
-                height={16}
-              />
+              <Icon className="w-4 h-4" />
             </Link>
           ))}
         </nav>
