@@ -1,94 +1,94 @@
 import "./globals.css";
 
-import {Toaster} from "react-hot-toast";
-import type {Metadata, Viewport} from "next";
+import { headers } from "next/headers";
+import { Toaster } from "react-hot-toast";
+import { cookieToInitialState } from "wagmi";
+import type { Metadata, Viewport } from "next";
 
-import {inter, sora} from "@/utils/fonts";
+import { inter, sora } from "@/utils/fonts";
 
-import {Navbar} from "@/components/Layout/Navbar";
-import {Footer} from "@/components/Layout/Footer";
+import { Navbar } from "@/components/Layout/Navbar";
+import { Footer } from "@/components/Layout/Footer";
 
 import {
-    APP_DEFAULT_TITLE,
-    APP_DESCRIPTION,
-    APP_NAME,
-    APP_TITLE_TEMPLATE,
+  APP_DEFAULT_TITLE,
+  APP_DESCRIPTION,
+  APP_NAME,
+  APP_TITLE_TEMPLATE,
 } from "@/constants";
-import Web3ModalProvider from "@/context/wagmi";
-import {cookieToInitialState} from "wagmi";
-import {config} from "@/config/wagmi";
-import {headers} from "next/headers";
+import Web3ModalProvider from "@/hooks/auth/Provider";
+import { config } from "@/config/wagmi";
 
 export const metadata: Metadata = {
-    applicationName: APP_NAME,
+  applicationName: APP_NAME,
+  title: {
+    default: APP_DEFAULT_TITLE,
+    template: APP_TITLE_TEMPLATE,
+  },
+  description: APP_DESCRIPTION,
+  formatDetection: {
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    siteName: APP_NAME,
     title: {
-        default: APP_DEFAULT_TITLE,
-        template: APP_TITLE_TEMPLATE,
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE,
     },
     description: APP_DESCRIPTION,
-    formatDetection: {
-        telephone: false,
+  },
+  twitter: {
+    card: "summary",
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE,
     },
-    openGraph: {
-        type: "website",
-        siteName: APP_NAME,
-        title: {
-            default: APP_DEFAULT_TITLE,
-            template: APP_TITLE_TEMPLATE,
-        },
-        description: APP_DESCRIPTION,
-    },
-    twitter: {
-        card: "summary",
-        title: {
-            default: APP_DEFAULT_TITLE,
-            template: APP_TITLE_TEMPLATE,
-        },
-        description: APP_DESCRIPTION,
-    },
+    description: APP_DESCRIPTION,
+  },
 };
 
 export const viewport: Viewport = {
-    themeColor: "#FFFFFF",
+  themeColor: "#FFFFFF",
 };
 
 export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
-    children: React.ReactNode;
+  children,
+}: Readonly<{
+  children: React.ReactNode;
 }>) {
-    const initialState = cookieToInitialState(config, headers().get('cookie'));
+  const initialState = cookieToInitialState(config, headers().get("cookie"));
 
-    return (
-        <html
-            lang="en"
-            className={`${inter.variable} ${sora.variable} antialiased`}
-            suppressHydrationWarning
-        >
-        <body suppressHydrationWarning>
+  return (
+    <html
+      lang="en"
+      className={`${inter.variable} ${sora.variable} antialiased`}
+      suppressHydrationWarning
+    >
+      <body suppressHydrationWarning>
         <Web3ModalProvider initialState={initialState}>
-            <Navbar/>
-            {children}
-            <Footer/>
-            <Toaster
-                toastOptions={{
-                    className: "toaster",
-                    loading: {
-                        // icon: "",
-                        className: "toaster-loading",
-                    },
-                    error: {
-                        // icon: ""
-                        className: "toaster-error",
-                    },
-                    success: {
-                        // icon: ""
-                        className: "toaster-success",
-                    },
-                }}
-            />
+          <Navbar />
+          {children}
+          <Footer />
+          <Toaster
+            toastOptions={{
+              className: "toaster",
+              loading: {
+                // icon: "",
+                className: "toaster-loading",
+              },
+              error: {
+                // icon: ""
+                className: "toaster-error",
+              },
+              success: {
+                // icon: ""
+                className: "toaster-success",
+              },
+            }}
+          />
         </Web3ModalProvider>
-        </body>
-        </html>
-    );
+      </body>
+    </html>
+  );
 }

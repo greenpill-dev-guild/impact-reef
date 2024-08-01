@@ -1,122 +1,122 @@
-export const endorsements: Endorsement[] = [
-  {
-    id: "1",
-    metricUID: "",
-    projectUID: "23",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
-    attester: "afo-wefa.eth",
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "2",
-    metricUID: "",
-    projectUID: "23",
-    description:
-      "This section here should be fix height, and we should have max. character limit in the form.",
-    attester: "chiali.eth",
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "30",
-    metricUID: "",
-    projectUID: "23",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
-    attester: "afo-wefa.eth",
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "3",
-    metricUID: "",
-    projectUID: "23",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
-    attester: "0x2aa64E6d80390F5C017F0313cB908051BE2FD35e",
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "4",
-    metricUID: "",
-    projectUID: "23",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
-    attester: "afo-wefa.eth",
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "5",
-    metricUID: "",
-    projectUID: "23",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
-    attester: "0x5d638a6E9089ea3140F97E85Cd1FC54bd6f0023e",
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "11",
-    metricUID: "",
-    projectUID: "23",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
-    attester: "afo-wefa.eth",
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: "6",
-    metricUID: "",
-    projectUID: "23",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
-    attester: "0x5d638a6E9089ea3140F97E85Cd1FC54bd6f0023e",
-    updated_at: new Date().toISOString(),
-  },
-];
+// export const endorsements: Endorsement[] = [
+//   {
+//     id: "1",
+//     metricUID: "",
+//     projectUID: "23",
+//     description:
+//       "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
+//     attester: "afo-wefa.eth",
+//     updated_at: new Date().toISOString(),
+//   },
+//   {
+//     id: "2",
+//     metricUID: "",
+//     projectUID: "23",
+//     description:
+//       "This section here should be fix height, and we should have max. character limit in the form.",
+//     attester: "chiali.eth",
+//     updated_at: new Date().toISOString(),
+//   },
+//   {
+//     id: "30",
+//     metricUID: "",
+//     projectUID: "23",
+//     description:
+//       "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
+//     attester: "afo-wefa.eth",
+//     updated_at: new Date().toISOString(),
+//   },
+//   {
+//     id: "3",
+//     metricUID: "",
+//     projectUID: "23",
+//     description:
+//       "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
+//     attester: "0x2aa64E6d80390F5C017F0313cB908051BE2FD35e",
+//     updated_at: new Date().toISOString(),
+//   },
+//   {
+//     id: "4",
+//     metricUID: "",
+//     projectUID: "23",
+//     description:
+//       "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
+//     attester: "afo-wefa.eth",
+//     updated_at: new Date().toISOString(),
+//   },
+//   {
+//     id: "5",
+//     metricUID: "",
+//     projectUID: "23",
+//     description:
+//       "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
+//     attester: "0x5d638a6E9089ea3140F97E85Cd1FC54bd6f0023e",
+//     updated_at: new Date().toISOString(),
+//   },
+//   {
+//     id: "11",
+//     metricUID: "",
+//     projectUID: "23",
+//     description:
+//       "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
+//     attester: "afo-wefa.eth",
+//     updated_at: new Date().toISOString(),
+//   },
+//   {
+//     id: "6",
+//     metricUID: "",
+//     projectUID: "23",
+//     description:
+//       "Lorem ipsum dolor sit amet consectetur. Orci et molestie magna massa molestie. Ante iaculis laoreet et scelerisque augue sollicitudin condimentum lacinia est. Vulputate faucibus quam nunc porta posuere et vitae erat. Tellus sit lectus nulla sed auctor sapien at amet. Sed rutrum habitasse urna volutpat eget urna odio augue. Viverra facilisi orci maecenas enim sapien eget non. Tristique ac rhoncus metus etiam enim facilisis ac. Amet viverra ut tempus vel nisl lacus fringilla risus vitae adipiscing.",
+//     attester: "0x5d638a6E9089ea3140F97E85Cd1FC54bd6f0023e",
+//     updated_at: new Date().toISOString(),
+//   },
+// ];
 
-export const metrics: ProjectMetric[] = [
-  {
-    id: "1",
-    name: "Number of OP Stack modules dependent on this contribution",
-    description: "jkjkj",
-    source: "",
-    value: "0",
-  },
-  {
-    id: "2",
-    name: "Number of merged contributions to the OP Stack",
-    description: "klklk",
-    source: "",
-    value: "3083091",
-  },
-  {
-    id: "3",
-    name: "Bytecode size reduction",
-    description: "",
-    source: "",
-    value: "0",
-  },
-  {
-    id: "4",
-    name: "Response time for RPC calls",
-    description: "",
-    source: "",
-    value: "482401",
-  },
-  {
-    id: "5",
-    name: "Gas costs reduction in contract creation",
-    description: "",
-    source: "",
-    value: "32",
-  },
-  {
-    id: "6",
-    name: "Number of modules that were developed simultaneously without causing issues",
-    description: "",
-    source: "",
-    value: "0",
-  },
-];
+// export const metrics: ProjectMetric[] = [
+//   {
+//     id: "1",
+//     name: "Number of OP Stack modules dependent on this contribution",
+//     description: "jkjkj",
+//     source: "",
+//     value: "0",
+//   },
+//   {
+//     id: "2",
+//     name: "Number of merged contributions to the OP Stack",
+//     description: "klklk",
+//     source: "",
+//     value: "3083091",
+//   },
+//   {
+//     id: "3",
+//     name: "Bytecode size reduction",
+//     description: "",
+//     source: "",
+//     value: "0",
+//   },
+//   {
+//     id: "4",
+//     name: "Response time for RPC calls",
+//     description: "",
+//     source: "",
+//     value: "482401",
+//   },
+//   {
+//     id: "5",
+//     name: "Gas costs reduction in contract creation",
+//     description: "",
+//     source: "",
+//     value: "32",
+//   },
+//   {
+//     id: "6",
+//     name: "Number of modules that were developed simultaneously without causing issues",
+//     description: "",
+//     source: "",
+//     value: "0",
+//   },
+// ];
 
 export const projects: ProjectItem[] = [
   {

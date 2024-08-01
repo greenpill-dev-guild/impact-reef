@@ -11,7 +11,7 @@ import { EAS } from "@/constants";
 import { eas } from "@/modules/eas";
 import { easSepoliaClient } from "@/modules/urql";
 
-import { endorsements } from "@/utils/mockData";
+import { parseDataToEndorsementItem } from "@/utils/parseData";
 
 export const makeEndorsement = async (
   endorsement: CreateEndorsement,
@@ -50,10 +50,14 @@ export const makeEndorsement = async (
   return newAttestationUID;
 };
 
-export const getProjectEndorsements = async (projectUID?: string | null) => {
+export const getProjectEndorsements = async (
+  projectUID?: string | null
+): Promise<Endorsement[]> => {
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
+        id
+        attester
         decodedDataJson
       }
     }
@@ -68,25 +72,26 @@ export const getProjectEndorsements = async (projectUID?: string | null) => {
     })
     .toPromise();
 
-  if (error) {
-    console.error(error);
-    return;
-  }
+  if (error) console.error(error);
+  if (!data) console.error("No data found");
 
-  if (!data) {
-    console.error("No data found");
-    return;
-  }
+  return (
+    data?.attestations.map(({ id, attester, decodedDataJson }) =>
+      parseDataToEndorsementItem(id, attester, decodedDataJson)
+    ) ?? []
+  );
 };
 
 export const getUserEndorsements = async (
   address?: string | null
-): Promise<EndorsementItem[]> => {
+): Promise<Endorsement[]> => {
   if (!address) console.error("No address provided");
 
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
+        id
+        attester
         decodedDataJson
       }
     }
@@ -104,7 +109,9 @@ export const getUserEndorsements = async (
   if (error) console.error(error);
   if (!data) console.error("No data found");
 
-  console.log("User endorsements", data);
-
-  return endorsements;
+  return (
+    data?.attestations.map(({ id, attester, decodedDataJson }) =>
+      parseDataToEndorsementItem(id, attester, decodedDataJson)
+    ) ?? []
+  );
 };

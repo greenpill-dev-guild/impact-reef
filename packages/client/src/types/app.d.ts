@@ -96,7 +96,7 @@ declare interface Project extends ProjectItem {
   grant_track: GrantTrack;
   description: string;
   banner_image: string;
-  metrics: ProjectMetric[];
+  metrics: ProjectMetricItem[];
   endorsements: Endorsement[];
   repositories: string[];
   contracts: Contract[];

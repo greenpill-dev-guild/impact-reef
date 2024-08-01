@@ -2,15 +2,16 @@
 
 import { graphql } from "gql.tada";
 import {
-  AttestationRequestData,
   SchemaEncoder,
   TransactionSigner,
+  AttestationRequestData,
 } from "@ethereum-attestation-service/eas-sdk";
 
 import { eas } from "@/modules/eas";
 import { easSepoliaClient } from "@/modules/urql";
 
 import { EAS } from "@/constants";
+import { parseDataToProjectMetric } from "@/utils/parseData";
 
 export async function createMetric(
   metric: CreateMetric,
@@ -111,22 +112,26 @@ export const claimProjectMetrics = async (
   return uids;
 };
 
-export const getProjectMetrics = async (projectId?: string | null) => {
+export const getProjectMetrics = async (
+  projectId?: string | null
+): Promise<ProjectMetricItem[]> => {
   if (!projectId) {
     console.error("No project ID provided");
-    return;
+    return [];
   }
 
   // TODO add 'where: valid: true' filter
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
+        id
+        recipient
         decodedDataJson
       }
     }
   `);
 
-  const data = await easSepoliaClient
+  const { data, error } = await easSepoliaClient
     .query(QUERY, {
       where: {
         schemaId: { equals: EAS["11155111"].PROJECT_METRICS.uid },
@@ -134,4 +139,13 @@ export const getProjectMetrics = async (projectId?: string | null) => {
       },
     })
     .toPromise();
+
+  if (error) console.error(error);
+  if (!data) console.error("No data found");
+
+  return (
+    data?.attestations.map(({ id, recipient, decodedDataJson }) =>
+      parseDataToProjectMetric(id, recipient, decodedDataJson)
+    ) ?? []
+  );
 };

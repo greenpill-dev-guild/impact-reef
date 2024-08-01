@@ -19,36 +19,41 @@ export const parseDataToProjectItem = async (
     avatar_image: metadata.projectAvatarUrl,
     creator: "", // Todo get creator
     updated_at: new Date().toISOString(),
-    creator: "vitalik.eth",
   };
 };
 
-export const parseDataToProjectMetric = async (
+export const parseDataToProjectMetric = (
+  id: string,
+  recipient: string,
   data: any
-): Promise<ProjectMetricItem> => {
+): ProjectMetricItem => {
   const _data = JSON.parse(data);
 
   return {
-    id: _data.filter((d: any) => d.name === "id")[0].value.value,
+    id,
     metricUID: _data.filter((d: any) => d.name === "metricUID")[0].value.value!,
     projectUID: _data.filter((d: any) => d.name === "projectUID")[0].value
       .value!,
     source: _data.filter((d: any) => d.name === "source")[0].value.value!,
     value: _data.filter((d: any) => d.name === "value")[0].value.value!,
-    recipient: _data.filter((d: any) => d.name === "recipient")[0].value.value!,
+    recipient,
     created_at: new Date().toISOString(),
   };
 };
 
-export const parseDataToEndorsementItem = (data: any): Endorsement => {
+export const parseDataToEndorsementItem = (
+  id: string,
+  attester: string,
+  data: any
+): Endorsement => {
   const _data = JSON.parse(data);
 
   return {
-    id: _data.filter((d: any) => d.name === "id")[0].value.value,
+    id,
     metricUID: _data.filter((d: any) => d.name === "metricUID")[0].value.value!,
     projectUID: _data.filter((d: any) => d.name === "projectUID")[0].value
       .value!,
-    attester: _data.filter((d: any) => d.name === "attester")[0].value.value!,
+    attester,
     description: _data.filter((d: any) => d.name === "description")[0].value
       .value!,
     created_at: new Date().toISOString(),
