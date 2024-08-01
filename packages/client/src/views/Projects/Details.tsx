@@ -5,8 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import {useRouter} from "next/navigation";
 
-import {useProject} from "@/hooks/projects/useProject";
-
 import {ProjectInfo} from "@/components/Project/Info";
 import {ProjectAttest} from "@/components/Project/Attest";
 import {ProjectMetrics} from "@/components/Project/Metrics";
@@ -15,6 +13,8 @@ import {ProjectAttestations} from "@/components/Project/Attestations";
 import {ProjectEndorsements} from "@/components/Project/Endorsements";
 import {AttestFormValues} from "@/components/Project/Attest/Metric";
 import {useEndorsements} from "@/hooks/useEndorsements";
+import {useClaimMetrics} from "@/hooks/useClaimMetrics";
+import {useProject} from "@/hooks/projects/useProject";
 
 export interface ProjectViewProps {
     user: User;
@@ -24,27 +24,30 @@ export interface ProjectViewProps {
 const ProjectView: React.FC<ProjectViewProps> = ({project, user}) => {
     const {push} = useRouter();
     const {createEndorsement} = useEndorsements();
+    const { createMetricsClaim } = useClaimMetrics();
 
     const {
         claimMetricsState,
         startClaiming,
-        claim,
         cancelClaim,
         endorsementState,
         startEndorsing,
-        endorse,
         cancelEndorse,
     } = useProject(project.id);
 
-    const projectCreator = !!user.address && user.address === project.creator;
+    // const projectCreator = !!user.address && user.address === project.creator;
     // TODO remove hacky toggle for development
-    // const projectCreator = true;
+    const projectCreator = true;
 
     async function onSubmit(data: AttestFormValues) {
         if (projectCreator) {
-            claim(
-                data.metrics.map((metric) => ({projectUID: project.id, ...metric}))
-            );
+            // TODO get correct metricUID
+            await createMetricsClaim({
+                projectUID: project.id,
+                metricUID: "0xa32db8cca8e3d1e4c052d37efe89f1cdad683793f26e0bb0e4923e3deb2696e1",
+                value: "0",
+                source: ""
+            })
         } else {
             console.log(
                 "Project creators can't endorse projects.",

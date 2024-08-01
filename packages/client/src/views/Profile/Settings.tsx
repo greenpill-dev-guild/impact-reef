@@ -1,16 +1,13 @@
 "use client";
 
 import React from "react";
-import { useAccount } from "wagmi";
 
 export interface ProfileSettingsProps {
   user?: User;
 }
 
-const ProfileSettings: React.FC<ProfileSettingsProps> = ({ user }) => {
-  const { address } = useAccount();
-
-  console.log("User Address", address, user);
+const ProfileSettings: React.FC<ProfileSettingsProps> = () => {
+  // TODO useEffect to get User via server component
 
   return (
     <div className="mt-8">
