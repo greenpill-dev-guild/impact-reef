@@ -8,47 +8,10 @@ import {
 
 import { EAS } from "@/constants";
 
-import { eas } from "@/modules/eas";
+import { EAS as EAS_REGISTRY } from "@ethereum-attestation-service/eas-sdk";
 import { easSepoliaClient } from "@/modules/urql";
 
 import { parseDataToEndorsementItem } from "@/utils/parseData";
-
-export const makeEndorsement = async (
-  endorsement: CreateEndorsement,
-  signer?: TransactionSigner
-) => {
-  "use client";
-
-  if (!signer) throw new Error("No signer found");
-
-  eas.connect(signer);
-
-  // Initialize SchemaEncoder with the schema string
-  const schemaEncoder = new SchemaEncoder(EAS[11155111].ENDORSEMENTS.schema);
-
-  const encodedData = schemaEncoder.encodeData([
-    { name: "projectUID", value: endorsement.projectUID, type: "bytes32" },
-    { name: "metricUID", value: endorsement.metricUID ?? "", type: "bytes32" },
-    { name: "description", value: endorsement.description, type: "string" },
-  ]);
-
-  const transaction = await eas.attest({
-    schema: EAS[11155111].ENDORSEMENTS.uid,
-    data: {
-      recipient: endorsement.recipient ?? "",
-      // expirationTime: 0,
-      revocable: true, // Be aware that if your schema is not revocable, this MUST be false
-      data: encodedData,
-    },
-  });
-
-  const newAttestationUID = await transaction.wait();
-
-  console.log("New attestation UID:", newAttestationUID);
-  console.log("Transaction receipt:", transaction.receipt);
-
-  return newAttestationUID;
-};
 
 export const getProjectEndorsements = async (
   projectUID?: string | null

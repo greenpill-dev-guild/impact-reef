@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useProject } from "@/hooks/projects/useProject";
 
 import { ProjectInfo } from "@/components/Project/Info";
+import { ProjectAttest } from "@/components/Project/Attest";
 import { ProjectMetrics } from "@/components/Project/Metrics";
 import { ProjectOverview } from "@/components/Project/Overview";
 import { ProjectAttestations } from "@/components/Project/Attestations";
@@ -33,7 +34,7 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
     cancelEndorse,
   } = useProject(project.id);
 
-  const projectCreator = !!user.address || user.address === project.creator;
+  const projectCreator = !!user.address && user.address === project.creator;
 
   async function onSubmit(data: AttestFormValues) {
     if (projectCreator) {
@@ -41,6 +42,10 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
         data.metrics.map((metric) => ({ projectUID: project.id, ...metric }))
       );
     } else {
+      console.log(
+        "Only project creators can endorse projects.",
+        endorsementState
+      );
       endorse({
         projectUID: project.id,
         description: data.endorsement,
@@ -105,7 +110,7 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
           <ProjectMetrics metrics={project.metrics} />
           <ProjectAttestations />
         </div>
-       
+
         <ProjectEndorsements
           banner={project.banner_image}
           endorsements={project.endorsements}
@@ -143,7 +148,7 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
           </button>
         </footer>
       </div>
-      {/* <div className="drawer-side h-screen">
+      <div className="drawer-side h-screen">
         <label
           htmlFor={
             endorsementState.matches("endorsing") ||
@@ -163,7 +168,7 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
             projectCreator={projectCreator}
           />
         </aside>
-      </div> */}
+      </div>
     </main>
   );
 };

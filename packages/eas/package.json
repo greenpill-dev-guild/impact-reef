@@ -19,7 +19,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "@ethereum-attestation-service/eas-sdk": "^2.1.4",
+    "@ethereum-attestation-service/eas-sdk": "^2.5.0",
     "commander": "^12.1.0",
     "dotenv": "^16.4.5",
     "ethers": "^6.12.2",

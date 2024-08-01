@@ -160,7 +160,7 @@ export const getProjectDetails = async (
     };
   };
 
-  console.log("Project data: ", data);
+  // console.log("Project data: ", data);
 
   if (!data || data?.attestations.length === 0) {
     console.error("No data found");

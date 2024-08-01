@@ -6,7 +6,7 @@ import { endorsementMachine } from "./machines/endorsement";
 import { claimMetricsMachine } from "./machines/claimMetrics";
 
 export const useProject = (projectUID: string) => {
-  const signer = useEthersSigner()!;
+  const signer = useEthersSigner({ chainId: 11155111 })!;
 
   const [endorsementState, endorsementSend] = useMachine(endorsementMachine, {
     input: {
@@ -25,7 +25,7 @@ export const useProject = (projectUID: string) => {
   );
 
   const endorse = (endorsement: CreateEndorsement) =>
-    endorsementSend({ type: "ENDORSE", endorsement });
+    endorsementSend({ type: "ENDORSE", endorsement, signer });
   const startEndorsing = () => endorsementSend({ type: "START_ENDORSING" });
   const cancelEndorse = () => endorsementSend({ type: "CANCEL" });
 
