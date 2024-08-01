@@ -124,7 +124,26 @@ export const getProjectDetails = async (
     const endorsements = await getProjectEndorsements(projectId);
 
     const _data = JSON.parse(data);
-    const metadata = await fetchMetadata(
+    const metadata: {
+      projectAvatarUrl: string;
+      projectCoverImageUrl: string;
+      description: string;
+      team: any[];
+      npm: any[];
+      contracts: any[];
+      grantsAndFunding: {
+        optimismGrants: any[];
+        ventureFunding: any[];
+        otherGrants: any[];
+      };
+      github: string[];
+      socialLinks: {
+        website: string;
+        farcaster: string;
+        twitter: string;
+        mirror: string;
+      };
+    } = await fetchMetadata(
       _data.filter((d: any) => d.name === "metadataUrl")[0].value.value!
     );
 
@@ -134,6 +153,8 @@ export const getProjectDetails = async (
     // TODO get creator
     // TODO get funding
 
+    console.log("Metadata: ", metadata);
+
     return {
       id: _data.filter((d: any) => d.name === "projectRefUID")[0]["value"]
         .value,
@@ -141,19 +162,19 @@ export const getProjectDetails = async (
       creator: "vitalik.eth",
       avatar_image: metadata.projectAvatarUrl,
       banner_image: metadata.projectCoverImageUrl,
-      category: _data.filter((d: any) => d.name === "category")[0].value.value!,
+      // category: _data.filter((d: any) => d.name === "category")[0].value.value!,
+      category: "utility",
       description: metadata.description,
       endorsements,
       contracts: metadata?.contracts || [],
-      funding: [],
+      funding: metadata.grantsAndFunding.optimismGrants,
       grant_track: "onchain-builders",
       repositories:
         metadata.github && metadata.github.length > 0 ? metadata.github : [],
       metrics,
-      socials:
-        metadata.socialLinks && metadata.socialLinks.length > 0
-          ? Object.values(metadata.socialLinks)
-          : [],
+      socials: metadata.socialLinks
+        ? Object.values(metadata.socialLinks).filter((value) => !!value)
+        : [],
       updated_at: new Date().toISOString(),
     };
   };

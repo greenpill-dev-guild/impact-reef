@@ -80,7 +80,7 @@ export const ProjectAttest: React.FC<ProjectAttestProps> = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-[680px] relative h-full mb-16 flex flex-col"
+      className="w-[540px] relative h-full mb-16 flex flex-col"
     >
       <header className="py-8 px-12">
         <h2 className="mb-2">

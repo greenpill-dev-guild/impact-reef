@@ -5,6 +5,7 @@ import Image from "next/image";
 import React from "react";
 
 import { determineSocialMedia } from "@/utils/text";
+import { categories } from "../List/Item";
 
 export interface ProjectOverviewProps {
   avatar_image: string;
@@ -15,6 +16,26 @@ export interface ProjectOverviewProps {
   socials: string[];
 }
 
+export const grantTracks: Record<GrantTrack, { label: string; color: string }> =
+  {
+    "dev-tooling": {
+      label: "Dev Tooling",
+      color: "#e0f2fe",
+    },
+    governance: {
+      label: "Governance",
+      color: "#93c5fd",
+    },
+    "onchain-builders": {
+      label: "Onchain Builders",
+      color: "#DED0FF",
+    },
+    "op-stack": {
+      label: "OP Stack",
+      color: "#6ee7b7",
+    },
+  };
+
 export const ProjectOverview: React.FC<ProjectOverviewProps> = ({
   avatar_image,
   title,
@@ -23,10 +44,11 @@ export const ProjectOverview: React.FC<ProjectOverviewProps> = ({
   category,
   socials,
 }) => {
+  console.log("Categorizing project: ", title, category);
   return (
-    <div className="flex items-center gap-4 px-8 py-6 bg-zinc-50 shadow-md rounded-md">
+    <div className="w-full flex items-center gap-4 px-8 py-6 border shadow-sm rounded-md">
       <Image
-        className="aspect-square"
+        className="aspect-square rounded-lg"
         alt="porject logo/avatar"
         src={avatar_image}
         width={120}
@@ -38,31 +60,42 @@ export const ProjectOverview: React.FC<ProjectOverviewProps> = ({
       </div>
       <div className="basis-72 flex flex-col h-full justify-between items-end gap-6">
         <ul className="flex gap-2">
-          {socials && socials.map((link) => {
-            const social = determineSocialMedia(link);
+          {socials &&
+            socials.map((link) => {
+              const social = determineSocialMedia(link);
 
-            return (
-              <li key={link} className="p-2 rounded-full bg-zinc-100">
-                <Link href={link}>
-                  <Image
-                    alt={`${social.label} icon`}
-                    src={social.icon}
-                    width={24}
-                    height={24}
-                    unoptimized
-                  />
-                </Link>
-              </li>
-            );
-          })}
+              return (
+                <li key={link} className="p-2 rounded-full bg-zinc-100">
+                  <Link href={link}>
+                    <Image
+                      alt={`${social.label} icon`}
+                      src={social.icon}
+                      width={24}
+                      height={24}
+                      unoptimized
+                    />
+                  </Link>
+                </li>
+              );
+            })}
         </ul>
         <div>
           <div className="flex gap-2 mb-2 justify-end">
-            <h4 className="bg-violet-200 rounded-sm px-2 py-1 text-xl font-bold tracking-wide">
-              {grant_track}
+            <h4
+              style={{
+                backgroundColor: grantTracks[grant_track].color,
+              }}
+              className="bg-violet-200 rounded-sm px-2 py-1 text-xl font-bold tracking-wide"
+            >
+              {grantTracks[grant_track].label}
             </h4>
-            <p className="bg-orange-300 rounded-sm px-2 py-1 text-lg font-light">
-              {category}
+            <p
+              style={{
+                backgroundColor: categories[category].color,
+              }}
+              className={"rounded-sm px-2 py-1 text-lg font-light"}
+            >
+              {categories[category].label}
             </p>
           </div>
           <p className="bg-zinc-200 rounded-sm px-2 py-1 text-sm">

@@ -1,5 +1,6 @@
 "use client";
 
+import { formatAddress } from "@/utils/text";
 import Image from "next/image";
 import React from "react";
 
@@ -18,12 +19,14 @@ export const ProjectEndorsementCard: React.FC<ProjectEndorsementCardProps> = ({
   return (
     <li
       key={endorsement.id}
-      className="p-3 bg-neutral-100 rounded-md shadow-sm flex flex-col justify-between gap-6"
+      className="p-3 border h-[456px] rounded-md shadow-sm flex flex-col justify-between gap-6"
     >
       <p className="">{endorsement.description}</p>
       <div>
-        <p className="line-clamp-1 font-semibold">by {endorsement.attester}</p>
-        <span>{new Date(Date.parse(endorsement.created_at)).getUTCDate()}</span>
+        <p className="font-semibold">
+          by {formatAddress(endorsement.attester)}
+        </p>
+        <span>{endorsement.created_at}</span>
       </div>
     </li>
   );

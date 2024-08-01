@@ -1,59 +1,75 @@
-import {useEas} from "@/hooks/useEas";
-import {SchemaEncoder, ZERO_ADDRESS} from "@ethereum-attestation-service/eas-sdk";
-import {EAS} from "@/constants";
-import {z} from "zod";
+import { z } from "zod";
 import toast from "react-hot-toast";
-import {isHex} from "viem";
+import {
+  AttestationRequestData,
+  SchemaEncoder,
+  ZERO_ADDRESS,
+} from "@ethereum-attestation-service/eas-sdk";
 
+import { EAS } from "@/constants";
+import { useEas } from "@/hooks/useEas";
 
-const claimMetricsSchema = z.object({
+const claimMetricsSchema = z.array(
+  z.object({
     projectUID: z.string(),
     metricUID: z.string(),
     value: z.string(),
     source: z.string(),
-})
+  })
+);
 
 export type CreateMetricsClaimParams = z.infer<typeof claimMetricsSchema>;
 
 export const useClaimMetrics = () => {
-    const {eas} = useEas();
+  const { eas } = useEas();
 
-    const createMetricsClaim = async (params: CreateMetricsClaimParams) => {
-        const {projectUID, metricUID, value, source} = claimMetricsSchema.parse(params);
+  const createMetricsClaim = async (params: CreateMetricsClaimParams) => {
+    const metrics = claimMetricsSchema.parse(params);
 
-        // Initialize SchemaEncoder with the schema string
-        const schemaEncoder = new SchemaEncoder(EAS[11155111].PROJECT_METRICS.schema);
+    // Initialize SchemaEncoder with the schema string
+    const schemaEncoder = new SchemaEncoder(
+      EAS[11155111].PROJECT_METRICS.schema
+    );
 
-        const encodedData = schemaEncoder.encodeData([
-            {name: "projectUID", value: projectUID, type: "bytes32"},
-            {name: "metricUID", value: metricUID, type: "bytes32"},
-            {name: "value", value: value, type: "string"},
-            {name: "source", value: source, type: "string"},
-        ]);
+    const data = metrics.map<AttestationRequestData>((metric) => {
+      const encodedData = schemaEncoder.encodeData([
+        { name: "projectUID", value: metric.projectUID, type: "bytes32" },
+        { name: "metricUID", value: metric.metricUID ?? "", type: "bytes32" },
+        { name: "value", value: metric.value, type: "string" },
+        { name: "source", value: metric.source, type: "string" },
+      ]);
 
-        console.log("Making metrics claim attestation...");
+      return {
+        recipient: ZERO_ADDRESS,
+        expirationTime: BigInt(0),
+        revocable: true, // Be aware that if your schema is not revocable, this MUST be false
+        data: encodedData,
+      };
+    });
 
-        const transaction = await eas
-            .attest({
-                schema: EAS[11155111].PROJECT_METRICS.uid,
-                data: {
-                    recipient: ZERO_ADDRESS,
-                    expirationTime: BigInt(0),
-                    revocable: true, // Be aware that if your schema is not revocable, this MUST be false
-                    data: encodedData,
-                },
-            })
-            .then(async (transaction) => {
-                const newAttestationUID = await transaction.wait();
+    try {
+      toast.loading("Claiming Project Metrics...");
 
-                return newAttestationUID;
-            })
-            .catch((error) => {
-                toast.error("Failed to create claim: " + error.message);
-                console.error("Failed to create claim:", error);
-            });
+      const transaction = await eas.multiAttest([
+        {
+          schema: EAS[11155111].PROJECT_METRICS.uid,
+          data,
+        },
+      ]);
 
+      const uids = await transaction.wait();
+
+      toast.dismiss();
+      toast.success("Project metrics claimed successfully");
+      console.log("New attestation UIDs:", uids);
+      console.log("Transaction receipt:", transaction.receipt);
+
+      return uids;
+    } catch (error) {
+      console.error("Failed to create claim:", error);
+      toast.error("Error endorsing project");
     }
+  };
 
-    return {createMetricsClaim};
-}
+  return { createMetricsClaim };
+};
