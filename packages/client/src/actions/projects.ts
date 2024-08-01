@@ -50,8 +50,6 @@ export const getProjectBuilders = async (): Promise<any[]> => {
   //   .flatMap((decodedData) => decodedData) as bigint[];
 };
 
-// TODO filter on 'where: valid: true'
-// TODO update ProjectItem to aggregate builder and metadata in complete object
 export const getProjects = async (): Promise<ProjectItem[]> => {
   const QUERY = graphql(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
