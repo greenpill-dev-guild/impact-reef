@@ -23,7 +23,7 @@ export const ProjectEndorsementCard: React.FC<ProjectEndorsementCardProps> = ({
       <p className="">{endorsement.description}</p>
       <div>
         <p className="line-clamp-1 font-semibold">by {endorsement.attester}</p>
-        <span>{new Date(Date.parse(endorsement.updated_at)).getUTCDate()}</span>
+        <span>{new Date(Date.parse(endorsement.created_at)).getUTCDate()}</span>
       </div>
     </li>
   );

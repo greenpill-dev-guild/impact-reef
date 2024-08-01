@@ -138,8 +138,8 @@ importers:
   packages/eas:
     dependencies:
       '@ethereum-attestation-service/eas-sdk':
-        specifier: ^2.1.4
-        version: 2.3.0(bufferutil@4.0.8)(ts-node@10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@22.0.0)(typescript@5.5.3))(typescript@5.5.3)(utf-8-validate@5.0.10)
+        specifier: ^2.5.0
+        version: 2.5.0(bufferutil@4.0.8)(ts-node@10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@22.0.0)(typescript@5.5.3))(typescript@5.5.3)(utf-8-validate@5.0.10)
       commander:
         specifier: ^12.1.0
         version: 12.1.0
@@ -1156,9 +1156,6 @@ packages:
   '@ethereum-attestation-service/eas-contracts@1.4.1':
     resolution: {integrity: sha512-c+yaTMrEjOESG3yFztPQnNCGARZOBde6r7RnH4hK/T7BS84rC0Y0BbUv/4tOwGBAhN9ke8MJ7G/qySngVtJk3w==}
 
-  '@ethereum-attestation-service/eas-sdk@2.3.0':
-    resolution: {integrity: sha512-hZBkkOFKg71mNAI9ZVSTLjV29MRxFO+L/v/omYyOHXXY3U5GHdVnhOJNgkX16zlmpxxprYgesrDwQL/kXurP0g==}
-
   '@ethereum-attestation-service/eas-sdk@2.5.0':
     resolution: {integrity: sha512-3Lt7mDmrIjJqfWcR2rMpwzOOcbcn39G02ziXJbkO9R9FNro4U9uZSyhh1iQsbXUgf0LLisd3LrcrmNg8Wo9rKA==}
 
@@ -1701,9 +1698,6 @@ packages:
     resolution: {integrity: sha512-4JKyrk55ohQK2FcuZbPdNvxdyXD14jjOIvE8hYjJ+E1cHbRbfXQXbYnjTODFE52Gx8eAxz8C9icuhDYDLn7nww==}
     engines: {node: '>=10.0.0'}
     hasBin: true
-
-  '@openzeppelin/merkle-tree@1.0.6':
-    resolution: {integrity: sha512-cGWOb2WBWbJhqvupzxjnKAwGLxxAEYPg51sk76yZ5nVe5D03mw7Vx5yo8llaIEqYhP5O39M8QlrNWclgLfKVrA==}
 
   '@openzeppelin/merkle-tree@1.0.7':
     resolution: {integrity: sha512-i93t0YYv6ZxTCYU3CdO5Q+DXK0JH10A4dCBOMlzYbX+ujTXm+k1lXiEyVqmf94t3sqmv8sm/XT5zTa0+efnPgQ==}
@@ -5877,11 +5871,6 @@ packages:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
 
-  semver@7.6.2:
-    resolution: {integrity: sha512-FNAIBWCx9qcRhoHcgcJ0gvU7SN1lYU2ZXuSfl04bSC5OpvDHFyJCjdNHomPXxjQlCBU67YW64PzY7/VIEH7F2w==}
-    engines: {node: '>=10'}
-    hasBin: true
-
   semver@7.6.3:
     resolution: {integrity: sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==}
     engines: {node: '>=10'}
@@ -8101,16 +8090,16 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@ethereum-attestation-service/eas-sdk@2.3.0(bufferutil@4.0.8)(ts-node@10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@22.0.0)(typescript@5.5.3))(typescript@5.5.3)(utf-8-validate@5.0.10)':
+  '@ethereum-attestation-service/eas-sdk@2.5.0(bufferutil@4.0.8)(ts-node@10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@22.0.0)(typescript@5.5.3))(typescript@5.5.3)(utf-8-validate@5.0.10)':
     dependencies:
       '@ethereum-attestation-service/eas-contracts': 1.4.1(bufferutil@4.0.8)(ts-node@10.9.2(@swc/core@1.6.13(@swc/helpers@0.5.11))(@types/node@22.0.0)(typescript@5.5.3))(typescript@5.5.3)(utf-8-validate@5.0.10)
-      '@openzeppelin/merkle-tree': 1.0.6
-      ethers: 6.13.1(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      '@openzeppelin/merkle-tree': 1.0.7
+      ethers: 6.13.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       js-base64: 3.7.7
       lodash: 4.17.21
       multiformats: 9.9.0
       pako: 2.1.0
-      semver: 7.6.2
+      semver: 7.6.3
     transitivePeerDependencies:
       - bufferutil
       - c-kzg
@@ -8878,11 +8867,6 @@ snapshots:
       - debug
       - encoding
       - supports-color
-
-  '@openzeppelin/merkle-tree@1.0.6':
-    dependencies:
-      '@ethersproject/abi': 5.7.0
-      ethereum-cryptography: 1.2.0
 
   '@openzeppelin/merkle-tree@1.0.7':
     dependencies:
@@ -14638,8 +14622,6 @@ snapshots:
   semver@5.7.2: {}
 
   semver@6.3.1: {}
-
-  semver@7.6.2: {}
 
   semver@7.6.3: {}
 

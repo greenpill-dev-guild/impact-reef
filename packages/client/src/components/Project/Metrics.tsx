@@ -31,10 +31,12 @@ export const ProjectMetrics: React.FC<ProjectMetricsProps> = ({ metrics }) => {
       <ul className="grid grid-cols-2 grid-rows-auto gap-4 min-h-[794px]]">
         {metricList.map((metric) => (
           <li
-            key={metric.name}
+            key={metric.metricUID}
             className="w-72 card p-4 flex flex-col justify-between min-h-40 bg-white shadow-sm rounded-md"
           >
-            <h3 className="text-sm font-light line-clamp-2">{metric.name}</h3>
+            <h3 className="text-sm font-light line-clamp-2">
+              {metric.metricUID}
+            </h3>
             <div className="flex flex-col gap-1">
               <span className="text-4xl font-bold">
                 {metric.value ? metric.value.toLocaleString() : "-"}

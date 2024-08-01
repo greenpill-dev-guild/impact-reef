@@ -8,7 +8,7 @@ export interface AttestFormValues {
     metricUID: string;
     metricName: string;
     metricDescription: string;
-    value: number;
+    value: string;
     source: string;
   }[];
 }
