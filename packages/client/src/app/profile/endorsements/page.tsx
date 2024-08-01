@@ -1,19 +1,9 @@
+import React from "react";
 import { NextPage } from "next";
-import dynamic from "next/dynamic";
+import Endorsements from "@/views/Profile/Endorsements";
 
-import { getUser } from "@/actions/auth";
-import { getUserEndorsements } from "@/actions/endorsements";
-
-const ProfileEndorsementsView = dynamic(
-  () => import("@/views/Profile/Endorsements")
-);
-
-const ProfilePage: NextPage = async () => {
-  const user = await getUser();
-
-  const endorsements = await getUserEndorsements(user?.address);
-
-  return <ProfileEndorsementsView user={user} endorsements={endorsements} />;
+const ProfileEndorsementsPage: NextPage = () => {
+    return <Endorsements />;
 };
 
-export default ProfilePage;
+export default ProfileEndorsementsPage;

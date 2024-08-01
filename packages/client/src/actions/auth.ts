@@ -1,6 +1,8 @@
 "use server";
 
 import {siweConfig} from "@/config/siwe";
+import {useAccount} from "wagmi";
+import {getSession} from "next-auth/react";
 
 export interface Credentials {
     message: string;
@@ -20,7 +22,7 @@ export async function getNonce() {
 }
 
 export async function getUser() {
-    const signedInUser = await siweConfig.getSession();
+    const signedInUser = await getSession();
 
     // TODO get user auth roles
 
@@ -37,11 +39,11 @@ export async function logout() {
         await siweConfig.signOut();
 
         return {
-            message: "User succesfully logged out",
+            message: "User successfully logged out",
         };
     } catch (error) {
         return {
-            message: "Error lpgging out user",
+            message: "Error logging out user",
             error,
         };
     }
