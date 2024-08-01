@@ -37,7 +37,7 @@ export const Filters: React.FC<FiltersProps> = ({
   onRefresh,
 }) => {
   return (
-    <div className="w-full flex gap-2 flex-wrap text-lg text-zinc-800 font-light leading-6">
+    <div className="w-full flex gap-2 flex-wrap justify-between text-lg text-zinc-800 font-light leading-6 py-2">
       {filters.map(({ count, active, title, onFilterChange, disabled }) => (
         <button
           key={title}
