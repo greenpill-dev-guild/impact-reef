@@ -58,7 +58,6 @@ export const ProjectAttest: React.FC<ProjectAttestProps> = ({
     control,
     formState: { isValid, isSubmitting },
   } = useForm<AttestFormValues>({
-    shouldUseNativeValidation: true,
     values: {
       endorsement: "",
       metrics: [],

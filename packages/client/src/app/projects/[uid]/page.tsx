@@ -16,8 +16,6 @@ const ProjectPage: NextPage<Props> = async ({ params: { uid } }) => {
     return <div>Project not found</div>;
   }
 
-  // console.log("Project", project);
-
   return (
     <ProjectDetailsView
       project={project}

@@ -12,15 +12,6 @@ interface Props {
 }
 
 const ProjectsPage: NextPage<Props> = async ({ params }) => {
-  // const pathname = usePathname();
-  // const currentPage = Number(params?.page) || 1;
-
-  // const createPageURL = (pageNumber: number | string) => {
-  //   // const newParams = new URLSearchParams(params);
-  //   newParams.set("page", pageNumber.toString());
-  //   return `${pathname}?${newParams.toString()}`;
-  // };
-
   const projects = await getProjects();
   const projectBuilders = await getProjectBuilders();
 
