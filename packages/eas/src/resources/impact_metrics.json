@@ -1,0 +1,982 @@
+[
+  {
+    "Name": "Number of repositories that depend on a library",
+    "Description": "Number of repositories that leverage an existing library and build upon it.",
+    "Importance": "Medium",
+    "Rationale": "Dependencies of a library point to the use of pre-existing tools to develop new projects. An increase impact to the Optimism Ecosystem can be showcased by ensuring the projects that depend on this library belong to the Optimism Ecosystem.",
+    "Keyword": "Libraries",
+    "Term": "Developer Tooling",
+    "Category": "Developer Ecosystem",
+    "UID": "0x5411311e8651e3f2a6f6e0c0cf8a7c720d6f90f12dfcb354aaf2818c9454d550"
+  },
+  {
+    "Name": "Attestations received by the RetroPGF applicant",
+    "Description": "Can measure the perceived positive impact badgeholders have derived from an interaction. ",
+    "Importance": "High",
+    "Rationale": "Badgeholders require information to make informed decisions during the RetroPGF process. Additional information provided through attestations improves their ability to access information. ",
+    "Keyword": "Accessibility of data",
+    "Term": "Accountability",
+    "Category": "Collective Governance",
+    "UID": "0xbdbd6fe2d5dc4c16408997f06d76d7c807214e4470d14af4b560684e82b3bd58"
+  },
+  {
+    "Name": "Number of developers from other ecosystems that built on an OP Chain",
+    "Description": "Developers from other ecosystems who have built within the Optimism Ecosystem as a result of interoperable tooling",
+    "Importance": "High",
+    "Rationale": "Interoperable tooling enables developers from other blockchain ecosystems to easily deploy their projects in the OP Chains.",
+    "Keyword": "Interoperability",
+    "Term": "Developer Tooling",
+    "Category": "Developer Ecosystem",
+    "UID": "0x73101d637fb74e5482874125209b5802ce1764905712ae9f5dafaec096ba0930"
+  },
+  {
+    "Name": "Number of Github contributors",
+    "Description": "Number of contributors to a resource on Github that is not OP Chain exclusive.",
+    "Importance": "Medium",
+    "Rationale": "An increased number of contributors to a project that can enable the development of projects in the OP Chains and other chains could help to innovate in the development process. ",
+    "Keyword": "Co-creation",
+    "Term": "Collaboration",
+    "Category": "Developer Ecosystem",
+    "UID": "0x19e12541e7d78f0851044f123c9b8ceb109f61d000bfda20b5220f215f05b5be"
+  },
+  {
+    "Name": "Bytecode size reduction",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Code reduction",
+    "Term": "Security",
+    "Category": "OP Stack",
+    "UID": "0x3f3b9f36159270e3f93c9f4218925aa740840152f242397265139a225070b66c"
+  },
+  {
+    "Name": "Increase in wallet interactions MoM per OP Chain",
+    "Description": null,
+    "Importance": null,
+    "Rationale": null,
+    "Keyword": null,
+    "Term": null,
+    "Category": null,
+    "UID": "0x14ce51caf4a78ba3367b46e1fc873cf4b90e774406cc29d48a162d67c2814f54"
+  },
+  {
+    "Name": "Number of views",
+    "Description": "Is a measure that counts how many ",
+    "Importance": "Low",
+    "Rationale": "This metric provides an oversight of how many individuals were exposed to this content, however, there is no way of telling if this resulted in an engagement with the OP Chains",
+    "Keyword": "Visibility",
+    "Term": "Awareness",
+    "Category": "End User Experience + Adoption",
+    "UID": "0xbe6ad2adc3a51e92f653143503c5dff01594895d0c42ce4c85d0f2a7cd777af2"
+  },
+  {
+    "Name": "Increase in address retention",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": null,
+    "Term": "User Experience",
+    "Category": "End User Experience + Adoption",
+    "UID": "0x5a4716bf87e490f82c8d89d46b1c1077cbe084a46f618cb649f6447f34af7764"
+  },
+  {
+    "Name": "Number of addresses transacting for the first time in the OP Chain this project is built on",
+    "Description": "Number of addresses that were onboarded to this OP Chain by this project",
+    "Importance": "High",
+    "Rationale": "The existence of this project led these addresses to explore a new OP Chain.",
+    "Keyword": "Innovation",
+    "Term": "Adoption",
+    "Category": "End User Experience + Adoption",
+    "UID": "0xd90c21fa0cb4c9e02f6248562c48c90b498b962de2c9cae33853fc05002d3507"
+  },
+  {
+    "Name": "Number of unique addresses that have completed over 20 transactions in X OP Chain.",
+    "Description": null,
+    "Importance": null,
+    "Rationale": null,
+    "Keyword": null,
+    "Term": null,
+    "Category": "Developer Ecosystem",
+    "UID": "0x2f45994d7778053bc7aa1af8943de421d4000af9e62721e6b73e234142b2c4db"
+  },
+  {
+    "Name": "Number of attendees to an Academic Research Optimism Workshop",
+    "Description": null,
+    "Importance": "Medium",
+    "Rationale": null,
+    "Keyword": "Understanding",
+    "Term": "Awareness",
+    "Category": "OP Stack",
+    "UID": "0x7cec2bef8719521f52d318816d07985f86690d12311e720914d092c3cf8053df"
+  },
+  {
+    "Name": "Number of minority holder wallets that have delegated",
+    "Description": "Measures the number of wallets that hold less than 0.1% of tokens that have delegated their voting power.",
+    "Importance": "High",
+    "Rationale": "An increase of the number of minority holder wallets that delegate their tokens can speak to an improved understanding of the delegation process. ",
+    "Keyword": "Comprehensibleness",
+    "Term": "Understandability",
+    "Category": "Collective Governance",
+    "UID": "0x51c50c81a9995e96f2448a826191a6c92e99a70ff8d87b9b50c68ab586a33518"
+  },
+  {
+    "Name": "Number of positive testimonies from OP Stack core contributors",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Utility",
+    "Term": "Modularity",
+    "Category": "OP Stack",
+    "UID": "0x67168474a8cbca81831d5ac8f7178ee85b8caddff982a964f85e276d4603e5ea"
+  },
+  {
+    "Name": "Number of lists created by Badgeholders",
+    "Description": "Measures the number of lists Badgeholders created to be used by other Badgeholders.",
+    "Importance": "Medium",
+    "Rationale": "The creation of lists by Badgeholders enables other Badgeholders to leverage the expertise of others in their decision-making process.",
+    "Keyword": "Collaboration",
+    "Term": "Governance Participation",
+    "Category": "Collective Governance",
+    "UID": "0x91410c2114f0f20ef2ccdb12fc7f52361be5f2bffeb45c438d168f3c8fd3d67d"
+  },
+  {
+    "Name": "Score of podcast reviews",
+    "Description": "Average scores of the reviews podcast listeners have given.",
+    "Importance": "Low",
+    "Rationale": "This metric provides an insight into the perceived quality of podcast consumers, if the podcast is Optimism specific the impact to the Optimism Collective can be medium or high. ",
+    "Keyword": "Audience",
+    "Term": "Education",
+    "Category": "Developer Ecosystem",
+    "UID": "0xa5fe64ba8e643572fc2d6b2b651cb86db9881254e78b4ddce78d7635a309201a"
+  },
+  {
+    "Name": "Number of unique transacting addresses by smart contract after 3 months",
+    "Description": "Is a measure of how users are interacting with the OP Chains",
+    "Importance": "High",
+    "Rationale": "Adoption in projects intended for recurrent use is achieved when users complete recurrent interactions.",
+    "Keyword": "long-term engagement",
+    "Term": "Adoption",
+    "Category": "End User Experience + Adoption",
+    "UID": "0x94bc8ba2dff3909142932791a3e6dda009ceea805cb8f42420a4a5a12c63f057"
+  },
+  {
+    "Name": "Number of projects dependent on an OP Stack library",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Adoption",
+    "Term": "Awareness",
+    "Category": "OP Stack",
+    "UID": "0x65a668c0fef94b0901c827afd97dee3dfc1f8436ce31affec10007c1020306ab"
+  },
+  {
+    "Name": "Number of interactions completed in an OP Chain",
+    "Description": "Is a measure of how intuitive it is to complete an desired interaction.",
+    "Importance": "High",
+    "Rationale": "The less we require users to modify their existing behaviours, the more they will go through the discovery journey seamlessly.",
+    "Keyword": "Intuitiveness",
+    "Term": "Discovery Journey",
+    "Category": "End User Experience + Adoption",
+    "UID": "0xb7fb2d641638d429b08bad969e9ffcf205544d0475b1ef611cade12249f11cef"
+  },
+  {
+    "Name": "Uptime",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Stability",
+    "Term": "Resilience",
+    "Category": "OP Stack",
+    "UID": "0xed8f57ea63cab17d589cd9030a7f9058f9540c3bbffaf3d0bddf326340628a47"
+  },
+  {
+    "Name": "Number of Cross-chain contract calls from unique projects in the OP Chains",
+    "Description": null,
+    "Importance": null,
+    "Rationale": null,
+    "Keyword": null,
+    "Term": null,
+    "Category": "Developer Ecosystem",
+    "UID": "0x5ef16becff41e3abdbd6cd534c7820c2a86bb5828e9ce81429b63895f7f7493a"
+  },
+  {
+    "Name": "Number of users that understood the goal of the Optimistic Vision after consuming the content",
+    "Description": "Is a measure of how value aligned content generated to create awareness is to the Optimistic Vision.",
+    "Importance": "High",
+    "Rationale": "This metric clearly outlines if the consumers of a certain content understood the Optimistic Vision or not.",
+    "Keyword": "Awareness",
+    "Term": "Awareness",
+    "Category": "End User Experience + Adoption",
+    "UID": "0xdbf2e533d9ccbf6a260c7263dbf4d5463a645feb910e3c249920c5eced3bfcb1"
+  },
+  {
+    "Name": "Number of other projects building on top of a project in the past month",
+    "Description": "Number of other projects building on top of a project based on event logs contained in a project's contract in the past month",
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Co-creation",
+    "Term": "Collaboration",
+    "Category": "Developer Ecosystem",
+    "UID": "0x9676ad8d6df345b59bfd3a9d83cd4f30f0a40de2e5880e241db6103d70d12dee"
+  },
+  {
+    "Name": "Number of deployments that leveraged a step-by-step development guide",
+    "Description": "Number of smart contracts that were deployed on an OP Chain by following the process described on an educational resource.",
+    "Importance": "High",
+    "Rationale": "Enabling developers to deploy on an OP Chain increases the availability of projects in the Optimism Ecosystem.",
+    "Keyword": "Documentation",
+    "Term": "Education",
+    "Category": "Developer Ecosystem",
+    "UID": "0x8a5a2fcd82962b7179f1582a3aef83d0ad1f29a11b907bab512b7b97a75ccb55"
+  },
+  {
+    "Name": "Number of delegates explaining their voting rationale",
+    "Description": "Is a measure of the number of delegates that are publicly sharing their voting rationale.",
+    "Importance": "High",
+    "Rationale": "By sharing their voting rationale, delegates increase the available data toke holders have when deciding how to allocate their voting power.",
+    "Keyword": "Transparency",
+    "Term": "Accountability",
+    "Category": "Collective Governance",
+    "UID": "0x2b31261d8748dbd407af2cde5526547a1101e3c283e5c8f95559c67ac503e7bb"
+  },
+  {
+    "Name": "Monthly active delegates using the platform",
+    "Description": "Measures the number of delegates that use the platform on an monthly basis",
+    "Importance": "High",
+    "Rationale": "The recurring monthly use of a platform by delegates can showcase its value in the Collective Governance participation.",
+    "Keyword": "Engagement",
+    "Term": "Governance Participation",
+    "Category": "Collective Governance",
+    "UID": "0xc39f659ee0dbe7b44a320c7743665075fa1195e1c460a46e8113e565a5735407"
+  },
+  {
+    "Name": "OP Chain Active Users for over 5 weeks",
+    "Description": null,
+    "Importance": null,
+    "Rationale": null,
+    "Keyword": null,
+    "Term": null,
+    "Category": "Developer Ecosystem",
+    "UID": "0xd06712067977f3cfe6f9657f4f28ee335b0453fec762654121b7f3e443f7cdcc"
+  },
+  {
+    "Name": "Increase in number of unique deposit users to an OP bridge 2 weeks after content is generated",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": null,
+    "Term": "Education",
+    "Category": "End User Experience + Adoption",
+    "UID": "0xcea6aae0b286574c57c2a481864ca9220a1f80f5e5638f3d454c053c1de3c119"
+  },
+  {
+    "Name": "Level of engagement with OP Stack content",
+    "Description": null,
+    "Importance": "Low",
+    "Rationale": null,
+    "Keyword": "Understanding",
+    "Term": "Awareness",
+    "Category": "OP Stack",
+    "UID": "0x1f4deee73d4a2369b601037bad5c45b4ad054b290508be14391a838ff205a706"
+  },
+  {
+    "Name": "Number of delegates voting in a proposal",
+    "Description": "Is a measure of delegates that have issued a vote in a specific proposal.",
+    "Importance": "High",
+    "Rationale": "By knowing how many delegates are not participating in governance it is possible for token holders to hold the members they have delegated their voting power to accountable on their engagement in Governance. ",
+    "Keyword": "Monitoring",
+    "Term": "Accountability",
+    "Category": "Collective Governance",
+    "UID": "0xde063138f4f7b0c7fb2de5c9cc755c64293cb5667ad36c5a170a50f3a89a4da8"
+  },
+  {
+    "Name": "Number of active non-native English speaking delegates/citizens",
+    "Description": "Measures the number of active non-native English speaking delegates.",
+    "Importance": "High",
+    "Rationale": "By enabling the active participation of non-native English speakers in the Collective Governance contributions can reduce the entry barriers of new members.",
+    "Keyword": "Lower barriers to entry",
+    "Term": "Governance Accessibility",
+    "Category": "Collective Governance",
+    "UID": "0x7962fc0f29f5848cf0bff07c7b5af5f904c52315c4e16e807ff0e4906a04109c"
+  },
+  {
+    "Name": "Number of modules that were developed simultaneously without causing issues",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Modules",
+    "Term": "Modularity",
+    "Category": "OP Stack",
+    "UID": "0x25af1cbc0ae628bed004a4c1fb52ded11db8a2c5ae79b1853d5d32889e673af0"
+  },
+  {
+    "Name": "Total Value Bridged into X OP Chain",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": null,
+    "Term": "Adoption",
+    "Category": "End User Experience + Adoption",
+    "UID": "0xc4ff4bb03e8c5e331e11d22acf13aa68edd80108ee130286ba4da969cf454b68"
+  },
+  {
+    "Name": "Monthly Active Addresses",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Interest",
+    "Term": "Adoption",
+    "Category": "End User Experience + Adoption",
+    "UID": "0xf4eb4b424016b2ab8773286d8ac41602f9c21c5142c92548b0eb9fd6585f7627"
+  },
+  {
+    "Name": "Number of unique transacting addresses by Contract",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": null,
+    "Term": "Discovery Journey",
+    "Category": "End User Experience + Adoption",
+    "UID": "0x113da6fbd208a9cfd8d4fd1d446587c55f6d2fda2f73df91eb7fc89580c98e67"
+  },
+  {
+    "Name": "Voting power distribution held within the top 10 delegates",
+    "Description": "Measures the share of total voting power held within the top 5 delegates.",
+    "Importance": "Medium",
+    "Rationale": "Changes over time in voting power distribution con provide an overview of how capture resistant Optimisms Governance can be.",
+    "Keyword": "Concentration of voting power",
+    "Term": "Capture Resistance",
+    "Category": "Collective Governance",
+    "UID": "0x5936dbfa3d9189a1a8524e20ebcc1a5c0ffb137702bcde13f8191b95c484874f"
+  },
+  {
+    "Name": "Number of smart contracts deployed on OP Mainnet",
+    "Description": "Number of smart contracts deployed on OP Mainnet",
+    "Importance": "High",
+    "Rationale": "Providing timely tailored support in the last steps of deployment can make the difference in a team's ability to deploy to Mainnet.",
+    "Keyword": "Support",
+    "Term": "Developer Support",
+    "Category": "Developer Ecosystem",
+    "UID": "0x393bf7e4f54af4a76b57ad5387638608a55cac18ac55942242b612699578f970"
+  },
+  {
+    "Name": "Number of views",
+    "Description": "Number of times a video resources has been viewed",
+    "Importance": "Low",
+    "Rationale": "Video materials describing the projects in the ecosystem can increase awareness of the Optimism Ecosystem.",
+    "Keyword": "Content",
+    "Term": "Discoverability",
+    "Category": "Developer Ecosystem",
+    "UID": "0x22462afa563528b06ba5c6c84f409ab8fd866040109296f01713232f6693fa5e"
+  },
+  {
+    "Name": "Share of total voting power per delegate",
+    "Description": "Is a measure of the total voting power a delegate holds. ",
+    "Importance": "Medium",
+    "Rationale": "Increasing the voting power of a delegate can encourage them to engage more often in the Collective Governance.",
+    "Keyword": "Engagement",
+    "Term": "Governance Participation",
+    "Category": "Collective Governance",
+    "UID": "0xd8aa1c6e256c78041320720e54d90e9a6512d18a534433aa6078bc5465dc8f50"
+  },
+  {
+    "Name": "Amount of time needed for a technical support ticket to be closed",
+    "Description": "Measures the amount of time required to resolve a technical inquiry. ",
+    "Importance": "High",
+    "Rationale": "A reduction in the amount of time a developer has to wait to receive an initial response on their query could increase their productivity when working in Optimism related projects. ",
+    "Keyword": "Support",
+    "Term": "Developer Support",
+    "Category": "Developer Ecosystem",
+    "UID": "0x5e16e8a8eb0f84ea5a817fc3dc550c26a74aef5516711b8e0f4e2e3b2cc739bb"
+  },
+  {
+    "Name": "Response time for RPC calls",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Reliability",
+    "Term": "Performance",
+    "Category": "OP Stack",
+    "UID": "0xeeb23545e04287a1f2e4e6d68f315ff40f7b4b2baaa0fbdcc145b6e6951e23c5"
+  },
+  {
+    "Name": "Number of developers that received a Grant ",
+    "Description": "Measures the number of developers that received a Grant. ",
+    "Importance": "Medium",
+    "Rationale": "Providing documentation on funding for developers can lead to the development of new projects in the Optimism Ecosystem.",
+    "Keyword": "Documentation",
+    "Term": "Developer Support",
+    "Category": "Developer Ecosystem",
+    "UID": "0x6d9a816854555446bf924590a6cca756bdbb70f8f823c04314dcb46a43df3285"
+  },
+  {
+    "Name": "Increase in total value bridged into the Optimism Ecosystem",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": null,
+    "Term": "Education",
+    "Category": "End User Experience + Adoption",
+    "UID": "0xef38a923ee315e9990c89472ddaa589311faa71e15e4d4a1efcf027dad5a6243"
+  },
+  {
+    "Name": "Number of forks from a library",
+    "Description": null,
+    "Importance": "Medium",
+    "Rationale": null,
+    "Keyword": "Adoption",
+    "Term": "Awareness",
+    "Category": "OP Stack",
+    "UID": "0x2c5ece38868fe8f1a9a3cc2941d6042d36c012a4d01aba9ce0e2297379ea5ee1"
+  },
+  {
+    "Name": "Gas costs reduction in contract creation",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Gas Fees",
+    "Term": "Performance",
+    "Category": "OP Stack",
+    "UID": "0x751461581c9f96d300ab58ea763c00e63dbeb724aa42acd5abd13d3a3ae09db4"
+  },
+  {
+    "Name": "Number of podcast listeners",
+    "Description": "Measures the number of listeners a podcast has.",
+    "Importance": "Low",
+    "Rationale": "Providing the number of podcast listeners ",
+    "Keyword": "Resources",
+    "Term": "Discoverability",
+    "Category": "Developer Ecosystem",
+    "UID": "0xbce2b7a3ee305594409b989d0f9a8c3009eeb529407111c84231373095b698a9"
+  },
+  {
+    "Name": "Number of unique addresses using project A and project B ",
+    "Description": "Number of unique addresses from project A enabled to use project B through the use of event logs generated in project A.",
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Co-creation",
+    "Term": "Collaboration",
+    "Category": "Developer Ecosystem",
+    "UID": "0x4bcd5c1e1bd9167c025ce5ebeaeb66239dd62db036031762171c7c13d973e906"
+  },
+  {
+    "Name": "Total OP Chains RPC served",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Reliability",
+    "Term": "Performance",
+    "Category": "OP Stack",
+    "UID": "0x04fb772daa21014e9b1a8f6fd883b49e324f6f143556257f1accbe9e89c4a482"
+  },
+  {
+    "Name": "Number of POAP holders that have completed x call to action",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": null,
+    "Term": "Education",
+    "Category": "End User Experience + Adoption",
+    "UID": "0x4277a6098ec275523fc72563ab69707fe741fdda1ae68f9b3b2abe333ab12ab7"
+  },
+  {
+    "Name": "Number of downloads of an OP Chain specific SDK",
+    "Description": "Measures the number of times an OP Chain specific SDK has been downloaded. ",
+    "Importance": "Medium",
+    "Rationale": "The number of times an OP Chain specific SDK has been downloaded can signal how useful it is for developers building in the Optimism Ecosystem. ",
+    "Keyword": "Interoperability",
+    "Term": "Developer Tooling",
+    "Category": "Developer Ecosystem",
+    "UID": "0x351d5fc498b0c63c36a0b1bdd677fd5ccbc9fd202643dcaa68d8ef6e0936848c"
+  },
+  {
+    "Name": "Content impressions (views, reproductions)",
+    "Description": "Measures the number of impressions a certain governance asset received.",
+    "Importance": "Low",
+    "Rationale": "Sharing information on the functioning of the Collective Governance could generate awareness, however it is not know if this was consumed by a relevant audience and translated into action.",
+    "Keyword": "Communication",
+    "Term": "Understandability",
+    "Category": "Collective Governance",
+    "UID": "0x90e10bf11644d12a030947ae37e41f2c32ff01d58166909a11f6ab8ab49f9467"
+  },
+  {
+    "Name": "Number of steps required to complete a transaction in an OP Chain",
+    "Description": "Is a measure of how frictionless an interaction is for an end user of an OP Chain.",
+    "Importance": "Medium",
+    "Rationale": "Barriers increase friction in user interactions that can lead to deflection and uncompleted actions.",
+    "Keyword": "Barriers",
+    "Term": "User Experience",
+    "Category": "End User Experience + Adoption",
+    "UID": "0x44caf1fa2503c61ea0230fdf309f65ee4ffa299888c52d0c8b26139e61a635da"
+  },
+  {
+    "Name": "Increase in delegate voting turnout in proposals",
+    "Description": "Measures how engaged individual delegates are in each proposal. ",
+    "Importance": "High",
+    "Rationale": "Improving the communication of what, when and where participation of delegates is required can lead to an increase in engagement with individual proposals.",
+    "Keyword": "Communication",
+    "Term": "Governance Participation",
+    "Category": "Collective Governance",
+    "UID": "0x1a6c7522206ccc000bb38d43e7472a7a8ac661c1302a5d75b8dbec72e4a30fa6"
+  },
+  {
+    "Name": "Percentage of total OP Stack nodes supported",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Redundancy",
+    "Term": "Resilience",
+    "Category": "OP Stack",
+    "UID": "0x66b645c9f9578d98799f8a8768c69f307a26966384158320c309399cd6ea5ba0"
+  },
+  {
+    "Name": "Number of new wallets funded in an OP Chain",
+    "Description": "Is a measure of how many individuals successfully completed the initial steps to engage in a platform or network.",
+    "Importance": "Medium",
+    "Rationale": "For users to be able to interact with an OP Chain there are certain steps they need to complete as part of their discovery journey.",
+    "Keyword": "Education",
+    "Term": "Discovery Journey",
+    "Category": "End User Experience + Adoption",
+    "UID": "0xd31c4951e77919a9f01699bd9f0e5a8e04599129846b4f829c426424d36d07c8"
+  },
+  {
+    "Name": "Node support provided ",
+    "Description": null,
+    "Importance": "Medium",
+    "Rationale": null,
+    "Keyword": "Redundancy",
+    "Term": "Resilience",
+    "Category": "OP Stack",
+    "UID": "0xbf6a3b044d2e45280ad5dba093d12c63def334836669655787d252b715c9dd91"
+  },
+  {
+    "Name": "Runtime gas costs reduction",
+    "Description": "The amount of gas costs that can be reduced by using a different language.",
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Gas Fees",
+    "Term": "Performance",
+    "Category": "OP Stack",
+    "UID": "0xc87577782e53d6299ec163c838f661cbc36fc56636f054d7b4e60c9afef395ad"
+  },
+  {
+    "Name": "Number of new OP Chain users from x language",
+    "Description": "Is a measure of how accessible certain content is across languages.",
+    "Importance": "High",
+    "Rationale": "The generation of material accessible in a different language improves the user experience.",
+    "Keyword": "Accesssibility",
+    "Term": "User Experience",
+    "Category": "End User Experience + Adoption",
+    "UID": "0xb2dda04c6bfa201d8dae3645c1f302161b75759eb9c4662fb2dca69e204b7d7b"
+  },
+  {
+    "Name": "Performance Improvement",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Reliability",
+    "Term": "Performance",
+    "Category": "OP Stack",
+    "UID": "0x02964333f4779defd1db624765a38ba679b7c5ba64cfa5178464ba0e91bbc422"
+  },
+  {
+    "Name": "Number of graduates of an Optimism-centric bootcamp",
+    "Description": "Number of developers who have completed a bootcamp focused in developing in the Optimism Ecosystem. ",
+    "Importance": null,
+    "Rationale": null,
+    "Keyword": null,
+    "Term": null,
+    "Category": null,
+    "UID": "0xac7c64ef3279a1090a6e7a0d17b8de7ac2eac871baa83428b71e0fc84b5e4116"
+  },
+  {
+    "Name": null,
+    "Description": "High",
+    "Importance": "Bootcamps increase the hands-on experience of developers and improves their ability to build within the Optimism Ecosystem. ",
+    "Rationale": "Audience",
+    "Keyword": "Education",
+    "Term": "Developer Ecosystem",
+    "Category": null,
+    "UID": "0x446ea4c6bd67998049046f205ef8c2c62f949986aa34a69dfa18f9dc7f18ca06"
+  },
+  {
+    "Name": "Qualitative information received from developers that have been supported by a tool.",
+    "Description": "Measures qualitatively the support received by developers leveraging a particular tool in their development process.",
+    "Importance": "Medium",
+    "Rationale": "Testimonials can provide additional insights into the quality and impact of a resource in enabling them to deploy or interact with the Optimism Ecosystem.",
+    "Keyword": "Friendliness",
+    "Term": "Developer Tooling",
+    "Category": "Developer Ecosystem",
+    "UID": "0x62c36d0c53f69fc7564396fc9c8a9b8caf204c79c79d880a74ca6968a49cc181"
+  },
+  {
+    "Name": "Delegate Nakamoto coefficient",
+    "Description": "Is a measure of the number of delegates required to achieve 50% of the total Votable Supply.",
+    "Importance": "High",
+    "Rationale": "This metric indicates decentralization levels, a higher number of delegates required to meet the 50% means higher decentralization and enhances capture resistance.",
+    "Keyword": "Concentration of voting power",
+    "Term": "Capture Resistance",
+    "Category": "Collective Governance",
+    "UID": "0x46a1f08748905c0c2a2e8715b5918608b271d22db7de8cb4988499eab0b6d388"
+  },
+  {
+    "Name": "Daily unique OP Chain X Users",
+    "Description": null,
+    "Importance": null,
+    "Rationale": null,
+    "Keyword": null,
+    "Term": null,
+    "Category": "Developer Ecosystem",
+    "UID": "0xe2466dc6a65e378460e5e70ca232fe8e94e52b69f82b2e2cf97d444f07fdb6a3"
+  },
+  {
+    "Name": "Amount of funds needed for first interaction",
+    "Description": "How affordable is it for a new consumer to interact with an Optimism based-product?|",
+    "Importance": "High",
+    "Rationale": "Increasing the affordability to complete a users first interaction improves the end user experience",
+    "Keyword": "Affordability",
+    "Term": "Adoption",
+    "Category": "End User Experience + Adoption",
+    "UID": "0xfcbfc696681bda5aba2c6fccaa139a33c5be961f69eb815b26a53c9aa90f9033"
+  },
+  {
+    "Name": "Increase in fees generated in the Optimism Ecosystem",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": null,
+    "Term": "Adoption",
+    "Category": "End User Experience + Adoption",
+    "UID": "0x5e758b75efb9d2b6b5be90c3f84d075826592cbf80717b865060fca570347943"
+  },
+  {
+    "Name": "Number of smart contracts using x development language deployed on an OP Chain",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Audits",
+    "Term": "Security",
+    "Category": "OP Stack",
+    "UID": "0x61dbd9a8b855e0599a46187af82c893afffa748286e16eb4d0933bc183208124"
+  },
+  {
+    "Name": "Number of new delegates generated by an initiative",
+    "Description": "Measures the number of members who turned into delegates derived on their involvement in an initiative.",
+    "Importance": "Low",
+    "Rationale": "The more accessible Optimism's Governance is, the easier it will become for members to become delegates, however there is no information on how active they are.",
+    "Keyword": "New delegates",
+    "Term": "Governance Accessibility",
+    "Category": "Collective Governance",
+    "UID": "0xc057ef9b063226e85fda178bf2aae423f4d2fd3ffe75167c4a5a3401100d47be"
+  },
+  {
+    "Name": "Increase in votable supply",
+    "Description": "Tracks the increase in number of tokens delegated.",
+    "Importance": "High",
+    "Rationale": "An increase in votable supply can change how power is distributed within the Token House.",
+    "Keyword": "Votable Supply",
+    "Term": "Capture Resistance",
+    "Category": "Collective Governance",
+    "UID": "0x6b5b9b8887abf4b09f166d123973c8731ec74949b50d831accee013a097a0b04"
+  },
+  {
+    "Name": "Number of Impressions",
+    "Description": "Is a measure of the number of followers or accounts a resource was displayed to.",
+    "Importance": "Low",
+    "Rationale": "The size of an audience that engages with content and its call to actions can if correctly directed lead to an increase in the user base of the OP Chains.",
+    "Keyword": "Interest",
+    "Term": "Awareness",
+    "Category": "End User Experience + Adoption",
+    "UID": "0xa297887b783d390933fbb161dd86ee031eb61b292437b7064b4d2212148729be"
+  },
+  {
+    "Name": "Number of content material created on the OP Stack",
+    "Description": null,
+    "Importance": "Low",
+    "Rationale": null,
+    "Keyword": "Familiarity",
+    "Term": "Awareness",
+    "Category": "OP Stack",
+    "UID": "0x158a585e9b6bc8bf3585e52ac5219e602e9053578486e1eb27075005fe4d9b8c"
+  },
+  {
+    "Name": "Number of smart contracts deployed during hackathon",
+    "Description": null,
+    "Importance": null,
+    "Rationale": null,
+    "Keyword": null,
+    "Term": null,
+    "Category": "Developer Ecosystem",
+    "UID": "0x9fde186ff83d255f1449137a8fae5a1b1f74a74e6815456cdf786db0f95d4c37"
+  },
+  {
+    "Name": "Number of subscribers",
+    "Description": "Is a measure of how many actors are subscribed to a newsletter",
+    "Importance": "Low",
+    "Rationale": "Educating Optimism users on novel projects improves their discovery journey in the ecosystem, however, the number of subscribers alone does not indicate if this led subscribers to try out the projects.",
+    "Keyword": "Novelty",
+    "Term": "Discovery Journey",
+    "Category": "End User Experience + Adoption",
+    "UID": "0xe9c33a199c6f5fa991f15703dbb4dc936e115a674b644a6c6c182db7f0a2c8f0"
+  },
+  {
+    "Name": "Number of transactions with event logs from other projects",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": "These many transactions from project B are dependent on transactions generated in project A",
+    "Keyword": null,
+    "Term": null,
+    "Category": "Developer Ecosystem",
+    "UID": "0x2bc59a2bf4e30a9a90a81ea69b45de915dacd16f0a2cb0f8b32f02b5b801836b"
+  },
+  {
+    "Name": "Fee reduction",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Gas Fees",
+    "Term": "Performance",
+    "Category": "OP Stack",
+    "UID": "0x0feeefe30fc97c848194e004bd95eb24698a0bd939f2067e492d71b296262a7f"
+  },
+  {
+    "Name": "Percentage growth in transactions per day on a project since call to action",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": null,
+    "Term": "Education",
+    "Category": "End User Experience + Adoption",
+    "UID": "0x2a58fbd75c9ca1e11c8db6ccd1423d07f6df60d8a21fdc447b6fab4f12313c98"
+  },
+  {
+    "Name": "Blob data stored (GB)",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Redundancy",
+    "Term": "Resilience",
+    "Category": "OP Stack",
+    "UID": "0x3bb25891c56718e951c1ea5812f2f8914c87401d624add66df48246904f3bfc8"
+  },
+  {
+    "Name": "Number of stars on Github",
+    "Description": "Number of stars a Github project has.",
+    "Importance": "Low",
+    "Rationale": "The number of stars a Github project has speaks to the interest developers can have in a repository, it however does not directly speak to the use of the repository.",
+    "Keyword": "Resources",
+    "Term": "Discoverability",
+    "Category": "Developer Ecosystem",
+    "UID": "0x6ee1541b184713bde8adf52533e2a41fa2970fb69378ff945ebaf50aa588a730"
+  },
+  {
+    "Name": "Number of ERC-4337 accounts deployed on OP Chains",
+    "Description": "Measures the number of Account Abstraction powered accounts deployed on the OP Chains by a project",
+    "Importance": "Medium",
+    "Rationale": "Account Abstraction can reduce the challenges developers face in getting users new to crypto to use their projects.",
+    "Keyword": "Friendliness",
+    "Term": "Developer Tooling",
+    "Category": "Developer Ecosystem",
+    "UID": "0x12574bccdb1e85264e0b091b62260ae3484078480a71ca2a3a087f0d0ff1a659"
+  },
+  {
+    "Name": "Number of weekly active OP community builders",
+    "Description": "Measures the number of weekly active OP community builders.",
+    "Importance": "Medium",
+    "Rationale": "A large number of engaged OP community builders can lead to an increase in knowledge sharing of the development process. ",
+    "Keyword": "Knowledge sharing",
+    "Term": "Collaboration",
+    "Category": "Developer Ecosystem",
+    "UID": "0xe0bef1f5644bfdf3b76838061caefc88ae584a948cdaacd5ef3f0aaf3dcfdbcd"
+  },
+  {
+    "Name": null,
+    "Description": null,
+    "Importance": null,
+    "Rationale": null,
+    "Keyword": null,
+    "Term": null,
+    "Category": null,
+    "UID": "0xa57c4d75d06f9409d8ba036da7b7f5f77f06a2ad128f6878965e5c06818f4069"
+  },
+  {
+    "Name": null,
+    "Description": null,
+    "Importance": null,
+    "Rationale": null,
+    "Keyword": null,
+    "Term": null,
+    "Category": null,
+    "UID": "0x561b86b8baa0a6cf986f5c7d93d6f374c3ffea8a5c5ac62618e2abc8f3a1d830"
+  },
+  {
+    "Name": null,
+    "Description": null,
+    "Importance": null,
+    "Rationale": null,
+    "Keyword": null,
+    "Term": null,
+    "Category": "End User Experience + Adoption",
+    "UID": "0x381fcb05065d1680796eec2fa5b5ad23a05e77b7a858503366e67d2fa94c581c"
+  },
+  {
+    "Name": "Number of hackathon participants building on Optimism",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Accesssibility",
+    "Term": "Education",
+    "Category": "Developer Ecosystem",
+    "UID": "0x26bcb38bfbc4e96a7cb655430922469fdf8e2832d0ab09fa97fb79d6c96abb9c"
+  },
+  {
+    "Name": "Number of support questions answered",
+    "Description": null,
+    "Importance": "Low",
+    "Rationale": null,
+    "Keyword": "Support",
+    "Term": "Developer Support",
+    "Category": "Developer Ecosystem",
+    "UID": "0xa82a52988cc922749caae0d1bb305dc1586f471caa7159f0d263128432c39aef"
+  },
+  {
+    "Name": "Rate of redelegated tokens",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Monitoring",
+    "Term": "Accountability",
+    "Category": "Collective Governance",
+    "UID": "0x1ecea00e32c65feaf53378b6e2598c3efe40e3d79db7391d0f7d5511f981559e"
+  },
+  {
+    "Name": "Amount of OP voted per proposal",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Voting",
+    "Term": "Governance Participation",
+    "Category": "Collective Governance",
+    "UID": "0xe9172611342f465c2860fdff9009f0dec96057de169245b0c08cebe3e3fe744a"
+  },
+  {
+    "Name": "Increase in data availability for the creation of citizenship eligibility. ",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Onboarding",
+    "Term": "Governance Accessibility",
+    "Category": "Collective Governance",
+    "UID": "0xdb246f1997e6269457659c4e2e838c5d7c9186fb4431e1eef3773e603b1c0fc5"
+  },
+  {
+    "Name": "Number of OP Stack modules dependent on this contribution",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Utility",
+    "Term": "Modularity",
+    "Category": "OP Stack",
+    "UID": "0xf2a0533ada738e8ef3c502fcb1217d297982693e191faa50021b237108537e73"
+  },
+  {
+    "Name": "Content impressions",
+    "Description": null,
+    "Importance": "Low",
+    "Rationale": null,
+    "Keyword": "Familiarity",
+    "Term": "Awareness",
+    "Category": "OP Stack",
+    "UID": "0x08b53299c79363ae31a93cff1066d9a9ac628831cdc32659135816bfd997cc86"
+  },
+  {
+    "Name": "Number of merged contributions to the OP Stack",
+    "Description": null,
+    "Importance": "High",
+    "Rationale": null,
+    "Keyword": "Adoption",
+    "Term": "Awareness",
+    "Category": "OP Stack",
+    "UID": "0x01bebc54cd7bca141e0c05e90c416c275aae01e07e6ec2dc5f0c135a2d33f857"
+  },
+  {
+    "Name": "Number of course/workshop attendees on the OP Stack",
+    "Description": null,
+    "Importance": "Medium",
+    "Rationale": null,
+    "Keyword": "Understanding",
+    "Term": "Awareness",
+    "Category": "OP Stack",
+    "UID": "0x3874264caca4d548708962c1e603c163981bcc57403e0c9dbebf0c70a880d7c7"
+  },
+  {
+    "Name": "Number of weekly Github packages downloaded",
+    "Description": null,
+    "Importance": "Medium",
+    "Rationale": null,
+    "Keyword": null,
+    "Term": "Security",
+    "Category": "OP Stack",
+    "UID": "0x68bac12d41f21be0a06ea202d1574332cfca792665ce023370232448c4797de6"
+  },
+  {
+    "Name": "Number of NPM weekly downloads",
+    "Description": null,
+    "Importance": "Medium",
+    "Rationale": null,
+    "Keyword": null,
+    "Term": "Security",
+    "Category": "OP Stack",
+    "UID": "0xe7a4901bcea7a98653ceb3ab2af84b70886bdafbe12d8bf4142b864147f16352"
+  },
+  {
+    "Name": "Number of Github stars",
+    "Description": null,
+    "Importance": "Low",
+    "Rationale": null,
+    "Keyword": "Familiarity",
+    "Term": "Awareness",
+    "Category": "OP Stack",
+    "UID": "0xde8f26f5ad1b1fb229aacafe042b521c9552ed20b831d0c0cc842a1f1e155e23"
+  },
+  {
+    "Name": "Number of dependent Github repositories",
+    "Description": null,
+    "Importance": "Medium",
+    "Rationale": null,
+    "Keyword": "Extensibility",
+    "Term": "Modularity",
+    "Category": "OP Stack",
+    "UID": "0x530ae013d44f63da3b1d460c48dbc30492ef05f4fdbf592f6af4752c34ebaf0c"
+  },
+  {
+    "Name": "Off-chain content Engagement (shares, likes clicks, etc)",
+    "Description": "Measures the level of engagement a piece of content had off-chain.",
+    "Importance": "Low",
+    "Rationale": "Off-chain content engagement while more telling than impressions, does not provide insight into whether this was useful or valuable to the reader. Nor is additional information on the reader and their relation to the OP Ecosystem accessible. ",
+    "Keyword": "Communication",
+    "Term": "Understandability",
+    "Category": "Collective Governance",
+    "UID": "0x3402e4fcafb25cce806000d2ea9012bff456ad6bf0a3e1740301f3b70791f715"
+  },
+  {
+    "Name": "On-chain content engagement (NFT mints, attestations) with Governance Accessibility resources",
+    "Description": "Measures the level of engagement a piece of content had on-chain.",
+    "Importance": "Medium",
+    "Rationale": "On-chain content engagement can demonstrate the value readers provide to the contribution. It also serves to increase data accessibility and build an on-chain reputation.",
+    "Keyword": "Lower barriers to entry",
+    "Term": "Governance Accessibility",
+    "Category": "Collective Governance",
+    "UID": "0xc7177c6ba09ea9221bc9152f72e59e4676d6a196fc2a9499860077a5b146b200"
+  },
+  {
+    "Name": "Number of grants executed as specified",
+    "Description": "Measures the number of grants that an applicant has completed in accordance to the requirements. ",
+    "Importance": "High",
+    "Rationale": "Contributors to the collective who complete their grants according to the specifications demonstrate increased credibility. ",
+    "Keyword": "Monitoring",
+    "Term": "Accountability",
+    "Category": "Collective Governance",
+    "UID": "0x4f5dd78d823957b6ecd3c17134ce21fd69753430f2177aa380affa92de135986"
+  }
+]

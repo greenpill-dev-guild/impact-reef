@@ -1,11 +1,14 @@
 {
-  "name": "impact-framework",
+  "name": "impact-reef",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "dev": "cd packages/client && pnpm run dev",
     "test": "cd packages/client && pnpm run test",
-    "build": "cd packages/client && pnpm run build",
-    "generate:supabase:types": "npx supabase gen types typescript --local > types/database-generated.types.ts"
+    "build": "cd packages/client && pnpm run build"
+  },
+  "engines": {
+    "node": "20.x",
+    "pnpm": "^9.x"
   }
 }

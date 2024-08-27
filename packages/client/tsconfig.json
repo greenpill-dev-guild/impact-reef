@@ -7,20 +7,24 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "target": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     "plugins": [
+      {
+        "name": "@0no-co/graphqlsp",
+        "schema": "https://easscan.org/graphql",
+        "tadaOutputLocation": "src/types/graphql-env.d.ts"
+      },
       {
         "name": "next"
       }
-    ],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    ]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

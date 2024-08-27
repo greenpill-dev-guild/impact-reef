@@ -1,17 +1,23 @@
 import "./globals.css";
 
+import { headers } from "next/headers";
+import { Toaster } from "react-hot-toast";
+import { cookieToInitialState } from "wagmi";
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+
+import { inter, sora } from "@/utils/fonts";
 
 import { Navbar } from "@/components/Layout/Navbar";
+import { Footer } from "@/components/Layout/Footer";
 
-const APP_NAME = "Impact Voice";
-const APP_DEFAULT_TITLE = "Impact Voice App";
-const APP_TITLE_TEMPLATE = "%s - Impact Voice";
-const APP_DESCRIPTION =
-  "Let your voice be heard, submit proposals for your community";
-
-const inter = Inter({ subsets: ["latin"] });
+import {
+  APP_DEFAULT_TITLE,
+  APP_DESCRIPTION,
+  APP_NAME,
+  APP_TITLE_TEMPLATE,
+} from "@/constants";
+import Web3ModalProvider from "@/hooks/auth/Provider";
+import { config } from "@/config/wagmi";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -51,11 +57,37 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const initialState = cookieToInitialState(config, headers().get("cookie"));
+
   return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased`}>
-        <Navbar />
-        {children}
+    <html
+      lang="en"
+      className={`${inter.variable} ${sora.variable} antialiased`}
+      suppressHydrationWarning
+    >
+      <body suppressHydrationWarning>
+        <Web3ModalProvider initialState={initialState}>
+          <Navbar />
+          {children}
+          <Footer />
+          <Toaster
+            toastOptions={{
+              className: "toaster",
+              loading: {
+                // icon: "",
+                className: "toaster-loading",
+              },
+              error: {
+                // icon: ""
+                className: "toaster-error",
+              },
+              success: {
+                // icon: ""
+                className: "toaster-success",
+              },
+            }}
+          />
+        </Web3ModalProvider>
       </body>
     </html>
   );
