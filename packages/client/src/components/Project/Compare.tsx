@@ -1,7 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+
 import { categories } from "../List/Item";
 
 interface Metric {
@@ -142,9 +143,9 @@ export const ProjectCompare: React.FC<ProjectCompareProps> = ({
                       <li
                         key={`${metric.title}-${project.id}`}
                         className={`flex items-center gap-2 text-zinc-800  ${
-                          project.amount === 0
-                            ? "font-bold leading-none"
-                            : "font-light"
+                          project.amount === 0 ?
+                            "font-bold leading-none"
+                          : "font-light"
                         }`}
                       >
                         <span

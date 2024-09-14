@@ -2,12 +2,15 @@
 
 import { graphql } from "gql.tada";
 
-import { easOptimismClient } from "@/modules/urql";
+import { easOptimismClient, easSepoliaClient } from "@/modules/urql";
 
 import { EAS } from "@/constants";
-import { parseDataToProjectItem, fetchMetadata } from "@/utils/parseData";
+import {
+  parseDataToProjectItem,
+  fetchMetadata,
+  parseDataToProjectMetric,
+} from "@/utils/parseData";
 
-import { getProjectMetrics } from "./metrics";
 import { getProjectEndorsements } from "./endorsements";
 
 // TODO add cache for metadata fetching
@@ -76,6 +79,45 @@ export const getProjects = async (): Promise<ProjectItem[]> => {
     data?.attestations.map(
       async ({ decodedDataJson }) =>
         await parseDataToProjectItem(decodedDataJson)
+    ) ?? []
+  );
+};
+
+export const getProjectMetrics = async (
+  projectId?: string | null
+): Promise<ProjectMetricItem[]> => {
+  if (!projectId) {
+    console.error("No project ID provided");
+    return [];
+  }
+
+  // TODO add 'where: valid: true' filter
+  const QUERY = graphql(/* GraphQL */ `
+    query Attestations($where: AttestationWhereInput) {
+      attestations(where: $where) {
+        id
+        recipient
+        timeCreated
+        decodedDataJson
+      }
+    }
+  `);
+
+  const { data, error } = await easSepoliaClient
+    .query(QUERY, {
+      where: {
+        schemaId: { equals: EAS["11155111"].PROJECT_METRICS.uid },
+        decodedDataJson: { contains: projectId },
+      },
+    })
+    .toPromise();
+
+  if (error) console.error(error);
+  if (!data) console.error("No data found");
+
+  return (
+    data?.attestations.map(({ id, recipient, timeCreated, decodedDataJson }) =>
+      parseDataToProjectMetric(id, recipient, timeCreated, decodedDataJson)
     ) ?? []
   );
 };
@@ -172,8 +214,9 @@ export const getProjectDetails = async (
       repositories:
         metadata.github && metadata.github.length > 0 ? metadata.github : [],
       metrics,
-      socials: metadata.socialLinks
-        ? Object.values(metadata.socialLinks).filter((value) => !!value)
+      socials:
+        metadata.socialLinks ?
+          Object.values(metadata.socialLinks).filter((value) => !!value)
         : [],
       updated_at: new Date().toISOString(),
     };

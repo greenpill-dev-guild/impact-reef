@@ -1,8 +1,9 @@
 "use client";
 
-import { formatAddress } from "@/utils/text";
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+
+import { formatAddress } from "@/utils/text";
 
 export interface ProjectEndorsementsProps {
   banner: string;
@@ -59,16 +60,14 @@ export const ProjectEndorsements: React.FC<ProjectEndorsementsProps> = ({
         <h2 className="font-semibold text-3xl">Endorsements</h2>
       </div>
       <ul className="grid grid-cols-4 grid-rows-auto gap-4 w-full">
-        {endorsements && endorsements.length ? (
+        {endorsements && endorsements.length ?
           endorsements.map((endorsement) => (
             <ProjectEndorsementCard
               key={endorsement.id}
               endorsement={endorsement}
             />
           ))
-        ) : (
-          <div></div>
-        )}
+        : <div></div>}
       </ul>
     </section>
   );

@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 
 import { useProject } from "@/hooks/projects/useProject";
 import { useEndorsements } from "@/hooks/useEndorsements";
-import { useClaimMetrics } from "@/hooks/useClaimMetrics";
 
 import { ProjectInfo } from "@/components/Project/Info";
 import { ProjectAttest } from "@/components/Project/Attest";
@@ -25,16 +24,8 @@ export interface ProjectViewProps {
 const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
   const { push } = useRouter();
   const { createEndorsement } = useEndorsements();
-  const { createMetricsClaim } = useClaimMetrics();
 
-  const {
-    claimMetricsState,
-    startClaiming,
-    cancelClaim,
-    endorsementState,
-    startEndorsing,
-    cancelEndorse,
-  } = useProject(project.id);
+  const {} = useProject(project.id);
 
   // const projectCreator = !!user.address && user.address === project.creator;
   // TODO remove hacky toggle for development
@@ -43,15 +34,6 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
   async function onSubmit(data: AttestFormValues) {
     if (projectCreator) {
       // TODO get correct metricUID
-      await createMetricsClaim([
-        {
-          projectUID: project.id,
-          metricUID:
-            "0xa32db8cca8e3d1e4c052d37efe89f1cdad683793f26e0bb0e4923e3deb2696e1",
-          value: "0",
-          source: "",
-        },
-      ]);
     } else {
       // TODO get correct metricUID
       await createEndorsement({
@@ -86,13 +68,8 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
             </Link>
             <div className="flex gap-3">
               <label
-                htmlFor={
-                  endorsementState.matches("endorsing") ||
-                  claimMetricsState.matches("claiming")
-                    ? undefined
-                    : "attest-drawer"
-                }
-                onClick={projectCreator ? cancelClaim : cancelEndorse}
+                htmlFor={false ? undefined : "attest-drawer"}
+                // onClick={projectCreator ? cancelClaim : cancelEndorse}
                 className="grid place-items-center drawer-button w-36 p-4 rounded-full bg-blue-950 text-neutral-50 font-semibold leading-snug btn"
               >
                 {projectCreator ? "Claim Metric" : "Endorse"}
@@ -160,13 +137,8 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
       </div>
       <div className="drawer-side h-screen">
         <label
-          htmlFor={
-            endorsementState.matches("endorsing") ||
-            claimMetricsState.matches("claiming")
-              ? undefined
-              : "attest-drawer"
-          }
-          onClick={projectCreator ? startClaiming : startEndorsing}
+          htmlFor={false ? undefined : "attest-drawer"}
+          // onClick={projectCreator ? startClaiming : startEndorsing}
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>

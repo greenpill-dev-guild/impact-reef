@@ -1,10 +1,11 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
 
 import { determineSocialMedia } from "@/utils/text";
+
 import { categories } from "../List/Item";
 
 export interface ProjectOverviewProps {

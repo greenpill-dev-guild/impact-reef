@@ -1,9 +1,11 @@
 import React from "react";
 import { NextPage } from "next";
-import Endorsements from "@/views/Profile/Endorsements";
+import dynamic from "next/dynamic";
+
+const EndorsementsView = dynamic(() => import("@/views/Profile/Endorsements"));
 
 const ProfileEndorsementsPage: NextPage = () => {
-    return <Endorsements />;
+  return <EndorsementsView />;
 };
 
 export default ProfileEndorsementsPage;

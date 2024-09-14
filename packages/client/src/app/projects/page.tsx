@@ -1,9 +1,10 @@
-import {NextPage} from "next";
-import ProjectsView from "@/views/Projects";
+import { NextPage } from "next";
+import dynamic from "next/dynamic";
+
+const ProjectsView = dynamic(() => import("@/views/Projects"));
 
 const ProjectsPage: NextPage = () => {
-
-    return <ProjectsView/>;
+  return <ProjectsView />;
 };
 
 export default ProjectsPage;

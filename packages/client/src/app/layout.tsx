@@ -5,19 +5,21 @@ import { Toaster } from "react-hot-toast";
 import { cookieToInitialState } from "wagmi";
 import type { Metadata, Viewport } from "next";
 
-import { inter, sora } from "@/utils/fonts";
-
-import { Navbar } from "@/components/Layout/Navbar";
-import { Footer } from "@/components/Layout/Footer";
-
 import {
   APP_DEFAULT_TITLE,
   APP_DESCRIPTION,
   APP_NAME,
   APP_TITLE_TEMPLATE,
 } from "@/constants";
+
+import { inter, sora } from "@/utils/fonts";
+
+import { config } from "@/modules/wagmi";
+
 import Web3ModalProvider from "@/hooks/auth/Provider";
-import { config } from "@/config/wagmi";
+
+import { Navbar } from "@/components/Layout/Navbar";
+import { Footer } from "@/components/Layout/Footer";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
