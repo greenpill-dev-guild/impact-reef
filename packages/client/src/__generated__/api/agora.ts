@@ -10,7 +10,8 @@
 ### API Categories
 Live and stable. 
 - **auth**: Authenticate with the Agora API
-- **RetroFunding**: Data related to RetroPGF Funding for Optimism Round 4 and beyond
+- **Round 4**: Data related to Retro Funding for Optimism Round 4
+- **RetroFunding**: Data related to Retro Funding for Optimism Round 4 and beyond
 - **projects**: Data related to RetroPGF Projects
 - **RetroFundingRounds**: Data related to RetroPGF Funding Rounds
 - **RetroFundingBallots**: Data related to RetroPGF Funding Ballots
@@ -23,1494 +24,142 @@ Live and stable.
 - **proposals**: Proposal data
 - **votes**: Vote data
 - **contracts**: Data for the current onchain contracts
+- **projects** Round 5 Projects with mock data
+- **RetroFundingBallots** Round 5 Ballots with mock data
+
+Not Live.
+- **Round 5**: Data related to Retro Funding for Optimism Round 5
+- 0.2.2: **DistributionStrategies** Round 5 Distribution strategies with mock data
+- 0.2.3: Round 5 Production release with real data
 
 ### Release Schedule
 
 | Version  | Status  | Release Date  |
 |----------|---------|---------------|
-| OP 0.1.0 | LIVE   | June 7th|
+| OP 0.1.0 | LIVE   | June 7th |
 | OP 0.1.1 | LIVE   | June 27th |
 | OP 0.1.2 | LIVE   | July 22th |
 | OP 0.1.3 | LIVE   | July 31th |
- * OpenAPI spec version: 0.1.3
+|----------|---------|---------------|
+| OP 0.2.0 | LIVE   | Aug 10th |
+| OP 0.2.1 | LIVE   | Aug 26th |
+| OP 0.2.2 | LIVE   | Sep 4th |
+| OP 0.2.3 | ON TRACK   | Sep 20th |
+ * OpenAPI spec version: 0.2.1
  */
-import axios from "axios";
-import type { AxiosRequestConfig, AxiosResponse } from "axios";
-export type PutImactMetricCommentVoteBody = {
-  vote?: number;
-};
-
-export type UpdateImpactMetricCommentBody = {
-  comment?: string;
-};
-
-export type PutImpactMetricCommentBody = {
-  comment?: string;
-};
-
-export type GetImpactMetricComments200 = {
-  data?: Comment[];
-  metadata?: PageMetadata;
-};
-
-export type GetImpactMetricCommentsSort =
-  (typeof GetImpactMetricCommentsSort)[keyof typeof GetImpactMetricCommentsSort];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const GetImpactMetricCommentsSort = {
-  newest: "newest",
-  votes: "votes",
-} as const;
-
-export type AddImpactMetricToRetroFundingBallotBody = {
-  allocation?: number;
-  locked?: boolean;
-  metric_id?: string;
-};
-
-export type GetRetroFundingRoundProjects200 = {
-  metadata?: PageMetadata;
-  projects?: Project[];
-};
-
-export type GetRetroFundingRoundBallots200 = {
-  ballots?: RetroFundingBallot[];
-  metadata?: PageMetadata;
-};
-
-export type GetRetroFundingRounds200 = {
-  ballots?: RetroFundingRound[];
-  metadata?: PageMetadata;
-};
-
-export type GetProjects200 = {
-  metadata?: PageMetadata;
-  projects?: Project[];
-};
-
-export type GetVotes200 = {
-  metadata?: PageMetadata;
-  votes?: Vote[];
-};
-
-export type GetVotesSort = (typeof GetVotesSort)[keyof typeof GetVotesSort];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const GetVotesSort = {
-  most_delegators: "most_delegators",
-  weighted_random: "weighted_random",
-} as const;
-
-export type GetVotesParams = {
-  /**
-   * Limits the number of returned results.
-   */
-  limit?: LimitParamParameter;
-  /**
-   * Offset from which start returned results.
-   */
-  offset?: OffsetParamParameter;
-  /**
- * The desired method by which returned delegates will be sorted. Supported values are: 'most_delegators', 'weighted_random'
-
- */
-  sort?: GetVotesSort;
-};
-
-export type GetDelegatorsByAddress200 = {
-  metadata?: PageMetadata;
-  votes?: Delegation[];
-};
-
-export type GetProposalVotes200 = {
-  metadata?: PageMetadata;
-  votes?: Vote[];
-};
-
-export type GetProposalVotesSort =
-  (typeof GetProposalVotesSort)[keyof typeof GetProposalVotesSort];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const GetProposalVotesSort = {
-  weight: "weight",
-  block_number: "block_number",
-} as const;
-
-export type GetProposalVotesParams = {
-  /**
-   * Limits the number of returned results.
-   */
-  limit?: LimitParamParameter;
-  /**
-   * Offset from which start returned results.
-   */
-  offset?: OffsetParamParameter;
-  /**
- * The desired method by which returned delegates will be sorted. Supported values are: 'weight' for descending voting weight, or 'block' for descending block number
-
- */
-  sort?: GetProposalVotesSort;
-};
-
-export type GetProposals200 = {
-  metadata?: PageMetadata;
-  proposals?: Proposal[];
-};
-
-export type GetProposalsFilter =
-  (typeof GetProposalsFilter)[keyof typeof GetProposalsFilter];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const GetProposalsFilter = {
-  relevant: "relevant",
-  everything: "everything",
-} as const;
-
-export type GetProposalsParams = {
-  /**
-   * Limits the number of returned results.
-   */
-  limit?: LimitParamParameter;
-  /**
-   * Offset from which start returned results.
-   */
-  offset?: OffsetParamParameter;
-  /**
- * The desired method by which returned votes will be filtered. Supported values are: 'relevant', 'everything'
-
- */
-  filter?: GetProposalsFilter;
-};
-
-export type GetDelegateVotes200 = {
-  metadata?: PageMetadata;
-  votes?: Vote[];
-};
-
-export type GetDelegates200 = {
-  data?: DelegateChunk[];
-  metadata?: PageMetadata;
-};
-
-export type GetDelegatesSort =
-  (typeof GetDelegatesSort)[keyof typeof GetDelegatesSort];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const GetDelegatesSort = {
-  most_delegators: "most_delegators",
-  weighted_random: "weighted_random",
-} as const;
-
-export type GetDelegatesParams = {
-  /**
-   * Limits the number of returned results.
-   */
-  limit?: LimitParamParameter;
-  /**
-   * Offset from which start returned results.
-   */
-  offset?: OffsetParamParameter;
-  /**
- * The desired method by which returned delegates will be sorted. Supported values are: 'voting_power', 'most_delegators', 'weighted_random'
-
- */
-  sort?: GetDelegatesSort;
-};
-
-export type ProposalStatusParamParameter = string;
-
-/**
- * Describes which way the vote was cast (i.e. for/against/abstention)
- * @summary Disposition of the vote
- */
-export type SupportParamParameter =
-  (typeof SupportParamParameter)[keyof typeof SupportParamParameter];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const SupportParamParameter = {
-  FOR: "FOR",
-  AGAINST: "AGAINST",
-  ABSTAIN: "ABSTAIN",
-} as const;
-
-/**
- * The block number in which requested resources are to be sought.
- */
-export type BlockParamParameter = number;
-
-/**
- * Offset from which start returned results.
- */
-export type OffsetParamParameter = number;
-
-/**
- * Limits the number of returned results.
- */
-export type LimitParamParameter = number;
-
-export type GetImpactMetricCommentsParams = {
-  /**
-   * Limits the number of returned results.
-   */
-  limit?: LimitParamParameter;
-  /**
-   * Offset from which start returned results.
-   */
-  offset?: OffsetParamParameter;
-  /**
- * The desired method by which returned comments will be sorted. Supported values are: 'newest', 'votes'
-
- */
-  sort?: GetImpactMetricCommentsSort;
-};
-
-export type GetRetroFundingRoundProjectsParams = {
-  /**
-   * Limits the number of returned results.
-   */
-  limit?: LimitParamParameter;
-  /**
-   * Offset from which start returned results.
-   */
-  offset?: OffsetParamParameter;
-};
-
-export type GetRetroFundingRoundBallotsParams = {
-  /**
-   * Limits the number of returned results.
-   */
-  limit?: LimitParamParameter;
-  /**
-   * Offset from which start returned results.
-   */
-  offset?: OffsetParamParameter;
-};
-
-export type GetRetroFundingRoundsParams = {
-  /**
-   * Limits the number of returned results.
-   */
-  limit?: LimitParamParameter;
-  /**
-   * Offset from which start returned results.
-   */
-  offset?: OffsetParamParameter;
-};
-
-export type GetProjectsParams = {
-  /**
-   * Limits the number of returned results.
-   */
-  limit?: LimitParamParameter;
-  /**
-   * Offset from which start returned results.
-   */
-  offset?: OffsetParamParameter;
-};
-
-export type GetDelegateVotesParams = {
-  /**
-   * Limits the number of returned results.
-   */
-  limit?: LimitParamParameter;
-  /**
-   * Offset from which start returned results.
-   */
-  offset?: OffsetParamParameter;
-};
-
-export type RetroFundingBallotSubmissionBallotContentAllocationsItem = {
-  [key: string]: unknown;
-};
-
-export type RetroFundingBallotSubmissionBallotContent = {
-  allocations?: RetroFundingBallotSubmissionBallotContentAllocationsItem[];
-  os_multiplier?: number;
-  os_only?: boolean;
-};
-
-/**
- * An object containing the information required to submit a ballot.
- * @summary Fields required for ballot submission
- */
-export interface RetroFundingBallotSubmission {
-  /**
-   * Address or ENS of the ballot caster.
-   * @summary Address or ENS of the ballot caster
-   */
-  address?: string;
-  ballot_content?: RetroFundingBallotSubmissionBallotContent;
-  /**
-   * Badgeholder's signature of the contents of their ballot.
-
-   * @summary Badgeholder signature of the ballot
-   * @pattern ^0x[a-fA-F0-9]{130}$
-   */
-  signature?: string;
-}
-
-export type RetroFundingBallotStatus =
-  (typeof RetroFundingBallotStatus)[keyof typeof RetroFundingBallotStatus];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const RetroFundingBallotStatus = {
-  PENDING: "PENDING",
-  SUBMITTED: "SUBMITTED",
-} as const;
-
-export type RetroFundingBallotProjectsAllocationAllocationsPerMetricItem = {
-  allocation?: number;
-  metric_id?: string;
-};
-
-/**
- * Projects allocation distribution based on the vote out of total 10M OP
-
- * @summary Projects allocation distribution based on the vote
- */
-export interface RetroFundingBallotProjectsAllocation {
-  allocation?: number;
-  allocations_per_metric?: RetroFundingBallotProjectsAllocationAllocationsPerMetricItem[];
-  image?: string;
-  is_os?: boolean;
-  name?: string;
-  project_id?: string;
-}
-
-/**
- * A vote for an RetroFunding ballot, including information about the vote.
-
- * @summary A vote for an RetroFunding ballot
- */
-export interface RetroFundingBallotMetricsAllocation {
-  allocation?: string;
-  locked?: boolean;
-  metric_id?: number;
-}
-
-/**
- * A ballot for an RetroFunding round, including information about the ballot.
-
- * @summary A ballot for an RetroFunding round
- */
-export interface RetroFundingBallot {
-  /**
-   * Address of the voter
-   * @summary Address of the voter
-   */
-  address?: string;
-  allocations?: RetroFundingBallotMetricsAllocation[];
-  created_at?: string;
-  projects_allocation?: RetroFundingBallotProjectsAllocation[];
-  published_at?: string;
-  round_id?: number;
-  status?: RetroFundingBallotStatus;
-  updated_at?: string;
-}
-
-/**
- * Social media links for a project, including links to Twitter, Discord, and other platforms.
-
- * @summary Social media links for a project
- */
-export interface SocialLinks {
-  farcaster?: string;
-  mirror?: string;
-  twitter?: string;
-  website?: string;
-}
-
-export type ProjectGrantsAndFundingVentureFundingItem = {
-  amount?: string;
-  details?: string;
-  year?: string;
-};
-
-export type ProjectGrantsAndFundingRevenueItem = {
-  amount?: string;
-  details?: string;
-};
-
-export type ProjectGrantsAndFundingGrantsItem = {
-  amount?: string;
-  date?: string;
-  details?: string;
-  grant?: string;
-  link?: string;
-};
-
-export type ProjectGrantsAndFunding = {
-  grants?: ProjectGrantsAndFundingGrantsItem[];
-  revenue?: ProjectGrantsAndFundingRevenueItem[];
-  ventureFunding?: ProjectGrantsAndFundingVentureFundingItem[];
-};
-
-export type ProjectContractsItemAllOf = {
-  /**
-   * The address of the deployed contract.
-   * @summary Address of the deployed contract
-   */
-  address?: string;
-  /**
-   * The chain ID on which the contract was deployed.
-   * @summary Chain ID of the contract
-   */
-  chainId?: string;
-  /**
-   * The address of the entity which deployed the contract.
-   * @summary Address of the deployer
-   */
-  deployerAddress?: string;
-  /**
-   * The transaction hash of the deployment transaction.
-   * @summary Transaction hash of the deployment
-   */
-  deploymentTxHash?: string;
-};
-
-export type ProjectContractsItem = Contract & ProjectContractsItemAllOf;
-
-/**
- * Information about a project submitted for Retroactive Public Goods Funding on Agora.
-
- * @summary A project submitted for RetroFunding
- */
-export interface Project {
-  category?: string;
-  /**
-   * Information about the contracts deployed by the project, including the contract address, chain ID, deployer, and creation block.
-
-   * @summary Deployed contracts for the project
-   */
-  contracts?: ProjectContractsItem[];
-  description?: string;
-  github?: string[];
-  grantsAndFunding?: ProjectGrantsAndFunding;
-  id?: string;
-  name?: string;
-  packages?: string[];
-  proejctCoverImageUrl?: string;
-  profileAvatarUrl?: string;
-  socialLinks?: SocialLinks;
-  team?: string[];
-}
-
-/**
- * A category for an RetroFunding project, including information about the category.
-
- * @summary A category for an RetroFunding project
- */
-export interface RetroFundingCategory {
-  description?: string;
-  name?: string;
-}
-
-/**
- * A team member on a RetroFunding project.
-
- * @summary Member of a RGPF project
- */
-export interface ProjectMember {
-  /** @summary Farcaster ID for project team member */
-  farcasterId?: string;
-}
-
-export type RetroFundingImpactMetricAllocationsPerProjectItem = {
-  allocation?: number;
-  image?: string;
-  is_os?: boolean;
-  name?: string;
-  project_id?: string;
-};
-
-/**
- * An impact metric for an RetroFunding project with associated metadata.
-
- * @summary Impact metric for an RetroFunding project
- */
-export interface RetroFundingImpactMetric {
-  added_to_ballot?: number;
-  allocations_per_project?: RetroFundingImpactMetricAllocationsPerProjectItem[];
-  comments?: Comment[];
-  description?: string;
-  metric_id?: string;
-  name?: string;
-  url?: string;
-  views?: number;
-}
-
-/**
- * Enum description of the status of an RetroFunding round.
- * @summary Status of an RetroFunding round
- */
-export type RetroFundingRoundStatus =
-  (typeof RetroFundingRoundStatus)[keyof typeof RetroFundingRoundStatus];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const RetroFundingRoundStatus = {
-  PLANNED: "PLANNED",
-  SCHEDULED: "SCHEDULED",
-  APPLICATIONS_STARTED: "APPLICATIONS_STARTED",
-  APPLICATIONS_REVIEW: "APPLICATIONS_REVIEW",
-  APPLICATIONS_LOCKED: "APPLICATIONS_LOCKED",
-  VOTING: "VOTING",
-  BALLOT_COUNTING: "BALLOT_COUNTING",
-  RESULTS_ANNOUNCED: "RESULTS_ANNOUNCED",
-  FUNDS_DISTRIBUTION: "FUNDS_DISTRIBUTION",
-  DONE: "DONE",
-  CANCELLED: "CANCELLED",
-} as const;
-
-/**
- * An event within an RetroFunding round, including status and timestamp. For example, a round may have events for the start of voting, application review, etc.
-
- * @summary An event within an RetroFunding round
- */
-export interface RetroFundingRoundEvent {
-  status?: RetroFundingRoundStatus;
-  /**
-   * The timestamp at which the RetroFunding event occurred.
-   * @summary Timestamp of the event
-   */
-  timestamp?: string;
-}
-
-/**
- * A Retroactive Public Goods Funding round on Agora, including  information about the round, and all events within the round.
-
- * @summary An RetroFunding round
- */
-export interface RetroFundingRound {
-  description?: string;
-  events?: RetroFundingRoundEvent[];
-  externalLink?: string;
-  name?: string;
-  roundId?: number;
-}
-
-/**
- * A vote on a comment, including the voter, timestamp, and vote (-1, 0, 1).
-
- * @summary A vote on a comment
- */
-export interface CommentVote {
-  /**
-   * The unique ID of the comment.
-   * @summary Comment ID
-   */
-  comment_id?: string;
-  /**
-   * The timestamp at which the comment was created.
-   * @summary Timestamp of the vote
-   */
-  created_at?: string;
-  /**
-   * The timestamp at which the comment was last edited.
-   * @summary Timestamp of the vote update
-   */
-  updated_at?: string;
-  /**
-   * The value of the vote (-1, 0, 1).
-   * @summary Vote value
-   */
-  vote?: number;
-  /**
-   * The address of the voter.
-   * @summary Voter address
-   */
-  voter?: string;
-}
-
-/**
- * A discussion comment, including the author, timestamp, and content.
-
- * @summary A comment
- */
-export interface Comment {
-  /**
-   * The delegate address of the author of the comment.
-   * @summary Author of the comment
-   */
-  address?: string;
-  /**
-   * The text content of the comment.
-   * @summary Content of the comment
-   */
-  comment?: string;
-  /**
-   * The unique ID of the comment.
-   * @summary Comment ID
-   */
-  comment_id?: string;
-  /**
-   * The timestamp at which the comment was created.
-   * @summary Timestamp of the comment
-   */
-  created_at?: string;
-  /**
-   * The timestamp at which the comment was last edited.
-   * @summary Timestamp of the comment edit
-   */
-  updated_at?: string;
-  votes?: CommentVote[];
-  /**
-   * The number of votes on the comment.
-   * @summary Count of votes on the comment
-   */
-  votes_count?: number;
-}
-
-/**
- * Metadata about a specific smart contract deployed on chain.
- * @summary Information about a deployed contract
- */
-export interface Contract {
-  /**
-   * The address of the contract on chain.
-   * @summary Contract address
-   */
-  address?: string;
-  /**
-   * The chain ID on which the contract is deployed.
-   * @summary Chain ID of the contract
-   */
-  chainId?: string;
-}
-
-export type VotingTokenAllOf = {
-  /**
-   * The total supply of the voting token.
-   * @summary Total supply of the voting token
-   */
-  totalSupply?: string;
-  /**
-   * The votable supply of the voting token.
-   * @summary Votable supply of the voting token
-   */
-  votableSupply?: string;
-};
-
-export type VotingToken = Contract & VotingTokenAllOf;
-
-/**
- * The type of the proposal.
- * @summary Type of the proposal
- */
-export type VoteProposalType =
-  (typeof VoteProposalType)[keyof typeof VoteProposalType];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const VoteProposalType = {
-  STANDARD: "STANDARD",
-  APPROVAL: "APPROVAL",
-  OPTIMISTIC: "OPTIMISTIC",
-  SNAPSHOT: "SNAPSHOT",
-} as const;
-
-/**
- * Describes which way the vote was cast (i.e. for/against/abstention)
- * @summary Disposition of the vote
- */
-export type VoteSupport = (typeof VoteSupport)[keyof typeof VoteSupport];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const VoteSupport = {
-  FOR: "FOR",
-  AGAINST: "AGAINST",
-  ABSTAIN: "ABSTAIN",
-} as const;
-
-/**
- * Information and metadata about a specific vote on a governance proposal.
- * @summary Information about a given vote
- */
-export interface Vote {
-  /**
-   * On-chain address of the EOA or contract which cast the vote.
-   * @summary Address casting the vote
-   */
-  address?: string;
-  /**
-   * An array of items to submit for approval for multiple choice votes.
-   * @summary Array of votes that have been chosen by the voter
-   */
-  params?: string[];
-  /**
-   * The unique ID of the proposal on which the vote was cast.
-   * @summary Proposal ID for the vote
-   */
-  proposalId?: string;
-  /**
-   * The title of the proposal.
-   * @summary Title of the proposal
-   */
-  proposalTitle?: string;
-  /**
-   * The type of the proposal.
-   * @summary Type of the proposal
-   */
-  proposalType?: VoteProposalType;
-  /**
-   * The total value that the proposal will be executed with.
-   * @summary Value of the proposal
-   */
-  proposalValue?: string;
-  /**
-   * A voter-supplied reason for voting the particular way they did.
-   * @summary Reason for the vote
-   */
-  reason?: string;
-  support?: VoteSupport;
-  /**
-   * The timestamp at which the vote was cast.
-   * @summary Timestamp of the vote
-   */
-  timestamp?: string;
-  /**
-   * The transaction hash of the transaction in which the vote was cast.
-   * @summary Transaction hash of the vote
-   */
-  transactionHash?: string;
-  /**
-   * Numeric description of the weight and voting power behind the vote.
-   * @summary Voting power behind the vote
-   */
-  weight?: string;
-}
-
-/**
- * Enum description of the proposal's voting strategy.
- * @summary The voting strategy for a proposal
- */
-export type VotingStrategy =
-  (typeof VotingStrategy)[keyof typeof VotingStrategy];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const VotingStrategy = {
-  STANDARD: "STANDARD",
-  ADVANCED: "ADVANCED",
-  OPTIMISTIC: "OPTIMISTIC",
-  SNAPSHOT: "SNAPSHOT",
-} as const;
-
-/**
- * An object describing the particular voting parameters of a proposal.
-
- * @summary Metadata about the proposal
- */
-export interface ProposalTemplate {
-  /**
-   * The amount of voting power needed to pass the given proposal.
-   * @summary Amount needed for measure to pass
-   */
-  approvalThreshold?: string;
-  /**
-   * Governor contract address to which this proposal was submitted.
-   * @summary Governor contract address
-   */
-  contractAddress?: string;
-  /**
-   * Block number on which this proposal template was created.
-   * @summary Proposal creation block number
-   */
-  createBlock?: string;
-  /**
-   * Name of proposal template
-   * @summary Name of proposal template
-   */
-  name?: string;
-  /**
-   * Numeric id of the proposal template
-   * @summary Numeric id of the proposal template
-   */
-  proposalTemplateId?: number;
-  /**
-   * The minimum number of voting power needed to be involved in a given proposal as a prerequisite for passage
-
-   * @summary Minimmum participation for passage
-   */
-  quorum?: string;
-  votingStrategy?: VotingStrategy;
-}
-
-/**
- * The current status of the proposal; can be active, closed, or pending.
- * @summary Status of the proposal
- */
-export type ProposalStatus =
-  (typeof ProposalStatus)[keyof typeof ProposalStatus];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const ProposalStatus = {
-  CANCELLED: "CANCELLED",
-  SUCCEEDED: "SUCCEEDED",
-  DEFEATED: "DEFEATED",
-  ACTIVE: "ACTIVE",
-  PENDING: "PENDING",
-  QUEUED: "QUEUED",
-  EXECUTED: "EXECUTED",
-  CLOSED: "CLOSED",
-} as const;
-
-/**
- * The type of proposal; can be standard, approval, optimistic, or snapshot.
- * @summary Type of proposal
- */
-export type ProposalProposalType =
-  (typeof ProposalProposalType)[keyof typeof ProposalProposalType];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const ProposalProposalType = {
-  STANDARD: "STANDARD",
-  APPROVAL: "APPROVAL",
-  OPTIMISTIC: "OPTIMISTIC",
-  SNAPSHOT: "SNAPSHOT",
-} as const;
-
-export type ProposalProposalData =
-  | SnapshotProposalData
-  | StandardProposalData
-  | ApprovalProposalData
-  | OptimisticProposalData;
-
-/**
- * An object describing the specifics and metadata associated with a particular governance proposal, including the specific measure, proposer, data, etc.
-
- * @summary A specific governance proposal for voting
- */
-export interface Proposal {
-  /**
-   * The amount of voting power needed to pass an option in the given approval voting proposal.
-   * @summary Minimum amount needed for option to pass
-   */
-  approvalThreshold?: string;
-  /**
-   * Timestamp at which this proposal has been canceled. Zero if not canceled.
-   * @summary Cancelled time of the proposal
-   */
-  cancelledTime?: string;
-  /**
-   * The transaction hash of the transaction which canceled the proposal.
-   * @summary Transaction hash of proposal cancellation
-   */
-  cancelledTransactionHash?: string;
-  /**
-   * Timestamp on which this proposal was created.
-   * @summary Proposal creation time
-   */
-  createdTime?: string;
-  /**
-   * The transaction hash of the transaction which created the proposal.
-   * @summary Transaction hash of proposal creation
-   */
-  createdTransactionHash?: string;
-  /**
-   * Extended information and context around the proposal.
-   * @summary Description of the proposal
-   */
-  description?: string;
-  /**
-   * Timestamp at which the proposal has closed for voting.
-   * @summary End time of the proposal
-   */
-  endTime?: string;
-  /**
-   * Timestamp at which this proposal has been executed. Zero if not executed.
-   * @summary Execution time of the proposal
-   */
-  executedTime?: string;
-  /**
-   * The transaction hash of the transaction which executed the proposal.
-   * @summary Transaction hash of proposal execution
-   */
-  executedTransactionHash?: string;
-  id?: string;
-  /**
-   * Title of the proposal
-   * @summary Title of the proposal
-   */
-  markdowntitle?: string;
-  proposalData?: ProposalProposalData;
-  proposalResults?: ProposalProposalResults;
-  proposalTemplate?: ProposalTemplate;
-  /**
-   * The type of proposal; can be standard, approval, optimistic, or snapshot.
-   * @summary Type of proposal
-   */
-  proposalType?: ProposalProposalType;
-  /**
-   * The address which submitted the proposal for voting.
-   * @summary Proposer's address
-   */
-  proposer?: string;
-  /**
-   * The minimum number of voting power needed to be involved in a given proposal as a prerequisite for passage
-
-   * @summary Minimum participation for passage
-   */
-  quorum?: string;
-  /**
-   * Block number of the proposal at which the voting power was calculated
-   * @summary Block number of the voting power snapshot
-   */
-  snapshotBlockNumber?: number;
-  /**
-   * Timestamp at which this proposal is open for voting.
-   * @summary Start time of the proposal
-   */
-  startTime?: string;
-  /**
-   * The current status of the proposal; can be active, closed, or pending.
-   * @summary Status of the proposal
-   */
-  status?: ProposalStatus;
-  /**
-   * The raw, unformatted data associated with the proposal.
-
-   * @summary Unformatted proposal data
-   */
-  unformattedProposalData?: string;
-}
-
-export type ExecutionDataFunctionArgsNameItem = {
-  /** @summary Data for function */
-  functionArgs?: string[];
-  /** @summary Function name */
-  functionName?: string;
-};
-
-/**
- * Provides the values, targets, calldata, and functions for proposal execution.
-
- * @summary Structured exceution data for proposal
- */
-export interface ExecutionData {
-  /** @summary Total tokens spent in the option transactions */
-  budgetTokensSpent?: string;
-  /** @summary Calldata for execution */
-  calldata?: string[];
-  /** @summary Description of the option */
-  description?: string;
-  /** @summary Functions for execution */
-  functionArgsName?: ExecutionDataFunctionArgsNameItem[];
-  /** @summary Function signatures */
-  signatures?: string[];
-  /** @summary Targets for execution */
-  targets?: string[];
-  /** @summary Values for execution */
-  values?: string[];
-}
-
-/**
- * Metadata and data associated with an optimistic proposal, including onchain execution data.
-
- * @summary Data associated with an optimistic proposal
- */
-export interface OptimisticProposalData {
-  /** @summary Description of the proposal */
-  description?: string;
-  executionData?: ExecutionData;
-  votingStrategy?: VotingStrategy;
-}
-
-/**
- * @summary Criteria for the proposal
- */
-export type ApprovalProposalDataProposalSettingsCriteria =
-  (typeof ApprovalProposalDataProposalSettingsCriteria)[keyof typeof ApprovalProposalDataProposalSettingsCriteria];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const ApprovalProposalDataProposalSettingsCriteria = {
-  THRESHOLD: "THRESHOLD",
-  TOP_CHOICES: "TOP_CHOICES",
-} as const;
-
-export type ApprovalProposalDataProposalSettings = {
-  /** @summary Budget amount for the proposal */
-  budgetAmount?: string;
-  /** @summary Budget token for the proposal */
-  budgetToken?: string;
-  /** @summary Criteria for the proposal */
-  criteria?: ApprovalProposalDataProposalSettingsCriteria;
-  /** @summary Criteria value for the proposal */
-  criteriaValue?: string;
-  /** @summary Maximum approvals for the proposal */
-  maxApprovals?: string;
-};
-
-export type ApprovalProposalDataOptionsItem = {
-  /** @summary Budget tokens spent */
-  budgetTokensSpent?: string;
-  /** @summary Description of the proposal */
-  description?: string;
-  executionData?: ExecutionData;
-};
-
-/**
- * Metadata and data associated with an approval proposal, including onchain execution data.
-
- * @summary Data associated with an approval proposal
- */
-export interface ApprovalProposalData {
-  options?: ApprovalProposalDataOptionsItem[];
-  proposalSettings?: ApprovalProposalDataProposalSettings;
-  votingStrategy?: VotingStrategy;
-}
-
-export type StandardProposalDataOptionsItem = {
-  executionData?: ExecutionData;
-};
-
-/**
- * Metadata and data associated with a standard proposal, including onchain execution data.
-
- * @summary Data associated with standard proposal
- */
-export interface StandardProposalData {
-  options?: StandardProposalDataOptionsItem[];
-  votingStrategy?: VotingStrategy;
-}
-
-/**
- * @summary State of the proposal
- */
-export type SnapshotProposalDataState =
-  (typeof SnapshotProposalDataState)[keyof typeof SnapshotProposalDataState];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const SnapshotProposalDataState = {
-  ACTIVE: "ACTIVE",
-  CLOSED: "CLOSED",
-  PENDING: "PENDING",
-} as const;
-
-/**
- * Metadata and data associated with a snapshot proposal, including start/end/created times, scores, and votes.
-
- * @summary Data associated with a snapshot proposal
- */
-export interface SnapshotProposalData {
-  /** @summary Creation time of the proposal */
-  createdTimestamp?: string;
-  /** @summary End time of the proposal */
-  endTimestamp?: string;
-  /** @summary Link to the proposal */
-  link?: string;
-  /** @summary Scores for the proposal */
-  scores?: string[];
-  /** @summary Start time of the proposal */
-  startTimestamp?: string;
-  /** @summary State of the proposal */
-  state?: SnapshotProposalDataState;
-  /** @summary Title of the proposal */
-  title?: string;
-  /** @summary Votes for the proposal */
-  votes?: string;
-  votingStrategy?: VotingStrategy;
-}
-
-/**
- * An object describing the results of a standard proposal.
- * @summary Results of a standard proposal
- */
-export interface OptimisticProposalResults {
-  /** @summary Number of abstentions */
-  abstain?: string;
-  /** @summary Number of votes against */
-  against?: string;
-  /** @summary Number of votes for */
-  for?: string;
-}
-
-export type ApprovalProposalResultsOptionsItem = {
-  option?: string;
-  votes?: string;
-};
-
-export type ApprovalProposalResultsCriteria =
-  (typeof ApprovalProposalResultsCriteria)[keyof typeof ApprovalProposalResultsCriteria];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const ApprovalProposalResultsCriteria = {
-  THRESHOLD: "THRESHOLD",
-  TOP_CHOICES: "TOP_CHOICES",
-} as const;
-
-/**
- * An object describing the results of an approval proposal.
- * @summary Results of an approval proposal
- */
-export interface ApprovalProposalResults {
-  /** @summary Number of abstentions */
-  abstain?: string;
-  /** @summary Number of votes against */
-  against?: string;
-  criteria?: ApprovalProposalResultsCriteria;
-  /** @summary Threshold required to pass or number of top choices that is passed */
-  criteriaValue?: string;
-  /** @summary Number of votes for */
-  for?: string;
-  options?: ApprovalProposalResultsOptionsItem[];
-}
-
-/**
- * An object describing the results of a standard proposal.
- * @summary Results of a standard proposal
- */
-export interface StandardProposalResults {
-  /** @summary Number of abstentions */
-  abstain?: string;
-  /** @summary Number of votes against */
-  against?: string;
-  /** @summary Number of votes for */
-  for?: string;
-}
-
-export type ProposalProposalResults =
-  | SnapshotProposalResults
-  | StandardProposalResults
-  | ApprovalProposalResults
-  | OptimisticProposalResults;
-
-/**
- * @summary Status of the proposal
- */
-export type SnapshotProposalResultsStatus =
-  (typeof SnapshotProposalResultsStatus)[keyof typeof SnapshotProposalResultsStatus];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const SnapshotProposalResultsStatus = {
-  pending: "pending",
-  active: "active",
-  closed: "closed",
-} as const;
-
-/**
- * An object describing the results of a snapshot proposal, including status and scores.
- * @summary Results of a snapshot proposal
- */
-export interface SnapshotProposalResults {
-  /** @summary Scores for the proposal */
-  scores?: string[];
-  /** @summary Status of the proposal */
-  status?: SnapshotProposalResultsStatus;
-}
-
-/**
- * An object describing a particular view on a particular governance issue.
- * @summary Description of a governance issue
- */
-export interface Issue {
-  type?: string;
-  value?: string;
-}
-
-/**
- * A delegate's statement, including the social links and topIssues.
- */
-export interface DelegateStatement {
-  /**
-   * Discord handle for the delegate.
-   * @summary Discord handle
-   */
-  discord?: string;
-  /**
-   * A statement from the delegate describing their voting positions.
-   * @summary Delegate's statement
-   */
-  statement?: string;
-  /**
-   * The most important issues for a given delegate.
-   * @summary Top issues for a delegate
-   */
-  topIssues?: Issue[];
-  /**
-   * Twitter handle for the delegate.
-   * @summary Twitter handle
-   */
-  twitter?: string;
-  /**
-   * Warpcast handle for the delegate.
-   * @summary Warpcast handle
-   */
-  warpcast?: string;
-}
-
-/**
- * An object providing a breakdown of a delegate's overall voting power between direct, advanced, and total.
- * @summary Delegate's available voting power
- */
-export type DelegateVotingPower = {
-  /** Advanced voting power. */
-  advanced?: string;
-  /** Direct voting power. */
-  direct?: string;
-  /** Total voting power. */
-  total?: string;
-};
-
-/**
- * Data associated with a voting delegate. Sub-resources under this delegate are not expanded.
- * @summary A voting delegate
- */
-export interface Delegate {
-  /**
-   * Address of the delegate.
-   * @summary Delegate address
-   */
-  address?: string;
-  /** A boolean flag indicating whether or not this delegate is an Agora citizen. */
-  isCitizen?: boolean;
-  /**
-   * The number of proposals voted on out of the last ten.
-   * @summary number of proposals voted on out of the last ten
-   */
-  lastTenProps?: string;
-  /**
-   * The number of delegators.
-   * @summary Number of delegators
-   */
-  numOfDelegators?: string;
-  /**
-   * The number of proposals created by the delegate.
-   * @summary Number of proposals created
-   */
-  proposalsCreated?: number;
-  /**
-   * The number of proposals voted on by the delegate.
-   * @summary Number of proposals voted on
-   */
-  proposalsVotedOn?: number;
-  statement?: DelegateStatement;
-  /**
-   * The number of proposals abstained from by the delegate.
-   * @summary Number of proposals abstained from
-   */
-  votedAbstain?: string;
-  /**
-   * The number of proposals voted against by the delegate.
-   * @summary Number of proposals voted against
-   */
-  votedAgainst?: string;
-  /**
-   * The number of proposals voted for by the delegate.
-   * @summary Number of proposals voted for
-   */
-  votedFor?: string;
-  /**
-   * The delegate's voting participation.
-   * @summary Voting participation
-   */
-  votingParticipation?: string;
-  /**
-   * An object providing a breakdown of a delegate's overall voting power between direct, advanced, and total.
-   * @summary Delegate's available voting power
-   */
-  votingPower?: DelegateVotingPower;
-  /**
-   * The delegate's voting power relative to the quorum.
-   * @summary Delegate's voting power relative to quorum
-   */
-  votingPowerRelativeToQuorum?: number;
-  /**
-   * The delegate's voting power relative to the votable supply.
-   * @summary Delegate's voting power relative to votable supply
-   */
-  votingPowerRelativeToVotableSupply?: number;
-}
-
-/**
- * An object providing a breakdown of a delegate's overall voting power between direct, advanced, and total.
- * @summary Delegate's available voting power
- */
-export type DelegateChunkVotingPower = {
-  /** Advanced voting power. */
-  advanced?: string;
-  /** Direct voting power. */
-  direct?: string;
-  /** Total voting power. */
-  total?: string;
-};
-
-/**
- * Data associated with a voting delegate. Sub-resources under this delegate are not expanded.
- * @summary A chunk of delegate data
- */
-export interface DelegateChunk {
-  /**
-   * Address of the delegate.
-   * @summary Delegate address
-   */
-  address?: string;
-  /** A boolean flag indicating whether or not this delegate is an Agora citizen. */
-  isCitizen?: boolean;
-  statement?: DelegateStatement;
-  /**
-   * An object providing a breakdown of a delegate's overall voting power between direct, advanced, and total.
-   * @summary Delegate's available voting power
-   */
-  votingPower?: DelegateChunkVotingPower;
-}
-
-/**
- * The type of delegation; can be advanced or direct. Advanced delegations are made through Alligator. Direct delegations are made through OP token.
- * @summary Type of delegation
- */
-export type DelegationType =
-  (typeof DelegationType)[keyof typeof DelegationType];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const DelegationType = {
-  DIRECT: "DIRECT",
-  ADVANCED: "ADVANCED",
-} as const;
-
-/**
- * The amount of voting power delegated; can be full or partial.
- * @summary Amount delegated
- */
-export type DelegationAmount =
-  (typeof DelegationAmount)[keyof typeof DelegationAmount];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const DelegationAmount = {
-  FULL: "FULL",
-  PARTIAL: "PARTIAL",
-} as const;
-
-/**
- * A delegation of voting power from one address to another.
- * @summary A delegation of voting power
- */
-export interface Delegation {
-  /**
-   * Total amount of voting power delegated to or from address.
-   * @summary Voting allowance for delegate in OP tokens (18 decimals)
-   */
-  allowance?: string;
-  /**
-   * The amount of voting power delegated; can be full or partial.
-   * @summary Amount delegated
-   */
-  amount?: DelegationAmount;
-  /**
-   * Address of the delegator.
-   * @summary Delegator address
-   */
-  from?: string;
-  /**
-   * The datetime on which the delegation of voting power occurred.
-   * @summary When delegation occured
-   */
-  timestamp?: string;
-  /**
-   * Address of the delegatee.
-   * @summary Delegatee address
-   */
-  to?: string;
-  /**
-   * The transaction hash of the delegation transaction.
-   * @summary Transaction hash of delegation
-   */
-  transaction_hash?: string;
-  /**
-   * The type of delegation; can be advanced or direct. Advanced delegations are made through Alligator. Direct delegations are made through OP token.
-   * @summary Type of delegation
-   */
-  type?: DelegationType;
-}
-
-/**
- * Metadata associated with paginated requests.
- * @summary Pagination metadata
- */
-export interface PageMetadata {
-  /**
-   * A boolean flag indicating if there is additional data past the returned page to retrieve.
-   * @summary Flag indicating if there's more data for retieval
-   */
-  has_next?: boolean;
-  /**
-   * A number indicating the offset at which a subsequent request may retrieve the next set of records.
-   * @summary Offset to supply to the next request
-   */
-  next_offset?: number;
-  /**
-   * A number indicating the total amount of records returned for the request.
-   * @summary Total records returned
-   */
-  total_returned?: number;
-}
-
-/**
- * Body SIWE verification requests containing message and signature per  (EIP-4361)[https://eips.ethereum.org/EIPS/eip-4361]
-
- * @summary Body of SIWE /verify request
- */
-export interface SIWEVerificationBody {
-  /** @summary SIWE message for verification */
-  message?: string;
-  nonce?: string;
-  /** @summary SIWE message signature for verification */
-  signature?: string;
-}
-
-/**
- * A token for authentication and authorization on the Agora platform. Subsequent requests should supply this as a Bearer token in the  "Authorization" header.
-
- * @summary Token for authentication
- */
-export interface AuthToken {
-  /**
-   * The access token.
-   * @summary The access token
-   */
-  access_token?: string;
-  /**
-   * The time after which the token will expire, in seconds.
-   * @summary Expiration time of the token
-   */
-  expires_in?: number;
-  /**
-   * The type of the token, either "jwt" or "api_key".
-
-   * @summary Type of the token
-   */
-  token_type?: string;
-}
+import type {
+  AddImpactMetricToRetroFundingBallotBody,
+  AuthToken,
+  Comment,
+  CommentVote,
+  Contract,
+  Delegate,
+  Delegation,
+  GetDelegateVotes200,
+  GetDelegateVotesParams,
+  GetDelegates200,
+  GetDelegatesParams,
+  GetDelegatorsByAddress200,
+  GetImpactMetricComments200,
+  GetImpactMetricCommentsParams,
+  GetProjects200,
+  GetProjectsParams,
+  GetProposalVotes200,
+  GetProposalVotesParams,
+  GetProposals200,
+  GetProposalsParams,
+  GetRetroFundingRoundBallotById200,
+  GetRetroFundingRoundProjects200,
+  GetRetroFundingRoundProjectsParams,
+  GetRetroFundingRounds200,
+  GetRetroFundingRoundsParams,
+  Project,
+  Proposal,
+  PutImactMetricCommentVoteBody,
+  PutImpactMetricCommentBody,
+  RecordImpactMetricView200,
+  RetroFundingImpactMetric,
+  RetroFundingRound,
+  Round4Ballot,
+  Round5Ballot,
+  SIWEVerificationBody,
+  SubmitRetroFundingBallot200,
+  SubmitRetroFundingBallotBody,
+  UpdateImpactMetricCommentBody,
+  UpdateRetroFundingRoundCategoryAllocationBody,
+  UpdateRetroFundingRoundProjectsBody,
+  VotingToken,
+} from "./agora.schemas";
+import { customFetch } from "../../utils/custom-fetch";
 
 /**
  * Retrieves the full OAS/Swagger spec for the API in YAML.
  * @summary Gets this specification
  */
-export const getSpec = <TData = AxiosResponse<string>>(
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(`https://vote.optimism.io/api/v1/spec`, options);
+export type getSpecResponse = {
+  data: string;
+  status: number;
+};
+
+export const getGetSpecUrl = () => {
+  return `https://vote.optimism.io/api/v1/spec`;
+};
+
+export const getSpec = async (
+  options?: RequestInit,
+): Promise<getSpecResponse> => {
+  return customFetch<Promise<getSpecResponse>>(getGetSpecUrl(), {
+    ...options,
+    method: "GET",
+  });
 };
 
 /**
  * Gets nonce for SIWE authentication.
  * @summary Gets nonce for SIWE authentication
  */
-export const getNonce = <TData = AxiosResponse<string>>(
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(`https://vote.optimism.io/api/v1/auth/nonce`, options);
+export type getNonceResponse = {
+  data: string;
+  status: number;
+};
+
+export const getGetNonceUrl = () => {
+  return `https://vote.optimism.io/api/v1/auth/nonce`;
+};
+
+export const getNonce = async (
+  options?: RequestInit,
+): Promise<getNonceResponse> => {
+  return customFetch<Promise<getNonceResponse>>(getGetNonceUrl(), {
+    ...options,
+    method: "GET",
+  });
 };
 
 /**
  * Posts SIWE message and signature.
  * @summary Posts SIWE verification payload
  */
-export const postSiweVerificationMessage = <TData = AxiosResponse<AuthToken>>(
+export type postSiweVerificationMessageResponse = {
+  data: AuthToken;
+  status: number;
+};
+
+export const getPostSiweVerificationMessageUrl = () => {
+  return `https://vote.optimism.io/api/v1/auth/verify`;
+};
+
+export const postSiweVerificationMessage = async (
   sIWEVerificationBody: SIWEVerificationBody,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.post(
-    `https://vote.optimism.io/api/v1/auth/verify`,
-    sIWEVerificationBody,
-    options,
+  options?: RequestInit,
+): Promise<postSiweVerificationMessageResponse> => {
+  return customFetch<Promise<postSiweVerificationMessageResponse>>(
+    getPostSiweVerificationMessageUrl(),
+    {
+      ...options,
+      method: "POST",
+      body: JSON.stringify(sIWEVerificationBody),
+    },
   );
 };
 
@@ -1519,14 +168,36 @@ export const postSiweVerificationMessage = <TData = AxiosResponse<AuthToken>>(
 
  * @summary Gets a list of delegates
  */
-export const getDelegates = <TData = AxiosResponse<GetDelegates200>>(
-  params?: GetDelegatesParams,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(`https://vote.optimism.io/api/v1/delegates`, {
-    ...options,
-    params: { ...params, ...options?.params },
+export type getDelegatesResponse = {
+  data: GetDelegates200;
+  status: number;
+};
+
+export const getGetDelegatesUrl = (params?: GetDelegatesParams) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value === null) {
+      normalizedParams.append(key, "null");
+    } else if (value !== undefined) {
+      normalizedParams.append(key, value.toString());
+    }
   });
+
+  return `https://vote.optimism.io/api/v1/delegates?${normalizedParams.toString()}`;
+};
+
+export const getDelegates = async (
+  params?: GetDelegatesParams,
+  options?: RequestInit,
+): Promise<getDelegatesResponse> => {
+  return customFetch<Promise<getDelegatesResponse>>(
+    getGetDelegatesUrl(params),
+    {
+      ...options,
+      method: "GET",
+    },
+  );
 };
 
 /**
@@ -1534,13 +205,25 @@ export const getDelegates = <TData = AxiosResponse<GetDelegates200>>(
 
  * @summary Gets a specific delegate
  */
-export const getDelegateByAddress = <TData = AxiosResponse<Delegate>>(
+export type getDelegateByAddressResponse = {
+  data: Delegate;
+  status: number;
+};
+
+export const getGetDelegateByAddressUrl = (addressOrEnsName: string) => {
+  return `https://vote.optimism.io/api/v1/delegates/${addressOrEnsName}`;
+};
+
+export const getDelegateByAddress = async (
   addressOrEnsName: string,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/delegates/${addressOrEnsName}`,
-    options,
+  options?: RequestInit,
+): Promise<getDelegateByAddressResponse> => {
+  return customFetch<Promise<getDelegateByAddressResponse>>(
+    getGetDelegateByAddressUrl(addressOrEnsName),
+    {
+      ...options,
+      method: "GET",
+    },
   );
 };
 
@@ -1549,16 +232,38 @@ export const getDelegateByAddress = <TData = AxiosResponse<Delegate>>(
 
  * @summary Gets a paginated list of votes for a delegate
  */
-export const getDelegateVotes = <TData = AxiosResponse<GetDelegateVotes200>>(
+export type getDelegateVotesResponse = {
+  data: GetDelegateVotes200;
+  status: number;
+};
+
+export const getGetDelegateVotesUrl = (
   addressOrEnsName: string,
   params?: GetDelegateVotesParams,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/delegates/${addressOrEnsName}/votes`,
+) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value === null) {
+      normalizedParams.append(key, "null");
+    } else if (value !== undefined) {
+      normalizedParams.append(key, value.toString());
+    }
+  });
+
+  return `https://vote.optimism.io/api/v1/delegates/${addressOrEnsName}/votes?${normalizedParams.toString()}`;
+};
+
+export const getDelegateVotes = async (
+  addressOrEnsName: string,
+  params?: GetDelegateVotesParams,
+  options?: RequestInit,
+): Promise<getDelegateVotesResponse> => {
+  return customFetch<Promise<getDelegateVotesResponse>>(
+    getGetDelegateVotesUrl(addressOrEnsName, params),
     {
       ...options,
-      params: { ...params, ...options?.params },
+      method: "GET",
     },
   );
 };
@@ -1568,14 +273,36 @@ export const getDelegateVotes = <TData = AxiosResponse<GetDelegateVotes200>>(
 
  * @summary Gets a list of proposals
  */
-export const getProposals = <TData = AxiosResponse<GetProposals200>>(
-  params?: GetProposalsParams,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(`https://vote.optimism.io/api/v1/proposals`, {
-    ...options,
-    params: { ...params, ...options?.params },
+export type getProposalsResponse = {
+  data: GetProposals200;
+  status: number;
+};
+
+export const getGetProposalsUrl = (params?: GetProposalsParams) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value === null) {
+      normalizedParams.append(key, "null");
+    } else if (value !== undefined) {
+      normalizedParams.append(key, value.toString());
+    }
   });
+
+  return `https://vote.optimism.io/api/v1/proposals?${normalizedParams.toString()}`;
+};
+
+export const getProposals = async (
+  params?: GetProposalsParams,
+  options?: RequestInit,
+): Promise<getProposalsResponse> => {
+  return customFetch<Promise<getProposalsResponse>>(
+    getGetProposalsUrl(params),
+    {
+      ...options,
+      method: "GET",
+    },
+  );
 };
 
 /**
@@ -1583,13 +310,25 @@ export const getProposals = <TData = AxiosResponse<GetProposals200>>(
 
  * @summary Gets a specific proposal
  */
-export const getProposalById = <TData = AxiosResponse<Proposal>>(
+export type getProposalByIdResponse = {
+  data: Proposal;
+  status: number;
+};
+
+export const getGetProposalByIdUrl = (proposalId: string) => {
+  return `https://vote.optimism.io/api/v1/proposals/${proposalId}`;
+};
+
+export const getProposalById = async (
   proposalId: string,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/proposals/${proposalId}`,
-    options,
+  options?: RequestInit,
+): Promise<getProposalByIdResponse> => {
+  return customFetch<Promise<getProposalByIdResponse>>(
+    getGetProposalByIdUrl(proposalId),
+    {
+      ...options,
+      method: "GET",
+    },
   );
 };
 
@@ -1598,16 +337,38 @@ export const getProposalById = <TData = AxiosResponse<Proposal>>(
 
  * @summary Gets a paginated list of votes for a proposal
  */
-export const getProposalVotes = <TData = AxiosResponse<GetProposalVotes200>>(
+export type getProposalVotesResponse = {
+  data: GetProposalVotes200;
+  status: number;
+};
+
+export const getGetProposalVotesUrl = (
   proposalId: string,
   params?: GetProposalVotesParams,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/proposals/${proposalId}/votes`,
+) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value === null) {
+      normalizedParams.append(key, "null");
+    } else if (value !== undefined) {
+      normalizedParams.append(key, value.toString());
+    }
+  });
+
+  return `https://vote.optimism.io/api/v1/proposals/${proposalId}/votes?${normalizedParams.toString()}`;
+};
+
+export const getProposalVotes = async (
+  proposalId: string,
+  params?: GetProposalVotesParams,
+  options?: RequestInit,
+): Promise<getProposalVotesResponse> => {
+  return customFetch<Promise<getProposalVotesResponse>>(
+    getGetProposalVotesUrl(proposalId, params),
     {
       ...options,
-      params: { ...params, ...options?.params },
+      method: "GET",
     },
   );
 };
@@ -1617,13 +378,25 @@ export const getProposalVotes = <TData = AxiosResponse<GetProposalVotes200>>(
 
  * @summary Gets delegatees (delegating to) information for an address
  */
-export const getDelegateesByAddress = <TData = AxiosResponse<Delegation>>(
+export type getDelegateesByAddressResponse = {
+  data: Delegation;
+  status: number;
+};
+
+export const getGetDelegateesByAddressUrl = (addressOrEnsName: string) => {
+  return `https://vote.optimism.io/api/v1/delegates/${addressOrEnsName}/delegatees`;
+};
+
+export const getDelegateesByAddress = async (
   addressOrEnsName: string,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/delegates/${addressOrEnsName}/delegatees`,
-    options,
+  options?: RequestInit,
+): Promise<getDelegateesByAddressResponse> => {
+  return customFetch<Promise<getDelegateesByAddressResponse>>(
+    getGetDelegateesByAddressUrl(addressOrEnsName),
+    {
+      ...options,
+      method: "GET",
+    },
   );
 };
 
@@ -1632,61 +405,26 @@ export const getDelegateesByAddress = <TData = AxiosResponse<Delegation>>(
 
  * @summary Gets delegator (delegating to) information for an address
  */
-export const getDelegatorsByAddress = <
-  TData = AxiosResponse<GetDelegatorsByAddress200>,
->(
+export type getDelegatorsByAddressResponse = {
+  data: GetDelegatorsByAddress200;
+  status: number;
+};
+
+export const getGetDelegatorsByAddressUrl = (addressOrEnsName: string) => {
+  return `https://vote.optimism.io/api/v1/delegates/${addressOrEnsName}/delegators`;
+};
+
+export const getDelegatorsByAddress = async (
   addressOrEnsName: string,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/delegates/${addressOrEnsName}/delegators`,
-    options,
+  options?: RequestInit,
+): Promise<getDelegatorsByAddressResponse> => {
+  return customFetch<Promise<getDelegatorsByAddressResponse>>(
+    getGetDelegatorsByAddressUrl(addressOrEnsName),
+    {
+      ...options,
+      method: "GET",
+    },
   );
-};
-
-/**
- * Retrieves a paginated list of votes on Agora as a JSON array. Limit, offset, and sort parameters can be used to customize the returned list.
-
- * @summary Gets a paginated list of votes
- */
-export const getVotes = <TData = AxiosResponse<GetVotes200>>(
-  params?: GetVotesParams,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(`https://vote.optimism.io/api/v1/votes`, {
-    ...options,
-    params: { ...params, ...options?.params },
-  });
-};
-
-/**
- * Retrieves a specific vote on Agora.
-
- * @summary Gets a specific vote
- */
-export const getVoteByTransactionId = <TData = AxiosResponse<Vote>>(
-  transactionId: string,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/votes/${transactionId}`,
-    options,
-  );
-};
-
-/**
- * Retrieves a list of projects on Agora as a JSON array. Limit, offset, and sort parameters can be used to customize the returned list.
-
- * @summary Gets a list of projects
- */
-export const getProjects = <TData = AxiosResponse<GetProjects200>>(
-  params?: GetProjectsParams,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(`https://vote.optimism.io/api/v1/projects`, {
-    ...options,
-    params: { ...params, ...options?.params },
-  });
 };
 
 /**
@@ -1694,12 +432,24 @@ export const getProjects = <TData = AxiosResponse<GetProjects200>>(
 
  * @summary Gets the governor contract address
  */
-export const getGovernorContract = <TData = AxiosResponse<Contract>>(
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/contracts/governor`,
-    options,
+export type getGovernorContractResponse = {
+  data: Contract;
+  status: number;
+};
+
+export const getGetGovernorContractUrl = () => {
+  return `https://vote.optimism.io/api/v1/contracts/governor`;
+};
+
+export const getGovernorContract = async (
+  options?: RequestInit,
+): Promise<getGovernorContractResponse> => {
+  return customFetch<Promise<getGovernorContractResponse>>(
+    getGetGovernorContractUrl(),
+    {
+      ...options,
+      method: "GET",
+    },
   );
 };
 
@@ -1708,12 +458,24 @@ export const getGovernorContract = <TData = AxiosResponse<Contract>>(
 
  * @summary Gets the alligator contract address
  */
-export const getAlligatorContract = <TData = AxiosResponse<Contract>>(
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/contracts/alligator`,
-    options,
+export type getAlligatorContractResponse = {
+  data: Contract;
+  status: number;
+};
+
+export const getGetAlligatorContractUrl = () => {
+  return `https://vote.optimism.io/api/v1/contracts/alligator`;
+};
+
+export const getAlligatorContract = async (
+  options?: RequestInit,
+): Promise<getAlligatorContractResponse> => {
+  return customFetch<Promise<getAlligatorContractResponse>>(
+    getGetAlligatorContractUrl(),
+    {
+      ...options,
+      method: "GET",
+    },
   );
 };
 
@@ -1722,10 +484,59 @@ export const getAlligatorContract = <TData = AxiosResponse<Contract>>(
 
  * @summary Gets the voting token contract address
  */
-export const getVotingTokenContract = <TData = AxiosResponse<VotingToken>>(
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(`https://vote.optimism.io/api/v1/contracts/token`, options);
+export type getVotingTokenContractResponse = {
+  data: VotingToken;
+  status: number;
+};
+
+export const getGetVotingTokenContractUrl = () => {
+  return `https://vote.optimism.io/api/v1/contracts/token`;
+};
+
+export const getVotingTokenContract = async (
+  options?: RequestInit,
+): Promise<getVotingTokenContractResponse> => {
+  return customFetch<Promise<getVotingTokenContractResponse>>(
+    getGetVotingTokenContractUrl(),
+    {
+      ...options,
+      method: "GET",
+    },
+  );
+};
+
+/**
+ * Retrieves a list of projects on Agora as a JSON array. Limit, offset, and sort parameters can be used to customize the returned list.
+
+ * @summary Gets a list of projects
+ */
+export type getProjectsResponse = {
+  data: GetProjects200;
+  status: number;
+};
+
+export const getGetProjectsUrl = (params?: GetProjectsParams) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value === null) {
+      normalizedParams.append(key, "null");
+    } else if (value !== undefined) {
+      normalizedParams.append(key, value.toString());
+    }
+  });
+
+  return `https://vote.optimism.io/api/v1/projects?${normalizedParams.toString()}`;
+};
+
+export const getProjects = async (
+  params?: GetProjectsParams,
+  options?: RequestInit,
+): Promise<getProjectsResponse> => {
+  return customFetch<Promise<getProjectsResponse>>(getGetProjectsUrl(params), {
+    ...options,
+    method: "GET",
+  });
 };
 
 /**
@@ -1733,16 +544,38 @@ export const getVotingTokenContract = <TData = AxiosResponse<VotingToken>>(
 
  * @summary Gets a list of RetroFunding rounds
  */
-export const getRetroFundingRounds = <
-  TData = AxiosResponse<GetRetroFundingRounds200>,
->(
+export type getRetroFundingRoundsResponse = {
+  data: GetRetroFundingRounds200;
+  status: number;
+};
+
+export const getGetRetroFundingRoundsUrl = (
   params?: GetRetroFundingRoundsParams,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(`https://vote.optimism.io/api/v1/retrofunding/rounds`, {
-    ...options,
-    params: { ...params, ...options?.params },
+) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value === null) {
+      normalizedParams.append(key, "null");
+    } else if (value !== undefined) {
+      normalizedParams.append(key, value.toString());
+    }
   });
+
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds?${normalizedParams.toString()}`;
+};
+
+export const getRetroFundingRounds = async (
+  params?: GetRetroFundingRoundsParams,
+  options?: RequestInit,
+): Promise<getRetroFundingRoundsResponse> => {
+  return customFetch<Promise<getRetroFundingRoundsResponse>>(
+    getGetRetroFundingRoundsUrl(params),
+    {
+      ...options,
+      method: "GET",
+    },
+  );
 };
 
 /**
@@ -1750,35 +583,24 @@ export const getRetroFundingRounds = <
 
  * @summary Gets a specific RetroFunding round
  */
-export const getRetroFundingRoundById = <
-  TData = AxiosResponse<RetroFundingRound>,
->(
-  roundId: number,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}`,
-    options,
-  );
+export type getRetroFundingRoundByIdResponse = {
+  data: RetroFundingRound;
+  status: number;
 };
 
-/**
- * Retrieves a list of ballots for a specific RetroFunding round on Agora as a JSON array. Limit, offset parameters can be used to customize the returned list sorted by ballot ordinal.
+export const getGetRetroFundingRoundByIdUrl = (roundId: number) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}`;
+};
 
- * @summary Gets a list of ballots for an RetroFunding round
- */
-export const getRetroFundingRoundBallots = <
-  TData = AxiosResponse<GetRetroFundingRoundBallots200>,
->(
+export const getRetroFundingRoundById = async (
   roundId: number,
-  params?: GetRetroFundingRoundBallotsParams,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots`,
+  options?: RequestInit,
+): Promise<getRetroFundingRoundByIdResponse> => {
+  return customFetch<Promise<getRetroFundingRoundByIdResponse>>(
+    getGetRetroFundingRoundByIdUrl(roundId),
     {
       ...options,
-      params: { ...params, ...options?.params },
+      method: "GET",
     },
   );
 };
@@ -1788,36 +610,29 @@ export const getRetroFundingRoundBallots = <
 
  * @summary Gets a specific ballot for an RetroFunding round
  */
-export const getRetroFundingRoundBallotById = <
-  TData = AxiosResponse<RetroFundingBallot>,
->(
-  roundId: number,
-  ballotCasterAddressOrEns: string,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${ballotCasterAddressOrEns}`,
-    options,
-  );
+export type getRetroFundingRoundBallotByIdResponse = {
+  data: GetRetroFundingRoundBallotById200;
+  status: number;
 };
 
-/**
- * Updates the OS multiplier for a specific ballot for an RetroFunding round on Agora.
-
- * @summary Updates the OS multiplier for a specific RetroFunding ballot
- */
-export const updateRetroFundingBallotOSMultiplier = <
-  TData = AxiosResponse<RetroFundingBallot>,
->(
+export const getGetRetroFundingRoundBallotByIdUrl = (
   roundId: number,
-  ballotCasterAddressOrEns: string,
-  osMultiplier: number,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.post(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${ballotCasterAddressOrEns}/osMultiplier/${osMultiplier}`,
-    undefined,
-    options,
+  addressOrEnsName: string,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}`;
+};
+
+export const getRetroFundingRoundBallotById = async (
+  roundId: number,
+  addressOrEnsName: string,
+  options?: RequestInit,
+): Promise<getRetroFundingRoundBallotByIdResponse> => {
+  return customFetch<Promise<getRetroFundingRoundBallotByIdResponse>>(
+    getGetRetroFundingRoundBallotByIdUrl(roundId, addressOrEnsName),
+    {
+      ...options,
+      method: "GET",
+    },
   );
 };
 
@@ -1826,18 +641,31 @@ export const updateRetroFundingBallotOSMultiplier = <
 
  * @summary Updates the OS only flag for a specific RetroFunding ballot
  */
-export const updateRetroFundingBallotOSOnly = <
-  TData = AxiosResponse<RetroFundingBallot>,
->(
+export type updateRetroFundingBallotOSOnlyResponse = {
+  data: Round4Ballot;
+  status: number;
+};
+
+export const getUpdateRetroFundingBallotOSOnlyUrl = (
   roundId: number,
-  ballotCasterAddressOrEns: string,
+  addressOrEnsName: string,
   osOnly: boolean,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.post(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${ballotCasterAddressOrEns}/osOnly/${osOnly}`,
-    undefined,
-    options,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/osOnly/${osOnly}`;
+};
+
+export const updateRetroFundingBallotOSOnly = async (
+  roundId: number,
+  addressOrEnsName: string,
+  osOnly: boolean,
+  options?: RequestInit,
+): Promise<updateRetroFundingBallotOSOnlyResponse> => {
+  return customFetch<Promise<updateRetroFundingBallotOSOnlyResponse>>(
+    getUpdateRetroFundingBallotOSOnlyUrl(roundId, addressOrEnsName, osOnly),
+    {
+      ...options,
+      method: "POST",
+    },
   );
 };
 
@@ -1845,18 +673,31 @@ export const updateRetroFundingBallotOSOnly = <
  * Submits the content of a ballot to be counted as final for the round.
  * @summary Submits a particular ballot
  */
-export const submitRetroFundingBallot = <
-  TData = AxiosResponse<RetroFundingBallot>,
->(
+export type submitRetroFundingBallotResponse = {
+  data: SubmitRetroFundingBallot200;
+  status: number;
+};
+
+export const getSubmitRetroFundingBallotUrl = (
   roundId: number,
-  ballotCasterAddressOrEns: string,
-  retroFundingBallotSubmission: RetroFundingBallotSubmission,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.post(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${ballotCasterAddressOrEns}/submit`,
-    retroFundingBallotSubmission,
-    options,
+  addressOrEnsName: string,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/submit`;
+};
+
+export const submitRetroFundingBallot = async (
+  roundId: number,
+  addressOrEnsName: string,
+  submitRetroFundingBallotBody: SubmitRetroFundingBallotBody,
+  options?: RequestInit,
+): Promise<submitRetroFundingBallotResponse> => {
+  return customFetch<Promise<submitRetroFundingBallotResponse>>(
+    getSubmitRetroFundingBallotUrl(roundId, addressOrEnsName),
+    {
+      ...options,
+      method: "POST",
+      body: JSON.stringify(submitRetroFundingBallotBody),
+    },
   );
 };
 
@@ -1865,18 +706,69 @@ export const submitRetroFundingBallot = <
 
  * @summary Gets a list of projects for an RetroFunding round
  */
-export const getRetroFundingRoundProjects = <
-  TData = AxiosResponse<GetRetroFundingRoundProjects200>,
->(
+export type getRetroFundingRoundProjectsResponse = {
+  data: GetRetroFundingRoundProjects200;
+  status: number;
+};
+
+export const getGetRetroFundingRoundProjectsUrl = (
   roundId: number,
   params?: GetRetroFundingRoundProjectsParams,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/projects`,
+) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value === null) {
+      normalizedParams.append(key, "null");
+    } else if (value !== undefined) {
+      normalizedParams.append(key, value.toString());
+    }
+  });
+
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/projects?${normalizedParams.toString()}`;
+};
+
+export const getRetroFundingRoundProjects = async (
+  roundId: number,
+  params?: GetRetroFundingRoundProjectsParams,
+  options?: RequestInit,
+): Promise<getRetroFundingRoundProjectsResponse> => {
+  return customFetch<Promise<getRetroFundingRoundProjectsResponse>>(
+    getGetRetroFundingRoundProjectsUrl(roundId, params),
     {
       ...options,
-      params: { ...params, ...options?.params },
+      method: "GET",
+    },
+  );
+};
+
+/**
+ * Retrieves a specific project for a specific RetroFunding round on Agora.
+
+ * @summary Gets a specific project for an RetroFunding round
+ */
+export type getRetroFundingRoundProjectByIdResponse = {
+  data: Project;
+  status: number;
+};
+
+export const getGetRetroFundingRoundProjectByIdUrl = (
+  roundId: number,
+  projectId: string,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/projects/${projectId}`;
+};
+
+export const getRetroFundingRoundProjectById = async (
+  roundId: number,
+  projectId: string,
+  options?: RequestInit,
+): Promise<getRetroFundingRoundProjectByIdResponse> => {
+  return customFetch<Promise<getRetroFundingRoundProjectByIdResponse>>(
+    getGetRetroFundingRoundProjectByIdUrl(roundId, projectId),
+    {
+      ...options,
+      method: "GET",
     },
   );
 };
@@ -1886,37 +778,295 @@ export const getRetroFundingRoundProjects = <
 
  * @summary Adds or updates an impact metric on a specific RetroFunding ballot
  */
-export const addImpactMetricToRetroFundingBallot = <
-  TData = AxiosResponse<RetroFundingBallot>,
->(
+export type addImpactMetricToRetroFundingBallotResponse = {
+  data: Round4Ballot;
+  status: number;
+};
+
+export const getAddImpactMetricToRetroFundingBallotUrl = (
   roundId: number,
-  ballotCasterAddressOrEns: string,
+  addressOrEnsName: string,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/impactMetrics`;
+};
+
+export const addImpactMetricToRetroFundingBallot = async (
+  roundId: number,
+  addressOrEnsName: string,
   addImpactMetricToRetroFundingBallotBody: AddImpactMetricToRetroFundingBallotBody,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.post(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${ballotCasterAddressOrEns}/impactMetrics`,
-    addImpactMetricToRetroFundingBallotBody,
-    options,
+  options?: RequestInit,
+): Promise<addImpactMetricToRetroFundingBallotResponse> => {
+  return customFetch<Promise<addImpactMetricToRetroFundingBallotResponse>>(
+    getAddImpactMetricToRetroFundingBallotUrl(roundId, addressOrEnsName),
+    {
+      ...options,
+      method: "POST",
+      body: JSON.stringify(addImpactMetricToRetroFundingBallotBody),
+    },
   );
 };
 
 /**
- * Removes an impact metric from a specific ballot for an RetroFunding round on Agora.
+ * Updates all projects data for a specific ballot for a RetroFunding round on Agora.
+
+ * @summary Updates all projects data for a specific RetroFunding ballot
+ */
+export type updateRetroFundingRoundProjectsResponse = {
+  data: Round5Ballot;
+  status: number;
+};
+
+export const getUpdateRetroFundingRoundProjectsUrl = (
+  roundId: number,
+  addressOrEnsName: string,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/projects`;
+};
+
+export const updateRetroFundingRoundProjects = async (
+  roundId: number,
+  addressOrEnsName: string,
+  updateRetroFundingRoundProjectsBody: UpdateRetroFundingRoundProjectsBody,
+  options?: RequestInit,
+): Promise<updateRetroFundingRoundProjectsResponse> => {
+  return customFetch<Promise<updateRetroFundingRoundProjectsResponse>>(
+    getUpdateRetroFundingRoundProjectsUrl(roundId, addressOrEnsName),
+    {
+      ...options,
+      method: "POST",
+      body: JSON.stringify(updateRetroFundingRoundProjectsBody),
+    },
+  );
+};
+
+/**
+ * Updates a specific project for a specific RetroFunding round on Agora. Allocation is a percentage of total allocation for the round.
+
+ * @summary Updates allocation for a specific project for a RetroFunding round
+ */
+export type updateRetroFundingRoundProjectAllocationResponse = {
+  data: Round5Ballot;
+  status: number;
+};
+
+export const getUpdateRetroFundingRoundProjectAllocationUrl = (
+  roundId: number,
+  addressOrEnsName: string,
+  projectId: string,
+  allocation: string,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/projects/${projectId}/allocation/${allocation}`;
+};
+
+export const updateRetroFundingRoundProjectAllocation = async (
+  roundId: number,
+  addressOrEnsName: string,
+  projectId: string,
+  allocation: string,
+  options?: RequestInit,
+): Promise<updateRetroFundingRoundProjectAllocationResponse> => {
+  return customFetch<Promise<updateRetroFundingRoundProjectAllocationResponse>>(
+    getUpdateRetroFundingRoundProjectAllocationUrl(
+      roundId,
+      addressOrEnsName,
+      projectId,
+      allocation,
+    ),
+    {
+      ...options,
+      method: "POST",
+    },
+  );
+};
+
+/**
+ * Updates a specific project for a specific RetroFunding round on Agora. Impact is a number from 0 to 5. 0 - Conflict of Interest 1 - Very Low 2 - Low 3 - Medium 4 - High 5 - Very High
+
+ * @summary Updates impact for a specific project for a RetroFunding round
+ */
+export type updateRetroFundingRoundProjectImpactResponse = {
+  data: Round5Ballot;
+  status: number;
+};
+
+export const getUpdateRetroFundingRoundProjectImpactUrl = (
+  roundId: number,
+  addressOrEnsName: string,
+  projectId: string,
+  impact: number,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/projects/${projectId}/impact/${impact}`;
+};
+
+export const updateRetroFundingRoundProjectImpact = async (
+  roundId: number,
+  addressOrEnsName: string,
+  projectId: string,
+  impact: number,
+  options?: RequestInit,
+): Promise<updateRetroFundingRoundProjectImpactResponse> => {
+  return customFetch<Promise<updateRetroFundingRoundProjectImpactResponse>>(
+    getUpdateRetroFundingRoundProjectImpactUrl(
+      roundId,
+      addressOrEnsName,
+      projectId,
+      impact,
+    ),
+    {
+      ...options,
+      method: "POST",
+    },
+  );
+};
+
+/**
+ * Updates a specific project for a specific RetroFunding round on Agora. Postion is an integer of the project's rank.
+
+ * @summary Updates position for a specific project for a RetroFunding round
+ */
+export type updateRetroFundingRoundProjectPositionResponse = {
+  data: Round5Ballot;
+  status: number;
+};
+
+export const getUpdateRetroFundingRoundProjectPositionUrl = (
+  roundId: number,
+  addressOrEnsName: string,
+  projectId: string,
+  position: number,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/projects/${projectId}/position/${position}`;
+};
+
+export const updateRetroFundingRoundProjectPosition = async (
+  roundId: number,
+  addressOrEnsName: string,
+  projectId: string,
+  position: number,
+  options?: RequestInit,
+): Promise<updateRetroFundingRoundProjectPositionResponse> => {
+  return customFetch<Promise<updateRetroFundingRoundProjectPositionResponse>>(
+    getUpdateRetroFundingRoundProjectPositionUrl(
+      roundId,
+      addressOrEnsName,
+      projectId,
+      position,
+    ),
+    {
+      ...options,
+      method: "POST",
+    },
+  );
+};
+
+/**
+ * Updates a category allocation and lock status for a specific ballot for a RetroFunding round on Agora.
+
+ * @summary Updates a category allocation for a specific RetroFunding ballot
+ */
+export type updateRetroFundingRoundCategoryAllocationResponse = {
+  data: Round5Ballot;
+  status: number;
+};
+
+export const getUpdateRetroFundingRoundCategoryAllocationUrl = (
+  roundId: number,
+  addressOrEnsName: string,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/categories`;
+};
+
+export const updateRetroFundingRoundCategoryAllocation = async (
+  roundId: number,
+  addressOrEnsName: string,
+  updateRetroFundingRoundCategoryAllocationBody: UpdateRetroFundingRoundCategoryAllocationBody,
+  options?: RequestInit,
+): Promise<updateRetroFundingRoundCategoryAllocationResponse> => {
+  return customFetch<
+    Promise<updateRetroFundingRoundCategoryAllocationResponse>
+  >(
+    getUpdateRetroFundingRoundCategoryAllocationUrl(roundId, addressOrEnsName),
+    {
+      ...options,
+      method: "POST",
+      body: JSON.stringify(updateRetroFundingRoundCategoryAllocationBody),
+    },
+  );
+};
+
+/**
+ * Updates the distribution method for a specific ballot for a RetroFunding round on Agora.
+
+ * @summary Updates the distribution method for a specific RetroFunding ballot
+ */
+export type updateRetroFundingBallotDistributionMethodResponse = {
+  data: Round5Ballot;
+  status: number;
+};
+
+export const getUpdateRetroFundingBallotDistributionMethodUrl = (
+  roundId: number,
+  addressOrEnsName: string,
+  distributionMethod: "IMPACT_GROUPS" | "TOP_TO_BOTTOM",
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/distribution_method/${distributionMethod}`;
+};
+
+export const updateRetroFundingBallotDistributionMethod = async (
+  roundId: number,
+  addressOrEnsName: string,
+  distributionMethod: "IMPACT_GROUPS" | "TOP_TO_BOTTOM",
+  options?: RequestInit,
+): Promise<updateRetroFundingBallotDistributionMethodResponse> => {
+  return customFetch<
+    Promise<updateRetroFundingBallotDistributionMethodResponse>
+  >(
+    getUpdateRetroFundingBallotDistributionMethodUrl(
+      roundId,
+      addressOrEnsName,
+      distributionMethod,
+    ),
+    {
+      ...options,
+      method: "POST",
+    },
+  );
+};
+
+/**
+ * Removes an impact metric from a specific ballot for a RetroFunding round on Agora.
 
  * @summary Removes an impact metric from a ballot
  */
-export const removeImpactMetricFromRetroFundingBallot = <
-  TData = AxiosResponse<void>,
->(
+export type removeImpactMetricFromRetroFundingBallotResponse = {
+  data: void;
+  status: number;
+};
+
+export const getRemoveImpactMetricFromRetroFundingBallotUrl = (
   roundId: number,
-  ballotCasterAddressOrEns: string,
+  addressOrEnsName: string,
   impactMetricId: string,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.delete(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${ballotCasterAddressOrEns}/impactMetrics/${impactMetricId}`,
-    options,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/impactMetrics/${impactMetricId}`;
+};
+
+export const removeImpactMetricFromRetroFundingBallot = async (
+  roundId: number,
+  addressOrEnsName: string,
+  impactMetricId: string,
+  options?: RequestInit,
+): Promise<removeImpactMetricFromRetroFundingBallotResponse> => {
+  return customFetch<Promise<removeImpactMetricFromRetroFundingBallotResponse>>(
+    getRemoveImpactMetricFromRetroFundingBallotUrl(
+      roundId,
+      addressOrEnsName,
+      impactMetricId,
+    ),
+    {
+      ...options,
+      method: "DELETE",
+    },
   );
 };
 
@@ -1925,15 +1075,25 @@ export const removeImpactMetricFromRetroFundingBallot = <
 
  * @summary Gets impact metrics for a specific RetroFunding round
  */
-export const getImpactMetricsOnRetroFundingRound = <
-  TData = AxiosResponse<RetroFundingImpactMetric[]>,
->(
+export type getImpactMetricsOnRetroFundingRoundResponse = {
+  data: RetroFundingImpactMetric[];
+  status: number;
+};
+
+export const getGetImpactMetricsOnRetroFundingRoundUrl = (roundId: number) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics`;
+};
+
+export const getImpactMetricsOnRetroFundingRound = async (
   roundId: number,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics`,
-    options,
+  options?: RequestInit,
+): Promise<getImpactMetricsOnRetroFundingRoundResponse> => {
+  return customFetch<Promise<getImpactMetricsOnRetroFundingRoundResponse>>(
+    getGetImpactMetricsOnRetroFundingRoundUrl(roundId),
+    {
+      ...options,
+      method: "GET",
+    },
   );
 };
 
@@ -1942,16 +1102,29 @@ export const getImpactMetricsOnRetroFundingRound = <
 
  * @summary Gets a specific impact metric for an RetroFunding round
  */
-export const getImpactMetricOnRetroFundingRound = <
-  TData = AxiosResponse<RetroFundingImpactMetric>,
->(
+export type getImpactMetricOnRetroFundingRoundResponse = {
+  data: RetroFundingImpactMetric;
+  status: number;
+};
+
+export const getGetImpactMetricOnRetroFundingRoundUrl = (
   roundId: number,
   impactMetricId: string,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}`,
-    options,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}`;
+};
+
+export const getImpactMetricOnRetroFundingRound = async (
+  roundId: number,
+  impactMetricId: string,
+  options?: RequestInit,
+): Promise<getImpactMetricOnRetroFundingRoundResponse> => {
+  return customFetch<Promise<getImpactMetricOnRetroFundingRoundResponse>>(
+    getGetImpactMetricOnRetroFundingRoundUrl(roundId, impactMetricId),
+    {
+      ...options,
+      method: "GET",
+    },
   );
 };
 
@@ -1960,16 +1133,31 @@ export const getImpactMetricOnRetroFundingRound = <
 
  * @summary Records a view of an impact metric
  */
-export const recordImpactMetricView = <TData = AxiosResponse<unknown>>(
+export type recordImpactMetricViewResponse = {
+  data: RecordImpactMetricView200;
+  status: number;
+};
+
+export const getRecordImpactMetricViewUrl = (
   roundId: number,
   impactMetricId: string,
   addressOrEnsName: string,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.post(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/${addressOrEnsName}`,
-    undefined,
-    options,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/${addressOrEnsName}`;
+};
+
+export const recordImpactMetricView = async (
+  roundId: number,
+  impactMetricId: string,
+  addressOrEnsName: string,
+  options?: RequestInit,
+): Promise<recordImpactMetricViewResponse> => {
+  return customFetch<Promise<recordImpactMetricViewResponse>>(
+    getRecordImpactMetricViewUrl(roundId, impactMetricId, addressOrEnsName),
+    {
+      ...options,
+      method: "POST",
+    },
   );
 };
 
@@ -1978,19 +1166,40 @@ export const recordImpactMetricView = <TData = AxiosResponse<unknown>>(
 
  * @summary Gets comments on an impact metric
  */
-export const getImpactMetricComments = <
-  TData = AxiosResponse<GetImpactMetricComments200>,
->(
+export type getImpactMetricCommentsResponse = {
+  data: GetImpactMetricComments200;
+  status: number;
+};
+
+export const getGetImpactMetricCommentsUrl = (
   roundId: number,
   impactMetricId: string,
   params?: GetImpactMetricCommentsParams,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments`,
+) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value === null) {
+      normalizedParams.append(key, "null");
+    } else if (value !== undefined) {
+      normalizedParams.append(key, value.toString());
+    }
+  });
+
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments?${normalizedParams.toString()}`;
+};
+
+export const getImpactMetricComments = async (
+  roundId: number,
+  impactMetricId: string,
+  params?: GetImpactMetricCommentsParams,
+  options?: RequestInit,
+): Promise<getImpactMetricCommentsResponse> => {
+  return customFetch<Promise<getImpactMetricCommentsResponse>>(
+    getGetImpactMetricCommentsUrl(roundId, impactMetricId, params),
     {
       ...options,
-      params: { ...params, ...options?.params },
+      method: "GET",
     },
   );
 };
@@ -2000,16 +1209,31 @@ export const getImpactMetricComments = <
 
  * @summary Creates a comment on an impact metric
  */
-export const putImpactMetricComment = <TData = AxiosResponse<Comment>>(
+export type putImpactMetricCommentResponse = {
+  data: Comment;
+  status: number;
+};
+
+export const getPutImpactMetricCommentUrl = (
+  roundId: number,
+  impactMetricId: string,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments`;
+};
+
+export const putImpactMetricComment = async (
   roundId: number,
   impactMetricId: string,
   putImpactMetricCommentBody: PutImpactMetricCommentBody,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.put(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments`,
-    putImpactMetricCommentBody,
-    options,
+  options?: RequestInit,
+): Promise<putImpactMetricCommentResponse> => {
+  return customFetch<Promise<putImpactMetricCommentResponse>>(
+    getPutImpactMetricCommentUrl(roundId, impactMetricId),
+    {
+      ...options,
+      method: "PUT",
+      body: JSON.stringify(putImpactMetricCommentBody),
+    },
   );
 };
 
@@ -2018,15 +1242,31 @@ export const putImpactMetricComment = <TData = AxiosResponse<Comment>>(
 
  * @summary Gets a specific comment on an impact metric
  */
-export const getImpactMetricComment = <TData = AxiosResponse<Comment>>(
+export type getImpactMetricCommentResponse = {
+  data: Comment;
+  status: number;
+};
+
+export const getGetImpactMetricCommentUrl = (
   roundId: number,
   impactMetricId: string,
   commentId: string,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}`,
-    options,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}`;
+};
+
+export const getImpactMetricComment = async (
+  roundId: number,
+  impactMetricId: string,
+  commentId: string,
+  options?: RequestInit,
+): Promise<getImpactMetricCommentResponse> => {
+  return customFetch<Promise<getImpactMetricCommentResponse>>(
+    getGetImpactMetricCommentUrl(roundId, impactMetricId, commentId),
+    {
+      ...options,
+      method: "GET",
+    },
   );
 };
 
@@ -2035,17 +1275,33 @@ export const getImpactMetricComment = <TData = AxiosResponse<Comment>>(
 
  * @summary Updates existing comment
  */
-export const updateImpactMetricComment = <TData = AxiosResponse<Comment>>(
+export type updateImpactMetricCommentResponse = {
+  data: Comment;
+  status: number;
+};
+
+export const getUpdateImpactMetricCommentUrl = (
+  roundId: number,
+  impactMetricId: string,
+  commentId: string,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}`;
+};
+
+export const updateImpactMetricComment = async (
   roundId: number,
   impactMetricId: string,
   commentId: string,
   updateImpactMetricCommentBody: UpdateImpactMetricCommentBody,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.put(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}`,
-    updateImpactMetricCommentBody,
-    options,
+  options?: RequestInit,
+): Promise<updateImpactMetricCommentResponse> => {
+  return customFetch<Promise<updateImpactMetricCommentResponse>>(
+    getUpdateImpactMetricCommentUrl(roundId, impactMetricId, commentId),
+    {
+      ...options,
+      method: "PUT",
+      body: JSON.stringify(updateImpactMetricCommentBody),
+    },
   );
 };
 
@@ -2054,15 +1310,31 @@ export const updateImpactMetricComment = <TData = AxiosResponse<Comment>>(
 
  * @summary Deletes a comment on an impact metric
  */
-export const deleteImpactMetricComment = <TData = AxiosResponse<void>>(
+export type deleteImpactMetricCommentResponse = {
+  data: void;
+  status: number;
+};
+
+export const getDeleteImpactMetricCommentUrl = (
   roundId: number,
   impactMetricId: string,
   commentId: string,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.delete(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}`,
-    options,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}`;
+};
+
+export const deleteImpactMetricComment = async (
+  roundId: number,
+  impactMetricId: string,
+  commentId: string,
+  options?: RequestInit,
+): Promise<deleteImpactMetricCommentResponse> => {
+  return customFetch<Promise<deleteImpactMetricCommentResponse>>(
+    getDeleteImpactMetricCommentUrl(roundId, impactMetricId, commentId),
+    {
+      ...options,
+      method: "DELETE",
+    },
   );
 };
 
@@ -2071,17 +1343,31 @@ export const deleteImpactMetricComment = <TData = AxiosResponse<void>>(
 
  * @summary Gets all votes for a speciffic comment
  */
-export const getImpactMetricCommentVote = <
-  TData = AxiosResponse<CommentVote[]>,
->(
+export type getImpactMetricCommentVoteResponse = {
+  data: CommentVote[];
+  status: number;
+};
+
+export const getGetImpactMetricCommentVoteUrl = (
   roundId: number,
   impactMetricId: string,
   commentId: string,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.get(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}/votes`,
-    options,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}/votes`;
+};
+
+export const getImpactMetricCommentVote = async (
+  roundId: number,
+  impactMetricId: string,
+  commentId: string,
+  options?: RequestInit,
+): Promise<getImpactMetricCommentVoteResponse> => {
+  return customFetch<Promise<getImpactMetricCommentVoteResponse>>(
+    getGetImpactMetricCommentVoteUrl(roundId, impactMetricId, commentId),
+    {
+      ...options,
+      method: "GET",
+    },
   );
 };
 
@@ -2090,67 +1376,32 @@ export const getImpactMetricCommentVote = <
 
  * @summary Creates or updates vote for a speciffic comment
  */
-export const putImactMetricCommentVote = <TData = AxiosResponse<CommentVote>>(
+export type putImactMetricCommentVoteResponse = {
+  data: CommentVote;
+  status: number;
+};
+
+export const getPutImactMetricCommentVoteUrl = (
+  roundId: number,
+  impactMetricId: string,
+  commentId: string,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}/votes`;
+};
+
+export const putImactMetricCommentVote = async (
   roundId: number,
   impactMetricId: string,
   commentId: string,
   putImactMetricCommentVoteBody: PutImactMetricCommentVoteBody,
-  options?: AxiosRequestConfig,
-): Promise<TData> => {
-  return axios.put(
-    `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}/votes`,
-    putImactMetricCommentVoteBody,
-    options,
+  options?: RequestInit,
+): Promise<putImactMetricCommentVoteResponse> => {
+  return customFetch<Promise<putImactMetricCommentVoteResponse>>(
+    getPutImactMetricCommentVoteUrl(roundId, impactMetricId, commentId),
+    {
+      ...options,
+      method: "PUT",
+      body: JSON.stringify(putImactMetricCommentVoteBody),
+    },
   );
 };
-
-export type GetSpecResult = AxiosResponse<string>;
-export type GetNonceResult = AxiosResponse<string>;
-export type PostSiweVerificationMessageResult = AxiosResponse<AuthToken>;
-export type GetDelegatesResult = AxiosResponse<GetDelegates200>;
-export type GetDelegateByAddressResult = AxiosResponse<Delegate>;
-export type GetDelegateVotesResult = AxiosResponse<GetDelegateVotes200>;
-export type GetProposalsResult = AxiosResponse<GetProposals200>;
-export type GetProposalByIdResult = AxiosResponse<Proposal>;
-export type GetProposalVotesResult = AxiosResponse<GetProposalVotes200>;
-export type GetDelegateesByAddressResult = AxiosResponse<Delegation>;
-export type GetDelegatorsByAddressResult =
-  AxiosResponse<GetDelegatorsByAddress200>;
-export type GetVotesResult = AxiosResponse<GetVotes200>;
-export type GetVoteByTransactionIdResult = AxiosResponse<Vote>;
-export type GetProjectsResult = AxiosResponse<GetProjects200>;
-export type GetGovernorContractResult = AxiosResponse<Contract>;
-export type GetAlligatorContractResult = AxiosResponse<Contract>;
-export type GetVotingTokenContractResult = AxiosResponse<VotingToken>;
-export type GetRetroFundingRoundsResult =
-  AxiosResponse<GetRetroFundingRounds200>;
-export type GetRetroFundingRoundByIdResult = AxiosResponse<RetroFundingRound>;
-export type GetRetroFundingRoundBallotsResult =
-  AxiosResponse<GetRetroFundingRoundBallots200>;
-export type GetRetroFundingRoundBallotByIdResult =
-  AxiosResponse<RetroFundingBallot>;
-export type UpdateRetroFundingBallotOSMultiplierResult =
-  AxiosResponse<RetroFundingBallot>;
-export type UpdateRetroFundingBallotOSOnlyResult =
-  AxiosResponse<RetroFundingBallot>;
-export type SubmitRetroFundingBallotResult = AxiosResponse<RetroFundingBallot>;
-export type GetRetroFundingRoundProjectsResult =
-  AxiosResponse<GetRetroFundingRoundProjects200>;
-export type AddImpactMetricToRetroFundingBallotResult =
-  AxiosResponse<RetroFundingBallot>;
-export type RemoveImpactMetricFromRetroFundingBallotResult =
-  AxiosResponse<void>;
-export type GetImpactMetricsOnRetroFundingRoundResult = AxiosResponse<
-  RetroFundingImpactMetric[]
->;
-export type GetImpactMetricOnRetroFundingRoundResult =
-  AxiosResponse<RetroFundingImpactMetric>;
-export type RecordImpactMetricViewResult = AxiosResponse<unknown>;
-export type GetImpactMetricCommentsResult =
-  AxiosResponse<GetImpactMetricComments200>;
-export type PutImpactMetricCommentResult = AxiosResponse<Comment>;
-export type GetImpactMetricCommentResult = AxiosResponse<Comment>;
-export type UpdateImpactMetricCommentResult = AxiosResponse<Comment>;
-export type DeleteImpactMetricCommentResult = AxiosResponse<void>;
-export type GetImpactMetricCommentVoteResult = AxiosResponse<CommentVote[]>;
-export type PutImactMetricCommentVoteResult = AxiosResponse<CommentVote>;
