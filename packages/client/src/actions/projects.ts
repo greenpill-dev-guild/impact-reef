@@ -66,157 +66,58 @@ export const getProjects = async (): Promise<Partial<Project>[]> => {
         return res.data;
     });
 
-    console.log("Projects: ", projects);
     if (!projects) return [];
-
-    console.log("Categories: ", projects.map((project: Project) => project.category));
 
     return projects.map((project: Project) => parseOpProjectToProjectItem(project));
 };
 
-export const getProjectMetrics = async (
-    projectId?: string | null
-): Promise<ProjectMetricItem[]> => {
-    if (!projectId) {
-        console.error("No project ID provided");
-        return [];
-    }
-
-    // TODO add 'where: valid: true' filter
-    const QUERY = graphql(/* GraphQL */ `
-        query Attestations($where: AttestationWhereInput) {
-            attestations(where: $where) {
-                id
-                recipient
-                timeCreated
-                decodedDataJson
-            }
-        }
-    `);
-
-    const {data, error} = await easSepoliaClient
-        .query(QUERY, {
-            where: {
-                schemaId: {equals: EAS["11155111"].PROJECT_METRICS.uid},
-                decodedDataJson: {contains: projectId},
-            },
-        })
-        .toPromise();
-
-    if (error) console.error(error);
-    if (!data) console.error("No data found");
-
-    return (
-        data?.attestations.map(({id, recipient, timeCreated, decodedDataJson}) =>
-            parseDataToProjectMetric(id, recipient, timeCreated, decodedDataJson)
-        ) ?? []
-    );
-};
+// export const getProjectMetrics = async (
+//     projectId?: string | null
+// ): Promise<ProjectMetricItem[]> => {
+//     if (!projectId) {
+//         console.error("No project ID provided");
+//         return [];
+//     }
+//
+//     // TODO add 'where: valid: true' filter
+//     const QUERY = graphql(/* GraphQL */ `
+//         query Attestations($where: AttestationWhereInput) {
+//             attestations(where: $where) {
+//                 id
+//                 recipient
+//                 timeCreated
+//                 decodedDataJson
+//             }
+//         }
+//     `);
+//
+//     const {data, error} = await easSepoliaClient
+//         .query(QUERY, {
+//             where: {
+//                 schemaId: {equals: EAS["11155111"].PROJECT_METRICS.uid},
+//                 decodedDataJson: {contains: projectId},
+//             },
+//         })
+//         .toPromise();
+//
+//     if (error) console.error(error);
+//     if (!data) console.error("No data found");
+//
+//     return (
+//         data?.attestations.map(({id, recipient, timeCreated, decodedDataJson}) =>
+//             parseDataToProjectMetric(id, recipient, timeCreated, decodedDataJson)
+//         ) ?? []
+//     );
+// };
 
 export const getProjectDetails = async (
     projectId?: string | null
-): Promise<Project | undefined> => {
+): Promise<Partial<Project> | undefined> => {
     if (!projectId) console.error("No project ID provided");
 
-    const QUERY = graphql(/* GraphQL */ `
-        query Attestations(
-            $where: AttestationWhereInput!
-            $orderBy: [AttestationOrderByWithRelationInput!]
-            $take: Int
-        ) {
-            attestations(where: $where, orderBy: $orderBy, take: $take) {
-                id
-                decodedDataJson
-                timeCreated
-            }
-        }
-    `);
+    const project = await getProjects().then((res) => res.find((project: Project) => project.id === projectId));
 
-    const {data, error} = await easOptimismClient
-        .query(QUERY, {
-            where: {
-                schemaId: {equals: EAS["10"].PROJECT_METADATA.uid},
-                decodedDataJson: {contains: projectId},
-                revoked: {equals: false},
-            },
-            orderBy: [
-                {
-                    timeCreated: "desc",
-                },
-            ],
-            take: 1,
-        })
-        .toPromise();
+    console.log("Details found for project: ", project);
 
-    if (error) console.error(error);
-    if (!data) console.error("No data found");
-
-    // TODO add placeholder image urls
-    const parseDataToProjectDetails = async (data: any): Promise<Project> => {
-        const metrics = await getProjectMetrics(projectId);
-        const endorsements = await getProjectEndorsements(projectId);
-
-        const _data = JSON.parse(data);
-        const metadata: {
-            projectAvatarUrl: string;
-            projectCoverImageUrl: string;
-            description: string;
-            team: any[];
-            npm: any[];
-            contracts: any[];
-            grantsAndFunding: {
-                optimismGrants: any[];
-                ventureFunding: any[];
-                otherGrants: any[];
-            };
-            github: string[];
-            socialLinks: {
-                website: string;
-                farcaster: string;
-                twitter: string;
-                mirror: string;
-            };
-        } = await fetchMetadata(
-            _data.filter((d: any) => d.name === "metadataUrl")[0].value.value!
-        );
-
-        // TODO get metrics
-        // TODO get grant_track
-        // TODO get attestations and counts
-        // TODO get creator
-        // TODO get funding
-
-        console.log("Metadata: ", metadata);
-
-        return {
-            id: _data.filter((d: any) => d.name === "projectRefUID")[0]["value"]
-                .value,
-            title: _data.filter((d: any) => d.name === "name")[0].value.value!,
-            creator: "vitalik.eth",
-            avatar_image: metadata.projectAvatarUrl,
-            banner_image: metadata.projectCoverImageUrl,
-            // category: _data.filter((d: any) => d.name === "category")[0].value.value!,
-            category: "utility",
-            description: metadata.description,
-            endorsements,
-            contracts: metadata?.contracts || [],
-            funding: metadata.grantsAndFunding.optimismGrants,
-            grant_track: "onchain-builders",
-            repositories:
-                metadata.github && metadata.github.length > 0 ? metadata.github : [],
-            metrics,
-            socials:
-                metadata.socialLinks ?
-                    Object.values(metadata.socialLinks).filter((value) => !!value)
-                    : [],
-            updated_at: new Date().toISOString(),
-        };
-    };
-
-    if (!data || data?.attestations.length === 0) {
-        console.error("No data found");
-        return;
-    }
-
-    return await parseDataToProjectDetails(data.attestations[0].decodedDataJson);
+    return project
 };

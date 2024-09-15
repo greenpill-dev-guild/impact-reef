@@ -8,7 +8,7 @@ export default defineConfig({
             target: './src/__generated__/api/agora.ts',
             client: 'fetch',
             baseUrl: 'https://vote.optimism.io/api/v1',
-            mock: true,
+            mock: false,
             override: {
                 mutator: {
                     path: './src/utils/custom-fetch.ts',
