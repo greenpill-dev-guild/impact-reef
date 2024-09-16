@@ -1,18 +1,22 @@
 "use server";
 
-import {graphql} from "gql.tada";
+import { graphql } from "gql.tada";
 
-import {easOptimismClient, easSepoliaClient} from "@/modules/urql";
+import { easOptimismClient, easSepoliaClient } from "@/modules/urql";
 
-import {EAS} from "@/constants";
+import { EAS } from "@/constants";
 import {
-    fetchMetadata,
-    parseDataToProjectMetric, parseOpProjectToProjectItem,
+  fetchMetadata,
+  parseDataToProjectMetric,
+  parseOpProjectToProjectItem,
 } from "@/utils/parseData";
 
-import {getProjectEndorsements} from "./endorsements";
-import {getRetroFundingRoundProjects, getRetroFundingRoundProjectsResponse} from "@/__generated__/api/agora";
-import {PageMetadata} from "@/__generated__/api/agora.schemas";
+import { getProjectEndorsements } from "./endorsements";
+import {
+  getRetroFundingRoundProjects,
+  getRetroFundingRoundProjectsResponse,
+} from "@/__generated__/api/agora";
+import { PageMetadata } from "@/__generated__/api/agora.schemas";
 
 // // TODO add cache for metadata fetching
 // export const getProjectBuilders = async (): Promise<any[]> => {
@@ -54,21 +58,25 @@ import {PageMetadata} from "@/__generated__/api/agora.schemas";
 //     //   .flatMap((decodedData) => decodedData) as bigint[];
 // };
 
-
 export type ProjectsResponse = {
-    metadata?: PageMetadata;
-    data?: Project[];
+  metadata?: PageMetadata;
+  data?: Project[];
 };
 
 export const getProjects = async (): Promise<Partial<Project>[]> => {
-    const projects = await getRetroFundingRoundProjects(5).then((results: getRetroFundingRoundProjectsResponse) => {
-        const res: ProjectsResponse = results.data;
-        return res.data;
-    });
+  const projects = await getRetroFundingRoundProjects(5).then(
+    (results: getRetroFundingRoundProjectsResponse) => {
+      const res: ProjectsResponse = results.data;
+      console.log("Projects response: ", res);
+      return res.data;
+    },
+  );
 
-    if (!projects) return [];
+  if (!projects) return [];
 
-    return projects.map((project: Project) => parseOpProjectToProjectItem(project));
+  return projects.map((project: Project) =>
+    parseOpProjectToProjectItem(project),
+  );
 };
 
 // export const getProjectMetrics = async (
@@ -111,13 +119,15 @@ export const getProjects = async (): Promise<Partial<Project>[]> => {
 // };
 
 export const getProjectDetails = async (
-    projectId?: string | null
+  projectId?: string | null,
 ): Promise<Partial<Project> | undefined> => {
-    if (!projectId) console.error("No project ID provided");
+  if (!projectId) console.error("No project ID provided");
 
-    const project = await getProjects().then((res) => res.find((project: Project) => project.id === projectId));
+  const project = await getProjects().then((res) =>
+    res.find((project: Project) => project.id === projectId),
+  );
 
-    console.log("Details found for project: ", project);
+  console.log("Details found for project: ", project);
 
-    return project
+  return project;
 };

@@ -31,7 +31,7 @@ export const Connect: React.FC<ConnectProps> = () => {
           <div
             tabIndex={0}
             role="button"
-            className="border-bl btn btn-outline inline-flex w-32 items-center justify-center gap-2 p-4 font-semibold text-zinc-800 hover:fill-white hover:text-white"
+            className="btn btn-outline inline-flex w-32 items-center justify-center gap-2 border-2 border-sky-700 p-4 font-semibold text-slate-800 transition-colors duration-300 ease-in-out hover:bg-sky-700 hover:fill-white hover:text-white focus:bg-sky-700 focus:fill-white focus:text-white"
           >
             My Reef{" "}
             <svg width="13" height="8" viewBox="0 0 13 8">

@@ -35,7 +35,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@0no-co/graphqlsp": "^1.12.12",
     "@next/bundle-analyzer": "^14.2.5",
     "@testing-library/react": "^16.0.0",
     "@types/node": "^22.0.0",

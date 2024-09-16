@@ -17,15 +17,16 @@ const ProjectsView: React.FC = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       const projects = await getProjects();
+
       setProjects(projects);
     };
     fetchProjects();
   }, []);
 
   return (
-    <main className="flex flex-row gap-4 min-h-screen p-12">
-      <div className="flex flex-col gap-4 w-full mx-auto">
-        <section className="w-full mx-auto max-w-screen-xl gap-4">
+    <main className="flex min-h-screen flex-row gap-4 p-12">
+      <div className="mx-auto flex w-full flex-col gap-4">
+        <section className="mx-auto w-full max-w-screen-xl gap-4">
           <h1 className="text-4xl font-semibold">Projects</h1>
           <p className="mb-6">
             Discover and explore the magic being built by fellow project
@@ -100,8 +101,8 @@ const ProjectsView: React.FC = () => {
         </section>
       </div>
       <aside className="basis-60">
-        <div className="rounded-xl p-6 w-full h-[460px] bg-no-repeat bg-cover bg-clip-padding bg-right-top bg-[url('/images/img-project-side.jpg')]">
-          <h3 className="text-2xl font-semibold mb-6">
+        <div className="h-[460px] w-full rounded-xl bg-[url('/images/img-project-side.jpg')] bg-cover bg-clip-padding bg-right-top bg-no-repeat p-6">
+          <h3 className="mb-6 text-2xl font-semibold">
             Observe the impact of projects on the ecosystem
           </h3>
           <p className="text-base font-light">
