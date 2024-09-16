@@ -3,10 +3,9 @@ export const APP_DEFAULT_TITLE = "Impact Reef";
 export const APP_TITLE_TEMPLATE = "%s - Impact Reef";
 export const APP_DESCRIPTION = "";
 export const APP_URL = "https://impactreef.app";
-export const APP_ICON = "https://impactreef.app/images/logo.png";
+export const APP_ICON = "https://impactreef.app/icon.png";
 
 export const agoraRoundsAPI = "/api/agora/retrofunding/rounds/5";
-
 
 export const EAS = {
   "10": {
