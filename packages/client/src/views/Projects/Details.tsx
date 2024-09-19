@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
 import { FaArrowLeft, FaArrowUp } from "react-icons/fa";

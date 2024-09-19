@@ -45,7 +45,7 @@ const ProjectsView: React.FC<ProjectViewProps> = ({
           <p className="text-base font-light">
             Guided by metrics from Impact Evaluators. Project builders,
             evaluators, and community members are actively shaping these metrics
-            to provide a comprehensive view of the project's impact.
+            to provide a comprehensive view of the project&apos;s impact.
           </p>
         </div>
       </aside>

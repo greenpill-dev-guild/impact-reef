@@ -4,9 +4,7 @@ import dynamic from "next/dynamic";
 import { getProject } from "@/actions/projects";
 import { getBadgeholders } from "@/actions/badgeholders";
 
-export const ProjectDetailsView = dynamic(
-  () => import("@/views/Projects/Details"),
-);
+const ProjectDetailsView = dynamic(() => import("@/views/Projects/Details"));
 
 interface Props {
   params: { uid: string };

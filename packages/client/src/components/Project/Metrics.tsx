@@ -50,7 +50,7 @@ export const ProjectMetrics: React.FC<ProjectMetricsProps> = ({ metrics }) => {
         <div className="grid place-items-center">
           <h3 className="text-xl font-semibold">No metrics yet</h3>
           <p className="text-lg font-light">
-            Add metrics to track your project's progress
+            Add metrics to track your project&apos;s progress
           </p>
         </div>
       )}
