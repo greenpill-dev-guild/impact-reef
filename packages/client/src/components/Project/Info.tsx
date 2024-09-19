@@ -11,15 +11,6 @@ export interface ProjectInfoProps {
   funding: ProjectGrant[];
 }
 
-// CONTRACTS:  [
-//   {
-//     id: '15310289-3b94-4a57-86f6-1306057fdae9',
-//     contractAddress: '0x206e4410d2eBf14caB8E5C88432E954924073cEA',
-//     deployerAddress: '0x4a6894Dd556fab996f8D50b521f900CAEedC168e',
-//     deploymentHash: '0x79889c96bf14c91f547474b5919c27f212c7f570572e81bfd3291cdc1e226cf6',
-//     chainId: 10
-//   }
-// ]
 const getBlockExplorerLink = ({
   contractAddress,
   chainId,
@@ -41,12 +32,14 @@ export const ProjectInfo: React.FC<ProjectInfoProps> = ({
   funding,
 }) => {
   return (
-    <aside className="basis-72 flex flex-col gap-2">
+    <aside className="flex basis-72 flex-col gap-2">
       <Collaspe title="Repository">
         <ul>
           {repositories?.map((repo) => (
             <li key={repo}>
-              <Link href={repo}>{repo}</Link>
+              <Link target="_blank" href={repo}>
+                {repo}
+              </Link>
             </li>
           ))}
         </ul>

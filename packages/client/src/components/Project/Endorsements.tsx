@@ -20,7 +20,7 @@ export const ProjectEndorsementCard: React.FC<ProjectEndorsementCardProps> = ({
   return (
     <li
       key={endorsement.id}
-      className="p-3 border h-[456px] rounded-md shadow-sm flex flex-col justify-between gap-6"
+      className="flex h-[456px] flex-col justify-between gap-6 rounded-md border p-3 shadow-sm"
     >
       <p className="">{endorsement.description}</p>
       <div>
@@ -40,12 +40,12 @@ export const ProjectEndorsements: React.FC<ProjectEndorsementsProps> = ({
   return (
     <section
       id="project-endorsements"
-      className="w-full min-h-screen max-w-screen-xl mx-auto flex flex-col items-center gap-12 py-12"
+      className="mx-auto flex w-full max-w-screen-xl flex-col items-center gap-12 py-12"
     >
       <Image
         src={banner}
         alt="project banner"
-        className="w-full aspect-[16/6] rounded-md"
+        className="aspect-[16/6] w-full rounded-md"
         width={1600}
         height={900}
       />
@@ -57,18 +57,25 @@ export const ProjectEndorsements: React.FC<ProjectEndorsementsProps> = ({
           width={32}
           height={32}
         />
-        <h2 className="font-semibold text-3xl">Endorsements</h2>
+        <h2 className="text-3xl font-semibold">Endorsements</h2>
       </div>
-      <ul className="grid grid-cols-4 grid-rows-auto gap-4 w-full">
-        {endorsements && endorsements.length ?
-          endorsements.map((endorsement) => (
+      {endorsements && endorsements.length ? (
+        <ul className="grid-rows-auto grid w-full grid-cols-4 gap-4">
+          {endorsements.map((endorsement) => (
             <ProjectEndorsementCard
               key={endorsement.id}
               endorsement={endorsement}
             />
-          ))
-        : <div></div>}
-      </ul>
+          ))}
+        </ul>
+      ) : (
+        <div className="grid place-items-center">
+          <h3 className="text-xl font-semibold">No endorsements yet</h3>
+          <p className="text-lg font-light">
+            Be the first to endorse this project
+          </p>
+        </div>
+      )}
     </section>
   );
 };

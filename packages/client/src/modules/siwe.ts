@@ -1,11 +1,11 @@
-import { getCsrfToken, signIn, signOut, getSession } from "next-auth/react";
 import type {
   SIWEVerifyMessageArgs,
   SIWECreateMessageArgs,
   SIWESession,
 } from "@web3modal/siwe";
-import { createSIWEConfig, formatMessage } from "@web3modal/siwe";
 import { sepolia } from "viem/chains";
+import { createSIWEConfig, formatMessage } from "@web3modal/siwe";
+import { getCsrfToken, signIn, signOut, getSession } from "next-auth/react";
 
 export const siweConfig = createSIWEConfig({
   getMessageParams: async () => ({
@@ -25,14 +25,15 @@ export const siweConfig = createSIWEConfig({
     return nonce;
   },
   getSession: async () => {
-    const session = await getSession()
+    const session = await getSession();
     if (!session) {
-      throw new Error('Failed to get session!')
+      // await siweConfig.signOut();
+      return null;
     }
 
-    const { address, chainId } = session as unknown as SIWESession
+    const { user, chainId } = session;
 
-    return { address, chainId }
+    return { address: user.address, chainId };
   },
   verifyMessage: async ({ message, signature }: SIWEVerifyMessageArgs) => {
     try {

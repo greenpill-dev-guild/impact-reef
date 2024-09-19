@@ -25,7 +25,7 @@ export const ProfileLayout = ({
   const pathname = usePathname();
 
   return (
-    <main className="mx-auto w-full max-w-screen-xl py-12">
+    <div className="mx-auto w-full max-w-screen-xl py-12">
       <header className="mb-8">
         <h2 className="mb-2">My Reef</h2>
         <p className="text-lg font-light">
@@ -61,6 +61,6 @@ export const ProfileLayout = ({
         </aside>
         <section className="flex-1">{children}</section>
       </div>
-    </main>
+    </div>
   );
 };

@@ -4,6 +4,7 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import { ProjectAttestEndorsement } from "./Endorsement";
 import { AttestFormValues, ProjectAttestMetric } from "./Metric";
+import Image from "next/image";
 
 interface ProjectAttestProps {
   metrics: ProjectMetricItem[];
@@ -26,7 +27,7 @@ function generateSchema(projectCreator: boolean) {
                 value: z.string(),
                 source: z.string().url(),
               })
-              .nullish()
+              .nullish(),
           )
           .nullish(),
       })
@@ -40,7 +41,7 @@ function generateSchema(projectCreator: boolean) {
               metricDescription: z.string(),
               value: z.number(),
               source: z.string(),
-            })
+            }),
           )
           .nullish(),
       });
@@ -80,10 +81,17 @@ export const ProjectAttest: React.FC<ProjectAttestProps> = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-[540px] relative h-full mb-16 flex flex-col"
+      className="relative mb-16 flex h-full w-[540px] flex-col"
     >
-      <header className="py-8 px-12">
-        <h2 className="mb-2">
+      <header className="px-12 py-8">
+        <h2 className="mb-2 flex items-center gap-1">
+          <Image
+            src="/icons/chat-alt.svg"
+            alt="Endorsment Chat SVG"
+            unoptimized
+            width={40}
+            height={40}
+          />{" "}
           {projectCreator
             ? "Claim Metrics"
             : badgeholder
@@ -98,16 +106,16 @@ export const ProjectAttest: React.FC<ProjectAttestProps> = ({
               : "Support this project by submitting an onchain attestation as proof of your endorsement."}
         </p>
       </header>
-      <section className="bg-slate-200 w-full overflow-scroll flex-1">
+      <section className="w-full flex-1 overflow-scroll bg-slate-200">
         {projectCreator ? (
           <ProjectAttestMetric metrics={fields} register={register} />
         ) : (
           <ProjectAttestEndorsement {...register("endorsement")} />
         )}
       </section>
-      <footer className="w-full fixed bottom-6 left-0 px-8">
+      <footer className="fixed bottom-6 left-0 w-full px-8">
         <button
-          className="w-full btn rounded-3xl"
+          className="btn w-full rounded-3xl"
           disabled={isSubmitting || !isValid}
         >
           Submit

@@ -39,7 +39,7 @@ const links: Link[] = [
 
 export const Footer: React.FC<FooterProps> = async () => {
   return (
-    <footer className="footer border-t border-slate-300 p-6">
+    <footer className="footer border-t border-slate-300 py-6">
       <div className="mx-auto flex w-full max-w-screen-xl flex-col flex-nowrap items-center justify-between gap-4 sm:flex-row">
         <aside className="hidden items-center gap-3 sm:flex">
           <Image
@@ -59,9 +59,9 @@ export const Footer: React.FC<FooterProps> = async () => {
               key={title}
               href={link}
               target="_blank"
-              className={`grid place-items-center rounded-full bg-sky-700 p-1.5 text-white transition-colors duration-200 ease-in-out hover:bg-sky-800`}
+              className={`link-icon`}
             >
-              <Icon className="h-4 w-4" />
+              <Icon className="h-5 w-5" />
             </Link>
           ))}
         </nav>

@@ -10,7 +10,7 @@ interface NavBarProps {}
 
 export const Navbar: React.FC<NavBarProps> = () => {
   return (
-    <header className="navbar h-16 w-full justify-center border-b border-slate-300 px-6">
+    <header className="navbar w-full justify-center border-b border-slate-300 px-6 py-4">
       <div className="flex w-full max-w-screen-xl flex-1 items-center justify-between gap-4">
         <Link href="/" className="flex shrink-0 cursor-pointer">
           <Image
@@ -32,7 +32,7 @@ export const Navbar: React.FC<NavBarProps> = () => {
         </Link>
         {/* <label
           htmlFor="search"
-          className="input input-bordered flex flex-1 items-center rounded-full border border-zinc-200 gap-2"
+          className="input input-bordered flex flex-1 items-center rounded-full border border-slate-200 gap-2"
         >
           <Image
             alt="search icon"
@@ -50,7 +50,9 @@ export const Navbar: React.FC<NavBarProps> = () => {
         </label> */}
         <div className="hidden flex-1 items-center justify-end gap-2 sm:flex">
           <NavbarLinks />
-          <Connect />
+          <div className="w-full basis-12">
+            <Connect />
+          </div>
         </div>
       </div>
     </header>

@@ -7,10 +7,11 @@ import {
 import NextAuth from "next-auth";
 import credentialsProvider from "next-auth/providers/credentials";
 
+import { getBadgeholder } from "@/actions/badgeholders";
+
 declare module "next-auth" {
   interface Session extends SIWESession {
-    address: string;
-    chainId: number;
+    user: User;
   }
 }
 
@@ -56,10 +57,11 @@ const providers = [
           chainId,
           projectId,
         });
+        const isBadgeholder = await getBadgeholder(address);
 
         if (isValid) {
           return {
-            id: `${chainId}:${address}`,
+            id: `${chainId}:${address}:${isBadgeholder}`,
           };
         }
 
@@ -84,10 +86,11 @@ const handler = NextAuth({
         return session;
       }
 
-      const [, chainId, address] = token.sub.split(":");
-      if (chainId && address) {
-        session.address = address;
+      const [, chainId, address, badgeholder] = token.sub.split(":");
+      if (chainId && address && badgeholder) {
         session.chainId = parseInt(chainId, 10);
+        session.user.address = address;
+        session.user.badgeholder = badgeholder === "true";
       }
 
       return session;

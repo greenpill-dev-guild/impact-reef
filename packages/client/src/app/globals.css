@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
-}
-
 body {
   font-family: var(--font-inter);
   scrollbar-width: none;
@@ -12,7 +9,7 @@ body {
 }
 
 main {
-  @apply min-h-screen w-screen;
+  @apply min-h-screen;
 }
 
 h1,
@@ -32,16 +29,17 @@ h4 {
   @apply text-xl font-bold;
 }
 
-button {
-  @apply min-w-32 rounded-full px-4 py-3 font-semibold leading-snug transition-colors duration-200 ease-in-out;
+h5 {
+  @apply text-lg font-bold;
+}
+
+button,
+.button {
+  @apply inline-flex min-w-32 cursor-pointer items-center justify-center gap-1 rounded-full px-3 py-2.5 font-semibold leading-snug transition-colors duration-200 ease-in-out;
 }
 
 button:disabled {
   @apply cursor-not-allowed bg-gray-300 text-gray-500;
-}
-
-button:disabled:hover {
-  @apply bg-gray-300 text-gray-500;
 }
 
 .button-primary {
@@ -52,6 +50,22 @@ button:disabled:hover {
   @apply border border-sky-700 bg-white text-sky-700 hover:bg-sky-700 hover:text-white;
 }
 
+.button-link {
+  @apply text-slate-800 hover:text-sky-800;
+}
+
+.button-icon {
+  @apply grid aspect-square place-items-center rounded-lg bg-slate-100 p-2 transition-colors duration-200 ease-in-out hover:bg-slate-200;
+}
+
+.link-icon {
+  @apply grid place-items-center rounded-full bg-slate-200 fill-inherit p-2 transition-colors duration-200 ease-in-out hover:bg-slate-300;
+}
+
+.toaster {
+  @apply inline-flex min-w-72 items-center gap-4 rounded-xl p-4 shadow;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
@@ -60,20 +74,4 @@ button:disabled:hover {
   .text-balance {
     text-wrap: balance;
   }
-}
-
-.toaster {
-  @apply rounded-lg p-2;
-}
-
-.toaster-loading {
-  @apply rounded-lg p-2;
-}
-
-.toaster-error {
-  @apply rounded-lg p-2;
-}
-
-.toaste-success {
-  @apply rounded-lg p-2;
 }

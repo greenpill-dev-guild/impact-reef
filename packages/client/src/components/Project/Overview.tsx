@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import { determineSocialMedia } from "@/utils/text";
 
-import { categories } from "../List/Item";
+import { categories } from "./ListItem";
 
 export interface ProjectOverviewProps {
   avatar_image: string;
@@ -45,9 +45,8 @@ export const ProjectOverview: React.FC<ProjectOverviewProps> = ({
   category,
   socials,
 }) => {
-  console.log("Categorizing project: ", title, category);
   return (
-    <div className="w-full flex items-center gap-4 px-8 py-6 border shadow-sm rounded-md">
+    <div className="flex w-full items-center gap-4 rounded-md border px-8 py-6 shadow-sm">
       <Image
         className="aspect-square rounded-lg"
         alt="porject logo/avatar"
@@ -56,18 +55,18 @@ export const ProjectOverview: React.FC<ProjectOverviewProps> = ({
         height={120}
       />
       <div className="flex-1">
-        <h1 className="font-semibold text-5xl">{title}</h1>
+        <h1 className="text-5xl font-semibold">{title}</h1>
         <p>{description}</p>
       </div>
-      <div className="basis-72 flex flex-col h-full justify-between items-end gap-6">
+      <div className="flex h-full basis-72 flex-col items-end justify-between gap-6">
         <ul className="flex gap-2">
           {socials &&
             socials.map((link) => {
               const social = determineSocialMedia(link);
 
               return (
-                <li key={link} className="p-2 rounded-full bg-zinc-100">
-                  <Link href={link}>
+                <li key={link} className="button-icon">
+                  <Link target="_blank" href={link}>
                     <Image
                       alt={`${social.label} icon`}
                       src={social.icon}
@@ -81,12 +80,12 @@ export const ProjectOverview: React.FC<ProjectOverviewProps> = ({
             })}
         </ul>
         <div>
-          <div className="flex gap-2 mb-2 justify-end">
+          <div className="mb-2 flex justify-end gap-2">
             <h4
               style={{
                 backgroundColor: grantTracks[grant_track].color,
               }}
-              className="bg-violet-200 rounded-sm px-2 py-1 text-xl font-bold tracking-wide"
+              className="rounded-sm bg-violet-200 px-2 py-1 text-xl font-bold tracking-wide"
             >
               {grantTracks[grant_track].label}
             </h4>
@@ -99,8 +98,8 @@ export const ProjectOverview: React.FC<ProjectOverviewProps> = ({
               {categories[category].label}
             </p>
           </div>
-          <p className="bg-zinc-200 rounded-sm px-2 py-1 text-sm">
-            Base information from OP retro round #4
+          <p className="rounded-sm bg-slate-200 px-2 py-1 text-sm">
+            Base information from OP retro round #5
           </p>
         </div>
       </div>

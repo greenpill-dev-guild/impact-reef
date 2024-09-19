@@ -34,7 +34,7 @@ export const useEndorsements = () => {
     ]);
 
     try {
-      toast.loading("Making endorsement...");
+      toast.loading("Submitting your endorsement onchain.");
 
       const transaction = await eas.attest({
         schema: EAS[11155111].ENDORSEMENTS.uid,
@@ -49,7 +49,7 @@ export const useEndorsements = () => {
       const newAttestationUID = await transaction.wait();
 
       toast.dismiss();
-      toast.success("Endorsement made successfully");
+      toast.success("Endorsement successfully made!");
 
       return newAttestationUID;
     } catch (error) {

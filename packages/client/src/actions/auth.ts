@@ -27,9 +27,9 @@ export async function getUser() {
 
   return {
     ...signedInUser,
-    badgeholder: true,
-    metrics_admin: true,
-    council_member: true,
+    badgeholder: false,
+    metrics_admin: false,
+    council_member: false,
   };
 }
 

@@ -1,47 +1,40 @@
 "use client";
 
-import { useAccount } from "wagmi";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import Link from "next/link";
 
-import { getUserEndorsements } from "@/actions/endorsements";
+export interface ProfileEndorsementsProps {
+  endorsements: Endorsement[];
+}
 
-export interface ProfileEndorsementsProps {}
-
-const ProfileEndorsementsView: React.FC<ProfileEndorsementsProps> = () => {
-  const account = useAccount();
-
-  const [endorsements, setEndorsements] = useState<Endorsement[]>([]);
-  const [endorsement, setEndorsement] = useState<Endorsement>();
-
-  useEffect(() => {
-    const updateEndorsements = async () => {
-      const updatedEndorsements = await getUserEndorsements(account.address);
-      setEndorsements(updatedEndorsements);
-    };
-    updateEndorsements();
-  }, []);
-
+const ProfileEndorsementsView: React.FC<ProfileEndorsementsProps> = ({
+  endorsements,
+}) => {
   return (
     <div className="flex max-w-xl flex-col gap-4">
       <h2 className="text-3xl font-bold leading-7">Endorsements</h2>
-      <ul>
+      <ul className="flex flex-col gap-2">
         {endorsements.map((endorsement) => (
-          <li key={endorsement.id} className="flex flex-col gap-2">
-            {/* <span className="text-slate-600">{endorsement.project}</span>
-            <span className="text-slate-600">{endorsement.endorser}</span>
-            <span className="text-slate-600">{endorsement.endorsement}</span> */}
+          <li
+            key={endorsement.id}
+            className="flex flex-col items-center justify-between gap-8 rounded-xl border-slate-100 p-4 shadow-sm"
+          >
+            <p className="max-w-prose font-light leading-snug">
+              {endorsement.description}
+            </p>
+            <div className="flex w-full justify-between">
+              <span className="">{endorsement.created_at}</span>
+              <Link
+                href={`https://sepolia.easscan.org/${endorsement.id}`}
+                target="_blank"
+                className="button button-link"
+              >
+                View Attestation
+              </Link>
+            </div>
           </li>
         ))}
       </ul>
-      <dialog id="endorsement-dialog" className="modal">
-        <div className="modal-box">
-          <h3 className="text-lg font-bold">Hello!</h3>
-          <p className="py-4">Press ESC key or click outside to close</p>
-        </div>
-        <form method="dialog" className="modal-backdrop">
-          <button>close</button>
-        </form>
-      </dialog>
     </div>
   );
 };

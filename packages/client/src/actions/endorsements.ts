@@ -1,17 +1,15 @@
 "use server";
 
-import { graphql } from "gql.tada";
-
 import { EAS } from "@/constants";
 
-import { easSepoliaClient } from "@/modules/urql";
+import { easGraphQL, easSepoliaClient } from "@/modules/graphql";
 
 import { parseDataToEndorsementItem } from "@/utils/parseData";
 
 export const getProjectEndorsements = async (
-  projectUID?: string | null
+  projectUID?: string | null,
 ): Promise<Endorsement[]> => {
-  const QUERY = graphql(/* GraphQL */ `
+  const QUERY = easGraphQL(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
         id
@@ -36,17 +34,17 @@ export const getProjectEndorsements = async (
 
   return (
     data?.attestations.map(({ id, attester, timeCreated, decodedDataJson }) =>
-      parseDataToEndorsementItem(id, attester, timeCreated, decodedDataJson)
+      parseDataToEndorsementItem(id, attester, timeCreated, decodedDataJson),
     ) ?? []
   );
 };
 
 export const getUserEndorsements = async (
-  address?: string | null
+  address?: string | null,
 ): Promise<Endorsement[]> => {
   if (!address) console.error("No address provided");
 
-  const QUERY = graphql(/* GraphQL */ `
+  const QUERY = easGraphQL(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
         id
@@ -71,7 +69,7 @@ export const getUserEndorsements = async (
 
   return (
     data?.attestations.map(({ id, attester, timeCreated, decodedDataJson }) =>
-      parseDataToEndorsementItem(id, attester, timeCreated, decodedDataJson)
+      parseDataToEndorsementItem(id, attester, timeCreated, decodedDataJson),
     ) ?? []
   );
 };

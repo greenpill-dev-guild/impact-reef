@@ -1,133 +1,104 @@
 "use server";
 
-import { graphql } from "gql.tada";
-
-import { easOptimismClient, easSepoliaClient } from "@/modules/urql";
-
-import { EAS } from "@/constants";
-import {
-  fetchMetadata,
-  parseDataToProjectMetric,
-  parseOpProjectToProjectItem,
-} from "@/utils/parseData";
-
-import { getProjectEndorsements } from "./endorsements";
 import {
   getRetroFundingRoundProjects,
   getRetroFundingRoundProjectsResponse,
+  getRetroFundingRoundProjectById,
+  getRetroFundingRoundProjectByIdResponse,
 } from "@/__generated__/api/agora";
-import { PageMetadata } from "@/__generated__/api/agora.schemas";
+import {
+  Project as OpProject,
+  PageMetadata,
+} from "@/__generated__/api/agora.schemas";
 
-// // TODO add cache for metadata fetching
-// export const getProjectBuilders = async (): Promise<any[]> => {
-//     const QUERY = graphql(/* GraphQL */ `
-//         query Attestations($where: AttestationWhereInput) {
-//             attestations(where: $where) {
-//                 data
-//                 decodedDataJson
-//             }
-//         }
-//     `);
-//
-//     const {data, error} = await easOptimismClient
-//         .query(QUERY, {
-//             where: {
-//                 schemaId: {equals: EAS["10"].PROJECT_OWNERS.uid},
-//             },
-//         })
-//         .toPromise();
-//
-//     if (error) console.error(error);
-//     if (!data) console.error("No data found");
-//
-//     return (
-//         data?.attestations.map((data) => {
-//             const json = JSON.parse(data.decodedDataJson);
-//             return json;
-//         }) ?? []
-//     );
-//
-//     // TODO - bit of a hack to cast as bigint, should be enforced by the schema tho
-//     // return data.attestations
-//     //   .map((ownerAttestation) =>
-//     //     decodeAbiParameters(
-//     //       parseAbiParameters(EAS["10"].PROJECT_OWNERS.schema),
-//     //       ownerAttestation.data as Hex
-//     //     )
-//     //   )
-//     //   .flatMap((decodedData) => decodedData) as bigint[];
-// };
+import { parseOpProjectToProjectItem } from "@/utils/parseData";
+
+import { getProjectEndorsements } from "./endorsements";
+import { getOsoCodeMetricsByArtifact } from "./repos";
+
+const getArtifactNameAndNamespace = (url: string) => {
+  const urlParts = url.split("/");
+  const artifactName = urlParts[urlParts.length - 1];
+  const artifactNamespace = urlParts[urlParts.length - 2];
+
+  return {
+    artifactName,
+    artifactNamespace,
+  };
+};
 
 export type ProjectsResponse = {
   metadata?: PageMetadata;
-  data?: Project[];
+  data?: OpProject[];
 };
 
-export const getProjects = async (): Promise<Partial<Project>[]> => {
-  const projects = await getRetroFundingRoundProjects(5).then(
-    (results: getRetroFundingRoundProjectsResponse) => {
-      const res: ProjectsResponse = results.data;
-      console.log("Projects response: ", res);
-      return res.data;
+export type ProjectResponse = {
+  data?: OpProject;
+};
+
+export const getProjects = async (
+  query?: string,
+  page?: number,
+): Promise<Project[]> => {
+  const projects = await getRetroFundingRoundProjects(5, {
+    limit: 25,
+    offset: page ? (page - 1) * 25 : 0,
+    category: "all",
+  }).then((results: getRetroFundingRoundProjectsResponse) => {
+    const res: ProjectsResponse = results.data;
+    return res.data;
+  });
+
+  return (
+    projects?.map((project) => parseOpProjectToProjectItem(project)) ?? []
+    // ?.filter((project) => project.name?.includes(query ?? ""))
+  );
+};
+
+export const getProjectCount = async (
+  query?: string,
+  page?: number,
+): Promise<Project[]> => {
+  const projects = await getRetroFundingRoundProjects(5, {
+    limit: 25,
+    offset: page ? (page - 1) * 25 : 0,
+  }).then((results: getRetroFundingRoundProjectsResponse) => {
+    const res: ProjectsResponse = results.data;
+    return res.data;
+  });
+
+  return (
+    projects
+      ?.filter((project) => project.name?.includes(query ?? ""))
+      .map((project) => parseOpProjectToProjectItem(project)) ?? []
+  );
+};
+
+export const getProject = async (
+  projectId: string,
+): Promise<Project | undefined> => {
+  const opProject = await getRetroFundingRoundProjectById(5, projectId).then(
+    (results: getRetroFundingRoundProjectByIdResponse) => {
+      return results.data;
     },
   );
 
-  if (!projects) return [];
+  if (!opProject) return undefined;
 
-  return projects.map((project: Project) =>
-    parseOpProjectToProjectItem(project),
+  const project = parseOpProjectToProjectItem(opProject);
+  const repos = project.repositories?.map((repo: string) =>
+    getArtifactNameAndNamespace(repo),
   );
-};
-
-// export const getProjectMetrics = async (
-//     projectId?: string | null
-// ): Promise<ProjectMetricItem[]> => {
-//     if (!projectId) {
-//         console.error("No project ID provided");
-//         return [];
-//     }
-//
-//     // TODO add 'where: valid: true' filter
-//     const QUERY = graphql(/* GraphQL */ `
-//         query Attestations($where: AttestationWhereInput) {
-//             attestations(where: $where) {
-//                 id
-//                 recipient
-//                 timeCreated
-//                 decodedDataJson
-//             }
-//         }
-//     `);
-//
-//     const {data, error} = await easSepoliaClient
-//         .query(QUERY, {
-//             where: {
-//                 schemaId: {equals: EAS["11155111"].PROJECT_METRICS.uid},
-//                 decodedDataJson: {contains: projectId},
-//             },
-//         })
-//         .toPromise();
-//
-//     if (error) console.error(error);
-//     if (!data) console.error("No data found");
-//
-//     return (
-//         data?.attestations.map(({id, recipient, timeCreated, decodedDataJson}) =>
-//             parseDataToProjectMetric(id, recipient, timeCreated, decodedDataJson)
-//         ) ?? []
-//     );
-// };
-
-export const getProjectDetails = async (
-  projectId?: string | null,
-): Promise<Partial<Project> | undefined> => {
-  if (!projectId) console.error("No project ID provided");
-
-  const project = await getProjects().then((res) =>
-    res.find((project: Project) => project.id === projectId),
+  const endorsements = await getProjectEndorsements(projectId);
+  const metrics = await getOsoCodeMetricsByArtifact(
+    projectId,
+    repos[0].artifactName,
+    repos[0].artifactNamespace,
   );
 
-  console.log("Details found for project: ", project);
-
-  return project;
+  return {
+    ...project,
+    endorsements,
+    metrics,
+  };
 };

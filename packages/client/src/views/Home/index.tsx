@@ -1,13 +1,12 @@
 "use client";
 
 import React from "react";
-
 import Link from "next/link";
 import Image from "next/image";
 
 const HomeView: React.FC = () => {
   return (
-    <main>
+    <>
       <section className="min-h-[calc(100vh-4rem)] bg-white px-6 py-8 sm:h-[calc(100vh-4rem)] sm:px-12 sm:py-16">
         <div className="mx-auto flex h-full w-full max-w-screen-xl flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-12">
           <div className="max-w-prose">
@@ -19,10 +18,7 @@ const HomeView: React.FC = () => {
               values the impact of each project within the ecosystem with the
               voice of community.
             </p>
-            <Link
-              href={"/projects"}
-              className="rounded-full bg-sky-700 px-4 py-3 font-semibold leading-snug text-white transition-colors hover:bg-sky-800"
-            >
+            <Link href={"/projects"} className="button button-primary">
               Browse Projects
             </Link>
           </div>
@@ -57,7 +53,7 @@ const HomeView: React.FC = () => {
           </div>
         </div>
       </section>
-    </main>
+    </>
   );
 };
 

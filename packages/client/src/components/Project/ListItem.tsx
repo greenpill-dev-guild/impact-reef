@@ -3,13 +3,14 @@ import React from "react";
 import Image from "next/image";
 
 import { formatLastUpdated } from "@/utils/text";
+import { useRouter } from "next/navigation";
 
-export interface ListItemProps {
+export interface ProjectListItemProps {
   id: string;
   title: string;
+  category: ProjectCategory;
   avatar_image: string;
   updated_at: string;
-  onClick?: () => void;
 }
 
 type ColumnValue =
@@ -58,54 +59,57 @@ export const categories: Record<
   },
 };
 
-export const ListItem: React.FC<ListItemProps> = ({
+export const ProjectProjectListItem: React.FC<ProjectListItemProps> = ({
   id,
   title,
   avatar_image,
-  // category,
-  // transactions_count,
-  // attestation_counts,
+  category,
   updated_at,
-  onClick,
   ...props
 }) => {
+  const { push } = useRouter();
+
+  function handleClick() {
+    push(`/projects/${id}`);
+  }
+
   return (
     <li
       {...props}
-      onClick={onClick}
-      className="cursor-pointer hover:bg-slate-50 hover:shadow-sm flex gap-2 items-center w-full font-light border border-zinc-300 rounded-lg px-4 py-3 transition-all ease-in-out duration-300"
+      onClick={handleClick}
+      className="flex w-full cursor-pointer items-center gap-2 rounded-lg border border-slate-300 px-4 py-3 font-light transition-all duration-300 ease-in-out hover:bg-slate-50 hover:shadow-sm"
     >
-      <div className="flex gap-2 items-center flex-[4] text-lg font-semibold leading-7">
-        <div className="aspect-square w-14 h-14 relative bg-cyan-900 rounded-lg">
+      <div className="flex flex-[4] items-center gap-2 text-lg font-semibold leading-7">
+        <div className="aspect-square h-14 w-14 shrink-0 rounded-lg bg-slate-50">
           {avatar_image && (
             <Image
               src={avatar_image}
               alt="project image"
-              className="aspect-square w-14 h-14"
+              className="aspect-square h-14 w-14 rounded-lg"
               width={56}
               height={56}
             />
           )}
         </div>
-        <h4 className="line-clamp-2">{title}</h4>
+        <h4 className="line-clamp-2 capitalize">{title}</h4>
       </div>
       <div className={`flex-[2]`}>
-        {/* <span
+        <span
           style={{
             background: categories[category].color,
           }}
-          className="rounded-md text-sm text-zinc-800 p-2 leading-snug"
+          className="rounded-md p-2 text-sm leading-snug"
         >
           {categories[category].label}
-        </span> */}
+        </span>
+      </div>
+      {/* <div className="flex-[3] leading-snug">
+        {transactions_count.toLocaleString()}
       </div>
       <div className="flex-[3] leading-snug">
-        {/* {transactions_count.toLocaleString()} */}
-      </div>
-      <div className="flex-[3] leading-snug">
-        {/* {attestation_counts.toLocaleString()} */}
-      </div>
-      <div className="flex-[2] leading-snug capitalize">
+        {attestation_counts.toLocaleString()}
+      </div> */}
+      <div className="flex-[2] capitalize leading-snug">
         {formatLastUpdated(updated_at)}
       </div>
     </li>

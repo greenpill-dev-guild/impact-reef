@@ -28,15 +28,15 @@ export const NavbarLinks: React.FC<NavBarLinksProps> = () => {
         <Link
           key={title}
           href={`/${title}`}
-          className={`capitalize inline-flex gap-2 w-32 p-4 justify-center items-center rounded-full text-zinc-800 font-semibold leading-snug ${pathname.includes(title) && !pathname.includes("profile") && "bg-neutral-100"}`}
+          className={`button button-link capitalize ${pathname === title && !pathname.includes("profile") && "bg-slate-200"}`}
         >
           {title}
           <Image
             alt="navbar link"
             src={icon}
             unoptimized
-            width={24}
-            height={24}
+            width={20}
+            height={20}
           />
         </Link>
       ))}
