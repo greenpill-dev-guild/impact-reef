@@ -59,7 +59,7 @@ export const categories: Record<
   },
 };
 
-export const ProjectProjectListItem: React.FC<ProjectListItemProps> = ({
+export const ProjectListItem: React.FC<ProjectListItemProps> = ({
   id,
   title,
   avatar_image,
@@ -109,9 +109,9 @@ export const ProjectProjectListItem: React.FC<ProjectListItemProps> = ({
       <div className="flex-[3] leading-snug">
         {attestation_counts.toLocaleString()}
       </div> */}
-      <div className="flex-[2] capitalize leading-snug">
+      {/* <div className="flex-[2] capitalize leading-snug">
         {formatLastUpdated(updated_at)}
-      </div>
+      </div> */}
     </li>
   );
 };

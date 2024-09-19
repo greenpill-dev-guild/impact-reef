@@ -27,7 +27,9 @@ export interface ProjectViewProps {
 const ProjectView: React.FC<ProjectViewProps> = ({ project, badgeholders }) => {
   const { push } = useRouter();
   const { address } = useAccount();
-  const { createEndorsement } = useEndorsements();
+  const { createEndorsement, endorsementList } = useEndorsements(
+    project.endorsements,
+  );
 
   const projectCreator = !!address && address === project.creator;
 
@@ -83,13 +85,13 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, badgeholders }) => {
           />
           <ProjectMetrics metrics={project.metrics} />
           <ProjectAttestations
-            endorsements={project.endorsements}
+            endorsements={endorsementList}
             badgeholders={badgeholders}
           />
         </div>
         <ProjectEndorsements
           banner={project.banner_image}
-          endorsements={project.endorsements}
+          endorsements={endorsementList}
         />
         <footer className="mx-auto flex w-full max-w-screen-xl justify-between py-12">
           <button

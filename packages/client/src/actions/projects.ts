@@ -59,10 +59,14 @@ export const getProjectCount = async (
   query?: string,
   page?: number,
 ): Promise<Project[]> => {
-  const projects = await getRetroFundingRoundProjects(5, {
-    limit: 25,
-    offset: page ? (page - 1) * 25 : 0,
-  }).then((results: getRetroFundingRoundProjectsResponse) => {
+  const projects = await getRetroFundingRoundProjects(
+    5,
+    {
+      limit: 25,
+      offset: page ? (page - 1) * 25 : 0,
+    },
+    {},
+  ).then((results: getRetroFundingRoundProjectsResponse) => {
     const res: ProjectsResponse = results.data;
     return res.data;
   });

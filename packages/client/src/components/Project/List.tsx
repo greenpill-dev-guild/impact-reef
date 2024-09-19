@@ -3,7 +3,7 @@ import React, { Suspense } from "react";
 import { getProjects } from "@/actions/projects";
 
 import { Loader } from "../Loader";
-import { ProjectProjectListItem } from "./ListItem";
+import { ProjectListItem } from "./ListItem";
 
 export interface ProjectListProps {
   query: string;
@@ -52,9 +52,7 @@ export const ProjectList: React.FC<ProjectListProps> = async ({
             </div>
           }
         >
-          {items?.map((item) => (
-            <ProjectProjectListItem {...item} key={item.id} />
-          ))}
+          {items?.map((item) => <ProjectListItem {...item} key={item.id} />)}
         </Suspense>
       </ul>
     </div>

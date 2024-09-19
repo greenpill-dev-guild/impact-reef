@@ -25,4 +25,9 @@ export const easOptimismClient = new Client({
 export const osoClient = new Client({
   url: "https://www.opensource.observer/api/v1/graphql",
   exchanges: [cacheExchange, fetchExchange],
+  fetchOptions: {
+    headers: {
+      Authorization: `Bearer ${process.env.OPEN_SOURCE_OBSERVER_API_KEY}`,
+    },
+  },
 });

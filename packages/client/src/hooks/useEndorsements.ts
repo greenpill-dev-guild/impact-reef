@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import {
   SchemaEncoder,
@@ -7,7 +8,10 @@ import {
 
 import { EAS } from "@/constants";
 
+import { getProjectEndorsements } from "@/actions/endorsements";
+
 import { useEas } from "@/hooks/useEas";
+import { useAccount } from "wagmi";
 
 const endorsementSchema = z.object({
   projectUID: z.string(),
@@ -17,8 +21,11 @@ const endorsementSchema = z.object({
 
 export type CreateEndorsementParams = z.infer<typeof endorsementSchema>;
 
-export const useEndorsements = () => {
+export const useEndorsements = (endorsements: Endorsement[]) => {
   const { eas } = useEas();
+  const { address } = useAccount();
+  const [endorsementList, setEndorsementList] =
+    useState<Endorsement[]>(endorsements);
 
   const createEndorsement = async (params: CreateEndorsementParams) => {
     const { projectUID, metricUID, description } =
@@ -48,7 +55,28 @@ export const useEndorsements = () => {
 
       const newAttestationUID = await transaction.wait();
 
+      const fetchedEndorsements = await getProjectEndorsements(projectUID);
+
+      if (!fetchedEndorsements.find((e) => e.id === newAttestationUID)) {
+        fetchedEndorsements.push({
+          id: newAttestationUID,
+          attester: address ?? "",
+          projectUID,
+          metricUID,
+          description,
+          created_at: new Date().toLocaleString(),
+        });
+      }
+
+      setEndorsementList(fetchedEndorsements);
+
       toast.dismiss();
+
+      const attestDialog = document.getElementById(
+        "attest-drawer",
+      ) as HTMLInputElement;
+      attestDialog.checked = false;
+
       toast.success("Endorsement successfully made!");
 
       return newAttestationUID;
@@ -59,5 +87,5 @@ export const useEndorsements = () => {
     }
   };
 
-  return { createEndorsement };
+  return { createEndorsement, endorsementList };
 };

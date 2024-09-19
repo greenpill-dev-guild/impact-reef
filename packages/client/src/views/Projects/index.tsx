@@ -32,7 +32,7 @@ const ProjectsView: React.FC<ProjectViewProps> = ({
             { title: "category", size: 2 },
             // { title: "transaction counts", size: 3 },
             // { title: "attestation counts", size: 3 },
-            { title: "last updated", size: 2 },
+            // { title: "last updated", size: 2 },
           ]}
         />
         <Pagination totalPages={totalPages} />
