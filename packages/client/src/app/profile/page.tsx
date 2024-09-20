@@ -7,11 +7,7 @@ const ProfileSettingView = dynamic(() => import("@/views/Profile/Settings"));
 const ProfilePage: NextPage = async () => {
   const session = await getSession();
 
-  if (!session) {
-    return null;
-  }
-
-  return <ProfileSettingView user={session.user} />;
+  return <ProfileSettingView user={session?.user} />;
 };
 
 export default ProfilePage;

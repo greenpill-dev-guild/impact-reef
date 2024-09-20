@@ -1,9 +1,8 @@
 import type {
   SIWEVerifyMessageArgs,
   SIWECreateMessageArgs,
-  SIWESession,
 } from "@web3modal/siwe";
-import { sepolia } from "viem/chains";
+import { optimism } from "viem/chains";
 import { createSIWEConfig, formatMessage } from "@web3modal/siwe";
 import { getCsrfToken, signIn, signOut, getSession } from "next-auth/react";
 
@@ -11,7 +10,7 @@ export const siweConfig = createSIWEConfig({
   getMessageParams: async () => ({
     domain: typeof window !== "undefined" ? window.location.host : "",
     uri: typeof window !== "undefined" ? window.location.origin : "",
-    chains: [sepolia.id],
+    chains: [optimism.id],
     statement: "Please sign with your account",
   }),
   createMessage: ({ address, ...args }: SIWECreateMessageArgs) =>

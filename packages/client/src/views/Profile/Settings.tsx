@@ -1,20 +1,29 @@
 "use client";
 
 import React from "react";
+import { useAccount, useDisconnect } from "wagmi";
+import { signOut } from "next-auth/react";
 import { useWalletInfo } from "@web3modal/wagmi/react";
 
 import { formatAddress } from "@/utils/text";
-
-import { logout } from "@/actions/auth";
 
 export interface ProfileSettingsProps {
   user?: User;
 }
 
 const ProfileSettings: React.FC<ProfileSettingsProps> = ({ user }) => {
+  const { address } = useAccount();
+  const { disconnect } = useDisconnect();
   const { walletInfo } = useWalletInfo();
 
-  const address = user?.address;
+  function handleLogout() {
+    signOut({
+      callbackUrl: "/",
+    });
+    disconnect();
+  }
+
+  // const address = user?.address;
 
   return (
     <div className="flex flex-col gap-12">
@@ -35,7 +44,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ user }) => {
         <span className="">{walletInfo?.name}</span>
       </div>
       <div>
-        <button onClick={logout} className="button-secondary">
+        <button onClick={handleLogout} className="button-secondary">
           Logout
         </button>
       </div>

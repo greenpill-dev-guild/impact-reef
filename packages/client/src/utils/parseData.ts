@@ -51,7 +51,8 @@ export const opApplicationCategoryToGrantTrack = (
     case "CeFi":
       return "onchain-builders";
     default:
-      throw new Error(`Unknown application category: ${opApplicationCategory}`);
+      return "onchain-builders";
+    // throw new Error(`Unknown application category: ${opApplicationCategory}`);
   }
 };
 
@@ -88,7 +89,8 @@ export const opCategoryToCategory = (
     case "Cross Chain":
       return "cross-chain";
     default:
-      throw new Error(`Unknown category: ${opCategory}`);
+      return "utility";
+    // throw new Error(`Unknown category: ${opCategory}`);
   }
 };
 
@@ -103,7 +105,7 @@ export const parseOpProjectToProjectItem = (opProject: OpProject): Project => {
 
   const repositories = opProject.github
     ? opGithubToRepositories(opProject.github)
-    : ["N/A"];
+    : [];
   const contracts = opProject.contracts
     ? opProject.contracts.map(opContractToContract)
     : [];
@@ -112,7 +114,7 @@ export const parseOpProjectToProjectItem = (opProject: OpProject): Project => {
     : [];
   const socials = opProject.socialLinks
     ? opSocialsToSocials(opProject.socialLinks)
-    : ["N/A"];
+    : [];
 
   return {
     id: opProject.id!,

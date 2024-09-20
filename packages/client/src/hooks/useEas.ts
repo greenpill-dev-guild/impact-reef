@@ -7,13 +7,13 @@ import { EAS } from "@/constants";
 import { useEthersSigner } from "@/hooks/auth/useEthersSigner";
 
 const easSigner = (signer: TransactionSigner) => {
-  const eas = new EAS_REGISTRY(EAS["11155111"].EAS.address);
+  const eas = new EAS_REGISTRY(EAS["10"].EAS.address);
 
   return eas.connect(signer);
 };
 
 export const useEas = () => {
-  const ethersSigner = useEthersSigner({ chainId: 11155111 })!;
+  const ethersSigner = useEthersSigner({ chainId: 10 })!;
 
   const eas = easSigner(ethersSigner);
 

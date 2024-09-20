@@ -1,5 +1,3 @@
-import { getToken } from "./token";
-
 // NOTE: Supports cases where `content-type` is other than `json`
 const getBody = <T>(c: Response | Request): Promise<T> => {
   const contentType = c.headers.get("content-type");
@@ -17,7 +15,6 @@ const getBody = <T>(c: Response | Request): Promise<T> => {
 
 // NOTE: Add headers
 const getHeaders = (headers?: HeadersInit): HeadersInit => {
-  const token = getToken();
   return {
     ...headers,
     "Content-Type": "application/json",
@@ -27,7 +24,7 @@ const getHeaders = (headers?: HeadersInit): HeadersInit => {
 
 export const customFetch = async <T>(
   url: string,
-  options: RequestInit
+  options: RequestInit,
 ): Promise<T> => {
   console.log("Calling custom fetch for URL: ", url);
   const requestHeaders = getHeaders(options.headers);

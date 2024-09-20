@@ -42,7 +42,10 @@ export const getProjectEndorsements = async (
 export const getUserEndorsements = async (
   address?: string | null,
 ): Promise<Endorsement[]> => {
-  if (!address) console.error("No address provided");
+  if (!address) {
+    console.error("No address provided");
+    return [];
+  }
 
   const QUERY = easGraphQL(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {

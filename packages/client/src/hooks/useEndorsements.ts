@@ -32,7 +32,7 @@ export const useEndorsements = (endorsements: Endorsement[]) => {
       endorsementSchema.parse(params);
 
     // Initialize SchemaEncoder with the schema string
-    const schemaEncoder = new SchemaEncoder(EAS[11155111].ENDORSEMENTS.schema);
+    const schemaEncoder = new SchemaEncoder(EAS[10].ENDORSEMENTS.schema);
 
     const encodedData = schemaEncoder.encodeData([
       { name: "projectUID", value: projectUID, type: "bytes32" },
@@ -41,6 +41,11 @@ export const useEndorsements = (endorsements: Endorsement[]) => {
     ]);
 
     try {
+      const attestDialog = document.getElementById(
+        "attest-drawer",
+      ) as HTMLInputElement;
+      attestDialog.checked = false;
+
       toast.loading("Submitting your endorsement onchain.");
 
       const transaction = await eas.attest({
@@ -71,19 +76,13 @@ export const useEndorsements = (endorsements: Endorsement[]) => {
       setEndorsementList(fetchedEndorsements);
 
       toast.dismiss();
-
-      const attestDialog = document.getElementById(
-        "attest-drawer",
-      ) as HTMLInputElement;
-      attestDialog.checked = false;
-
       toast.success("Endorsement successfully made!");
 
       return newAttestationUID;
     } catch (error) {
       console.error("Failed to make endorsement:", error);
       toast.dismiss();
-      toast.error("Error endorsing project, please try again");
+      toast.error("Error endorsing project, please try again.");
     }
   };
 

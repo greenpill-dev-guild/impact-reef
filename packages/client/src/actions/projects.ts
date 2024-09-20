@@ -14,18 +14,18 @@ import {
 import { parseOpProjectToProjectItem } from "@/utils/parseData";
 
 import { getProjectEndorsements } from "./endorsements";
-import { getOsoCodeMetricsByArtifact } from "./repos";
+// import { getOsoCodeMetricsByArtifact } from "./repos";
 
-const getArtifactNameAndNamespace = (url: string) => {
-  const urlParts = url.split("/");
-  const artifactName = urlParts[urlParts.length - 1];
-  const artifactNamespace = urlParts[urlParts.length - 2];
+// const getArtifactNameAndNamespace = (url: string) => {
+//   const urlParts = url.split("/");
+//   const artifactName = urlParts[urlParts.length - 1];
+//   const artifactNamespace = urlParts[urlParts.length - 2];
 
-  return {
-    artifactName,
-    artifactNamespace,
-  };
-};
+//   return {
+//     artifactName,
+//     artifactNamespace,
+//   };
+// };
 
 export type ProjectsResponse = {
   metadata?: PageMetadata;
@@ -55,29 +55,6 @@ export const getProjects = async (
   );
 };
 
-export const getProjectCount = async (
-  query?: string,
-  page?: number,
-): Promise<Project[]> => {
-  const projects = await getRetroFundingRoundProjects(
-    5,
-    {
-      limit: 25,
-      offset: page ? (page - 1) * 25 : 0,
-    },
-    {},
-  ).then((results: getRetroFundingRoundProjectsResponse) => {
-    const res: ProjectsResponse = results.data;
-    return res.data;
-  });
-
-  return (
-    projects
-      ?.filter((project) => project.name?.includes(query ?? ""))
-      .map((project) => parseOpProjectToProjectItem(project)) ?? []
-  );
-};
-
 export const getProject = async (
   projectId: string,
 ): Promise<Project | undefined> => {
@@ -90,19 +67,19 @@ export const getProject = async (
   if (!opProject) return undefined;
 
   const project = parseOpProjectToProjectItem(opProject);
-  const repos = project.repositories?.map((repo: string) =>
-    getArtifactNameAndNamespace(repo),
-  );
+  // const repos = project.repositories?.map((repo: string) =>
+  //   getArtifactNameAndNamespace(repo),
+  // );
   const endorsements = await getProjectEndorsements(projectId);
-  const metrics = await getOsoCodeMetricsByArtifact(
-    projectId,
-    repos[0].artifactName,
-    repos[0].artifactNamespace,
-  );
+  // const metrics = await getOsoCodeMetricsByArtifact(
+  //   projectId,
+  //   repos[0].artifactName,
+  //   repos[0].artifactNamespace,
+  // );
 
   return {
     ...project,
     endorsements,
-    metrics,
+    // metrics,
   };
 };

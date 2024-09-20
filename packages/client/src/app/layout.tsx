@@ -73,6 +73,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
           <Toaster
+            position="bottom-right"
             containerClassName="toaster"
             toastOptions={{
               loading: {

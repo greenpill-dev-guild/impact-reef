@@ -33,6 +33,18 @@ h5 {
   @apply text-lg font-bold;
 }
 
+p {
+  @apply text-base;
+}
+
+a {
+  @apply text-sky-700 hover:text-sky-800;
+}
+
+label {
+  @apply text-base font-semibold;
+}
+
 button,
 .button {
   @apply inline-flex min-w-32 cursor-pointer items-center justify-center gap-1 rounded-full px-3 py-2.5 font-semibold leading-snug transition-colors duration-200 ease-in-out;

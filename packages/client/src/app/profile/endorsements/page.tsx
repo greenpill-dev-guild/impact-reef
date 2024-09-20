@@ -10,11 +10,7 @@ const EndorsementsView = dynamic(() => import("@/views/Profile/Endorsements"));
 const ProfileEndorsementsPage: NextPage = async () => {
   const session = await getSession();
 
-  if (!session) {
-    return null;
-  }
-
-  const endorsements = await getUserEndorsements(session.user.address);
+  const endorsements = await getUserEndorsements(session?.user.address);
 
   return <EndorsementsView endorsements={endorsements} />;
 };
