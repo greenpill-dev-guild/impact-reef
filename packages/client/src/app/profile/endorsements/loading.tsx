@@ -2,7 +2,7 @@ import { Loader } from "@/components/Loader";
 
 export default function Loading() {
   return (
-    <div className="w-full h-full grid place-items-center">
+    <div className="grid h-full w-full place-items-center py-12">
       <Loader />;
     </div>
   );

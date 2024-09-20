@@ -43,7 +43,7 @@ export const Filters: React.FC<FiltersProps> = ({
           key={title}
           onClick={onFilterChange}
           disabled={disabled}
-          className={`${active ? "bg-blue-900 text-white" : disabled ? "backdrop-blur-sm" : "bg-slate-100 hover:bg-blue-100"} flex items-center gap-2 rounded-lg px-3 py-2 shadow-sm transition-colors duration-200 ease-in-out`}
+          className={`${active ? "bg-sky-900 text-white" : disabled ? "backdrop-blur-sm" : "bg-slate-100 hover:bg-sky-100"} flex items-center gap-2 rounded-lg px-3 py-2 shadow-sm transition-colors duration-200 ease-in-out`}
         >
           {title}
           <span className="grid h-8 w-8 place-items-center rounded-full text-base font-medium">
@@ -52,7 +52,7 @@ export const Filters: React.FC<FiltersProps> = ({
         </button>
       ))}
       <button
-        className="grid place-items-center rounded-lg bg-slate-100 px-3 py-2 shadow-sm hover:bg-blue-100"
+        className="grid place-items-center rounded-lg bg-slate-100 px-3 py-2 shadow-sm hover:bg-sky-100"
         disabled={refreshing}
         onClick={onRefresh}
       >
@@ -91,7 +91,7 @@ export const Filters: React.FC<FiltersProps> = ({
         <button
           tabIndex={0}
           role="button"
-          className="flex h-full items-center gap-2 rounded-lg bg-slate-100 px-3 py-2 capitalize shadow-sm transition-colors duration-200 ease-in-out hover:bg-blue-100"
+          className="flex h-full items-center gap-2 rounded-lg bg-slate-100 px-3 py-2 capitalize shadow-sm transition-colors duration-200 ease-in-out hover:bg-sky-100"
         >
           <Image
             alt="Sort button"

@@ -51,10 +51,12 @@ export const ProjectAttestations: React.FC<ProjectAttestationsProps> = ({
           <div className="flex items-center gap-1 text-sm font-light">
             <span className="h-2 w-2 rounded-full bg-red-500" />
             Badge holders{" "}
-            {(
-              (badgeholderEndorsers.length / endorsers.length) *
-              100
-            ).toPrecision(2)}
+            {badgeholderEndorsers.length
+              ? (
+                  (badgeholderEndorsers.length / endorsers.length) *
+                  100
+                ).toPrecision(2)
+              : 0}
             %
           </div>
         </div>

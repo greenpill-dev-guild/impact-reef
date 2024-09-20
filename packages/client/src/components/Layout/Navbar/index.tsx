@@ -10,7 +10,7 @@ interface NavBarProps {}
 
 export const Navbar: React.FC<NavBarProps> = () => {
   return (
-    <header className="navbar w-full justify-center border-b border-slate-300 px-6 py-4">
+    <header className="navbar h-20 w-full justify-center border-b border-slate-300 px-6">
       <div className="flex w-full max-w-screen-xl flex-1 items-center justify-between gap-4">
         <Link href="/" className="flex shrink-0 cursor-pointer">
           <Image

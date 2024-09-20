@@ -120,7 +120,7 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, badgeholders }) => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <aside className="min-h-full bg-base-200 text-base-content">
+        <aside className="min-h-full bg-slate-50 text-base-content">
           <ProjectAttest
             onSubmit={onSubmit}
             metrics={project.metrics}

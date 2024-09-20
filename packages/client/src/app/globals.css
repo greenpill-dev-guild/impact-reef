@@ -6,6 +6,8 @@ body {
   font-family: var(--font-inter);
   scrollbar-width: none;
   -ms-overflow-style: none; /* IE and Edge */
+
+  @apply text-slate-800;
 }
 
 main {
@@ -18,27 +20,27 @@ h2 {
 }
 
 h2 {
-  @apply text-4xl font-bold;
+  @apply text-4xl font-bold text-slate-900;
 }
 
 h3 {
-  @apply text-2xl font-bold;
+  @apply text-2xl font-bold text-slate-900;
 }
 
 h4 {
-  @apply text-xl font-bold;
+  @apply text-xl font-bold text-slate-900;
 }
 
 h5 {
-  @apply text-lg font-bold;
+  @apply text-lg font-bold text-slate-900;
 }
 
 p {
-  @apply text-base;
+  @apply text-base text-slate-800;
 }
 
 a {
-  @apply text-sky-700 hover:text-sky-800;
+  @apply text-slate-700 hover:text-sky-800;
 }
 
 label {
@@ -47,19 +49,19 @@ label {
 
 button,
 .button {
-  @apply inline-flex min-w-32 cursor-pointer items-center justify-center gap-1 rounded-full px-3 py-2.5 font-semibold leading-snug transition-colors duration-200 ease-in-out;
+  @apply inline-flex min-w-32 cursor-pointer items-center justify-center gap-1 rounded-full px-3 py-2.5 font-semibold leading-snug transition-all duration-200 ease-in-out;
 }
 
 button:disabled {
-  @apply cursor-not-allowed bg-gray-300 text-gray-500;
+  @apply cursor-not-allowed bg-slate-300 text-gray-500 pointer-events-none;
 }
 
 .button-primary {
-  @apply bg-sky-700 text-white hover:bg-sky-800;
+  @apply bg-sky-900 text-white hover:bg-sky-950 hover:text-white opacity-95;
 }
 
 .button-secondary {
-  @apply border border-sky-700 bg-white text-sky-700 hover:bg-sky-700 hover:text-white;
+  @apply border border-sky-900 bg-white text-sky-800 hover:bg-sky-900 hover:text-white;
 }
 
 .button-link {
@@ -67,11 +69,11 @@ button:disabled {
 }
 
 .button-icon {
-  @apply grid aspect-square place-items-center rounded-lg bg-slate-100 p-2 transition-colors duration-200 ease-in-out hover:bg-slate-200;
+  @apply grid aspect-square place-items-center rounded-lg bg-slate-100 h-10 w-10 transition-colors duration-200 ease-in-out hover:bg-slate-200;
 }
 
 .link-icon {
-  @apply grid place-items-center rounded-full bg-slate-200 fill-inherit p-2 transition-colors duration-200 ease-in-out hover:bg-slate-300;
+  @apply grid place-items-center rounded-full bg-slate-200 fill-inherit h-10 w-10 transition-colors duration-200 ease-in-out hover:bg-slate-300;
 }
 
 .toaster {
@@ -80,10 +82,4 @@ button:disabled {
 
 ::-webkit-scrollbar {
   display: none;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
 }

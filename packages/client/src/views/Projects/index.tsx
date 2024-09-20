@@ -37,7 +37,7 @@ const ProjectsView: React.FC<ProjectViewProps> = ({
           />
           <Pagination totalPages={totalPages} />
         </section>
-        <aside className="w-72">
+        <aside className="hidden w-72 sm:flex sm:flex-col sm:gap-2">
           <div className="h-[460px] w-full rounded-xl bg-[url('/images/img-project-side.jpg')] bg-cover bg-clip-padding bg-right-top bg-no-repeat p-6">
             <h3 className="mb-1 text-2xl font-semibold capitalize">
               Observe the impact of projects on the ecosystem

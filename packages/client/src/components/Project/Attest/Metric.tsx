@@ -53,7 +53,7 @@ export const ProjectAttestMetric = forwardRef<
               {metric.metricName}
             </div>
             <div className="collapse-content">
-              <p className="text-slate-300">{metric.metricDescription}</p>
+              <p className="">{metric.metricDescription}</p>
               <label className="form-control w-full">
                 <div className="label">
                   <span className="label-text text-lg font-semibold">Data</span>

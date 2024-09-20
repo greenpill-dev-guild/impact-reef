@@ -46,7 +46,7 @@ export const ProjectOverview: React.FC<ProjectOverviewProps> = ({
   socials,
 }) => {
   return (
-    <div className="flex w-full items-center gap-4 rounded-md border px-8 py-6 shadow-sm">
+    <div className="flex w-full items-center gap-4 rounded-md border border-slate-100 px-8 py-6 shadow-sm">
       <Image
         className="aspect-square rounded-lg"
         alt="porject logo/avatar"
@@ -56,7 +56,7 @@ export const ProjectOverview: React.FC<ProjectOverviewProps> = ({
       />
       <div className="flex-1">
         <h1 className="text-5xl font-semibold">{title}</h1>
-        <p>{description}</p>
+        <p className="line-clamp-6">{description}</p>
       </div>
       <div className="flex h-full basis-72 flex-col items-end justify-between gap-6">
         <ul className="flex gap-2">

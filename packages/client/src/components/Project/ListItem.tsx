@@ -35,7 +35,7 @@ export const categories: Record<
   },
   "cross-chain": {
     label: "Cross Chain",
-    color: "#93c5fd",
+    color: "#fd9393",
   },
   defi: {
     label: "DeFi",
@@ -47,7 +47,7 @@ export const categories: Record<
   },
   nft: {
     label: "NFT",
-    color: "#3b82f6",
+    color: "#9bc1ff",
   },
   social: {
     label: "Social",

@@ -17,7 +17,7 @@ export const ProjectMetrics: React.FC<ProjectMetricsProps> = ({ metrics }) => {
   }
 
   return (
-    <section className="flex flex-1 flex-col items-center gap-8 rounded-lg bg-slate-200 p-6 shadow-md">
+    <section className="flex flex-1 flex-col items-center gap-8 rounded-lg bg-slate-100 p-6 shadow-sm">
       <div className="flex gap-2">
         <Image
           src="/icons/flag.svg"
@@ -47,10 +47,11 @@ export const ProjectMetrics: React.FC<ProjectMetricsProps> = ({ metrics }) => {
           ))}
         </ul>
       ) : (
-        <div className="grid place-items-center">
-          <h3 className="text-xl font-semibold">No metrics yet</h3>
-          <p className="text-lg font-light">
-            Add metrics to track your project&apos;s progress
+        <div className="min-h-[800px]] grid place-items-center">
+          <h3 className="text-xl font-semibold">No Metrics Found</h3>
+          <p className="max-w-sm text-center text-lg font-light">
+            We fetch metrics from Open Source Observer connect your project to
+            view.
           </p>
         </div>
       )}

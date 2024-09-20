@@ -38,18 +38,20 @@ export const Connect: React.FC<ConnectProps> = () => {
       <div
         tabIndex={0}
         role="button"
-        className="btn btn-outline inline-flex w-32 items-center justify-center gap-2 border-2 border-sky-700 p-4 font-semibold text-slate-800 transition-colors duration-300 ease-in-out hover:bg-sky-700 hover:fill-white hover:text-white focus:bg-sky-700 focus:fill-white focus:text-white"
+        className="btn btn-outline inline-flex w-32 items-center justify-center gap-2 border-2 border-sky-900 p-4 font-semibold transition-colors duration-300 ease-in-out hover:bg-sky-900 hover:fill-white hover:text-white focus:bg-sky-900 focus:fill-white focus:text-white"
       >
         My Reef <FaChevronDown className="h-3 w-3" />
       </div>
       <ul
         tabIndex={0}
-        className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
+        className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 py-2 shadow"
       >
         {profileLinks.map((link) => (
           <li key={link.title} className="font-semibold capitalize">
             {link?.action ? (
-              <span onClick={link.action}>{link.title}</span>
+              <span className="hover:text-sky-800" onClick={link.action}>
+                {link.title}
+              </span>
             ) : (
               <Link
                 href={`/profile/${link.title === "settings" ? "" : link.title}`}
@@ -62,6 +64,6 @@ export const Connect: React.FC<ConnectProps> = () => {
       </ul>
     </div>
   ) : (
-    <w3m-button />
+    <w3m-button label="Connect Wallet" loadingLabel="Connecting" />
   );
 };

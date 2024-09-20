@@ -83,7 +83,7 @@ export const ProjectAttest: React.FC<ProjectAttestProps> = ({
       onSubmit={handleSubmit(onSubmit)}
       className="relative mb-16 flex h-full w-[540px] flex-col"
     >
-      <header className="px-12 py-8">
+      <header className="px-8 py-8">
         <h2 className="mb-2 flex items-center gap-1">
           <Image
             src="/icons/chat-alt.svg"
@@ -106,7 +106,7 @@ export const ProjectAttest: React.FC<ProjectAttestProps> = ({
               : "Support this project by submitting an onchain attestation as proof of your endorsement."}
         </p>
       </header>
-      <section className="w-full flex-1 overflow-scroll bg-slate-200">
+      <section className="w-full flex-1 overflow-scroll bg-slate-100 px-8 py-8">
         {projectCreator ? (
           <ProjectAttestMetric metrics={fields} register={register} />
         ) : (
@@ -115,7 +115,7 @@ export const ProjectAttest: React.FC<ProjectAttestProps> = ({
       </section>
       <footer className="fixed bottom-6 left-0 w-full px-8">
         <button
-          className="btn w-full rounded-3xl"
+          className="button button-primary w-full rounded-3xl"
           disabled={isSubmitting || !isValid}
         >
           Submit

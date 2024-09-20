@@ -68,7 +68,7 @@ export const ProjectInfo: React.FC<ProjectInfoProps> = ({
         </ul>
       </Collaspe>
       <Collaspe title="Funding">
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-3">
           {funding &&
             funding.map((fund) => {
               if (!fund) {
@@ -76,16 +76,20 @@ export const ProjectInfo: React.FC<ProjectInfoProps> = ({
               }
 
               return (
-                <li key={fund.title} className="flex flex-col gap-1">
-                  <h5 className="text-xl font-semibold">{fund.title}</h5>
-                  <div>
-                    <p className="text-xs font-light">Date: {fund.date}</p>
-                    <p className="text-xs font-light">
-                      Funds received: {fund.funds_received}
-                    </p>
-                  </div>
-                  <p className="text-sm">{fund.description}</p>
-                  {fund.link && <Link href="link">{fund.link}</Link>}
+                <li key={fund.title} className="flex flex-col">
+                  <h5 className="text-lg font-bold capitalize">{fund.title}</h5>
+                  <p className="text-xs font-light">
+                    Date: {fund.date ?? "Unknown"}
+                  </p>
+                  <p className="mb-2 text-xs font-light">
+                    Funds received: {fund.funds_received ?? "Unknown"}
+                  </p>
+                  <p className="mb-4 text-sm">{fund.description}</p>
+                  {fund.link && (
+                    <Link className="font-bold" href="link">
+                      Learn More
+                    </Link>
+                  )}
                 </li>
               );
             })}

@@ -33,7 +33,9 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ user }) => {
         <p className="mb-4 font-light">
           Current wallet address connected to your account.
         </p>
-        <span className="">{formatAddress(address!)}</span>
+        <span className="">
+          {address ? formatAddress(address) : "Not Connected"}
+        </span>
       </div>
       <div className="border-b-2 border-slate-200 pb-8">
         <h4 className="mb-2">Farcaster ID</h4>
@@ -41,12 +43,14 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ user }) => {
           Recommended for project builders to claim ownership to enable
           self-claim impact attestation.
         </p>
-        <span className="">{walletInfo?.name}</span>
+        <span className="">{walletInfo?.name ?? "Not Found"}</span>
       </div>
       <div>
-        <button onClick={handleLogout} className="button-secondary">
-          Logout
-        </button>
+        {address && (
+          <button onClick={handleLogout} className="button-secondary">
+            Logout
+          </button>
+        )}
       </div>
     </div>
   );

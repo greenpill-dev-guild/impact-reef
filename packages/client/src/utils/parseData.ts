@@ -10,7 +10,7 @@ export const opContractToContract = (
   opContract: ProjectContractsItem,
 ): Contract => {
   return {
-    id: opContract.address ?? "N/A",
+    id: opContract.address ?? "Untitled",
     contractAddress: opContract.address ?? "",
     deployerAddress: opContract.deployerAddress ?? "",
     deploymentHash: opContract.deploymentTxHash ?? "",
@@ -27,10 +27,10 @@ export const opGrantToGrant = (
 
   return grants.map((grant) => {
     return {
-      title: grant.grant ?? "N/A",
-      date: grant.date ?? "N/A",
-      funds_received: grant.amount ?? "N/A",
-      description: grant.details ?? "N/A",
+      title: grant.grant ?? "Untitled",
+      date: grant.date ?? "",
+      funds_received: grant.amount ?? "",
+      description: grant.details ?? "",
       link: grant.link,
     };
   });

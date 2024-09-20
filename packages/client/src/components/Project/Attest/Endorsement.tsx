@@ -11,7 +11,7 @@ export const ProjectAttestEndorsement = forwardRef<
   ProjectAttestEndorsementProps
 >(({ ...props }, ref) => {
   return (
-    <div className="collapse collapse-arrow w-full px-12 py-8">
+    <div className="collapse collapse-arrow w-full">
       {/* <h3 className="flex items-center gap-1 mb-2">
         <Image
           src="/icons/chat-alt.svg"

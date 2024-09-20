@@ -54,11 +54,11 @@ function PaginationNumber({
   isActive: boolean;
 }) {
   const className = clsx(
-    "flex h-10 w-10 bg-slate-100 text-slate-950 rounded-full grid place-items-center text-base font-semibold transition-colors duration-300 ease-in-out",
+    "flex h-10 w-10 text-slate-900 rounded-full grid place-items-center text-base font-semibold transition-colors duration-300 ease-in-out hover:text-slate-900",
     {
-      "z-10 bg-slate-400": isActive,
-      "hover:bg-slate-200": !isActive && position !== "middle",
-      "text-gray-300": position === "middle",
+      "z-10 bg-slate-200": isActive,
+      "hover:bg-slate-100": !isActive && position !== "middle",
+      "text-slate-300": position === "middle",
     },
   );
 
@@ -81,7 +81,7 @@ function PaginationArrow({
   isDisabled?: boolean;
 }) {
   const className = clsx("button-icon h-10 w-10", {
-    "pointer-events-none text-gray-300": isDisabled,
+    "pointer-events-none text-slate-300": isDisabled,
     "hover:bg-slate-200": !isDisabled,
     "mr-2 md:mr-4": direction === "left",
     "ml-2 md:ml-4": direction === "right",
@@ -124,7 +124,7 @@ export const Pagination: React.FC<PaginationProps> = ({ totalPages }) => {
         isDisabled={currentPage <= 1}
       />
 
-      <div className="flex gap-2">
+      <div className="flex gap-1">
         {allPages.map((page, index) => {
           let position: "first" | "last" | "single" | "middle" | undefined;
 
