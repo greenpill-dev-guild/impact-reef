@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { useState } from "react";
+import { useAccount } from "wagmi";
 import toast from "react-hot-toast";
 import {
   SchemaEncoder,
@@ -11,7 +12,6 @@ import { EAS } from "@/constants";
 import { getProjectEndorsements } from "@/actions/endorsements";
 
 import { useEas } from "@/hooks/useEas";
-import { useAccount } from "wagmi";
 
 const endorsementSchema = z.object({
   projectUID: z.string(),
@@ -49,7 +49,7 @@ export const useEndorsements = (endorsements: Endorsement[]) => {
       toast.loading("Submitting your endorsement onchain.");
 
       const transaction = await eas.attest({
-        schema: EAS[11155111].ENDORSEMENTS.uid,
+        schema: EAS[10].ENDORSEMENTS.uid,
         data: {
           recipient: ZERO_ADDRESS,
           expirationTime: BigInt(0),

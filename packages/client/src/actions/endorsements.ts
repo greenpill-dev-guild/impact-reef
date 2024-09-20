@@ -23,7 +23,7 @@ export const getProjectEndorsements = async (
   const { data, error } = await easSepoliaClient
     .query(QUERY, {
       where: {
-        schemaId: { equals: EAS["11155111"].ENDORSEMENTS.uid },
+        schemaId: { equals: EAS["10"].ENDORSEMENTS.uid },
         decodedDataJson: { contains: projectUID },
       },
     })
@@ -61,7 +61,7 @@ export const getUserEndorsements = async (
   const { data, error } = await easSepoliaClient
     .query(QUERY, {
       where: {
-        schemaId: { equals: EAS["11155111"].ENDORSEMENTS.uid },
+        schemaId: { equals: EAS["10"].ENDORSEMENTS.uid },
         attester: { equals: address },
       },
     })
