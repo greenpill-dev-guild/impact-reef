@@ -19,9 +19,8 @@ createWeb3Modal({
   siweConfig,
   themeMode: "light",
   themeVariables: {
-    "--w3m-accent": "#0369a1",
+    "--w3m-accent": "#0c4a6e",
     "--w3m-font-family": "Inter, sans-serif",
-    // "--w3m-font-size-master": "16px",
   },
   enableAnalytics: true, // Optional - defaults to your Cloud configuration
 });

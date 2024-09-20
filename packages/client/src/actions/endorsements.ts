@@ -2,7 +2,8 @@
 
 import { EAS } from "@/constants";
 
-import { easGraphQL, easSepoliaClient } from "@/modules/graphql";
+import { easGraphQL } from "@/modules/graphql";
+import { easOptimismClient } from "@/modules/urql";
 
 import { parseDataToEndorsementItem } from "@/utils/parseData";
 
@@ -20,7 +21,7 @@ export const getProjectEndorsements = async (
     }
   `);
 
-  const { data, error } = await easSepoliaClient
+  const { data, error } = await easOptimismClient
     .query(QUERY, {
       where: {
         schemaId: { equals: EAS["10"].ENDORSEMENTS.uid },
@@ -58,7 +59,7 @@ export const getUserEndorsements = async (
     }
   `);
 
-  const { data, error } = await easSepoliaClient
+  const { data, error } = await easOptimismClient
     .query(QUERY, {
       where: {
         schemaId: { equals: EAS["10"].ENDORSEMENTS.uid },

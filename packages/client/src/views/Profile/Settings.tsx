@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { useAccount, useDisconnect } from "wagmi";
 import { signOut } from "next-auth/react";
+import { useAccount, useDisconnect } from "wagmi";
 import { useWalletInfo } from "@web3modal/wagmi/react";
 
 import { formatAddress } from "@/utils/text";
@@ -19,6 +19,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ user }) => {
   function handleLogout() {
     signOut({
       callbackUrl: "/",
+      redirect: true,
     });
     disconnect();
   }

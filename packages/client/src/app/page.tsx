@@ -1,6 +1,7 @@
 import { NextPage } from "next";
+import dynamic from "next/dynamic";
 
-import HomeView from "@/views/Home";
+const HomeView = dynamic(() => import("@/views/Home"));
 
 const Home: NextPage = () => {
   return <HomeView />;

@@ -1,4 +1,5 @@
-import { osoClient, osoGraphQL } from "@/modules/graphql";
+import { osoClient } from "@/modules/urql";
+import { osoGraphQL } from "@/modules/graphql";
 
 export const getOsoCodeMetricsByArtifact = async (
   projectUID: string,

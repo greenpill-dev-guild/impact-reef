@@ -1,6 +1,7 @@
 "use server";
 
-import { easGraphQL, easOptimismClient } from "@/modules/graphql";
+import { easGraphQL } from "@/modules/graphql";
+import { easOptimismClient } from "@/modules/urql";
 
 import { EAS } from "@/constants";
 

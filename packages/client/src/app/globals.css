@@ -14,6 +14,10 @@ main {
   @apply min-h-screen;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 h1,
 h2 {
   font-family: var(--font-sora);
@@ -53,11 +57,11 @@ button,
 }
 
 button:disabled {
-  @apply cursor-not-allowed bg-slate-300 text-gray-500 pointer-events-none;
+  @apply pointer-events-none cursor-not-allowed bg-slate-300 text-gray-500;
 }
 
 .button-primary {
-  @apply bg-sky-900 text-white hover:bg-sky-950 hover:text-white opacity-95;
+  @apply bg-sky-900 text-white opacity-95 hover:bg-sky-950 hover:text-white;
 }
 
 .button-secondary {
@@ -69,17 +73,13 @@ button:disabled {
 }
 
 .button-icon {
-  @apply grid aspect-square place-items-center rounded-lg bg-slate-100 h-10 w-10 transition-colors duration-200 ease-in-out hover:bg-slate-200;
+  @apply grid aspect-square h-10 w-10 place-items-center rounded-lg bg-slate-100 transition-colors duration-200 ease-in-out hover:bg-slate-200;
 }
 
 .link-icon {
-  @apply grid place-items-center rounded-full bg-slate-200 fill-inherit h-10 w-10 transition-colors duration-200 ease-in-out hover:bg-slate-300;
+  @apply grid h-10 w-10 place-items-center rounded-full bg-slate-200 fill-inherit transition-colors duration-200 ease-in-out hover:bg-slate-300;
 }
 
 .toaster {
   @apply inline-flex min-w-72 items-center gap-4 rounded-xl p-4 shadow;
-}
-
-::-webkit-scrollbar {
-  display: none;
 }
