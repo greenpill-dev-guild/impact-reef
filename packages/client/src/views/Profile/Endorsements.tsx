@@ -1,15 +1,25 @@
 "use client";
 
-import React from "react";
+import { useAccount } from "wagmi";
 import Link from "next/link";
+import React, { useEffect } from "react";
+import { getUserEndorsements } from "@/actions/endorsements";
 
 export interface ProfileEndorsementsProps {
   endorsements: Endorsement[];
 }
 
-const ProfileEndorsementsView: React.FC<ProfileEndorsementsProps> = ({
-  endorsements,
-}) => {
+const ProfileEndorsementsView: React.FC<ProfileEndorsementsProps> = () => {
+  const { address } = useAccount();
+  const [endorsements, setEndorsements] = React.useState<Endorsement[]>([]);
+
+  useEffect(() => {
+    getUserEndorsements(address).then((endorsements) => {
+      console.log(endorsements);
+      setEndorsements(endorsements);
+    });
+  }, []);
+
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-3xl font-bold leading-7">Endorsements</h2>
