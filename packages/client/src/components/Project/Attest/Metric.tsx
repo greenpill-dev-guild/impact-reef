@@ -23,7 +23,7 @@ export const ProjectAttestMetric = forwardRef<
   ProjectAttestMetricProps
 >(({ register, metrics }) => {
   return (
-    <div className="bg-slate-400 collapse collapse-arrow h-full w-full px-8">
+    <div className="collapse collapse-arrow h-full w-full bg-slate-400 px-8">
       <input type="checkbox" />
       <div className="collapse-title">
         <h3 className="mb-2 flex items-center gap-1">

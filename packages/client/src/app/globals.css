@@ -83,3 +83,19 @@ button:disabled {
 .toaster {
   @apply inline-flex min-w-72 items-center gap-4 rounded-xl p-4 shadow;
 }
+
+.toaster {
+  @apply rounded-lg p-2;
+}
+
+.toaster-loading {
+  @apply rounded-lg p-2;
+}
+
+.toaster-error {
+  @apply rounded-lg p-2;
+}
+
+.toaste-success {
+  @apply rounded-lg p-2;
+}

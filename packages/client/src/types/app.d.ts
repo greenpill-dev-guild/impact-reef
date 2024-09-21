@@ -89,7 +89,6 @@ declare interface ProjectItem {
   category: ProjectCategory;
   updated_at: string;
   creator: string;
-
   [key: string]: any;
 }
 
