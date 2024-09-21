@@ -27,8 +27,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ user }) => {
   // const address = user?.address;
 
   return (
-    <div className="flex flex-col gap-12">
-      <h2 className="text-3xl font-bold leading-7">Settings</h2>
+    <div className="mt-4 flex flex-col gap-12">
       <div className="border-b-2 border-slate-200 pb-8">
         <h4 className="mb-2">Wallet Address</h4>
         <p className="mb-4 font-light">
