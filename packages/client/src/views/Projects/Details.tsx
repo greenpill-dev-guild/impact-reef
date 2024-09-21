@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { useAccount } from "wagmi";
-import { useRouter } from "next/navigation";
 import { FaArrowLeft, FaArrowUp } from "react-icons/fa";
 import { ZERO_BYTES32 } from "@ethereum-attestation-service/eas-sdk";
 
@@ -24,11 +23,8 @@ export interface ProjectViewProps {
 }
 
 const ProjectView: React.FC<ProjectViewProps> = ({ project, badgeholders }) => {
-  const { push } = useRouter();
   const { address } = useAccount();
-  const { createEndorsement, endorsementList } = useEndorsements(
-    project.endorsements,
-  );
+  const { createEndorsement, endorsementList } = useEndorsements(project.id);
 
   const projectCreator = !!address && address === project.creator;
 

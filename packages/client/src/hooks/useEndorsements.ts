@@ -1,11 +1,10 @@
 import { z } from "zod";
-import { useState } from "react";
-import { useAccount } from "wagmi";
-import toast from "react-hot-toast";
 import {
   SchemaEncoder,
   ZERO_ADDRESS,
 } from "@ethereum-attestation-service/eas-sdk";
+import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
 
 import { EAS } from "@/constants";
 
@@ -21,11 +20,12 @@ const endorsementSchema = z.object({
 
 export type CreateEndorsementParams = z.infer<typeof endorsementSchema>;
 
-export const useEndorsements = (endorsements: Endorsement[]) => {
+export const useEndorsements = (projectUID: string) => {
   const { eas } = useEas();
-  const { address } = useAccount();
-  const [endorsementList, setEndorsementList] =
-    useState<Endorsement[]>(endorsements);
+  const { data, refetch } = useQuery({
+    queryKey: ["endorsements", projectUID],
+    queryFn: () => getProjectEndorsements(projectUID),
+  });
 
   const createEndorsement = async (params: CreateEndorsementParams) => {
     const { projectUID, metricUID, description } =
@@ -60,20 +60,7 @@ export const useEndorsements = (endorsements: Endorsement[]) => {
 
       const newAttestationUID = await transaction.wait();
 
-      const fetchedEndorsements = await getProjectEndorsements(projectUID);
-
-      if (!fetchedEndorsements.find((e) => e.id === newAttestationUID)) {
-        fetchedEndorsements.push({
-          id: newAttestationUID,
-          attester: address ?? "",
-          projectUID,
-          metricUID,
-          description,
-          created_at: new Date().toLocaleString(),
-        });
-      }
-
-      setEndorsementList(fetchedEndorsements);
+      await refetch();
 
       toast.dismiss();
       toast.success("Endorsement successfully made!");
@@ -86,5 +73,5 @@ export const useEndorsements = (endorsements: Endorsement[]) => {
     }
   };
 
-  return { createEndorsement, endorsementList };
+  return { createEndorsement, endorsementList: data ?? [] };
 };

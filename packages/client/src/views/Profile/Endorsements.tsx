@@ -1,8 +1,10 @@
 "use client";
 
-import { useAccount } from "wagmi";
+import React from "react";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import { useAccount } from "wagmi";
+import { useQuery } from "@tanstack/react-query";
+
 import { getUserEndorsements } from "@/actions/endorsements";
 
 export interface ProfileEndorsementsProps {
@@ -11,20 +13,17 @@ export interface ProfileEndorsementsProps {
 
 const ProfileEndorsementsView: React.FC<ProfileEndorsementsProps> = () => {
   const { address } = useAccount();
-  const [endorsements, setEndorsements] = React.useState<Endorsement[]>([]);
 
-  useEffect(() => {
-    getUserEndorsements(address).then((endorsements) => {
-      console.log(endorsements);
-      setEndorsements(endorsements);
-    });
-  }, []);
+  const { data: endorsements } = useQuery({
+    queryKey: ["endorsements", address],
+    queryFn: () => getUserEndorsements(address),
+  });
 
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-3xl font-bold leading-7">Endorsements</h2>
       <div className="w-full flex-1">
-        {endorsements.length ? (
+        {endorsements?.length ? (
           <ul className="flex max-w-xl flex-col gap-2">
             {endorsements.map((endorsement) => (
               <li
