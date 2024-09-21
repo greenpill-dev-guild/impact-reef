@@ -1,7 +1,7 @@
 declare interface User {
-  // fid?: number;
-  // name?: string;
-  // image?: string;
+  fid?: number;
+  name?: string;
+  image?: string;
   badgeholder: boolean;
   metrics_admin: boolean;
   council_member: boolean;
@@ -115,11 +115,6 @@ declare interface CreateProjectMetric {
 declare interface ProjectMetricItem extends CreateProjectMetric {
   id: string;
   created_at: string;
-}
-
-declare interface ProjectMetric extends ProjectMetricItem {
-  description: string;
-  name: string;
 }
 
 interface CreateEndorsement {

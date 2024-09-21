@@ -10,21 +10,21 @@ interface NavBarProps {}
 
 export const Navbar: React.FC<NavBarProps> = () => {
   return (
-    <header className="navbar justify-center py-6 border-b border-zinc-200">
-      <div className="flex-1 flex gap-4 w-full justify-between max-w-screen-xl">
-        <Link href="/" className="flex gap-2 shrink-0">
+    <header className="navbar h-20 w-full justify-center border-b border-slate-300 px-6">
+      <div className="flex w-full max-w-screen-xl flex-1 items-center justify-between gap-4">
+        <Link href="/" className="flex shrink-0 cursor-pointer">
           <Image
-            alt="impact reef sun logo"
+            alt="Optimism Sun Logo"
             src={"/images/sun-logo.png"}
-            className="aspect-square rounded-full"
             width={48}
             height={48}
+            className="scale-90"
             priority
           />
           <Image
-            alt="impact reef text logo"
+            alt="Impact Reef Text Logo"
             src={"/images/logo-text.png"}
-            className=""
+            className="scale-90"
             width={164}
             height={48}
             priority
@@ -32,7 +32,7 @@ export const Navbar: React.FC<NavBarProps> = () => {
         </Link>
         {/* <label
           htmlFor="search"
-          className="input input-bordered flex flex-1 items-center rounded-full border border-zinc-200 gap-2"
+          className="input input-bordered flex flex-1 items-center rounded-full border border-slate-200 gap-2"
         >
           <Image
             alt="search icon"
@@ -48,9 +48,11 @@ export const Navbar: React.FC<NavBarProps> = () => {
             placeholder="Search projects, metrics, criteria..."
           />
         </label> */}
-        <div className="flex-1 flex gap-2 items-center justify-end">
+        <div className="hidden flex-1 items-center justify-end gap-2 sm:flex">
           <NavbarLinks />
-          <Connect />
+          <div className="w-full basis-12">
+            <Connect />
+          </div>
         </div>
       </div>
     </header>
