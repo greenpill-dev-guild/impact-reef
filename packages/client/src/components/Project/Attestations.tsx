@@ -24,7 +24,7 @@ export const ProjectAttestations: React.FC<ProjectAttestationsProps> = ({
   ];
 
   return (
-    <aside className="flex basis-72 flex-col gap-2">
+    <aside className="flex grow-0 basis-72 flex-col gap-2">
       {/* <Stat
         stats={[
           {

@@ -115,7 +115,7 @@ export const ProjectAttest: React.FC<ProjectAttestProps> = ({
       </section>
       <footer className="fixed bottom-6 left-0 w-full px-8">
         <button
-          className="button button-primary w-full rounded-3xl"
+          className="button button-primary w-full"
           disabled={isSubmitting || !isValid}
         >
           Submit

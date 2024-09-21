@@ -32,7 +32,7 @@ export const ProjectInfo: React.FC<ProjectInfoProps> = ({
   funding,
 }) => {
   return (
-    <aside className="flex basis-72 flex-col gap-2">
+    <aside className="flex grow-0 basis-72 flex-col gap-2">
       <Collaspe title="Repository">
         <ul>
           {repositories?.map((repo) => (
@@ -86,7 +86,11 @@ export const ProjectInfo: React.FC<ProjectInfoProps> = ({
                   </p>
                   <p className="mb-4 text-sm">{fund.description}</p>
                   {fund.link && (
-                    <Link className="font-bold" href="link">
+                    <Link
+                      className="font-bold"
+                      href={fund.link}
+                      target="_blank"
+                    >
                       Learn More
                     </Link>
                   )}

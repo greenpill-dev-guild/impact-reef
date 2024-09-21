@@ -28,8 +28,8 @@ export const ProjectAttestEndorsement = forwardRef<
         years.
       </p>
       <textarea
-        rows={10}
-        className="mb-2 min-h-96 rounded-lg border border-slate-400 p-4"
+        rows={7}
+        className="mb-2 min-h-80 rounded-lg border border-slate-400 p-4"
         placeholder="State why you endorse this project..."
         ref={ref}
         {...props}

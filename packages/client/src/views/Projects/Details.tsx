@@ -93,15 +93,10 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, badgeholders }) => {
           endorsements={endorsementList}
         />
         <footer className="mx-auto flex w-full max-w-screen-xl justify-between py-12">
-          <button
-            onClick={() => {
-              push("/projects");
-            }}
-            className="button button-secondary w-48"
-          >
+          <Link href="/projects" className="button button-secondary w-48">
             Return to projects
             <FaArrowLeft className="w-3" />
-          </button>
+          </Link>
           <button
             onClick={() => {
               window.scroll({ top: 0, left: 0, behavior: "smooth" });

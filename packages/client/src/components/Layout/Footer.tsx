@@ -1,13 +1,8 @@
-import {
-  FaTelegramPlane,
-  FaDiscord,
-  FaTwitter,
-  FaGithub,
-} from "react-icons/fa";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { IconType } from "react-icons/lib";
+import { FaTwitter, FaGithub, FaHatWizard } from "react-icons/fa";
 
 interface FooterProps {}
 
@@ -19,21 +14,16 @@ interface Link {
 }
 
 const links: Link[] = [
-  { title: "x", Icon: FaTwitter, link: "https://x.com/gp_dev_guild" },
+  { title: "x", Icon: FaTwitter, link: "https://x.com/ImpactReef" },
   {
-    title: "discord",
-    Icon: FaDiscord,
-    link: "https://discord.com/gp_dev_guild",
-  },
-  {
-    title: "telegram",
-    Icon: FaTelegramPlane,
-    link: "https://t.me/gp_dev_guild",
+    title: "farcaster",
+    Icon: FaHatWizard,
+    link: "https://warpcast.com/~/channel/impact-reef",
   },
   {
     title: "github",
     Icon: FaGithub,
-    link: "https://github.com/greenpill-dev-guild",
+    link: "https://github.com/greenpill-dev-guild/impact-reef",
   },
 ];
 

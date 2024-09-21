@@ -29,7 +29,7 @@ export const ProjectMetrics: React.FC<ProjectMetricsProps> = ({ metrics }) => {
         <h2 className="text-3xl font-semibold">Metrics</h2>
       </div>
       {metricList.length ? (
-        <ul className="grid-rows-auto min-h-[800px]] grid grid-cols-2 gap-4">
+        <ul className="grid-rows-auto grid min-h-96 grid-cols-2 gap-4">
           {metricList.map((metric) => (
             <li
               key={metric.metricUID}
@@ -47,7 +47,7 @@ export const ProjectMetrics: React.FC<ProjectMetricsProps> = ({ metrics }) => {
           ))}
         </ul>
       ) : (
-        <div className="min-h-[800px]] grid place-items-center">
+        <div className="flex min-h-96 flex-col items-center justify-center gap-4">
           <h3 className="text-xl font-semibold">No Metrics Found</h3>
           <p className="max-w-sm text-center text-lg font-light">
             We fetch metrics from Open Source Observer connect your project to
