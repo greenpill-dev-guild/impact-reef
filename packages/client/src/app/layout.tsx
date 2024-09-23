@@ -13,7 +13,7 @@ import {
   APP_TITLE_TEMPLATE,
 } from "@/constants";
 
-import { inter, sora } from "@/utils/fonts";
+import { inter, sora } from "@/modules/fonts";
 
 import { config } from "@/modules/wagmi";
 
