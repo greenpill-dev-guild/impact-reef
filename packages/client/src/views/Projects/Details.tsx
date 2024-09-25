@@ -15,6 +15,8 @@ import { ProjectOverview } from "@/components/Project/Overview";
 import { ProjectAttestations } from "@/components/Project/Attestations";
 import { ProjectEndorsements } from "@/components/Project/Endorsements";
 import { AttestFormValues } from "@/components/Project/Attest/Metric";
+import { Project } from "@/types/projects";
+import { User } from "@/types/app";
 
 export interface ProjectViewProps {
   user: User;

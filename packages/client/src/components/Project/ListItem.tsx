@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import { formatLastUpdated } from "@/utils/text";
 import { useRouter } from "next/navigation";
+import { ProjectCategory } from "@/types/projects";
 
 export interface ProjectListItemProps {
   id: string;
