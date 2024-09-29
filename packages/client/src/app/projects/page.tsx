@@ -1,9 +1,23 @@
-import {NextPage} from "next";
-import ProjectsView from "@/views/Projects";
+import { NextPage } from "next";
+import dynamic from "next/dynamic";
 
-const ProjectsPage: NextPage = () => {
+const ProjectsView = dynamic(() => import("@/views/Projects"));
 
-    return <ProjectsView/>;
+const ProjectsPage: NextPage = async ({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}) => {
+  const query = searchParams?.query || "";
+  const currentPage = Number(searchParams?.page) || 1;
+  const totalPages = 7;
+
+  return (
+    <ProjectsView query={query} page={currentPage} totalPages={totalPages} />
+  );
 };
 
 export default ProjectsPage;

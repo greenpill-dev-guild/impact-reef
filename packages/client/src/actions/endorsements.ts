@@ -1,17 +1,16 @@
 "use server";
 
-import { graphql } from "gql.tada";
-
 import { EAS } from "@/constants";
 
-import { easSepoliaClient } from "@/modules/urql";
+import { easGraphQL } from "@/modules/graphql";
+import { easOptimismClient } from "@/modules/urql";
 
 import { parseDataToEndorsementItem } from "@/utils/parseData";
 
 export const getProjectEndorsements = async (
-  projectUID?: string | null
+  projectUID?: string | null,
 ): Promise<Endorsement[]> => {
-  const QUERY = graphql(/* GraphQL */ `
+  const QUERY = easGraphQL(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
         id
@@ -22,10 +21,10 @@ export const getProjectEndorsements = async (
     }
   `);
 
-  const { data, error } = await easSepoliaClient
+  const { data, error } = await easOptimismClient
     .query(QUERY, {
       where: {
-        schemaId: { equals: EAS["11155111"].ENDORSEMENTS.uid },
+        schemaId: { equals: EAS["10"].ENDORSEMENTS.uid },
         decodedDataJson: { contains: projectUID },
       },
     })
@@ -36,17 +35,20 @@ export const getProjectEndorsements = async (
 
   return (
     data?.attestations.map(({ id, attester, timeCreated, decodedDataJson }) =>
-      parseDataToEndorsementItem(id, attester, timeCreated, decodedDataJson)
+      parseDataToEndorsementItem(id, attester, timeCreated, decodedDataJson),
     ) ?? []
   );
 };
 
 export const getUserEndorsements = async (
-  address?: string | null
+  address?: string | null,
 ): Promise<Endorsement[]> => {
-  if (!address) console.error("No address provided");
+  if (!address) {
+    console.error("No address provided");
+    return [];
+  }
 
-  const QUERY = graphql(/* GraphQL */ `
+  const QUERY = easGraphQL(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
         id
@@ -57,10 +59,10 @@ export const getUserEndorsements = async (
     }
   `);
 
-  const { data, error } = await easSepoliaClient
+  const { data, error } = await easOptimismClient
     .query(QUERY, {
       where: {
-        schemaId: { equals: EAS["11155111"].ENDORSEMENTS.uid },
+        schemaId: { equals: EAS["10"].ENDORSEMENTS.uid },
         attester: { equals: address },
       },
     })
@@ -71,7 +73,7 @@ export const getUserEndorsements = async (
 
   return (
     data?.attestations.map(({ id, attester, timeCreated, decodedDataJson }) =>
-      parseDataToEndorsementItem(id, attester, timeCreated, decodedDataJson)
+      parseDataToEndorsementItem(id, attester, timeCreated, decodedDataJson),
     ) ?? []
   );
 };

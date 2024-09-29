@@ -17,7 +17,7 @@ export const ProjectMetrics: React.FC<ProjectMetricsProps> = ({ metrics }) => {
   }
 
   return (
-    <section className="flex flex-col items-center flex-1 gap-8 bg-zinc-200 p-6 rounded-lg shadow-md">
+    <section className="flex flex-1 flex-col items-center gap-8 rounded-lg bg-slate-100 p-6 shadow-sm">
       <div className="flex gap-2">
         <Image
           src="/icons/flag.svg"
@@ -26,32 +26,43 @@ export const ProjectMetrics: React.FC<ProjectMetricsProps> = ({ metrics }) => {
           width={32}
           height={32}
         />
-        <h2 className="font-semibold text-3xl">Metrics</h2>
+        <h2 className="text-3xl font-semibold">Metrics</h2>
       </div>
-      <ul className="grid grid-cols-2 grid-rows-auto gap-4 min-h-[794px]]">
-        {metricList.map((metric) => (
-          <li
-            key={metric.metricUID}
-            className="w-72 card p-4 flex flex-col justify-between min-h-40 bg-white shadow-sm rounded-md"
-          >
-            <h3 className="text-sm font-light line-clamp-2">
-              {metric.metricUID}
-            </h3>
-            <div className="flex flex-col gap-1">
-              <span className="text-4xl font-bold">
-                {metric.value ? metric.value.toLocaleString() : "-"}
-              </span>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <button
-        disabled={!metrics || metrics?.length <= 6}
-        onClick={handleShowAllMetrics}
-        className="w-32 rounded-full bg-slate-400 text-center px-4 py-2 text-neutral-50 font-semibold leading-snug"
-      >
-        {showAllMetrics && metrics.length > 6 ? "View Less" : "Show All"}
-      </button>
+      {metricList.length ? (
+        <ul className="grid-rows-auto grid min-h-96 grid-cols-2 gap-4">
+          {metricList.map((metric) => (
+            <li
+              key={metric.metricUID}
+              className="card flex min-h-40 w-72 flex-col justify-between rounded-md bg-white p-4 shadow-sm"
+            >
+              <h3 className="line-clamp-2 text-sm font-light">
+                {metric.metricUID}
+              </h3>
+              <div className="flex flex-col gap-1">
+                <span className="text-4xl font-bold">
+                  {metric.value ? metric.value.toLocaleString() : "-"}
+                </span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className="flex min-h-96 flex-col items-center justify-center gap-4">
+          <h3 className="text-xl font-semibold">No Metrics Found</h3>
+          <p className="max-w-sm text-center text-lg font-light">
+            We fetch metrics from Open Source Observer connect your project to
+            view.
+          </p>
+        </div>
+      )}
+      {metrics.length > 6 && (
+        <button
+          onClick={handleShowAllMetrics}
+          className="button button-neutral text-center"
+        >
+          {showAllMetrics && metrics.length > 6 ? "View Less" : "Show All"}
+        </button>
+      )}
     </section>
   );
 };

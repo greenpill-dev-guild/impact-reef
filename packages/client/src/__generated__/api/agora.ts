@@ -43,7 +43,7 @@ Not Live.
 |----------|---------|---------------|
 | OP 0.2.0 | LIVE   | Aug 10th |
 | OP 0.2.1 | LIVE   | Aug 26th |
-| OP 0.2.2 | ON TRACK   | Aug 30th |
+| OP 0.2.2 | LIVE   | Sep 4th |
 | OP 0.2.3 | ON TRACK   | Sep 20th |
  * OpenAPI spec version: 0.2.1
  */
@@ -69,8 +69,6 @@ import type {
   GetProposals200,
   GetProposalsParams,
   GetRetroFundingRoundBallotById200,
-  GetRetroFundingRoundBallots200,
-  GetRetroFundingRoundBallotsParams,
   GetRetroFundingRoundProjects200,
   GetRetroFundingRoundProjectsParams,
   GetRetroFundingRounds200,
@@ -88,11 +86,11 @@ import type {
   SubmitRetroFundingBallot200,
   SubmitRetroFundingBallotBody,
   UpdateImpactMetricCommentBody,
-  UpdateRetroFundingBallotDistributionMethodBody,
   UpdateRetroFundingRoundCategoryAllocationBody,
+  UpdateRetroFundingRoundProjectsBody,
   VotingToken,
 } from "./agora.schemas";
-import { customFetch } from "../../lib/custom-fetch";
+import { customFetch } from "../../utils/custom-fetch";
 
 /**
  * Retrieves the full OAS/Swagger spec for the API in YAML.
@@ -104,7 +102,7 @@ export type getSpecResponse = {
 };
 
 export const getGetSpecUrl = () => {
-  return `/api/agora/spec`;
+  return `https://vote.optimism.io/api/v1/spec`;
 };
 
 export const getSpec = async (
@@ -126,7 +124,7 @@ export type getNonceResponse = {
 };
 
 export const getGetNonceUrl = () => {
-  return `/api/agora/auth/nonce`;
+  return `https://vote.optimism.io/api/v1/auth/nonce`;
 };
 
 export const getNonce = async (
@@ -148,7 +146,7 @@ export type postSiweVerificationMessageResponse = {
 };
 
 export const getPostSiweVerificationMessageUrl = () => {
-  return `/api/agora/auth/verify`;
+  return `https://vote.optimism.io/api/v1/auth/verify`;
 };
 
 export const postSiweVerificationMessage = async (
@@ -160,7 +158,6 @@ export const postSiweVerificationMessage = async (
     {
       ...options,
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(sIWEVerificationBody),
     },
   );
@@ -187,9 +184,7 @@ export const getGetDelegatesUrl = (params?: GetDelegatesParams) => {
     }
   });
 
-  return normalizedParams.size
-    ? `/api/agora/delegates?${normalizedParams.toString()}`
-    : `/api/agora/delegates`;
+  return `https://vote.optimism.io/api/v1/delegates?${normalizedParams.toString()}`;
 };
 
 export const getDelegates = async (
@@ -216,7 +211,7 @@ export type getDelegateByAddressResponse = {
 };
 
 export const getGetDelegateByAddressUrl = (addressOrEnsName: string) => {
-  return `/api/agora/delegates/${addressOrEnsName}`;
+  return `https://vote.optimism.io/api/v1/delegates/${addressOrEnsName}`;
 };
 
 export const getDelegateByAddress = async (
@@ -256,9 +251,7 @@ export const getGetDelegateVotesUrl = (
     }
   });
 
-  return normalizedParams.size
-    ? `/api/agora/delegates/${addressOrEnsName}/votes?${normalizedParams.toString()}`
-    : `/api/agora/delegates/${addressOrEnsName}/votes`;
+  return `https://vote.optimism.io/api/v1/delegates/${addressOrEnsName}/votes?${normalizedParams.toString()}`;
 };
 
 export const getDelegateVotes = async (
@@ -296,9 +289,7 @@ export const getGetProposalsUrl = (params?: GetProposalsParams) => {
     }
   });
 
-  return normalizedParams.size
-    ? `/api/agora/proposals?${normalizedParams.toString()}`
-    : `/api/agora/proposals`;
+  return `https://vote.optimism.io/api/v1/proposals?${normalizedParams.toString()}`;
 };
 
 export const getProposals = async (
@@ -325,7 +316,7 @@ export type getProposalByIdResponse = {
 };
 
 export const getGetProposalByIdUrl = (proposalId: string) => {
-  return `/api/agora/proposals/${proposalId}`;
+  return `https://vote.optimism.io/api/v1/proposals/${proposalId}`;
 };
 
 export const getProposalById = async (
@@ -365,9 +356,7 @@ export const getGetProposalVotesUrl = (
     }
   });
 
-  return normalizedParams.size
-    ? `/api/agora/proposals/${proposalId}/votes?${normalizedParams.toString()}`
-    : `/api/agora/proposals/${proposalId}/votes`;
+  return `https://vote.optimism.io/api/v1/proposals/${proposalId}/votes?${normalizedParams.toString()}`;
 };
 
 export const getProposalVotes = async (
@@ -395,7 +384,7 @@ export type getDelegateesByAddressResponse = {
 };
 
 export const getGetDelegateesByAddressUrl = (addressOrEnsName: string) => {
-  return `/api/agora/delegates/${addressOrEnsName}/delegatees`;
+  return `https://vote.optimism.io/api/v1/delegates/${addressOrEnsName}/delegatees`;
 };
 
 export const getDelegateesByAddress = async (
@@ -422,7 +411,7 @@ export type getDelegatorsByAddressResponse = {
 };
 
 export const getGetDelegatorsByAddressUrl = (addressOrEnsName: string) => {
-  return `/api/agora/delegates/${addressOrEnsName}/delegators`;
+  return `https://vote.optimism.io/api/v1/delegates/${addressOrEnsName}/delegators`;
 };
 
 export const getDelegatorsByAddress = async (
@@ -449,7 +438,7 @@ export type getGovernorContractResponse = {
 };
 
 export const getGetGovernorContractUrl = () => {
-  return `/api/agora/contracts/governor`;
+  return `https://vote.optimism.io/api/v1/contracts/governor`;
 };
 
 export const getGovernorContract = async (
@@ -475,7 +464,7 @@ export type getAlligatorContractResponse = {
 };
 
 export const getGetAlligatorContractUrl = () => {
-  return `/api/agora/contracts/alligator`;
+  return `https://vote.optimism.io/api/v1/contracts/alligator`;
 };
 
 export const getAlligatorContract = async (
@@ -501,7 +490,7 @@ export type getVotingTokenContractResponse = {
 };
 
 export const getGetVotingTokenContractUrl = () => {
-  return `/api/agora/contracts/token`;
+  return `https://vote.optimism.io/api/v1/contracts/token`;
 };
 
 export const getVotingTokenContract = async (
@@ -537,9 +526,7 @@ export const getGetProjectsUrl = (params?: GetProjectsParams) => {
     }
   });
 
-  return normalizedParams.size
-    ? `/api/agora/projects?${normalizedParams.toString()}`
-    : `/api/agora/projects`;
+  return `https://vote.optimism.io/api/v1/projects?${normalizedParams.toString()}`;
 };
 
 export const getProjects = async (
@@ -575,9 +562,7 @@ export const getGetRetroFundingRoundsUrl = (
     }
   });
 
-  return normalizedParams.size
-    ? `/api/agora/retrofunding/rounds?${normalizedParams.toString()}`
-    : `/api/agora/retrofunding/rounds`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds?${normalizedParams.toString()}`;
 };
 
 export const getRetroFundingRounds = async (
@@ -604,7 +589,7 @@ export type getRetroFundingRoundByIdResponse = {
 };
 
 export const getGetRetroFundingRoundByIdUrl = (roundId: number) => {
-  return `/api/agora/retrofunding/rounds/${roundId}`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}`;
 };
 
 export const getRetroFundingRoundById = async (
@@ -613,49 +598,6 @@ export const getRetroFundingRoundById = async (
 ): Promise<getRetroFundingRoundByIdResponse> => {
   return customFetch<Promise<getRetroFundingRoundByIdResponse>>(
     getGetRetroFundingRoundByIdUrl(roundId),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
-
-/**
- * Retrieves a list of ballots for a specific RetroFunding round on Agora as a JSON array. Limit, offset parameters can be used to customize the returned list sorted by ballot ordinal.
-
- * @summary Gets a list of ballots for an RetroFunding round
- */
-export type getRetroFundingRoundBallotsResponse = {
-  data: GetRetroFundingRoundBallots200;
-  status: number;
-};
-
-export const getGetRetroFundingRoundBallotsUrl = (
-  roundId: number,
-  params?: GetRetroFundingRoundBallotsParams,
-) => {
-  const normalizedParams = new URLSearchParams();
-
-  Object.entries(params || {}).forEach(([key, value]) => {
-    if (value === null) {
-      normalizedParams.append(key, "null");
-    } else if (value !== undefined) {
-      normalizedParams.append(key, value.toString());
-    }
-  });
-
-  return normalizedParams.size
-    ? `/api/agora/retrofunding/rounds/${roundId}/ballots?${normalizedParams.toString()}`
-    : `/api/agora/retrofunding/rounds/${roundId}/ballots`;
-};
-
-export const getRetroFundingRoundBallots = async (
-  roundId: number,
-  params?: GetRetroFundingRoundBallotsParams,
-  options?: RequestInit,
-): Promise<getRetroFundingRoundBallotsResponse> => {
-  return customFetch<Promise<getRetroFundingRoundBallotsResponse>>(
-    getGetRetroFundingRoundBallotsUrl(roundId, params),
     {
       ...options,
       method: "GET",
@@ -677,7 +619,7 @@ export const getGetRetroFundingRoundBallotByIdUrl = (
   roundId: number,
   addressOrEnsName: string,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}`;
 };
 
 export const getRetroFundingRoundBallotById = async (
@@ -709,7 +651,7 @@ export const getUpdateRetroFundingBallotOSOnlyUrl = (
   addressOrEnsName: string,
   osOnly: boolean,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/osOnly/${osOnly}`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/osOnly/${osOnly}`;
 };
 
 export const updateRetroFundingBallotOSOnly = async (
@@ -740,7 +682,7 @@ export const getSubmitRetroFundingBallotUrl = (
   roundId: number,
   addressOrEnsName: string,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/submit`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/submit`;
 };
 
 export const submitRetroFundingBallot = async (
@@ -754,7 +696,6 @@ export const submitRetroFundingBallot = async (
     {
       ...options,
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(submitRetroFundingBallotBody),
     },
   );
@@ -784,9 +725,7 @@ export const getGetRetroFundingRoundProjectsUrl = (
     }
   });
 
-  return normalizedParams.size
-    ? `/api/agora/retrofunding/rounds/${roundId}/projects?${normalizedParams.toString()}`
-    : `/api/agora/retrofunding/rounds/${roundId}/projects`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/projects?${normalizedParams.toString()}`;
 };
 
 export const getRetroFundingRoundProjects = async (
@@ -817,7 +756,7 @@ export const getGetRetroFundingRoundProjectByIdUrl = (
   roundId: number,
   projectId: string,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/projects/${projectId}`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/projects/${projectId}`;
 };
 
 export const getRetroFundingRoundProjectById = async (
@@ -848,7 +787,7 @@ export const getAddImpactMetricToRetroFundingBallotUrl = (
   roundId: number,
   addressOrEnsName: string,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/impactMetrics`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/impactMetrics`;
 };
 
 export const addImpactMetricToRetroFundingBallot = async (
@@ -862,8 +801,40 @@ export const addImpactMetricToRetroFundingBallot = async (
     {
       ...options,
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(addImpactMetricToRetroFundingBallotBody),
+    },
+  );
+};
+
+/**
+ * Updates all projects data for a specific ballot for a RetroFunding round on Agora.
+
+ * @summary Updates all projects data for a specific RetroFunding ballot
+ */
+export type updateRetroFundingRoundProjectsResponse = {
+  data: Round5Ballot;
+  status: number;
+};
+
+export const getUpdateRetroFundingRoundProjectsUrl = (
+  roundId: number,
+  addressOrEnsName: string,
+) => {
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/projects`;
+};
+
+export const updateRetroFundingRoundProjects = async (
+  roundId: number,
+  addressOrEnsName: string,
+  updateRetroFundingRoundProjectsBody: UpdateRetroFundingRoundProjectsBody,
+  options?: RequestInit,
+): Promise<updateRetroFundingRoundProjectsResponse> => {
+  return customFetch<Promise<updateRetroFundingRoundProjectsResponse>>(
+    getUpdateRetroFundingRoundProjectsUrl(roundId, addressOrEnsName),
+    {
+      ...options,
+      method: "POST",
+      body: JSON.stringify(updateRetroFundingRoundProjectsBody),
     },
   );
 };
@@ -884,7 +855,7 @@ export const getUpdateRetroFundingRoundProjectAllocationUrl = (
   projectId: string,
   allocation: string,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/projects/${projectId}/allocation/${allocation}`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/projects/${projectId}/allocation/${allocation}`;
 };
 
 export const updateRetroFundingRoundProjectAllocation = async (
@@ -924,7 +895,7 @@ export const getUpdateRetroFundingRoundProjectImpactUrl = (
   projectId: string,
   impact: number,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/projects/${projectId}/impact/${impact}`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/projects/${projectId}/impact/${impact}`;
 };
 
 export const updateRetroFundingRoundProjectImpact = async (
@@ -964,7 +935,7 @@ export const getUpdateRetroFundingRoundProjectPositionUrl = (
   projectId: string,
   position: number,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/projects/${projectId}/position/${position}`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/projects/${projectId}/position/${position}`;
 };
 
 export const updateRetroFundingRoundProjectPosition = async (
@@ -1002,7 +973,7 @@ export const getUpdateRetroFundingRoundCategoryAllocationUrl = (
   roundId: number,
   addressOrEnsName: string,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/categories`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/categories`;
 };
 
 export const updateRetroFundingRoundCategoryAllocation = async (
@@ -1018,7 +989,6 @@ export const updateRetroFundingRoundCategoryAllocation = async (
     {
       ...options,
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updateRetroFundingRoundCategoryAllocationBody),
     },
   );
@@ -1037,25 +1007,28 @@ export type updateRetroFundingBallotDistributionMethodResponse = {
 export const getUpdateRetroFundingBallotDistributionMethodUrl = (
   roundId: number,
   addressOrEnsName: string,
+  distributionMethod: "IMPACT_GROUPS" | "TOP_TO_BOTTOM",
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/distribution_method`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/distribution_method/${distributionMethod}`;
 };
 
 export const updateRetroFundingBallotDistributionMethod = async (
   roundId: number,
   addressOrEnsName: string,
-  updateRetroFundingBallotDistributionMethodBody: UpdateRetroFundingBallotDistributionMethodBody,
+  distributionMethod: "IMPACT_GROUPS" | "TOP_TO_BOTTOM",
   options?: RequestInit,
 ): Promise<updateRetroFundingBallotDistributionMethodResponse> => {
   return customFetch<
     Promise<updateRetroFundingBallotDistributionMethodResponse>
   >(
-    getUpdateRetroFundingBallotDistributionMethodUrl(roundId, addressOrEnsName),
+    getUpdateRetroFundingBallotDistributionMethodUrl(
+      roundId,
+      addressOrEnsName,
+      distributionMethod,
+    ),
     {
       ...options,
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updateRetroFundingBallotDistributionMethodBody),
     },
   );
 };
@@ -1075,7 +1048,7 @@ export const getRemoveImpactMetricFromRetroFundingBallotUrl = (
   addressOrEnsName: string,
   impactMetricId: string,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/impactMetrics/${impactMetricId}`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/ballots/${addressOrEnsName}/impactMetrics/${impactMetricId}`;
 };
 
 export const removeImpactMetricFromRetroFundingBallot = async (
@@ -1108,7 +1081,7 @@ export type getImpactMetricsOnRetroFundingRoundResponse = {
 };
 
 export const getGetImpactMetricsOnRetroFundingRoundUrl = (roundId: number) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/impactMetrics`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics`;
 };
 
 export const getImpactMetricsOnRetroFundingRound = async (
@@ -1138,7 +1111,7 @@ export const getGetImpactMetricOnRetroFundingRoundUrl = (
   roundId: number,
   impactMetricId: string,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}`;
 };
 
 export const getImpactMetricOnRetroFundingRound = async (
@@ -1170,7 +1143,7 @@ export const getRecordImpactMetricViewUrl = (
   impactMetricId: string,
   addressOrEnsName: string,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/${addressOrEnsName}`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/${addressOrEnsName}`;
 };
 
 export const recordImpactMetricView = async (
@@ -1213,9 +1186,7 @@ export const getGetImpactMetricCommentsUrl = (
     }
   });
 
-  return normalizedParams.size
-    ? `/api/agora/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments?${normalizedParams.toString()}`
-    : `/api/agora/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments?${normalizedParams.toString()}`;
 };
 
 export const getImpactMetricComments = async (
@@ -1247,7 +1218,7 @@ export const getPutImpactMetricCommentUrl = (
   roundId: number,
   impactMetricId: string,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments`;
 };
 
 export const putImpactMetricComment = async (
@@ -1261,7 +1232,6 @@ export const putImpactMetricComment = async (
     {
       ...options,
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(putImpactMetricCommentBody),
     },
   );
@@ -1282,7 +1252,7 @@ export const getGetImpactMetricCommentUrl = (
   impactMetricId: string,
   commentId: string,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}`;
 };
 
 export const getImpactMetricComment = async (
@@ -1315,7 +1285,7 @@ export const getUpdateImpactMetricCommentUrl = (
   impactMetricId: string,
   commentId: string,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}`;
 };
 
 export const updateImpactMetricComment = async (
@@ -1330,7 +1300,6 @@ export const updateImpactMetricComment = async (
     {
       ...options,
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updateImpactMetricCommentBody),
     },
   );
@@ -1351,7 +1320,7 @@ export const getDeleteImpactMetricCommentUrl = (
   impactMetricId: string,
   commentId: string,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}`;
 };
 
 export const deleteImpactMetricComment = async (
@@ -1384,7 +1353,7 @@ export const getGetImpactMetricCommentVoteUrl = (
   impactMetricId: string,
   commentId: string,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}/votes`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}/votes`;
 };
 
 export const getImpactMetricCommentVote = async (
@@ -1417,7 +1386,7 @@ export const getPutImactMetricCommentVoteUrl = (
   impactMetricId: string,
   commentId: string,
 ) => {
-  return `/api/agora/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}/votes`;
+  return `https://vote.optimism.io/api/v1/retrofunding/rounds/${roundId}/impactMetrics/${impactMetricId}/comments/${commentId}/votes`;
 };
 
 export const putImactMetricCommentVote = async (
@@ -1432,7 +1401,6 @@ export const putImactMetricCommentVote = async (
     {
       ...options,
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(putImactMetricCommentVoteBody),
     },
   );
