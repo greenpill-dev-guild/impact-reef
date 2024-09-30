@@ -1,13 +1,12 @@
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
-import { getSession } from "next-auth/react";
 
 const ProfileSettingView = dynamic(() => import("@/views/Profile/Settings"));
 
 const ProfilePage: NextPage = async () => {
-  const session = await getSession();
+  // const session = await getSession();
 
-  return <ProfileSettingView user={session?.user} />;
+  return <ProfileSettingView />;
 };
 
 export default ProfilePage;
