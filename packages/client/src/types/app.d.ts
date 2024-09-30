@@ -27,7 +27,8 @@ declare type ProjectCategory =
   | "governance"
   | "nft"
   | "social"
-  | "utility";
+  | "utility"
+  | string;
 
 declare interface CreateMetric {
   name: string;
@@ -89,6 +90,7 @@ declare interface ProjectItem {
   category: ProjectCategory;
   updated_at: string;
   creator: string;
+
   [key: string]: any;
 }
 

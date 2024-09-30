@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { useAccount, useDisconnect } from "wagmi";
-import { signOut } from "next-auth/react";
 import { FaChevronDown } from "react-icons/fa";
 
 interface Link {
@@ -21,9 +20,6 @@ export const Connect: React.FC<ConnectProps> = () => {
   const { disconnect } = useDisconnect();
 
   function handleLogout() {
-    signOut({
-      callbackUrl: "/",
-    });
     disconnect();
   }
 
