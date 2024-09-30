@@ -1,9 +1,16 @@
 import React from "react";
 import { NextPage } from "next";
-import Endorsements from "@/views/Profile/Endorsements";
+import dynamic from "next/dynamic";
 
-const ProfileEndorsementsPage: NextPage = () => {
-    return <Endorsements />;
+// import { getUserEndorsements } from "@/actions/endorsements";
+
+const EndorsementsView = dynamic(() => import("@/views/Profile/Endorsements"));
+
+const ProfileEndorsementsPage: NextPage = async () => {
+
+  // const endorsements = await getUserEndorsements(session?.address);
+
+  return <EndorsementsView endorsements={[]} />;
 };
 
 export default ProfileEndorsementsPage;

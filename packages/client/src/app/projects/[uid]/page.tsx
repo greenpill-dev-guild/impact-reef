@@ -1,7 +1,8 @@
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 
-import { getProjectDetails } from "@/actions/projects";
+import { getProject } from "@/actions/projects";
+import { getBadgeholders } from "@/actions/badgeholders";
 
 const ProjectDetailsView = dynamic(() => import("@/views/Projects/Details"));
 
@@ -10,20 +11,22 @@ interface Props {
 }
 
 const ProjectPage: NextPage<Props> = async ({ params: { uid } }) => {
-  const project = await getProjectDetails(uid);
+  const project = await getProject(uid);
+  const badgeholders = await getBadgeholders();
 
   if (!project) {
-    return <div>Project not found</div>;
+    return null;
   }
 
   return (
     <ProjectDetailsView
       project={project}
+      badgeholders={badgeholders}
       user={{
-        address: "0x1234567890abcdef1234567890abcdef1234567890", // Placeholder
-        badgeholder: true, // Placeholder
-        council_member: true, // Placeholder
-        metrics_admin: true, // Placeholder
+        address: "",
+        badgeholder: false, // Placeholder
+        council_member: false, // Placeholder
+        metrics_admin: false, // Placeholder
       }}
     />
   );

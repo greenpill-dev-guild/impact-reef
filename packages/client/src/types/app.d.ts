@@ -1,7 +1,7 @@
 declare interface User {
-  // fid?: number;
-  // name?: string;
-  // image?: string;
+  fid?: number;
+  name?: string;
+  image?: string;
   badgeholder: boolean;
   metrics_admin: boolean;
   council_member: boolean;
@@ -27,7 +27,8 @@ declare type ProjectCategory =
   | "governance"
   | "nft"
   | "social"
-  | "utility";
+  | "utility"
+  | string;
 
 declare interface CreateMetric {
   name: string;
@@ -89,6 +90,7 @@ declare interface ProjectItem {
   category: ProjectCategory;
   updated_at: string;
   creator: string;
+
   [key: string]: any;
 }
 
@@ -115,11 +117,6 @@ declare interface CreateProjectMetric {
 declare interface ProjectMetricItem extends CreateProjectMetric {
   id: string;
   created_at: string;
-}
-
-declare interface ProjectMetric extends ProjectMetricItem {
-  description: string;
-  name: string;
 }
 
 interface CreateEndorsement {
