@@ -1,6 +1,5 @@
 "use client";
 
-import { ProjectMetric } from "@/types/projects";
 import Image from "next/image";
 import React, { useState } from "react";
 

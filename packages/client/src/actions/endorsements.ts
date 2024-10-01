@@ -4,7 +4,6 @@ import { EAS } from "@/constants";
 
 import { easGraphQL } from "@/modules/graphql";
 import { easOptimismClient } from "@/modules/urql";
-import { Endorsement } from "@/types/projects";
 
 import { parseDataToEndorsementItem } from "@/utils/parseData";
 

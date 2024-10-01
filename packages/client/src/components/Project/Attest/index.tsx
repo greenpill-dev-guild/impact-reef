@@ -7,7 +7,7 @@ import { AttestFormValues, ProjectAttestMetric } from "./Metric";
 import Image from "next/image";
 
 interface ProjectAttestProps {
-  metrics: ProjectMetricItem[];
+  metrics: ProjectMetric[];
   projectCreator: boolean;
   badgeholder: boolean;
   onSubmit: SubmitHandler<AttestFormValues>;
