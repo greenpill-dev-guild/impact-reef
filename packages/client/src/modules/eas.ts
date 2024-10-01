@@ -2,4 +2,4 @@ import { EAS as EAS_REGISTRY } from "@ethereum-attestation-service/eas-sdk";
 
 import { EAS } from "@/constants";
 
-export const eas = new EAS_REGISTRY(EAS["11155111"].EAS.address);
+export const eas = new EAS_REGISTRY(EAS["10"].EAS.address);

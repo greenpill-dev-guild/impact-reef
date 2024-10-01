@@ -1,11 +1,14 @@
 import { z } from "zod";
-import toast from "react-hot-toast";
 import {
   SchemaEncoder,
   ZERO_ADDRESS,
 } from "@ethereum-attestation-service/eas-sdk";
+import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
 
 import { EAS } from "@/constants";
+
+import { getProjectEndorsements } from "@/actions/endorsements";
 
 import { useEas } from "@/hooks/useEas";
 
@@ -17,15 +20,19 @@ const endorsementSchema = z.object({
 
 export type CreateEndorsementParams = z.infer<typeof endorsementSchema>;
 
-export const useEndorsements = () => {
+export const useEndorsements = (projectUID: string) => {
   const { eas } = useEas();
+  const { data, refetch } = useQuery({
+    queryKey: ["endorsements", projectUID],
+    queryFn: () => getProjectEndorsements(projectUID),
+  });
 
   const createEndorsement = async (params: CreateEndorsementParams) => {
     const { projectUID, metricUID, description } =
       endorsementSchema.parse(params);
 
     // Initialize SchemaEncoder with the schema string
-    const schemaEncoder = new SchemaEncoder(EAS[11155111].ENDORSEMENTS.schema);
+    const schemaEncoder = new SchemaEncoder(EAS[10].ENDORSEMENTS.schema);
 
     const encodedData = schemaEncoder.encodeData([
       { name: "projectUID", value: projectUID, type: "bytes32" },
@@ -34,10 +41,15 @@ export const useEndorsements = () => {
     ]);
 
     try {
-      toast.loading("Making endorsement...");
+      const attestDialog = document.getElementById(
+        "attest-drawer",
+      ) as HTMLInputElement;
+      attestDialog.checked = false;
+
+      toast.loading("Submitting your endorsement onchain.");
 
       const transaction = await eas.attest({
-        schema: EAS[11155111].ENDORSEMENTS.uid,
+        schema: EAS[10].ENDORSEMENTS.uid,
         data: {
           recipient: ZERO_ADDRESS,
           expirationTime: BigInt(0),
@@ -48,16 +60,18 @@ export const useEndorsements = () => {
 
       const newAttestationUID = await transaction.wait();
 
+      await refetch();
+
       toast.dismiss();
-      toast.success("Endorsement made successfully");
+      toast.success("Endorsement successfully made!");
 
       return newAttestationUID;
     } catch (error) {
       console.error("Failed to make endorsement:", error);
       toast.dismiss();
-      toast.error("Error endorsing project, please try again");
+      toast.error("Error endorsing project, please try again.");
     }
   };
 
-  return { createEndorsement };
+  return { createEndorsement, endorsementList: data ?? [] };
 };

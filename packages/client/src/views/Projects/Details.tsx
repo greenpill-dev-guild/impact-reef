@@ -2,12 +2,11 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useAccount } from "wagmi";
+import { FaArrowLeft, FaArrowUp } from "react-icons/fa";
+import { ZERO_BYTES32 } from "@ethereum-attestation-service/eas-sdk";
 
-import { useProject } from "@/hooks/projects/useProject";
 import { useEndorsements } from "@/hooks/useEndorsements";
-import { useClaimMetrics } from "@/hooks/useClaimMetrics";
 
 import { ProjectInfo } from "@/components/Project/Info";
 import { ProjectAttest } from "@/components/Project/Attest";
@@ -20,83 +19,45 @@ import { AttestFormValues } from "@/components/Project/Attest/Metric";
 export interface ProjectViewProps {
   user: User;
   project: Project;
+  badgeholders: Map<string, string>;
 }
 
-const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
-  const { push } = useRouter();
-  const { createEndorsement } = useEndorsements();
-  const { createMetricsClaim } = useClaimMetrics();
+const ProjectView: React.FC<ProjectViewProps> = ({ project, badgeholders }) => {
+  const { address } = useAccount();
+  const { createEndorsement, endorsementList } = useEndorsements(project.id);
 
-  const {
-    claimMetricsState,
-    startClaiming,
-    cancelClaim,
-    endorsementState,
-    startEndorsing,
-    cancelEndorse,
-  } = useProject(project.id);
-
-  // const projectCreator = !!user.address && user.address === project.creator;
-  // TODO remove hacky toggle for development
-  const projectCreator = false;
+  const projectCreator = !!address && address === project.creator;
 
   async function onSubmit(data: AttestFormValues) {
-    if (projectCreator) {
-      // TODO get correct metricUID
-      await createMetricsClaim([
-        {
-          projectUID: project.id,
-          metricUID:
-            "0xa32db8cca8e3d1e4c052d37efe89f1cdad683793f26e0bb0e4923e3deb2696e1",
-          value: "0",
-          source: "",
-        },
-      ]);
-    } else {
-      // TODO get correct metricUID
-      await createEndorsement({
-        projectUID: project.id,
-        metricUID:
-          "0xa32db8cca8e3d1e4c052d37efe89f1cdad683793f26e0bb0e4923e3deb2696e1",
-        description: data.endorsement,
-      });
-    }
+    await createEndorsement({
+      projectUID: project.id,
+      metricUID: ZERO_BYTES32,
+      description: data.endorsement,
+    });
   }
 
   return (
-    <main className="drawer drawer-end">
+    <div className="drawer drawer-end">
       <input id="attest-drawer" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content w-full mx-auto flex flex-col gap-4">
+      <div className="drawer-content mx-auto flex w-full flex-col gap-4">
         <header
           id="project-header"
-          className="flex flex-col w-full max-w-screen-xl mx-auto gap-4 py-8"
+          className="mx-auto flex w-full max-w-screen-xl flex-col gap-4 py-8"
         >
-          <div className="w-full flex justify-between">
-            <Link
-              href="/projects"
-              className="bg-zinc-100 p-2 hover:bg-zinc-200 grid aspect-square place-items-center rounded-lg"
-            >
-              <Image
-                alt="back button icon"
-                src="/icons/back.svg"
-                unoptimized
-                width={28}
-                height={28}
-              />
+          <div className="flex w-full justify-between">
+            <Link href="/projects" className="button-icon">
+              <FaArrowLeft className="w-4" />
             </Link>
             <div className="flex gap-3">
-              <label
-                htmlFor={
-                  endorsementState.matches("endorsing") ||
-                  claimMetricsState.matches("claiming")
-                    ? undefined
-                    : "attest-drawer"
-                }
-                onClick={projectCreator ? cancelClaim : cancelEndorse}
-                className="grid place-items-center drawer-button w-36 p-4 rounded-full bg-blue-950 text-neutral-50 font-semibold leading-snug btn"
-              >
-                {projectCreator ? "Claim Metric" : "Endorse"}
-              </label>
+              {address && (
+                <label
+                  htmlFor={false ? undefined : "attest-drawer"}
+                  // onClick={projectCreator ? cancelClaim : cancelEndorse}
+                  className="button button-primary drawer-button"
+                >
+                  Endorse
+                </label>
+              )}
             </div>
           </div>
           <ProjectOverview
@@ -110,7 +71,7 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
         </header>
         <div
           id="project-metrics"
-          className="flex w-full max-w-screen-xl mx-auto gap-3 py-6"
+          className="mx-auto flex w-full max-w-screen-xl gap-3 py-6"
         >
           <ProjectInfo
             funding={project.funding}
@@ -118,68 +79,48 @@ const ProjectView: React.FC<ProjectViewProps> = ({ project, user }) => {
             repositories={project.repositories}
           />
           <ProjectMetrics metrics={project.metrics} />
-          <ProjectAttestations />
+          <ProjectAttestations
+            endorsements={endorsementList}
+            badgeholders={badgeholders}
+          />
         </div>
-
         <ProjectEndorsements
           banner={project.banner_image}
-          endorsements={project.endorsements}
+          endorsements={endorsementList}
         />
-        <footer className="w-full flex justify-between max-w-screen-xl mx-auto py-12">
-          <button
-            onClick={() => {
-              push("/projects");
-            }}
-            className="border-blue-950 text-blue-950 text-sm font-semibold border rounded-full px-4 py-2 flex gap-1 items-center"
-          >
+        <footer className="mx-auto flex w-full max-w-screen-xl justify-between py-12">
+          <Link href="/projects" className="button button-secondary w-48">
             Return to projects
-            <Image
-              alt="back icon for returing to view projects"
-              src="/icons/back.svg"
-              unoptimized
-              width={24}
-              height={24}
-            />
-          </button>
+            <FaArrowLeft className="w-3" />
+          </Link>
           <button
             onClick={() => {
               window.scroll({ top: 0, left: 0, behavior: "smooth" });
             }}
-            className="w-40 border-blue-950 text-blue-950 text-sm font-semibold border rounded-full px-4 py-2 flex gap-1 items-center justify-center"
+            className="button button-secondary w-48"
           >
             Back to top
-            <Image
-              alt="back icon for returing to view projects"
-              src="/icons/arrow-up.svg"
-              unoptimized
-              width={16}
-              height={16}
-            />
+            <FaArrowUp className="w-3" />
           </button>
         </footer>
       </div>
       <div className="drawer-side h-screen">
         <label
-          htmlFor={
-            endorsementState.matches("endorsing") ||
-            claimMetricsState.matches("claiming")
-              ? undefined
-              : "attest-drawer"
-          }
-          onClick={projectCreator ? startClaiming : startEndorsing}
+          htmlFor={false ? undefined : "attest-drawer"}
+          // onClick={projectCreator ? startClaiming : startEndorsing}
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <aside className="bg-base-200 text-base-content min-h-full">
+        <aside className="min-h-full bg-slate-50 text-base-content">
           <ProjectAttest
             onSubmit={onSubmit}
             metrics={project.metrics}
-            badgeholder={user?.badgeholder}
+            badgeholder={false}
             projectCreator={projectCreator}
           />
         </aside>
       </div>
-    </main>
+    </div>
   );
 };
 

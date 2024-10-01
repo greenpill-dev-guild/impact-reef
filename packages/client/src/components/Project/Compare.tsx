@@ -1,8 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import React from "react";
-import { categories } from "../List/Item";
+import Image from "next/image";
+
+import { categories } from "./ListItem";
 
 interface Metric {
   title: string;
@@ -47,12 +48,12 @@ export const ProjectCompare: React.FC<ProjectCompareProps> = ({
   colorMap,
 }) => {
   return (
-    <div className="flex flex-col gap-12 w-full items-center">
+    <div className="flex w-full flex-col items-center gap-12">
       <p className="text-xl">
         <span className="font-bold">{similarProjects.length}</span> other
         projects that applied for{" "}
         <span
-          className="rounded-md text-2xl font-semibold text-zinc-800 p-2 leading-snug"
+          className="rounded-md p-2 text-2xl font-semibold leading-snug"
           style={{
             background: grantTracks[grantTrack].color,
           }}
@@ -61,7 +62,7 @@ export const ProjectCompare: React.FC<ProjectCompareProps> = ({
         </span>{" "}
         and also{" "}
         <span
-          className="rounded-md text-xl text-zinc-800 p-2 py-3 leading-snug"
+          className="rounded-md p-2 py-3 text-xl leading-snug"
           style={{
             background: categories[category].color,
           }}
@@ -70,19 +71,19 @@ export const ProjectCompare: React.FC<ProjectCompareProps> = ({
         </span>
       </p>
       <div className="flex gap-8">
-        <aside className="basis-96 flex flex-col gap-4">
-          <ul className="flex flex-col shadow-md rounded-lg border border-zinc-400 text-lg font-semibold">
+        <aside className="flex basis-96 flex-col gap-4">
+          <ul className="flex flex-col rounded-lg border border-slate-400 text-lg font-semibold shadow-md">
             <li
               key={project.id}
-              className="flex items-center gap-3 p-3 bg-white border-b rounded-lg border-zinc-400"
+              className="flex items-center gap-3 rounded-lg border-b border-slate-400 bg-white p-3"
             >
               <span
-                className="w-4 h-4 rounded-full"
+                className="h-4 w-4 rounded-full"
                 style={{
                   background: colorMap.get(project.id),
                 }}
               />
-              <div className="aspect-square w-12 h-12 relative bg-cyan-900 rounded-lg">
+              <div className="relative aspect-square h-12 w-12 rounded-lg bg-cyan-900">
                 {project.logo && (
                   <Image
                     src={project.logo}
@@ -98,15 +99,15 @@ export const ProjectCompare: React.FC<ProjectCompareProps> = ({
             {similarProjects.map((project) => (
               <li
                 key={project.id}
-                className="flex gap-3 items-center p-3 border-b border-zinc-400"
+                className="flex items-center gap-3 border-b border-slate-400 p-3"
               >
                 <span
-                  className="w-4 h-4 rounded-full"
+                  className="h-4 w-4 rounded-full"
                   style={{
                     background: colorMap.get(project.id),
                   }}
                 />
-                <div className="aspect-square w-12 h-12 relative bg-cyan-900 rounded-lg">
+                <div className="relative aspect-square h-12 w-12 rounded-lg bg-cyan-900">
                   {project.logo && (
                     <Image
                       src={project.logo}
@@ -128,7 +129,7 @@ export const ProjectCompare: React.FC<ProjectCompareProps> = ({
           </p>
         </aside>
         <section className="flex-1">
-          <ul className="w-full flex flex-col gap-8">
+          <ul className="flex w-full flex-col gap-8">
             {metrics.map((metric) => {
               const amounts = metric.projects.map((metric) => metric.amount);
               const max = Math.max(...amounts);
@@ -137,11 +138,11 @@ export const ProjectCompare: React.FC<ProjectCompareProps> = ({
               return (
                 <li key={metric.title} className="flex flex-col gap-2">
                   <h4 className="text-xl font-medium">{metric.title}</h4>
-                  <ul className="flex flex-col gap-0.5 w-full">
+                  <ul className="flex w-full flex-col gap-0.5">
                     {metric.projects.map((project) => (
                       <li
                         key={`${metric.title}-${project.id}`}
-                        className={`flex items-center gap-2 text-zinc-800  ${
+                        className={`flex items-center gap-2 ${
                           project.amount === 0
                             ? "font-bold leading-none"
                             : "font-light"
@@ -158,7 +159,7 @@ export const ProjectCompare: React.FC<ProjectCompareProps> = ({
                       </li>
                     ))}
                   </ul>
-                  <span className="h-0.5 w-full bg-zinc-300" />
+                  <span className="h-0.5 w-full bg-slate-300" />
                 </li>
               );
             })}

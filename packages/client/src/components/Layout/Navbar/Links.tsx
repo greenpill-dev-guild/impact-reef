@@ -2,19 +2,20 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { FaFire } from "react-icons/fa";
+import { IconType } from "react-icons/lib";
 import { usePathname } from "next/navigation";
 
 interface NavBarLinksProps {}
 
 interface Link {
   title: string;
-  icon: string;
+  Icon?: IconType;
   action?: () => void;
 }
 
 const links: Link[] = [
-  { title: "projects", icon: "/icons/fire.svg" },
+  { title: "projects", Icon: FaFire },
   // { title: "metrics", icon: "/icons/flag.svg" },
   // { title: "about", icon: "/icons/newspaper.svg" },
 ];
@@ -24,20 +25,14 @@ export const NavbarLinks: React.FC<NavBarLinksProps> = () => {
 
   return (
     <nav className="inline-flex gap-1">
-      {links.map(({ icon, title }) => (
+      {links.map(({ title }) => (
         <Link
           key={title}
           href={`/${title}`}
-          className={`capitalize inline-flex gap-2 w-32 p-4 justify-center items-center rounded-full text-zinc-800 font-semibold leading-snug ${pathname.includes(title) && !pathname.includes("profile") && "bg-neutral-100"}`}
+          className={`button button-link capitalize ${pathname === title && !pathname.includes("profile") && "bg-slate-200"}`}
         >
           {title}
-          <Image
-            alt="navbar link"
-            src={icon}
-            unoptimized
-            width={24}
-            height={24}
-          />
+          {/* <Icon className="w-4" /> */}
         </Link>
       ))}
     </nav>

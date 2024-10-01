@@ -1,18 +1,17 @@
 "use server";
 
-import { graphql } from "gql.tada";
-
+import { easGraphQL } from "@/modules/graphql";
 import { easOptimismClient } from "@/modules/urql";
 
 import { EAS } from "@/constants";
 
 export const getBadgeholder = async (
-  address?: string | null
+  address?: string | null,
 ): Promise<boolean> => {
   if (!address) console.error("No address provided");
 
   // TODO add filter on 'where: {valid: true}'
-  const QUERY = graphql(/* GraphQL */ `
+  const QUERY = easGraphQL(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
         id
@@ -33,16 +32,17 @@ export const getBadgeholder = async (
   if (error) console.error(error);
   if (!data) console.error("No data found");
 
-  console.log("User Badgeholder API", data);
+  // console.log("User Badgeholder API", data);
 
   return !!data?.attestations.length;
 };
 
-export const getBadgeholders = async (): Promise<string[]> => {
+export const getBadgeholders = async (): Promise<Map<string, string>> => {
   // TODO add filter on 'where: {valid: true}'
-  const QUERY = graphql(/* GraphQL */ `
+  const QUERY = easGraphQL(/* GraphQL */ `
     query Attestations($where: AttestationWhereInput) {
       attestations(where: $where) {
+        id
         recipient
       }
     }
@@ -60,7 +60,7 @@ export const getBadgeholders = async (): Promise<string[]> => {
   if (error) console.error(error);
   if (!data) console.error("No data found");
 
-  console.log("Badgeholders API", data);
-
-  return data?.attestations.map((attest) => attest.recipient) ?? [];
+  return new Map(
+    data?.attestations.map(({ recipient, id }) => [recipient, id]),
+  );
 };

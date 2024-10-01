@@ -1,23 +1,27 @@
 import "./globals.css";
 
+import Image from "next/image";
 import { headers } from "next/headers";
 import { Toaster } from "react-hot-toast";
-import { cookieToInitialState } from "wagmi";
 import type { Metadata, Viewport } from "next";
-
-import { inter, sora } from "@/utils/fonts";
-
-import { Navbar } from "@/components/Layout/Navbar";
-import { Footer } from "@/components/Layout/Footer";
+import { cookieToInitialState } from "wagmi";
 
 import {
   APP_DEFAULT_TITLE,
   APP_DESCRIPTION,
+  APP_IMAGE,
   APP_NAME,
   APP_TITLE_TEMPLATE,
 } from "@/constants";
+
+import { inter, sora } from "@/modules/fonts";
+
+import { config } from "@/modules/wagmi";
+
 import Web3ModalProvider from "@/hooks/auth/Provider";
-import { config } from "@/config/wagmi";
+
+import { Navbar } from "@/components/Layout/Navbar";
+import { Footer } from "@/components/Layout/Footer";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -37,6 +41,7 @@ export const metadata: Metadata = {
       template: APP_TITLE_TEMPLATE,
     },
     description: APP_DESCRIPTION,
+    images: [APP_IMAGE],
   },
   twitter: {
     card: "summary",
@@ -45,6 +50,7 @@ export const metadata: Metadata = {
       template: APP_TITLE_TEMPLATE,
     },
     description: APP_DESCRIPTION,
+    images: [APP_IMAGE],
   },
 };
 
@@ -63,27 +69,48 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${sora.variable} antialiased`}
-      suppressHydrationWarning
     >
-      <body suppressHydrationWarning>
+      <body>
         <Web3ModalProvider initialState={initialState}>
           <Navbar />
-          {children}
+          <main>{children}</main>
           <Footer />
           <Toaster
+            position="bottom-right"
+            containerClassName="toaster"
             toastOptions={{
-              className: "toaster",
               loading: {
-                // icon: "",
-                className: "toaster-loading",
+                icon: (
+                  <Image
+                    src="/icons/reef.svg"
+                    alt="loading toast icon"
+                    className="grid aspect-square h-20 w-20 place-items-center"
+                    width={72}
+                    height={72}
+                  />
+                ),
               },
               error: {
-                // icon: ""
-                className: "toaster-error",
+                icon: (
+                  <Image
+                    src="/icons/reef-orange.svg"
+                    alt="error toast icon"
+                    className="grid aspect-square h-20 w-20 place-items-center"
+                    width={46}
+                    height={69}
+                  />
+                ),
               },
               success: {
-                // icon: ""
-                className: "toaster-success",
+                icon: (
+                  <Image
+                    src="/icons/fish.svg"
+                    alt="success toast icon"
+                    className="grid aspect-square h-20 w-20 place-items-center"
+                    width={72}
+                    height={72}
+                  />
+                ),
               },
             }}
           />
