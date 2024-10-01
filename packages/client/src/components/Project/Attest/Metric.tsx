@@ -18,10 +18,7 @@ interface ProjectAttestMetricProps {
   metrics: FieldArrayWithId<AttestFormValues, "metrics", "metricUID">[];
 }
 
-export const ProjectAttestMetric = forwardRef<
-  HTMLTextAreaElement,
-  ProjectAttestMetricProps
->(({ register, metrics }) => {
+export const ProjectAttestMetric: React.FC<ProjectAttestMetricProps> = ({ register, metrics }) => {
   return (
     <div className="collapse collapse-arrow h-full w-full bg-slate-400 px-8">
       <input type="checkbox" />
@@ -93,7 +90,7 @@ export const ProjectAttestMetric = forwardRef<
         ))}
       </ul>
     </div>
-  );
-});
+  )
+};
 
 ProjectAttestMetric.displayName = "Project Attest Metric";

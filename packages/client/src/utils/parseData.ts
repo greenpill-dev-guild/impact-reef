@@ -142,7 +142,7 @@ export const parseDataToProjectMetric = (
   recipient: string,
   timeCreated: number,
   data: any,
-): ProjectMetricItem => {
+): any => {
   const _data = JSON.parse(data);
 
   return {
