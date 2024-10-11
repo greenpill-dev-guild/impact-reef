@@ -1,7 +1,7 @@
 declare interface User {
-  // fid?: number;
-  // name?: string;
-  // image?: string;
+  fid?: number;
+  name?: string;
+  image?: string;
   badgeholder: boolean;
   metrics_admin: boolean;
   council_member: boolean;
@@ -13,21 +13,6 @@ declare enum Impact {
   MEDIUM,
   HIGH,
 }
-
-declare type GrantTrack =
-  | "onchain-builders"
-  | "op-stack"
-  | "dev-tooling"
-  | "governance";
-
-declare type ProjectCategory =
-  | "cefi"
-  | "cross-chain"
-  | "defi"
-  | "governance"
-  | "nft"
-  | "social"
-  | "utility";
 
 declare interface CreateMetric {
   name: string;
@@ -60,10 +45,20 @@ declare interface CreateMetric {
   keyword: string;
 }
 
-declare interface Metric extends CreateMetric {
-  id: string;
-  createdAt: string;
-}
+declare type GrantTrack =
+  | "onchain-builders"
+  | "op-stack"
+  | "dev-tooling"
+  | "governance";
+
+declare type ProjectCategory =
+  | "cefi"
+  | "cross-chain"
+  | "defi"
+  | "governance"
+  | "nft"
+  | "social"
+  | "utility";
 
 declare type Contract = {
   id: string;
@@ -89,6 +84,7 @@ declare interface ProjectItem {
   category: ProjectCategory;
   updated_at: string;
   creator: string;
+
   [key: string]: any;
 }
 
@@ -96,7 +92,7 @@ declare interface Project extends ProjectItem {
   grant_track: GrantTrack;
   description: string;
   banner_image: string;
-  metrics: ProjectMetricItem[];
+  metrics: ProjectMetric[];
   endorsements: Endorsement[];
   repositories: string[];
   contracts: Contract[];
@@ -104,25 +100,16 @@ declare interface Project extends ProjectItem {
   socials: string[];
 }
 
-declare interface CreateProjectMetric {
-  projectUID: string;
-  metricUID: string;
-  value: string;
-  source: string;
-  recipient?: string;
+declare enum ProjectMetricSource {
+  OSO = "Open Source Observer",
+  EAS = "EAS",
 }
 
-declare interface ProjectMetricItem extends CreateProjectMetric {
-  id: string;
-  created_at: string;
+declare interface ProjectMetric {
+  source: ProjectMetricSource;
 }
 
-declare interface ProjectMetric extends ProjectMetricItem {
-  description: string;
-  name: string;
-}
-
-interface CreateEndorsement {
+declare interface CreateEndorsement {
   recipient?: string; // Contract for Project
   projectUID: string;
   metricUID?: string;

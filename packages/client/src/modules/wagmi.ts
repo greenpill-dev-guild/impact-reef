@@ -1,4 +1,4 @@
-import { sepolia } from "wagmi/chains";
+import { optimism } from "wagmi/chains";
 import { cookieStorage, createStorage } from "wagmi";
 import { defaultWagmiConfig } from "@web3modal/wagmi/react/config";
 
@@ -17,7 +17,7 @@ export const metadata = {
 };
 
 // Create wagmiConfig
-const chains = [sepolia] as const;
+const chains = [optimism] as const;
 export const config = defaultWagmiConfig({
   chains,
   projectId,

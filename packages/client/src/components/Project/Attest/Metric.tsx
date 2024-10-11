@@ -18,15 +18,15 @@ interface ProjectAttestMetricProps {
   metrics: FieldArrayWithId<AttestFormValues, "metrics", "metricUID">[];
 }
 
-export const ProjectAttestMetric = forwardRef<
-  HTMLTextAreaElement,
-  ProjectAttestMetricProps
->(({ register, metrics }) => {
+export const ProjectAttestMetric: React.FC<ProjectAttestMetricProps> = ({
+  register,
+  metrics,
+}) => {
   return (
-    <div className="collapse collapse-arrow w-full h-full px-8 bg-gray-4s00">
+    <div className="collapse collapse-arrow h-full w-full bg-slate-400 px-8">
       <input type="checkbox" />
       <div className="collapse-title">
-        <h3 className="flex items-center gap-1 mb-2">
+        <h3 className="mb-2 flex items-center gap-1">
           <Image
             src="/icons/flag.svg"
             alt="Metric Claim SVG"
@@ -53,7 +53,7 @@ export const ProjectAttestMetric = forwardRef<
               {metric.metricName}
             </div>
             <div className="collapse-content">
-              <p className="text-gray-300">{metric.metricDescription}</p>
+              <p className="">{metric.metricDescription}</p>
               <label className="form-control w-full">
                 <div className="label">
                   <span className="label-text text-lg font-semibold">Data</span>
@@ -65,7 +65,7 @@ export const ProjectAttestMetric = forwardRef<
                   {...register(`metrics.${index}.value`)}
                 />
                 <div className="label">
-                  <span className="label-text-alt text-light text-base">
+                  <span className="label-text-alt text-base font-light">
                     This field must be a number format.
                   </span>
                 </div>
@@ -83,7 +83,7 @@ export const ProjectAttestMetric = forwardRef<
                   {...register(`metrics.${index}.source`)}
                 />
                 <div className="label">
-                  <span className="label-text-alt text-light text-base">
+                  <span className="label-text-alt text-base font-light">
                     Please include a support link for your attest.
                   </span>
                 </div>
@@ -94,6 +94,6 @@ export const ProjectAttestMetric = forwardRef<
       </ul>
     </div>
   );
-});
+};
 
 ProjectAttestMetric.displayName = "Project Attest Metric";
