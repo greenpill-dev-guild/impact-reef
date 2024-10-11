@@ -44,49 +44,67 @@ const osoMetricsToDisplay = [
   "openedIssueCount6Months",
   "openedPullRequestCount6Months",
   "forkCount",
-  "starCount"
+  "starCount",
 ];
 
 const metricsDisplayTitles = {
-  "activeDeveloperCount6Months": "Active Developers (6 Months)",
-  "closedIssueCount6Months": "Closed Issues (6 Months)",
-  "commitCount6Months": "Commits (6 Months)",
-  "contributorCount": "Contributors",
-  "contributorCount6Months": "Contributors (6 Months)",
-  "mergedPullRequestCount6Months": "Merged Pull Requests (6 Months)",
-  "newContributorCount6Months": "New Contributors (6 Months)",
-  "openedIssueCount6Months": "Opened Issues (6 Months)",
-  "openedPullRequestCount6Months": "Opened Pull Requests (6 Months)",
-  "forkCount": "Forks",
-  "starCount": "Stars"
-}
-
-
+  activeDeveloperCount6Months: "Active Developers (6 Months)",
+  closedIssueCount6Months: "Closed Issues (6 Months)",
+  commitCount6Months: "Commits (6 Months)",
+  contributorCount: "Contributors",
+  contributorCount6Months: "Contributors (6 Months)",
+  mergedPullRequestCount6Months: "Merged Pull Requests (6 Months)",
+  newContributorCount6Months: "New Contributors (6 Months)",
+  openedIssueCount6Months: "Opened Issues (6 Months)",
+  openedPullRequestCount6Months: "Opened Pull Requests (6 Months)",
+  forkCount: "Forks",
+  starCount: "Stars",
+};
 
 const renderOsoMetrics = (metrics: ProjectMetric[]) => {
-  const osoMetrics = metrics.find((metric) => metric.source === "Open Source Observer");
+  const osoMetrics = metrics.find(
+    (metric) => metric.source === "Open Source Observer",
+  );
 
   if (!osoMetrics) return null;
 
-  const osoValues = Object.entries(osoMetrics).filter(([key, value]) => osoMetricsToDisplay.includes(key));
+  const osoValues = Object.entries(osoMetrics).filter(([key, value]) =>
+    osoMetricsToDisplay.includes(key),
+  );
 
   return (
     <div>
-    <ul className="grid-rows-auto grid min-h-96 grid-cols-2 gap-4">
-      {osoValues.map(([key, value], index) => (
-        <li key={index} className="card flex min-h-40 w-72 flex-col justify-between rounded-md bg-white p-4 shadow-sm">
-          <h3 className="line-clamp-2 text-sm font-light">{metricsDisplayTitles[key as keyof typeof metricsDisplayTitles]}</h3>
-          <div className="flex flex-col gap-1">
-            <span className="text-4xl font-bold">{value ? value.toLocaleString() : "-"}</span>
-          </div>
-        </li>
-      ))}
-    </ul>
-    <p className="text-sm font-light"> Metrics provided by <a href="https://www.opensource.observer/" target="_blank" rel="noopener noreferrer">Open Source Observer</a></p>
+      <ul className="grid-rows-auto grid min-h-96 grid-cols-2 gap-4">
+        {osoValues.map(([key, value], index) => (
+          <li
+            key={index}
+            className="card flex min-h-40 w-72 flex-col justify-between rounded-md bg-white p-4 shadow-sm"
+          >
+            <h3 className="line-clamp-2 text-sm font-light">
+              {metricsDisplayTitles[key as keyof typeof metricsDisplayTitles]}
+            </h3>
+            <div className="flex flex-col gap-1">
+              <span className="text-4xl font-bold">
+                {value ? value.toLocaleString() : "-"}
+              </span>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p className="text-sm font-light">
+        {" "}
+        Metrics provided by{" "}
+        <a
+          href="https://www.opensource.observer/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open Source Observer
+        </a>
+      </p>
     </div>
   );
 };
-
 
 export const ProjectMetrics: React.FC<ProjectMetricsProps> = ({ metrics }) => {
   const [showAllMetrics, setShowAllMetrics] = useState(false);

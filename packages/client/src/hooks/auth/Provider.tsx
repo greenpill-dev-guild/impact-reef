@@ -20,7 +20,7 @@ createWeb3Modal({
     "--w3m-accent": "#0c4a6e",
     "--w3m-font-family": "Inter, sans-serif",
   },
-  // enableAnalytics: true, // Optional - defaults to your Cloud configuration
+  enableAnalytics: true, // Optional - defaults to your Cloud configuration
 });
 
 export default function Web3ModalProvider({
