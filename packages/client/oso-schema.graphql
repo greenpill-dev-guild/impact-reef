@@ -290,6 +290,20 @@ input Oso_DateComparisonExp {
   _nin: [Oso_Date!]
 }
 
+scalar Oso_Date
+
+input Oso_DateComparisonExp {
+  _eq: Oso_Date
+  _gt: Oso_Date
+  _gte: Oso_Date
+  _in: [Oso_Date!]
+  _is_null: Boolean
+  _lt: Oso_Date
+  _lte: Oso_Date
+  _neq: Oso_Date
+  _nin: [Oso_Date!]
+}
+
 scalar Oso_DateTime
 
 input Oso_DateTimeComparisonExp {
@@ -386,6 +400,20 @@ input Oso_Float64ComparisonExp {
   _nin: [Oso_Float64!]
 }
 
+scalar Oso_Float64
+
+input Oso_Float64ComparisonExp {
+  _eq: Oso_Float64
+  _gt: Oso_Float64
+  _gte: Oso_Float64
+  _in: [Oso_Float64!]
+  _is_null: Boolean
+  _lt: Oso_Float64
+  _lte: Oso_Float64
+  _neq: Oso_Float64
+  _nin: [Oso_Float64!]
+}
+
 scalar Oso_Int64
 
 input Oso_Int64ComparisonExp {
@@ -437,6 +465,33 @@ input Oso_MetricsMetricsV0OrderBy {
   metricNamespace: OrderBy
   metricSource: OrderBy
   rawDefinition: OrderBy
+}
+
+type Oso_MetricsTimeseriesMetricsByArtifactV0 {
+  amount: Oso_Float64!
+  artifactId: String!
+  metricId: String!
+  sampleDate: Oso_Date!
+  unit: String
+}
+
+input Oso_MetricsTimeseriesMetricsByArtifactV0BoolExp {
+  _and: [Oso_MetricsTimeseriesMetricsByArtifactV0BoolExp!]
+  _not: Oso_MetricsTimeseriesMetricsByArtifactV0BoolExp
+  _or: [Oso_MetricsTimeseriesMetricsByArtifactV0BoolExp!]
+  amount: Oso_Float64ComparisonExp
+  artifactId: Oso_StringComparisonExp
+  metricId: Oso_StringComparisonExp
+  sampleDate: Oso_DateComparisonExp
+  unit: Oso_StringComparisonExp
+}
+
+input Oso_MetricsTimeseriesMetricsByArtifactV0OrderBy {
+  amount: OrderBy
+  artifactId: OrderBy
+  metricId: OrderBy
+  sampleDate: OrderBy
+  unit: OrderBy
 }
 
 type Oso_MetricsTimeseriesMetricsByArtifactV0 {
