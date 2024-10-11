@@ -1,9 +1,11 @@
 export const APP_NAME = "Impact Reef";
 export const APP_DEFAULT_TITLE = "Impact Reef";
 export const APP_TITLE_TEMPLATE = "%s - Impact Reef";
-export const APP_DESCRIPTION = "";
+export const APP_DESCRIPTION =
+  "Discover how projects impact the ecosystem. Crafted with care and dedication, Impact Reef is a platform that values each project's impact through the voice of the community.";
 export const APP_URL = "https://impactreef.app";
-export const APP_ICON = "https://impactreef.app/icon.png";
+export const APP_ICON = "/icon.png";
+export const APP_IMAGE = "/images/social-image.png";
 
 export const agoraRoundsAPI = "/api/agora/retrofunding/rounds/5";
 

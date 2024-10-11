@@ -18,21 +18,6 @@
     },
     "plugins": [
       {
-        "name": "gql.tada/ts-plugin",
-        "schemas": [
-          {
-            "name": "OSO",
-            "schema": "./oso-schema.graphql",
-            "tadaOutputLocation": "./src/types/oso-env.d.ts"
-          },
-          {
-            "name": "EAS",
-            "schema": "https://easscan.org/graphql",
-            "tadaOutputLocation": "./src/types/eas-env.d.ts"
-          }
-        ]
-      },
-      {
         "name": "next"
       },
       {
@@ -41,7 +26,7 @@
           {
             "name": "OSO",
             "schema": "./oso-schema.graphql",
-            "tadaOutputLocation": "./src/types/oso-env.d.ts"
+            "tadaOutputLocation": "./src/types/oso-env.d.ts",
           },
           {
             "name": "EAS",

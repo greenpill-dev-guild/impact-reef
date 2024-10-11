@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+// import { signOut } from "next-auth/react";
 import { useAccount, useDisconnect } from "wagmi";
 import { useWalletInfo } from "@web3modal/wagmi/react";
 
@@ -16,6 +17,10 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ user }) => {
   const { walletInfo } = useWalletInfo();
 
   function handleLogout() {
+    // signOut({
+    //   callbackUrl: "/",
+    //   redirect: true,
+    // });
     disconnect();
   }
 
@@ -28,9 +33,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ user }) => {
         <p className="mb-4 font-light">
           Current wallet address connected to your account.
         </p>
-        <span className="">
-          {address ? formatAddress(address) : "Not Connected"}
-        </span>
+        <span className="">{address ? formatAddress(address) : ""}</span>
       </div>
       <div className="border-b-2 border-slate-200 pb-8">
         <h4 className="mb-2">Farcaster ID</h4>
@@ -38,7 +41,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ user }) => {
           Recommended for project builders to claim ownership to enable
           self-claim impact attestation.
         </p>
-        <span className="">{walletInfo?.name ?? "Not Found"}</span>
+        <span className="">{walletInfo?.name ?? ""}</span>
       </div>
       <div>
         {address && (

@@ -276,6 +276,34 @@ input Oso_ContractsV0OrderBy {
   rootDeployerAddress: OrderBy
 }
 
+scalar Oso_Date
+
+input Oso_DateComparisonExp {
+  _eq: Oso_Date
+  _gt: Oso_Date
+  _gte: Oso_Date
+  _in: [Oso_Date!]
+  _is_null: Boolean
+  _lt: Oso_Date
+  _lte: Oso_Date
+  _neq: Oso_Date
+  _nin: [Oso_Date!]
+}
+
+scalar Oso_Date
+
+input Oso_DateComparisonExp {
+  _eq: Oso_Date
+  _gt: Oso_Date
+  _gte: Oso_Date
+  _in: [Oso_Date!]
+  _is_null: Boolean
+  _lt: Oso_Date
+  _lte: Oso_Date
+  _neq: Oso_Date
+  _nin: [Oso_Date!]
+}
+
 scalar Oso_DateTime
 
 input Oso_DateTimeComparisonExp {
@@ -329,222 +357,6 @@ input Oso_EventIndexingStatusByProjectV1OrderBy {
   projectSource: OrderBy
 }
 
-type Oso_EventsDailyToArtifact {
-  amount: Oso_Float32!
-  artifactId: String!
-  bucketDay: Oso_DateTime!
-  eventType: String!
-}
-
-input Oso_EventsDailyToArtifactBoolExp {
-  _and: [Oso_EventsDailyToArtifactBoolExp!]
-  _not: Oso_EventsDailyToArtifactBoolExp
-  _or: [Oso_EventsDailyToArtifactBoolExp!]
-  amount: Oso_Float32ComparisonExp
-  artifactId: Oso_StringComparisonExp
-  bucketDay: Oso_DateTimeComparisonExp
-  eventType: Oso_StringComparisonExp
-}
-
-input Oso_EventsDailyToArtifactOrderBy {
-  amount: OrderBy
-  artifactId: OrderBy
-  bucketDay: OrderBy
-  eventType: OrderBy
-}
-
-type Oso_EventsDailyToCollection {
-  amount: Oso_Float32!
-  bucketDay: Oso_DateTime!
-  collectionId: String!
-  eventType: String!
-}
-
-input Oso_EventsDailyToCollectionBoolExp {
-  _and: [Oso_EventsDailyToCollectionBoolExp!]
-  _not: Oso_EventsDailyToCollectionBoolExp
-  _or: [Oso_EventsDailyToCollectionBoolExp!]
-  amount: Oso_Float32ComparisonExp
-  bucketDay: Oso_DateTimeComparisonExp
-  collectionId: Oso_StringComparisonExp
-  eventType: Oso_StringComparisonExp
-}
-
-input Oso_EventsDailyToCollectionOrderBy {
-  amount: OrderBy
-  bucketDay: OrderBy
-  collectionId: OrderBy
-  eventType: OrderBy
-}
-
-type Oso_EventsDailyToProject {
-  amount: Oso_Float32!
-  bucketDay: Oso_DateTime!
-  eventType: String!
-  projectId: String!
-}
-
-input Oso_EventsDailyToProjectBoolExp {
-  _and: [Oso_EventsDailyToProjectBoolExp!]
-  _not: Oso_EventsDailyToProjectBoolExp
-  _or: [Oso_EventsDailyToProjectBoolExp!]
-  amount: Oso_Float32ComparisonExp
-  bucketDay: Oso_DateTimeComparisonExp
-  eventType: Oso_StringComparisonExp
-  projectId: Oso_StringComparisonExp
-}
-
-input Oso_EventsDailyToProjectOrderBy {
-  amount: OrderBy
-  bucketDay: OrderBy
-  eventType: OrderBy
-  projectId: OrderBy
-}
-
-type Oso_EventsMonthlyToArtifact {
-  amount: Oso_Float32!
-  artifactId: String!
-  bucketMonth: Oso_DateTime!
-  eventType: String!
-}
-
-input Oso_EventsMonthlyToArtifactBoolExp {
-  _and: [Oso_EventsMonthlyToArtifactBoolExp!]
-  _not: Oso_EventsMonthlyToArtifactBoolExp
-  _or: [Oso_EventsMonthlyToArtifactBoolExp!]
-  amount: Oso_Float32ComparisonExp
-  artifactId: Oso_StringComparisonExp
-  bucketMonth: Oso_DateTimeComparisonExp
-  eventType: Oso_StringComparisonExp
-}
-
-input Oso_EventsMonthlyToArtifactOrderBy {
-  amount: OrderBy
-  artifactId: OrderBy
-  bucketMonth: OrderBy
-  eventType: OrderBy
-}
-
-type Oso_EventsMonthlyToCollection {
-  amount: Oso_Float32!
-  bucketMonth: Oso_DateTime!
-  collectionId: String!
-  eventType: String!
-}
-
-input Oso_EventsMonthlyToCollectionBoolExp {
-  _and: [Oso_EventsMonthlyToCollectionBoolExp!]
-  _not: Oso_EventsMonthlyToCollectionBoolExp
-  _or: [Oso_EventsMonthlyToCollectionBoolExp!]
-  amount: Oso_Float32ComparisonExp
-  bucketMonth: Oso_DateTimeComparisonExp
-  collectionId: Oso_StringComparisonExp
-  eventType: Oso_StringComparisonExp
-}
-
-input Oso_EventsMonthlyToCollectionOrderBy {
-  amount: OrderBy
-  bucketMonth: OrderBy
-  collectionId: OrderBy
-  eventType: OrderBy
-}
-
-type Oso_EventsMonthlyToProject {
-  amount: Oso_Float32!
-  bucketMonth: Oso_DateTime!
-  eventType: String!
-  projectId: String!
-}
-
-input Oso_EventsMonthlyToProjectBoolExp {
-  _and: [Oso_EventsMonthlyToProjectBoolExp!]
-  _not: Oso_EventsMonthlyToProjectBoolExp
-  _or: [Oso_EventsMonthlyToProjectBoolExp!]
-  amount: Oso_Float32ComparisonExp
-  bucketMonth: Oso_DateTimeComparisonExp
-  eventType: Oso_StringComparisonExp
-  projectId: Oso_StringComparisonExp
-}
-
-input Oso_EventsMonthlyToProjectOrderBy {
-  amount: OrderBy
-  bucketMonth: OrderBy
-  eventType: OrderBy
-  projectId: OrderBy
-}
-
-type Oso_EventsWeeklyToArtifact {
-  amount: Oso_Float32!
-  artifactId: String!
-  bucketWeek: Oso_DateTime!
-  eventType: String!
-}
-
-input Oso_EventsWeeklyToArtifactBoolExp {
-  _and: [Oso_EventsWeeklyToArtifactBoolExp!]
-  _not: Oso_EventsWeeklyToArtifactBoolExp
-  _or: [Oso_EventsWeeklyToArtifactBoolExp!]
-  amount: Oso_Float32ComparisonExp
-  artifactId: Oso_StringComparisonExp
-  bucketWeek: Oso_DateTimeComparisonExp
-  eventType: Oso_StringComparisonExp
-}
-
-input Oso_EventsWeeklyToArtifactOrderBy {
-  amount: OrderBy
-  artifactId: OrderBy
-  bucketWeek: OrderBy
-  eventType: OrderBy
-}
-
-type Oso_EventsWeeklyToCollection {
-  amount: Oso_Float32!
-  bucketWeek: Oso_DateTime!
-  collectionId: String!
-  eventType: String!
-}
-
-input Oso_EventsWeeklyToCollectionBoolExp {
-  _and: [Oso_EventsWeeklyToCollectionBoolExp!]
-  _not: Oso_EventsWeeklyToCollectionBoolExp
-  _or: [Oso_EventsWeeklyToCollectionBoolExp!]
-  amount: Oso_Float32ComparisonExp
-  bucketWeek: Oso_DateTimeComparisonExp
-  collectionId: Oso_StringComparisonExp
-  eventType: Oso_StringComparisonExp
-}
-
-input Oso_EventsWeeklyToCollectionOrderBy {
-  amount: OrderBy
-  bucketWeek: OrderBy
-  collectionId: OrderBy
-  eventType: OrderBy
-}
-
-type Oso_EventsWeeklyToProject {
-  amount: Oso_Float32!
-  bucketWeek: Oso_DateTime!
-  eventType: String!
-  projectId: String!
-}
-
-input Oso_EventsWeeklyToProjectBoolExp {
-  _and: [Oso_EventsWeeklyToProjectBoolExp!]
-  _not: Oso_EventsWeeklyToProjectBoolExp
-  _or: [Oso_EventsWeeklyToProjectBoolExp!]
-  amount: Oso_Float32ComparisonExp
-  bucketWeek: Oso_DateTimeComparisonExp
-  eventType: Oso_StringComparisonExp
-  projectId: Oso_StringComparisonExp
-}
-
-input Oso_EventsWeeklyToProjectOrderBy {
-  amount: OrderBy
-  bucketWeek: OrderBy
-  eventType: OrderBy
-  projectId: OrderBy
-}
-
 type Oso_EventTypesV1 {
   eventType: String!
 }
@@ -574,6 +386,34 @@ input Oso_Float32ComparisonExp {
   _nin: [Oso_Float32!]
 }
 
+scalar Oso_Float64
+
+input Oso_Float64ComparisonExp {
+  _eq: Oso_Float64
+  _gt: Oso_Float64
+  _gte: Oso_Float64
+  _in: [Oso_Float64!]
+  _is_null: Boolean
+  _lt: Oso_Float64
+  _lte: Oso_Float64
+  _neq: Oso_Float64
+  _nin: [Oso_Float64!]
+}
+
+scalar Oso_Float64
+
+input Oso_Float64ComparisonExp {
+  _eq: Oso_Float64
+  _gt: Oso_Float64
+  _gte: Oso_Float64
+  _in: [Oso_Float64!]
+  _is_null: Boolean
+  _lt: Oso_Float64
+  _lte: Oso_Float64
+  _neq: Oso_Float64
+  _nin: [Oso_Float64!]
+}
+
 scalar Oso_Int64
 
 input Oso_Int64ComparisonExp {
@@ -588,22 +428,22 @@ input Oso_Int64ComparisonExp {
   _nin: [Oso_Int64!]
 }
 
-type Oso_MetricsV0 {
-  aggregationFunction: String!
-  definitionRef: String!
-  description: String!
+type Oso_MetricsMetricsV0 {
+  aggregationFunction: String
+  definitionRef: String
+  description: String
   displayName: String!
   metricId: String!
   metricName: String!
   metricNamespace: String!
   metricSource: String!
-  rawDefinition: Oso_Int64!
+  rawDefinition: String
 }
 
-input Oso_MetricsV0BoolExp {
-  _and: [Oso_MetricsV0BoolExp!]
-  _not: Oso_MetricsV0BoolExp
-  _or: [Oso_MetricsV0BoolExp!]
+input Oso_MetricsMetricsV0BoolExp {
+  _and: [Oso_MetricsMetricsV0BoolExp!]
+  _not: Oso_MetricsMetricsV0BoolExp
+  _or: [Oso_MetricsMetricsV0BoolExp!]
   aggregationFunction: Oso_StringComparisonExp
   definitionRef: Oso_StringComparisonExp
   description: Oso_StringComparisonExp
@@ -612,10 +452,10 @@ input Oso_MetricsV0BoolExp {
   metricName: Oso_StringComparisonExp
   metricNamespace: Oso_StringComparisonExp
   metricSource: Oso_StringComparisonExp
-  rawDefinition: Oso_Int64ComparisonExp
+  rawDefinition: Oso_StringComparisonExp
 }
 
-input Oso_MetricsV0OrderBy {
+input Oso_MetricsMetricsV0OrderBy {
   aggregationFunction: OrderBy
   definitionRef: OrderBy
   description: OrderBy
@@ -625,6 +465,60 @@ input Oso_MetricsV0OrderBy {
   metricNamespace: OrderBy
   metricSource: OrderBy
   rawDefinition: OrderBy
+}
+
+type Oso_MetricsTimeseriesMetricsByArtifactV0 {
+  amount: Oso_Float64!
+  artifactId: String!
+  metricId: String!
+  sampleDate: Oso_Date!
+  unit: String
+}
+
+input Oso_MetricsTimeseriesMetricsByArtifactV0BoolExp {
+  _and: [Oso_MetricsTimeseriesMetricsByArtifactV0BoolExp!]
+  _not: Oso_MetricsTimeseriesMetricsByArtifactV0BoolExp
+  _or: [Oso_MetricsTimeseriesMetricsByArtifactV0BoolExp!]
+  amount: Oso_Float64ComparisonExp
+  artifactId: Oso_StringComparisonExp
+  metricId: Oso_StringComparisonExp
+  sampleDate: Oso_DateComparisonExp
+  unit: Oso_StringComparisonExp
+}
+
+input Oso_MetricsTimeseriesMetricsByArtifactV0OrderBy {
+  amount: OrderBy
+  artifactId: OrderBy
+  metricId: OrderBy
+  sampleDate: OrderBy
+  unit: OrderBy
+}
+
+type Oso_MetricsTimeseriesMetricsByArtifactV0 {
+  amount: Oso_Float64!
+  artifactId: String!
+  metricId: String!
+  sampleDate: Oso_Date!
+  unit: String
+}
+
+input Oso_MetricsTimeseriesMetricsByArtifactV0BoolExp {
+  _and: [Oso_MetricsTimeseriesMetricsByArtifactV0BoolExp!]
+  _not: Oso_MetricsTimeseriesMetricsByArtifactV0BoolExp
+  _or: [Oso_MetricsTimeseriesMetricsByArtifactV0BoolExp!]
+  amount: Oso_Float64ComparisonExp
+  artifactId: Oso_StringComparisonExp
+  metricId: Oso_StringComparisonExp
+  sampleDate: Oso_DateComparisonExp
+  unit: Oso_StringComparisonExp
+}
+
+input Oso_MetricsTimeseriesMetricsByArtifactV0OrderBy {
+  amount: OrderBy
+  artifactId: OrderBy
+  metricId: OrderBy
+  sampleDate: OrderBy
+  unit: OrderBy
 }
 
 type Oso_OnchainMetricsByProjectV1 {
@@ -782,58 +676,37 @@ input Oso_StringComparisonExp {
   _nlike: String
 }
 
-type Oso_TimeseriesMetricsByArtifactV0 {
-  amount: Oso_Int64!
-  artifactId: String!
-  metricId: String!
-  sampleDate: Oso_DateTime!
-  unit: Oso_Int64!
+type Oso_TimeseriesEventsByArtifactV0 {
+  amount: Oso_Float32!
+  eventSource: String!
+  eventSourceId: String!
+  eventType: String!
+  fromArtifactId: String!
+  time: Oso_DateTime!
+  toArtifactId: String!
 }
 
-input Oso_TimeseriesMetricsByArtifactV0BoolExp {
-  _and: [Oso_TimeseriesMetricsByArtifactV0BoolExp!]
-  _not: Oso_TimeseriesMetricsByArtifactV0BoolExp
-  _or: [Oso_TimeseriesMetricsByArtifactV0BoolExp!]
-  amount: Oso_Int64ComparisonExp
-  artifactId: Oso_StringComparisonExp
-  metricId: Oso_StringComparisonExp
-  sampleDate: Oso_DateTimeComparisonExp
-  unit: Oso_Int64ComparisonExp
+input Oso_TimeseriesEventsByArtifactV0BoolExp {
+  _and: [Oso_TimeseriesEventsByArtifactV0BoolExp!]
+  _not: Oso_TimeseriesEventsByArtifactV0BoolExp
+  _or: [Oso_TimeseriesEventsByArtifactV0BoolExp!]
+  amount: Oso_Float32ComparisonExp
+  eventSource: Oso_StringComparisonExp
+  eventSourceId: Oso_StringComparisonExp
+  eventType: Oso_StringComparisonExp
+  fromArtifactId: Oso_StringComparisonExp
+  time: Oso_DateTimeComparisonExp
+  toArtifactId: Oso_StringComparisonExp
 }
 
-input Oso_TimeseriesMetricsByArtifactV0OrderBy {
+input Oso_TimeseriesEventsByArtifactV0OrderBy {
   amount: OrderBy
-  artifactId: OrderBy
-  metricId: OrderBy
-  sampleDate: OrderBy
-  unit: OrderBy
-}
-
-type Oso_TimeseriesMetricsByProjectV0 {
-  amount: Oso_Int64!
-  metricId: String!
-  projectId: String!
-  sampleDate: Oso_DateTime!
-  unit: Oso_Int64!
-}
-
-input Oso_TimeseriesMetricsByProjectV0BoolExp {
-  _and: [Oso_TimeseriesMetricsByProjectV0BoolExp!]
-  _not: Oso_TimeseriesMetricsByProjectV0BoolExp
-  _or: [Oso_TimeseriesMetricsByProjectV0BoolExp!]
-  amount: Oso_Int64ComparisonExp
-  metricId: Oso_StringComparisonExp
-  projectId: Oso_StringComparisonExp
-  sampleDate: Oso_DateTimeComparisonExp
-  unit: Oso_Int64ComparisonExp
-}
-
-input Oso_TimeseriesMetricsByProjectV0OrderBy {
-  amount: OrderBy
-  metricId: OrderBy
-  projectId: OrderBy
-  sampleDate: OrderBy
-  unit: OrderBy
+  eventSource: OrderBy
+  eventSourceId: OrderBy
+  eventType: OrderBy
+  fromArtifactId: OrderBy
+  time: OrderBy
+  toArtifactId: OrderBy
 }
 
 type Oso_UsersV1 {
@@ -918,66 +791,12 @@ type Query {
     order_by: [Oso_EventTypesV1OrderBy!]
     where: Oso_EventTypesV1BoolExp
   ): [Oso_EventTypesV1!]
-  oso_eventsDailyToArtifact(
-    limit: Int
-    offset: Int
-    order_by: [Oso_EventsDailyToArtifactOrderBy!]
-    where: Oso_EventsDailyToArtifactBoolExp
-  ): [Oso_EventsDailyToArtifact!]
-  oso_eventsDailyToCollection(
-    limit: Int
-    offset: Int
-    order_by: [Oso_EventsDailyToCollectionOrderBy!]
-    where: Oso_EventsDailyToCollectionBoolExp
-  ): [Oso_EventsDailyToCollection!]
-  oso_eventsDailyToProject(
-    limit: Int
-    offset: Int
-    order_by: [Oso_EventsDailyToProjectOrderBy!]
-    where: Oso_EventsDailyToProjectBoolExp
-  ): [Oso_EventsDailyToProject!]
-  oso_eventsMonthlyToArtifact(
-    limit: Int
-    offset: Int
-    order_by: [Oso_EventsMonthlyToArtifactOrderBy!]
-    where: Oso_EventsMonthlyToArtifactBoolExp
-  ): [Oso_EventsMonthlyToArtifact!]
-  oso_eventsMonthlyToCollection(
-    limit: Int
-    offset: Int
-    order_by: [Oso_EventsMonthlyToCollectionOrderBy!]
-    where: Oso_EventsMonthlyToCollectionBoolExp
-  ): [Oso_EventsMonthlyToCollection!]
-  oso_eventsMonthlyToProject(
-    limit: Int
-    offset: Int
-    order_by: [Oso_EventsMonthlyToProjectOrderBy!]
-    where: Oso_EventsMonthlyToProjectBoolExp
-  ): [Oso_EventsMonthlyToProject!]
-  oso_eventsWeeklyToArtifact(
-    limit: Int
-    offset: Int
-    order_by: [Oso_EventsWeeklyToArtifactOrderBy!]
-    where: Oso_EventsWeeklyToArtifactBoolExp
-  ): [Oso_EventsWeeklyToArtifact!]
-  oso_eventsWeeklyToCollection(
-    limit: Int
-    offset: Int
-    order_by: [Oso_EventsWeeklyToCollectionOrderBy!]
-    where: Oso_EventsWeeklyToCollectionBoolExp
-  ): [Oso_EventsWeeklyToCollection!]
-  oso_eventsWeeklyToProject(
-    limit: Int
-    offset: Int
-    order_by: [Oso_EventsWeeklyToProjectOrderBy!]
-    where: Oso_EventsWeeklyToProjectBoolExp
-  ): [Oso_EventsWeeklyToProject!]
   oso_metricsV0(
     limit: Int
     offset: Int
-    order_by: [Oso_MetricsV0OrderBy!]
-    where: Oso_MetricsV0BoolExp
-  ): [Oso_MetricsV0!]
+    order_by: [Oso_MetricsMetricsV0OrderBy!]
+    where: Oso_MetricsMetricsV0BoolExp
+  ): [Oso_MetricsMetricsV0!]
   oso_onchainMetricsByProjectV1(
     limit: Int
     offset: Int
@@ -996,18 +815,18 @@ type Query {
     order_by: [Oso_ProjectsV1OrderBy!]
     where: Oso_ProjectsV1BoolExp
   ): [Oso_ProjectsV1!]
+  oso_timeseriesEventsByArtifactV0(
+    limit: Int
+    offset: Int
+    order_by: [Oso_TimeseriesEventsByArtifactV0OrderBy!]
+    where: Oso_TimeseriesEventsByArtifactV0BoolExp
+  ): [Oso_TimeseriesEventsByArtifactV0!]
   oso_timeseriesMetricsByArtifactV0(
     limit: Int
     offset: Int
-    order_by: [Oso_TimeseriesMetricsByArtifactV0OrderBy!]
-    where: Oso_TimeseriesMetricsByArtifactV0BoolExp
-  ): [Oso_TimeseriesMetricsByArtifactV0!]
-  oso_timeseriesMetricsByProjectV0(
-    limit: Int
-    offset: Int
-    order_by: [Oso_TimeseriesMetricsByProjectV0OrderBy!]
-    where: Oso_TimeseriesMetricsByProjectV0BoolExp
-  ): [Oso_TimeseriesMetricsByProjectV0!]
+    order_by: [Oso_MetricsTimeseriesMetricsByArtifactV0OrderBy!]
+    where: Oso_MetricsTimeseriesMetricsByArtifactV0BoolExp
+  ): [Oso_MetricsTimeseriesMetricsByArtifactV0!]
   oso_usersV1(
     limit: Int
     offset: Int

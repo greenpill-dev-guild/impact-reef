@@ -9,11 +9,12 @@ import { cookieToInitialState } from "wagmi";
 import {
   APP_DEFAULT_TITLE,
   APP_DESCRIPTION,
+  APP_IMAGE,
   APP_NAME,
   APP_TITLE_TEMPLATE,
 } from "@/constants";
 
-import { inter, sora } from "@/utils/fonts";
+import { inter, sora } from "@/modules/fonts";
 
 import { config } from "@/modules/wagmi";
 
@@ -40,6 +41,7 @@ export const metadata: Metadata = {
       template: APP_TITLE_TEMPLATE,
     },
     description: APP_DESCRIPTION,
+    images: [APP_IMAGE],
   },
   twitter: {
     card: "summary",
@@ -48,6 +50,7 @@ export const metadata: Metadata = {
       template: APP_TITLE_TEMPLATE,
     },
     description: APP_DESCRIPTION,
+    images: [APP_IMAGE],
   },
 };
 
