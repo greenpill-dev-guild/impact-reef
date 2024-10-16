@@ -14,6 +14,7 @@ const hostnames = [
   "i.seadn.io",
   "lh3.googleusercontent.com",
   "picsum.photos",
+  "impactreef.app",
 ];
 
 /** @type {import('next').NextConfig} */

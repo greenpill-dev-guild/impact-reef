@@ -13,7 +13,7 @@ const ProjectsPage: NextPage = async ({
 }) => {
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
-  const totalPages = 7;
+  const totalPages = 5;
 
   return (
     <ProjectsView query={query} page={currentPage} totalPages={totalPages} />
