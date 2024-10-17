@@ -71,7 +71,7 @@ export const getProject = async (
     getArtifactNameAndNamespace(repo),
   );
 
-  const endorsements = await getProjectEndorsements(projectId);
+  // const endorsements = await getProjectEndorsements(projectId);
   const metrics = await getOsoCodeMetricsByArtifact(
     projectId,
     repos[0]?.artifactName,
@@ -80,7 +80,6 @@ export const getProject = async (
 
   return {
     ...project,
-    endorsements,
     metrics,
   };
 };
