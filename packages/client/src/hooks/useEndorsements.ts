@@ -18,6 +18,8 @@ const endorsementSchema = z.object({
   description: z.string(),
 });
 
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
 export type CreateEndorsementParams = z.infer<typeof endorsementSchema>;
 
 export const useEndorsements = (projectUID: string) => {
@@ -62,6 +64,7 @@ export const useEndorsements = (projectUID: string) => {
 
       const newAttestationUID = await transaction.wait();
 
+      await delay(2000);
       await refetch();
 
       toast.dismiss();
