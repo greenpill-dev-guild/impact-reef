@@ -25,6 +25,8 @@ export const useEndorsements = (projectUID: string) => {
   const { data, refetch } = useQuery({
     queryKey: ["endorsements", projectUID],
     queryFn: () => getProjectEndorsements(projectUID),
+    staleTime: 30000,
+    refetchInterval: 120000,
   });
 
   const createEndorsement = async (params: CreateEndorsementParams) => {
