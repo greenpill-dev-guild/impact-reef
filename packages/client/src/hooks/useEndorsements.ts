@@ -64,7 +64,7 @@ export const useEndorsements = (projectUID: string) => {
 
       const newAttestationUID = await transaction.wait();
 
-      await delay(2000);
+      await delay(2700);
       await refetch();
 
       toast.dismiss();
