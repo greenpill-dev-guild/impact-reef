@@ -26,19 +26,21 @@ const ProfileEndorsementsView: React.FC<ProfileEndorsementsProps> = () => {
   return (
     <div className="w-full flex-1">
       {endorsements?.length ? (
-        <ul className="flex max-w-xl flex-col gap-2">
+        <ul className="flex max-w-xl flex-col gap-3">
           {endorsements.map((endorsement) => (
             <li
               key={endorsement.id}
-              className="flex flex-col items-center justify-between gap-8 rounded-xl border-slate-100 p-4 shadow-sm"
+              className="border-1 flex flex-col items-center justify-between gap-8 rounded-xl border-slate-100 p-4 shadow-md"
             >
               <p className="max-w-prose font-light leading-snug">
                 {endorsement.description}
               </p>
               <div className="flex w-full justify-between">
-                <span className="">{endorsement.created_at}</span>
+                <span className="">
+                  {new Date(endorsement.created_at).toLocaleString()}
+                </span>
                 <Link
-                  href={`https://sepolia.easscan.org/${endorsement.id}`}
+                  href={`https://optimism.easscan.org/attestation/view/${endorsement.id}`}
                   target="_blank"
                   className="button button-link"
                 >

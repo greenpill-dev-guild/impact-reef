@@ -34,7 +34,7 @@ export const ProjectAttestEndorsement = forwardRef<
         ref={ref}
         {...props}
       />
-      <p className="text-sm">500 Characters Max</p>
+      <p className="text-sm">250 Characters Max</p>
     </div>
   );
 });

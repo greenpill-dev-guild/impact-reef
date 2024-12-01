@@ -32,7 +32,7 @@ function generateSchema(projectCreator: boolean) {
           .nullish(),
       })
     : z.object({
-        endorsement: z.string().min(100).max(1000),
+        endorsement: z.string().min(100).max(250),
         metrics: z
           .array(
             z.object({
