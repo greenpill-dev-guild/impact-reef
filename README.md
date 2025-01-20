@@ -2,7 +2,7 @@
 
 ## Overview
 
-Impact Reef is a Web3-based project designed to improve the impact evaluation framework within the Optimism ecosystem. The platform focuses on capturing qualitative input via endorsements and attestations using EAS (Ethereum Attestation Service) for public good projects. This approach provides evaluators with strong qualitative input, enhancing the robustness of impact assessments. This project is part of a broader mission by the Greenpill Dev Guild to elevate the visibility and effectiveness of impact metrics and their corresponding evaluations.
+Impact Reef is a Web3-based project designed to improve the impact evaluation framework within the public goods ecosystem. The platform focuses on capturing qualitative input via endorsements and attestations using EAS (Ethereum Attestation Service) for public good projects. This approach provides evaluators with strong qualitative input, enhancing the robustness of impact assessments. This project is part of a broader mission by the Greenpill Dev Guild to elevate the visibility and effectiveness of impact metrics and their corresponding evaluations.
 
 ## Getting Started
 
