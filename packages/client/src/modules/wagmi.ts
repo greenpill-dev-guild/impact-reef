@@ -17,15 +17,12 @@ export const metadata = {
 };
 
 // Create wagmiConfig
-const chains = [optimism] as const;
 export const config = defaultWagmiConfig({
-  chains,
+  chains: [optimism],
   projectId,
   metadata,
   ssr: true,
-  auth: {
-    socials: ["farcaster"],
-  },
+  auth: {},
   storage: createStorage({
     storage: cookieStorage,
   }),

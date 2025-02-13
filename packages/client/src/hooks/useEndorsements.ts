@@ -27,8 +27,8 @@ export const useEndorsements = (projectUID: string) => {
   const { data, refetch } = useQuery({
     queryKey: ["endorsements", projectUID],
     queryFn: () => getProjectEndorsements(projectUID),
-    staleTime: 30000,
-    refetchInterval: 120000,
+    // staleTime: 30000,
+    refetchInterval: 4000,
   });
 
   const createEndorsement = async (params: CreateEndorsementParams) => {
@@ -64,7 +64,7 @@ export const useEndorsements = (projectUID: string) => {
 
       const newAttestationUID = await transaction.wait();
 
-      await delay(2000);
+      await delay(3200);
       await refetch();
 
       toast.dismiss();

@@ -55,7 +55,7 @@ export const ProjectOverview: React.FC<ProjectOverviewProps> = ({
         height={120}
       />
       <div className="flex-1">
-        <h1 className="text-5xl font-semibold">{title}</h1>
+        <h1 className="line-clamp-2 text-5xl font-semibold">{title}</h1>
         <p className="line-clamp-6">{description}</p>
       </div>
       <div className="flex h-full basis-72 flex-col items-end justify-between gap-6">

@@ -27,7 +27,7 @@ export const ProjectEndorsementCard: React.FC<ProjectEndorsementCardProps> = ({
         <p className="font-semibold">
           by {formatAddress(endorsement.attester)}
         </p>
-        <span>{endorsement.created_at}</span>
+        <span>{new Date(endorsement.created_at).toLocaleString()}</span>
       </div>
     </li>
   );

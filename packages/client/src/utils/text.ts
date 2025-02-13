@@ -18,30 +18,42 @@ export function formatPrice(
 }
 
 export function formatLastUpdated(updatedAt: string) {
+  const msPerSecond = 1000;
+  const msPerMinute = 60 * msPerSecond;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const msPerMonth = 30 * msPerDay;
+  const msPerYear = 12 * msPerMonth;
+
   const updatedDate = new Date(updatedAt).getTime();
   const now = new Date().getTime();
+  const differenceInMs = now - updatedDate;
 
-  console.log("updatedDate", updatedDate, now);
-
-  const differenceInSeconds = Math.floor((now - updatedDate) / 1000);
-
-  const intervals = [
-    { label: "year", seconds: 31536000 },
-    { label: "month", seconds: 2592000 },
-    { label: "day", seconds: 86400 },
-    { label: "hour", seconds: 3600 },
-    { label: "minute", seconds: 60 },
-    { label: "second", seconds: 1 },
-  ];
-
-  for (const interval of intervals) {
-    const count = Math.floor(differenceInSeconds / interval.seconds);
-    if (count !== 0) {
-      return `${count} ${interval.label}${count !== 1 ? "s" : ""} ago`;
-    }
+  if (differenceInMs < msPerSecond) {
+    return "just now";
   }
 
-  return "just now";
+  if (differenceInMs < msPerMinute) {
+    return `${Math.floor(differenceInMs / msPerSecond)} seconds ago`;
+  }
+
+  if (differenceInMs < msPerHour) {
+    return `${Math.floor(differenceInMs / msPerMinute)} minutes ago`;
+  }
+
+  if (differenceInMs < msPerDay) {
+    return `${Math.floor(differenceInMs / msPerHour)} hours ago`;
+  }
+
+  if (differenceInMs < msPerMonth) {
+    return `${Math.floor(differenceInMs / msPerDay)} days ago`;
+  }
+
+  if (differenceInMs < msPerYear) {
+    return `${Math.floor(differenceInMs / msPerMonth)} months ago`;
+  }
+
+  return `${Math.floor(differenceInMs / msPerYear)} years ago`;
 }
 
 export function determineSocialMedia(link: string | null) {

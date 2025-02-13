@@ -35,14 +35,6 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ user }) => {
         </p>
         <span className="">{address ? formatAddress(address) : ""}</span>
       </div>
-      <div className="border-b-2 border-slate-200 pb-8">
-        <h4 className="mb-2">Farcaster ID</h4>
-        <p className="mb-4 font-light">
-          Recommended for project builders to claim ownership to enable
-          self-claim impact attestation.
-        </p>
-        <span className="">{walletInfo?.name ?? ""}</span>
-      </div>
       <div>
         {address && (
           <button onClick={handleLogout} className="button-secondary">
