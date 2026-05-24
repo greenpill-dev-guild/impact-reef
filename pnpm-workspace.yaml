@@ -1,2 +1,5 @@
+# Only resolve package versions published at least 3 days ago.
+minimumReleaseAge: 4320
+
 packages:
   - packages/*
